@@ -1,10 +1,17 @@
+import GlobalStyle from './assets/style/GlobalStyle';
+import Header from './components/Header';
+import LogIn from './pages/Login';
+import SignIn from './pages/Signin';
+import { Footer } from "./components/Footer";
+
 function App() {
   return (
     <div>
-      <h1>PRE28</h1>
-      <div>명환</div>
-      <div>수현</div>
-      <div>상헌</div>
+      <GlobalStyle />
+      <Header />
+      <SignIn />
+      <LogIn />
+      <Footer />
     </div>
   );
 }
