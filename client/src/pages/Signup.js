@@ -146,7 +146,7 @@ export default function SignUp() {
         <Fieldset>
           <Field>
             <Label htmlFor="name">Display name</Label>
-            <Input type="text" id="name" required />
+            <Input type="text" id="name" />
           </Field>
 
           <Field>
