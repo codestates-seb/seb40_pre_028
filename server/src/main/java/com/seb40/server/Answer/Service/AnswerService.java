@@ -1,6 +1,6 @@
-package com.seb40.server.ask.answer.service;
+package com.seb40.server.Answer.Service;
 
-import com.seb40.server.ask.answer.entity.Answer;
+import com.seb40.server.Answer.Entity.Answer;
 import org.springframework.stereotype.Service;
 
 @Service

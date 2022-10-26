@@ -1,12 +1,12 @@
-package com.seb40.server.ask.answer.controller;
+package com.seb40.server.Answer.Controller;
 
 
-import com.seb40.server.ask.answer.dto.AnswerPatchDto;
-import com.seb40.server.ask.answer.dto.AnswerPostDto;
-import com.seb40.server.ask.answer.entity.Answer;
+import com.seb40.server.Answer.Dto.AnswerPatchDto;
+import com.seb40.server.Answer.Dto.AnswerPostDto;
+import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
-import com.seb40.server.ask.answer.mapper.AnswerMapper2;
-import com.seb40.server.ask.answer.service.AnswerService;
+import com.seb40.server.Answer.Mapper.AnswerMapper2;
+import com.seb40.server.Answer.Service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
