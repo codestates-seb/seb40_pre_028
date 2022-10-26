@@ -6,6 +6,7 @@ import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.User.entity.UserEntity;
 import com.seb40.server.User.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
