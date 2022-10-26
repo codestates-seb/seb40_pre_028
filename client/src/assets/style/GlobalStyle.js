@@ -5,7 +5,7 @@ import variables from './GlobalVariables';
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: "HelveticaNeue"; /* 사용하고 싶은 font-family명을 지정 */
-    src: url("../fonts/HelveticaNeue.ttf") format("opentype"); /* 폰트파일 불러오기 */
+    src: url("../fonts/HelveticaNeue.ttf") format("opentype"), ; /* 폰트파일 불러오기 */
   }
 
   html, body, div, span, applet, object, iframe,
@@ -55,10 +55,10 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-  body {
-    /* background-color: ${(props) => props}; */
-    /* color: ${(props) => props}; */
-  }
+  /* body {
+    background-color: ${props => props};
+    color: ${props => props};
+  } */
   a {
     text-decoration: none;
     color: inherit;

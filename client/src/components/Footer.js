@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const FooterLayout = styled.div`
   width: 100%;
@@ -109,5 +109,3 @@ function Footer() {
 }
 
 export default Footer;
-
-export { Footer };
