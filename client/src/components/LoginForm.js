@@ -127,7 +127,9 @@ export function LoginForm() {
     console.log(emailValue, passwordValue);
 
     if (emailValue === '') setEmailValid(true);
+    else setEmailValid(false);
     if (passwordValue === '') setPasswordValid(true);
+    else setPasswordValid(false);
   };
   const emailValueHandler = e => {
     setEmailValue(e.target.value);
@@ -161,7 +163,14 @@ export function LoginForm() {
               </span>
             </div>
             <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
-            {passwordValid ? <ErrorMSG>Password cannot be empty.</ErrorMSG> : ''}
+            {passwordValid ? (
+              <ErrorMSG>
+                Password cannot be empty.
+                <ErrorIcon />
+              </ErrorMSG>
+            ) : (
+              ''
+            )}
           </Field>
           <Button>Log in</Button>
         </Fieldset>
