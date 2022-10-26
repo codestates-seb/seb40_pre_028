@@ -1,7 +1,9 @@
 package com.seb40.server.ask.answer.service;
 
 import com.seb40.server.ask.answer.entity.Answer;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AnswerService {
     // repository di 주입
 
