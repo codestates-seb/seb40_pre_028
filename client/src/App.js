@@ -1,6 +1,11 @@
+import LogIn from './pages/Login';
+import SignIn from './pages/Signin';
+
 function App() {
   return (
     <div>
+      <SignIn />
+      <LogIn />
       <h1>PRE28</h1>
       <div>명환</div>
       <div>수현</div>
