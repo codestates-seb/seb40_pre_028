@@ -6,6 +6,7 @@ import { ReactComponent as FacebookFavicon } from '../assets/img/facebook_favico
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 `;
 const BtnWith = styled.button`
   display: flex;

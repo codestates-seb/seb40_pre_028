@@ -12,15 +12,7 @@ export const DefaultButton = styled.button`
   width: max-content;
   height: 32px;
   box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
-  ${({
-    color,
-    colorCode,
-    borderCode,
-    activeBorderCode,
-    bgCode,
-    hoverBgCode,
-    activeBgCode,
-  }) => css`
+  ${({ color, colorCode, borderCode, activeBorderCode, bgCode, hoverBgCode, activeBgCode }) => css`
     border: 1px solid ${`var(--${color}-${borderCode})`};
     color: ${`var(--${color}-${colorCode})`};
     background-color: ${`var(--${color}-${bgCode})`};
@@ -38,15 +30,7 @@ export const DefaultButton = styled.button`
 
 export const PowderButton = ({ children }) => {
   return (
-    <DefaultButton
-      color="powder"
-      colorCode="700"
-      borderCode="500"
-      activeBorderCode="600"
-      bgCode="100"
-      hoverBgCode="300"
-      activeBgCode="400"
-    >
+    <DefaultButton color="powder" colorCode="700" borderCode="500" activeBorderCode="600" bgCode="100" hoverBgCode="300" activeBgCode="400">
       {children}
     </DefaultButton>
   );
@@ -57,15 +41,7 @@ PowderButton.propTypes = {
 
 export const BlueButton = ({ children }) => {
   return (
-    <DefaultButton
-      color="blue"
-      colorCode="050"
-      borderCode="500"
-      activeBorderCode="600"
-      bgCode="500"
-      hoverBgCode="600"
-      activeBgCode="700"
-    >
+    <DefaultButton color="blue" colorCode="050" borderCode="500" activeBorderCode="600" bgCode="500" hoverBgCode="600" activeBgCode="700">
       {children}
     </DefaultButton>
   );

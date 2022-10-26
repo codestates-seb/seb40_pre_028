@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../../../../redux';
@@ -15,9 +9,8 @@ interface ProfileCardProps {
 }
 
 const ProfileCard = ({ setOpencard }: ProfileCardProps) => {
-  const { image, displayName, email } =
-    useAppSelector((state) => state.user.user) || {};
-  const boxRef = useRef<HTMLDivElement>(null);
+  const { image, displayName, email } = useAppSelector(state => state.user.user) || {};
+  const boxRef = useRef < HTMLDivElement > null;
   const navigate = useNavigate();
 
   const closeCard = useCallback(
