@@ -63,9 +63,9 @@ const Input = styled.input`
   border-radius: 3px;
 
   &:focus {
-    outline: none;
-    border-color: #8fcaf2;
-    box-shadow: 0 0 6px #0091f4;
+    outline: 3px solid #bfe4ff;
+    border-color: #7cc2f2;
+    /* box-shadow: 0 0 6px #0091f4; */
   }
 `;
 const RobotCheck = styled.div`
@@ -142,7 +142,7 @@ const TextContainer = styled.div`
     }
   }
 `;
-export default function SignIn() {
+export default function SignUp() {
   return (
     <Bg>
       <BtnContainer>

@@ -160,7 +160,7 @@ export default function LogIn() {
             </div>
             <Input type="text" id="password" />
           </Field>
-          <Button>Log up</Button>
+          <Button>Log in</Button>
         </Fieldset>
       </Form>
       <TextContainer>

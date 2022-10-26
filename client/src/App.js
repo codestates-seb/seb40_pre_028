@@ -1,17 +1,17 @@
 import GlobalStyle from './assets/style/GlobalStyle';
 import Header from './components/Header';
 import LogIn from './pages/Login';
-import SignIn from './pages/Signin';
-import { Footer } from "./components/Footer";
+import SignUp from './pages/Signup';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <Header />
-      <SignIn />
+      {/* <Header /> */}
+      <SignUp />
       <LogIn />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

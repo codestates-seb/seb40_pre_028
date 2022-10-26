@@ -55,10 +55,10 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-  body {
-    /* background-color: ${(props) => props}; */
-    /* color: ${(props) => props}; */
-  }
+  /* body {
+    background-color: ${props => props};
+    color: ${props => props};
+  } */
   a {
     text-decoration: none;
     color: inherit;
