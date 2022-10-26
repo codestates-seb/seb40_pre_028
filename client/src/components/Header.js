@@ -112,6 +112,26 @@ export const SearchBar = styled.input.attrs({
   }
 `;
 
+export const Buttton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  border: 0px;
+  padding: 2px 9px;
+  transition: 0.4s all;
+  font-size: 0.85rem;
+  width: max-content;
+  height: 32px;
+
+  &:hover {
+    background-color: var(--powder--400);
+    transition: 0.4s all;
+  }
+  background-color: var(--powder--200);
+  color: var(--powder-700);
+`;
+
 function Header() {
   return (
     <SHeader>
@@ -122,8 +142,9 @@ function Header() {
         <HeaderButton>Products</HeaderButton>
         <SearchBox>
           <MdSearch />
-          <SearchBar></SearchBar>
+          <SearchBar />
         </SearchBox>
+        <Buttton>Log in</Buttton>
       </SNav>
     </SHeader>
   );
