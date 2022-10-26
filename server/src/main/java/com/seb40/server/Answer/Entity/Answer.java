@@ -32,10 +32,10 @@ public class Answer {
     private long userId;
 
     @Column(name = "answer_createAt", nullable = false)
-    private LocalDateTime answerCreateAt = LocalDateTime.now();
+    private LocalDateTime answerCreatedAt = LocalDateTime.now();
 
-    @Column(name = "answer_modied", nullable = false)
-    private LocalDateTime answerModified = LocalDateTime.now();
+    @Column(name = "answer_modied",nullable = false)
+    private LocalDateTime answerModified  = LocalDateTime.now();
 
     @Column(name = "answer_body")
     private String answerBody;
