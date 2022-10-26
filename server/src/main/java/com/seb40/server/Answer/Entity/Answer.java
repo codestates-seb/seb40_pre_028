@@ -1,4 +1,4 @@
-package com.seb40.server.ask.answer.entity;
+package com.seb40.server.Answer.Entity;
 
 
 
