@@ -1,11 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-import variables from './GlobalVariables';
+import variables from "./GlobalVariables";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: "HelveticaNeue"; /* 사용하고 싶은 font-family명을 지정 */
-    src: url("../fonts/HelveticaNeue.ttf") format("opentype"); /* 폰트파일 불러오기 */
+    src: url("../fonts/HelveticaNeue.ttf") format("opentype"),; /* 폰트파일 불러오기 */
   }
 
   html, body, div, span, applet, object, iframe,

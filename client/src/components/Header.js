@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { ReactComponent as Sprites } from '../assets/img/sprites.svg';
-import { MdSearch } from 'react-icons/md';
+import styled from "styled-components";
+import { ReactComponent as Sprites } from "../assets/img/sprites.svg";
+import { MdSearch } from "react-icons/md";
 
 export const SHeader = styled.header`
   display: flex;
@@ -16,7 +16,7 @@ export const SHeader = styled.header`
     display: block;
     position: absolute;
     top: 0%;
-    content: '';
+    content: "";
     width: 100%;
     height: 3px;
     background-color: var(--orange-400);
@@ -98,8 +98,8 @@ export const SearchBox = styled.form`
 `;
 
 export const SearchBar = styled.input.attrs({
-  type: 'text',
-  placeholder: 'Search...',
+  type: "text",
+  placeholder: "Search...",
 })`
   width: 100%;
   height: 70%;
