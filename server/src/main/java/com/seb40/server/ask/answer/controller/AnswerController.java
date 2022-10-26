@@ -4,7 +4,8 @@ package com.seb40.server.ask.answer.controller;
 import com.seb40.server.ask.answer.dto.AnswerPatchDto;
 import com.seb40.server.ask.answer.dto.AnswerPostDto;
 import com.seb40.server.ask.answer.entity.Answer;
-import com.seb40.server.ask.answer.mapper.AnswerMapper;
+//import com.seb40.server.ask.answer.mapper.AnswerMapper;
+import com.seb40.server.ask.answer.mapper.AnswerMapper2;
 import com.seb40.server.ask.answer.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class AnswerController {
 
     private final AnswerService answerService;
-    private final AnswerMapper mapper;
+//    private final AnswerMapper mapper;
+    private final AnswerMapper2 mapper;
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+    public AnswerController(AnswerService answerService, AnswerMapper2 mapper) {
         this.answerService = answerService;
         this.mapper = mapper;
     }
 
     @PostMapping("/post")
     public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
-        Answer answer = mapper.answerPostToAnswer(answerPostDto);
+        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
         Answer response = answerService.creatAnswer(answer);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),

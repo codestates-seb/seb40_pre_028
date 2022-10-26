@@ -6,10 +6,14 @@ public class AnswerService {
     // repository di 주입
 
     public Answer creatAnswer(Answer answer){
-        return null;
+        Answer createdAnswer = answer;
+
+        return createdAnswer;
     }
     public Answer updateAnswer(Answer answer){
-        return null;
+        Answer updatedAnswer = answer;
+
+        return updatedAnswer;
     }
 
     public void deleteAnswer(long answerId){
