@@ -1,4 +1,4 @@
-package com.seb40.server.ask.answer.dto;
+package com.seb40.server.Answer.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
