@@ -1,21 +1,7 @@
 import styled from 'styled-components';
-const BtnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const BtnWith = styled.button`
-  width: 340px;
-  padding: 10px 0;
-  color: ${props => (props.bgColor ? 'white' : 'rgba(0,0,0,0.8)')};
-  background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#2F3337' : '#385499') : '#FFFFFF')};
-  border: 0.5px solid rgba(0, 0, 0, 0.4);
-  border-radius: 4px;
-  margin: 5px 0;
-  &:hover {
-    cursor: pointer;
-    background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#131517' : '#254799') : '#F7F7F7')};
-  }
-`;
+import { FaQuestionCircle } from 'react-icons/fa';
+import OauthBtn from '../components/OauthButton';
+
 const Bg = styled.div`
   background-color: #f1f2f3;
   padding: 20px 0;
@@ -26,10 +12,12 @@ const Bg = styled.div`
 `;
 const Form = styled.form`
   display: flex;
+  margin-bottom: 20px;
 `;
 const Fieldset = styled.fieldset`
   background-color: white;
-  width: 280px;
+  /* width: 280px; */
+  width: 340px;
   height: 700px;
   padding: 30px 30px;
   border-radius: 10px;
@@ -57,7 +45,7 @@ const Label = styled.label`
 `;
 const Input = styled.input`
   display: block;
-  width: 93%;
+  width: 100%;
   padding: 0.6rem 0.7rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 3px;
@@ -65,7 +53,6 @@ const Input = styled.input`
   &:focus {
     outline: 3px solid #bfe4ff;
     border-color: #7cc2f2;
-    /* box-shadow: 0 0 6px #0091f4; */
   }
 `;
 const RobotCheck = styled.div`
@@ -77,6 +64,7 @@ const RobotCheck = styled.div`
 `;
 const Checkbox = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
   div {
     input {
@@ -94,6 +82,14 @@ const Checkbox = styled.div`
         cursor: pointer;
       }
     }
+  }
+`;
+const QuestionCircle = styled(FaQuestionCircle)`
+  font-size: 14px;
+  color: var(--black-400);
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 const Button = styled.button`
@@ -129,7 +125,7 @@ const TextContainer = styled.div`
   font-size: 14px;
   text-align: center;
   div {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   a {
     color: #0273cc;
@@ -145,11 +141,7 @@ const TextContainer = styled.div`
 export default function SignUp() {
   return (
     <Bg>
-      <BtnContainer>
-        <BtnWith>Sign up with Google</BtnWith>
-        <BtnWith bgColor="github">Sign up with Github</BtnWith>
-        <BtnWith bgColor="facebook">Sign up with FaceBook</BtnWith>
-      </BtnContainer>
+      <OauthBtn />
       <Form>
         <Fieldset>
           <Field>
@@ -178,6 +170,9 @@ export default function SignUp() {
               <label htmlFor="checkbox">
                 Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.
               </label>
+            </div>
+            <div>
+              <QuestionCircle />
             </div>
           </Checkbox>
           <Button>Sign up</Button>
