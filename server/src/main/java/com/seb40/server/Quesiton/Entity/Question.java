@@ -19,7 +19,7 @@ public class Question {  // (1)
     @Id// (2)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
-    private String question_title;
-    private String question_body;
+    private String questionTitle;
+    private String questionBody;
 
 }
