@@ -16,25 +16,25 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private int id;
 
     @Column(nullable = false)
-    private String user_name;
+    private String name;
 
     @Column(nullable = false, updatable = false, unique = true)
-    private String user_email;
+    private String email;
 
     @Column(nullable = false)
-    private String user_password;
+    private String password;
 
-    public UserEntity(String user_email) {
-        this.user_email = user_email;
+    public UserEntity(String email) {
+        this.email = email;
     }
 
-    public UserEntity(String user_name, String user_email, String user_password) {
-        this.user_name = user_name;
-        this.user_email = user_email;
-        this.user_password = user_password;
+    public UserEntity(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
 }

@@ -19,13 +19,13 @@ public class UserService {
 
     public UserEntity createUser(UserEntity userEntity){
         //이메일 중복 확인
-        verifyExistsEmail(userEntity.getUser_email());
+        verifyExistsEmail(userEntity.getEmail());
 
         return userRepository.save(userEntity);
     }
 
-    private void verifyExistsEmail(String user_email) {
-        Optional<UserEntity> user = userRepository.findByUser_email(user_email);
+    private void verifyExistsEmail(String email) {
+        Optional<UserEntity> user = userRepository.findByEmail(email);
 
         if (user.isPresent())
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
