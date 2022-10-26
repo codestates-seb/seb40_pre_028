@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as Sprites } from '../assets/img/sprites.svg';
 import { MdSearch } from 'react-icons/md';
 import { BlueButton, PowderButton } from './DefaultButton';
+import { UserMenus } from './UseToolbar/UserToolbar';
 
 export const SHeader = styled.header`
   display: flex;
@@ -144,6 +145,8 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
+  const isLogIn = true;
+
   return (
     <SHeader>
       <SNav>
@@ -155,10 +158,14 @@ function Header() {
           <MdSearch />
           <SearchBar />
         </SearchBox>
-        <AuthBtns>
-          <PowderButton>Log in</PowderButton>
-          <BlueButton>Sign up</BlueButton>
-        </AuthBtns>
+        {isLogIn ? (
+          <UserMenus />
+        ) : (
+          <AuthBtns>
+            <PowderButton>Log in</PowderButton>
+            <BlueButton>Sign up</BlueButton>
+          </AuthBtns>
+        )}
       </SNav>
     </SHeader>
   );
