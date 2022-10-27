@@ -5,7 +5,7 @@ import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
-import com.seb40.server.Answer.Mapper.AnswerMapper2;
+import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Answer.Service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,9 @@ public class AnswerController {
 
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
-    private final AnswerMapper2 mapper;
+    private final AnswerMapper mapper;
 
-    public AnswerController(AnswerService answerService, AnswerMapper2 mapper) {
+    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
         this.answerService = answerService;
         this.mapper = mapper;
     }
