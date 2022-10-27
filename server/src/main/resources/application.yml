@@ -8,8 +8,8 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/stackover_flow?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/stack_overflow?serverTimezone=Asia/Seoul
     username: root
-    password:
+    password: 1234
 
 
