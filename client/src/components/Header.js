@@ -30,7 +30,7 @@ export const SNav = styled.nav`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1264px;
   height: 50px;
   padding-top: 3px;
 `;
@@ -89,7 +89,6 @@ export const SearchContainer = styled.form`
   padding: 0 10px;
   position: relative;
   overflow: hidden;
-  max-width: 750px;
   // 돋보기 아이콘에 적용
   > *:first-child {
     position: absolute;
