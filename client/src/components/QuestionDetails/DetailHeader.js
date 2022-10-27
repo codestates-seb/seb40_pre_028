@@ -4,10 +4,11 @@ const Header = styled.div`
   border-bottom: 1px solid #d6d9dc;
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
   a {
-    color: black;
-    text-decoration: none;
+    font-size: 1.6rem;
+    color: #3b4045;
+    line-height: 40px;
   }
 `;
 
@@ -21,7 +22,6 @@ const Btn = styled.button`
   cursor: pointer;
   padding: 0.8em;
   border-radius: 5px;
-  margin: auto 0;
   &:hover {
     background: #0074cc;
   }
@@ -30,6 +30,7 @@ const Btn = styled.button`
 const TitleSet = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 10px 0;
 `;
 
 const TitleInfo = styled.div`

@@ -1,4 +1,4 @@
-// import GlobalStyle from './assets/style/GlobalStyle';
+import GlobalStyle from "./assets/style/GlobalStyle";
 // import Header from './components/Header';
 // import LogIn from './pages/Login';
 // import SignIn from './pages/Signin';
@@ -8,8 +8,8 @@ import QuestionDetail from "./pages/QuestionDetail";
 function App() {
   return (
     <div>
-      {/* <GlobalStyle />
-      <Header />
+      <GlobalStyle />
+      {/* <Header />
       <SignUp />
       <LogIn />
       <Footer /> */}
