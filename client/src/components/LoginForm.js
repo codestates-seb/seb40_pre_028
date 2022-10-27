@@ -1,22 +1,7 @@
-import styled from 'styled-components';
-import OauthBtn from '../components/OauthButton';
 import { useState } from 'react';
+import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
-const Logo = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-`;
 
-const Bg = styled.div`
-  background-color: #f1f2f3;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 const Form = styled.form`
   display: flex;
 `;
@@ -51,7 +36,7 @@ const Field = styled.div`
   }
 `;
 const Label = styled.label`
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   display: block;
   &:hover {
     cursor: pointer;
@@ -61,15 +46,13 @@ const Input = styled.input`
   display: block;
   width: 100%;
   padding: 0.6rem 0.7rem;
-  border: ${props =>
-    props.error ? '1px solid #de4f55' : '1px solid rgba(0, 0, 0, 0.3)'};
+  border: ${props => (props.error ? '1px solid #de4f55' : '1px solid rgba(0, 0, 0, 0.3)')};
 
   /* border: 1px solid red; */
   border-radius: 3px;
 
   &:focus {
-    outline: ${props =>
-      props.error ? '3px solid #FFD1D3' : '3px solid #bfe4ff'};
+    outline: ${props => (props.error ? '3px solid #FFD1D3' : '3px solid #bfe4ff')};
     border-color: ${props => (props.error ? '#de4f55' : '#8fcaf2')};
   }
 `;
@@ -118,20 +101,34 @@ const TextContainer = styled.div`
     }
   }
 `;
+
+// function
+const emailValidation = str => {
+  return /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(str);
+  // 숫자 (0~9) or 알파벳 (a~z, A~Z) 으로 시작하며 중간에 -_. 문자가 있을 수 있으며 그 후 숫자 (0~9) or 알파벳 (a~z, A~Z)이 올 수도 있고 연달아 올 수도 있고 없을 수도 있다. @는 반드시 존재하며 . 도 반드시 존재하고 a~z, A~Z 의 문자가 2,3개 존재하고 i = 대소문자 구분 안한다.
+};
+
 export function LoginForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValid, setEmailValid] = useState(false);
+  const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
+
+  const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
   const formSubmitHandler = e => {
     e.preventDefault();
-    console.log(emailValue, passwordValue);
 
+    // 인풋값 존재
     if (emailValue === '') setEmailValid(true);
     else setEmailValid(false);
     if (passwordValue === '') setPasswordValid(true);
     else setPasswordValid(false);
+
+    // 형식 체크
+    if (!emailValidation(emailValue)) setEmailValid2(true);
+    else setEmailValid2(false);
   };
 
   const emailValueHandler = e => {
@@ -141,77 +138,106 @@ export function LoginForm() {
     setPasswordValue(e.target.value);
   };
   return (
-    <Bg>
-      <Logo />
-      <OauthBtn />
+    <>
       <Form onSubmit={formSubmitHandler}>
-        <Fieldset>
-          <Field>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              type="text"
-              id="email"
-              onChange={emailValueHandler}
-              error={emailValid}
-            />
-            {emailValid ? (
-              <ErrorMSG>
-                Email cannot be empty.
-                <ErrorIcon />
-              </ErrorMSG>
-            ) : (
-              ''
-            )}
-          </Field>
-          <Field>
-            <div>
-              <Label htmlFor="password">Password</Label>
-              <span>
-                <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>
-                  Forgot password?
-                </a>
-              </span>
-            </div>
-            <Input
-              type="text"
-              id="password"
-              onChange={passwordValueHandler}
-              error={passwordValid}
-            />
-            {passwordValid ? (
-              <ErrorMSG>
-                Password cannot be empty.
-                <ErrorIcon />
-              </ErrorMSG>
-            ) : (
-              ''
-            )}
-          </Field>
-          <Button>Log in</Button>
-        </Fieldset>
+        {verifiSuccess ? (
+          <Fieldset>
+            <Field>
+              <Label htmlFor="email">Email</Label>
+              <Input type="text" id="email" onChange={emailValueHandler} error={emailValid || emailValid2 || verifiSuccess} />
+              {emailValid ? (
+                <ErrorMSG>
+                  Email cannot be empty.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : emailValid2 ? (
+                <ErrorMSG>
+                  The email is not a valid email address.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : (
+                <ErrorMSG>
+                  The email or password is incorrect.
+                  <ErrorIcon />
+                </ErrorMSG>
+              )}
+            </Field>
+            <Field>
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <span>
+                  <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
+                </span>
+              </div>
+              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              {passwordValid ? (
+                <ErrorMSG>
+                  Password cannot be empty.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : (
+                ''
+              )}
+            </Field>
+            <Button>Log in</Button>
+          </Fieldset>
+        ) : (
+          <Fieldset>
+            <Field>
+              <Label htmlFor="email">Email</Label>
+              <Input type="text" id="email" onChange={emailValueHandler} error={emailValid || emailValid2} />
+              {emailValid ? (
+                <ErrorMSG>
+                  Email cannot be empty.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : emailValid2 ? (
+                <ErrorMSG>
+                  The email is not a valid email address.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : (
+                ''
+              )}
+            </Field>
+            <Field>
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <span>
+                  <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
+                </span>
+              </div>
+              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              {passwordValid ? (
+                <ErrorMSG>
+                  Password cannot be empty.
+                  <ErrorIcon />
+                </ErrorMSG>
+              ) : (
+                ''
+              )}
+            </Field>
+            <Button>Log in</Button>
+          </Fieldset>
+        )}
       </Form>
       <TextContainer>
         <div>
           <span>
             Don’t have an account?{' '}
-            <a
-              href="https://stackoverflow.com/users/signup?ssrc=head"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://stackoverflow.com/users/signup?ssrc=head" target="_blank" rel="noreferrer">
               Sign up
             </a>
           </span>
         </div>
         <div>
           <span>
-            Are you an employer?{' '}
-            <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>
-              Sign up on Talent{' '}
-            </a>
+            Are you an employer? <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>Sign up on Talent </a>
           </span>
         </div>
       </TextContainer>
-    </Bg>
+    </>
   );
 }
+
+export { Form, Fieldset, Field, Label, Input, ErrorMSG, ErrorIcon, Button, TextContainer, emailValidation };
