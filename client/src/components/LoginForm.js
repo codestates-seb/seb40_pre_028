@@ -61,15 +61,13 @@ const Input = styled.input`
   display: block;
   width: 100%;
   padding: 0.6rem 0.7rem;
-  border: ${props =>
-    props.error ? '1px solid #de4f55' : '1px solid rgba(0, 0, 0, 0.3)'};
+  border: ${props => (props.error ? '1px solid #de4f55' : '1px solid rgba(0, 0, 0, 0.3)')};
 
   /* border: 1px solid red; */
   border-radius: 3px;
 
   &:focus {
-    outline: ${props =>
-      props.error ? '3px solid #FFD1D3' : '3px solid #bfe4ff'};
+    outline: ${props => (props.error ? '3px solid #FFD1D3' : '3px solid #bfe4ff')};
     border-color: ${props => (props.error ? '#de4f55' : '#8fcaf2')};
   }
 `;
@@ -147,12 +145,7 @@ export function LoginForm() {
         <Fieldset>
           <Field>
             <Label htmlFor="email">Email</Label>
-            <Input
-              type="text"
-              id="email"
-              onChange={emailValueHandler}
-              error={emailValid}
-            />
+            <Input type="text" id="email" onChange={emailValueHandler} error={emailValid} />
             {emailValid ? (
               <ErrorMSG>
                 Email cannot be empty.
@@ -166,17 +159,10 @@ export function LoginForm() {
             <div>
               <Label htmlFor="password">Password</Label>
               <span>
-                <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>
-                  Forgot password?
-                </a>
+                <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
               </span>
             </div>
-            <Input
-              type="text"
-              id="password"
-              onChange={passwordValueHandler}
-              error={passwordValid}
-            />
+            <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
             {passwordValid ? (
               <ErrorMSG>
                 Password cannot be empty.
@@ -193,21 +179,14 @@ export function LoginForm() {
         <div>
           <span>
             Don’t have an account?{' '}
-            <a
-              href="https://stackoverflow.com/users/signup?ssrc=head"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://stackoverflow.com/users/signup?ssrc=head" target="_blank" rel="noreferrer">
               Sign up
             </a>
           </span>
         </div>
         <div>
           <span>
-            Are you an employer?{' '}
-            <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>
-              Sign up on Talent{' '}
-            </a>
+            Are you an employer? <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>Sign up on Talent </a>
           </span>
         </div>
       </TextContainer>

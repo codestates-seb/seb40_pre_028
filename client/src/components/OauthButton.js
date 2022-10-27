@@ -14,23 +14,13 @@ const BtnWith = styled.button`
   width: 340px;
   padding: 10px 0;
   color: ${props => (props.bgColor ? 'white' : 'rgba(0,0,0,0.8)')};
-  background-color: ${props =>
-    props.bgColor
-      ? props.bgColor === 'github'
-        ? '#2F3337'
-        : '#385499'
-      : '#FFFFFF'};
+  background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#2F3337' : '#385499') : '#FFFFFF')};
   border: 0.5px solid rgba(0, 0, 0, 0.4);
   border-radius: 4px;
   margin: 5px 0;
   &:hover {
     cursor: pointer;
-    background-color: ${props =>
-      props.bgColor
-        ? props.bgColor === 'github'
-          ? '#131517'
-          : '#254799'
-        : '#F7F7F7'};
+    background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#131517' : '#254799') : '#F7F7F7')};
   }
 `;
 const GoogleLogo = styled(GoogleFavicon)`

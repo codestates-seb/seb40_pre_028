@@ -10,23 +10,13 @@ const BtnWith = styled.button`
   width: 340px;
   padding: 10px 0;
   color: ${props => (props.bgColor ? 'white' : 'rgba(0,0,0,0.8)')};
-  background-color: ${props =>
-    props.bgColor
-      ? props.bgColor === 'github'
-        ? '#2F3337'
-        : '#385499'
-      : '#FFFFFF'};
+  background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#2F3337' : '#385499') : '#FFFFFF')};
   border: 0.5px solid rgba(0, 0, 0, 0.4);
   border-radius: 4px;
   margin: 5px 0;
   &:hover {
     cursor: pointer;
-    background-color: ${props =>
-      props.bgColor
-        ? props.bgColor === 'github'
-          ? '#131517'
-          : '#254799'
-        : '#F7F7F7'};
+    background-color: ${props => (props.bgColor ? (props.bgColor === 'github' ? '#131517' : '#254799') : '#F7F7F7')};
   }
 `;
 const Bg = styled.div`
@@ -185,10 +175,7 @@ export default function SignUp() {
             <Label htmlFor="password">Password</Label>
             <Input type="text" id="password" />
             <div>
-              <span>
-                Passwords must contain at least eight characters, including at
-                least 1 letter and 1 number.
-              </span>
+              <span>Passwords must contain at least eight characters, including at least 1 letter and 1 number.</span>
             </div>
           </Field>
           <RobotCheck></RobotCheck>
@@ -198,8 +185,7 @@ export default function SignUp() {
             </div>
             <div>
               <label htmlFor="checkbox">
-                Opt-in to receive occasional product updates, user research
-                invitations, company announcements, and digests.
+                Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.
               </label>
             </div>
             <div>
@@ -210,27 +196,15 @@ export default function SignUp() {
           <FieldsetFooter>
             <span>
               By clicking “Sign up”, you agree to our{' '}
-              <a
-                href="https://stackoverflow.com/legal/terms-of-service/public"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
                 terms of service
               </a>
               ,{' '}
-              <a
-                href="https://stackoverflow.com/legal/terms-of-service/public"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
                 privacy policy
               </a>{' '}
               and{' '}
-              <a
-                href="https://stackoverflow.com/legal/terms-of-service/public"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
                 cookie policy
               </a>
             </span>
@@ -241,21 +215,14 @@ export default function SignUp() {
         <div>
           <span>
             Already have an account?{' '}
-            <a
-              href="https://stackoverflow.com/users/login?ssrc=head"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://stackoverflow.com/users/login?ssrc=head" target="_blank" rel="noreferrer">
               Log in
             </a>
           </span>
         </div>
         <div>
           <span>
-            Are you an employer?{' '}
-            <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>
-              Sign up on Talent{' '}
-            </a>
+            Are you an employer? <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>Sign up on Talent </a>
           </span>
         </div>
       </TextContainer>
