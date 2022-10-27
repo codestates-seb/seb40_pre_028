@@ -5,9 +5,7 @@ import lombok.Getter;
 @Getter
 public class QuestionPatchDto {
     private long questionId;
-
     private String questionTitle;
-
     private String questionBody;
 
     public void setQuestionId(long questionId){
