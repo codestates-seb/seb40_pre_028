@@ -130,6 +130,7 @@ export function SignupForm() {
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
 
+  // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
   const formSubmitHandler = e => {
