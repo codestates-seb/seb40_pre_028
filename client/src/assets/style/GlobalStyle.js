@@ -56,8 +56,8 @@ const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }
   /* body {
-    background-color: ${(props) => props};
-    color: ${(props) => props};
+    background-color: ${props => props};
+    color: ${props => props};
   } */
   a {
     text-decoration: none;

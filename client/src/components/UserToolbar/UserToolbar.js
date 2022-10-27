@@ -1,12 +1,4 @@
-import {
-  AchievementSVG,
-  HelpSVG,
-  InboxSVG,
-  List,
-  MenuUList,
-  SwitchSVG,
-  UserMenusBox,
-} from './style';
+import { AchievementSVG, HelpSVG, InboxSVG, List, MenuUList, SwitchSVG, UserMenusBox } from './style';
 // import UserProfile from './UserProfile/UserProfile';
 
 export const UserMenus = () => {

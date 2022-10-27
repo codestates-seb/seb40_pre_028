@@ -6,6 +6,7 @@ import { ReactComponent as FacebookFavicon } from '../assets/img/facebook_favico
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 `;
 const BtnWith = styled.button`
   display: flex;
@@ -36,7 +37,7 @@ const FacebookLogo = styled(FacebookFavicon)`
   margin-right: 3px;
 `;
 
-export default function OauthBtn() {
+export function OauthBtn() {
   return (
     <BtnContainer>
       <BtnWith>
