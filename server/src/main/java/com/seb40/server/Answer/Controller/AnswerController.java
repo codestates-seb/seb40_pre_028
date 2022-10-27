@@ -58,11 +58,12 @@ public class AnswerController {
     }
 
     @DeleteMapping("/{answer_id}")
-    public ResponseEntity deleteAnswer(long answerId){
+    public ResponseEntity deleteAnswer(@PathVariable("answer_id")
+                                           @Positive long answerId){
         // answerId 로 deleteAnswer 서비스 메소드로 삭제
         answerService.deleteAnswer(answerId);
 
         // 삭제요청, ok 반환
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -47,7 +47,7 @@ public class AnswerService {
         // 반환 X
     }
 
-    // Answer Id 로 Answer 찾기
+    // Answer Id 로 저장된 Answer 찾기
     public Answer findVerifiedAnswer(long answerId){
 
         Optional<Answer> optionalAnswer =
