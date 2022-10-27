@@ -1,5 +1,6 @@
-import { DetailHeader } from "../components/QuestionDetails/DetailHeader";
-import { DetailMain } from "../components/QuestionDetails/DetailMain";
+import { DetailHeader } from '../components/QuestionDetails/DetailHeader';
+import { DetailMain } from '../components/QuestionDetails/DetailMain';
+import { DetailAnswer } from '../components/QuestionDetails/DetailAnswer';
 
 function QuestionDetail() {
   return (
@@ -11,6 +12,7 @@ function QuestionDetail() {
           <DetailHeader />
           <div>
             <DetailMain />
+            <DetailAnswer />
             {/* aside */}
           </div>
         </div>

@@ -2,7 +2,7 @@ import GlobalStyle from './assets/style/GlobalStyle';
 // import Header from './components/Header';
 // import LogIn from './pages/Login';
 // import SignIn from './pages/Signin';
-// import { Footer } from "./components/Footer";
+// import Footer from './components/Footer';
 import QuestionDetail from './pages/QuestionDetail';
 
 function App() {
@@ -11,9 +11,9 @@ function App() {
       <GlobalStyle />
       {/* <Header />
       <SignUp />
-      <LogIn />
-      <Footer /> */}
+      <LogIn /> */}
       <QuestionDetail />
+      {/* <Footer /> */}
     </div>
   );
 }

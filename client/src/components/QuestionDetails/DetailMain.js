@@ -114,30 +114,6 @@ const Comment = styled.div`
   margin-top: 10px;
 `;
 
-const Answer = styled.div`
-  * {
-    margin: 20px 0;
-  }
-  h2 {
-    font-size: 20px;
-  }
-`;
-
-const Btn = styled.button`
-  all: unset;
-  height: 20px;
-  width: 130px;
-  text-align: center;
-  color: white;
-  background-color: #0a96ff;
-  cursor: pointer;
-  padding: 0.8em;
-  border-radius: 5px;
-  &:hover {
-    background: #0074cc;
-  }
-`;
-
 export const DetailMain = () => {
   return (
     <Main>
@@ -194,11 +170,6 @@ export const DetailMain = () => {
           <Comment>Add a comment</Comment>
         </Question>
       </Section>
-      <Answer>
-        <p>Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.</p>
-        <h2>Your Answer</h2>
-        <Btn>Post Your Answer</Btn>
-      </Answer>
     </Main>
   );
 };
