@@ -19,7 +19,7 @@ public class AnswerResponseDto {
     private LocalDateTime answerCreateAt;
     private LocalDateTime answerModified;
 
-    // private int voteId; // id 로 vote 수 뽑기
-    // private int commentId; // id 로 코멘트 내용 뽑기 list 형식
+    private int voteId; // id 로 vote 수 뽑기
+    private int commentId; // id 로 코멘트 내용 뽑기 list 형식
 
 }
