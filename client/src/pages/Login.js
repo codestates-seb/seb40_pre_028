@@ -16,14 +16,14 @@ const Logo = styled.div`
   }
 `;
 
-export default function LoginPage() {
+export default function LoginPage({ setIsLoading, setUserData }) {
   return (
     <Bg>
       <Logo>
         <img src={StackIcon} alt="logo" />
       </Logo>
       <OauthBtn />
-      <LoginForm></LoginForm>
+      <LoginForm setIsLoading={setIsLoading} setUserData={setUserData} />
     </Bg>
   );
 }
