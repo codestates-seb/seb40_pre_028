@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const NavTap = styled.div`
   display: inline-block;

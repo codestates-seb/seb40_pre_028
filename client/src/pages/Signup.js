@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { FaQuestionCircle } from "react-icons/fa";
-import OauthBtn from "../components/OauthButton";
+import styled from 'styled-components';
+import { FaQuestionCircle } from 'react-icons/fa';
+import OauthBtn from '../components/OauthButton';
 
 const BtnContainer = styled.div`
   display: flex;
@@ -9,24 +9,24 @@ const BtnContainer = styled.div`
 const BtnWith = styled.button`
   width: 340px;
   padding: 10px 0;
-  color: ${(props) => (props.bgColor ? "white" : "rgba(0,0,0,0.8)")};
-  background-color: ${(props) =>
+  color: ${props => (props.bgColor ? 'white' : 'rgba(0,0,0,0.8)')};
+  background-color: ${props =>
     props.bgColor
-      ? props.bgColor === "github"
-        ? "#2F3337"
-        : "#385499"
-      : "#FFFFFF"};
+      ? props.bgColor === 'github'
+        ? '#2F3337'
+        : '#385499'
+      : '#FFFFFF'};
   border: 0.5px solid rgba(0, 0, 0, 0.4);
   border-radius: 4px;
   margin: 5px 0;
   &:hover {
     cursor: pointer;
-    background-color: ${(props) =>
+    background-color: ${props =>
       props.bgColor
-        ? props.bgColor === "github"
-          ? "#131517"
-          : "#254799"
-        : "#F7F7F7"};
+        ? props.bgColor === 'github'
+          ? '#131517'
+          : '#254799'
+        : '#F7F7F7'};
   }
 `;
 const Bg = styled.div`
@@ -209,7 +209,7 @@ export default function SignUp() {
           <Button>Sign up</Button>
           <FieldsetFooter>
             <span>
-              By clicking “Sign up”, you agree to our{" "}
+              By clicking “Sign up”, you agree to our{' '}
               <a
                 href="https://stackoverflow.com/legal/terms-of-service/public"
                 target="_blank"
@@ -217,15 +217,15 @@ export default function SignUp() {
               >
                 terms of service
               </a>
-              ,{" "}
+              ,{' '}
               <a
                 href="https://stackoverflow.com/legal/terms-of-service/public"
                 target="_blank"
                 rel="noreferrer"
               >
                 privacy policy
-              </a>{" "}
-              and{" "}
+              </a>{' '}
+              and{' '}
               <a
                 href="https://stackoverflow.com/legal/terms-of-service/public"
                 target="_blank"
@@ -240,7 +240,7 @@ export default function SignUp() {
       <TextContainer>
         <div>
           <span>
-            Already have an account?{" "}
+            Already have an account?{' '}
             <a
               href="https://stackoverflow.com/users/login?ssrc=head"
               target="_blank"
@@ -252,9 +252,9 @@ export default function SignUp() {
         </div>
         <div>
           <span>
-            Are you an employer?{" "}
+            Are you an employer?{' '}
             <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>
-              Sign up on Talent{" "}
+              Sign up on Talent{' '}
             </a>
           </span>
         </div>
