@@ -15,8 +15,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Question {  // (1)
-    @Id// (2)
+public class Question {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
     private String questionTitle;
