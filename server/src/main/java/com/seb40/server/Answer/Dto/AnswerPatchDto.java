@@ -1,4 +1,4 @@
-package com.seb40.server.ask.answer.dto;
+package com.seb40.server.Answer.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnswerPostDto {
-
+public class AnswerPatchDto {
     private long answerId;
     private String answerBody;
 

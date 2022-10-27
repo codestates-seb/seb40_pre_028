@@ -1,9 +1,9 @@
-package com.seb40.server.ask.answer.mapper;
+package com.seb40.server.Answer.Mapper;
 
-import com.seb40.server.ask.answer.dto.AnswerPatchDto;
-import com.seb40.server.ask.answer.dto.AnswerPostDto;
-import com.seb40.server.ask.answer.dto.AnswerResponseDto;
-import com.seb40.server.ask.answer.entity.Answer;
+import com.seb40.server.Answer.Dto.AnswerPatchDto;
+import com.seb40.server.Answer.Dto.AnswerPostDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Entity.Answer;
 import org.springframework.stereotype.Component;
 
 @Component // bean 등록
