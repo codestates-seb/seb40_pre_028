@@ -1,9 +1,9 @@
-package com.seb40.server.ask.answer.mapper;
+package com.seb40.server.ask.answer.Mapper;
 
-import com.seb40.server.ask.answer.dto.AnswerPatchDto;
-import com.seb40.server.ask.answer.dto.AnswerPostDto;
-import com.seb40.server.ask.answer.dto.AnswerResponseDto;
-import com.seb40.server.ask.answer.entity.Answer;
+import com.seb40.server.ask.answer.Dto.AnswerPatchDto;
+import com.seb40.server.ask.answer.Dto.AnswerPostDto;
+import com.seb40.server.ask.answer.Dto.AnswerResponseDto;
+import com.seb40.server.ask.answer.Entity.Answer;
 import java.time.LocalDateTime;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
