@@ -10,24 +10,26 @@
 //// Dto 클래스를 Answer 클래스로 변환
 //public class AnswerMapper {
 //
-////    public Answer answerPostToAnswer(AnswerPostDto answerPostDto){
-////        return new Answer(answerPostDto.getAnswerId(),
-////                answerPostDto.getAnswerBody());
-////    }
-////
-////    public Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto){
-////        return new Answer(
-////                answerPatchDto.getAnswerId(),
-////                answerPatchDto.getAnswerBody());
-////    }
-////
-////    public AnswerResponseDto answerToAnswerResponseDto(Answer answer){
-////        return new AnswerResponseDto(
-////                answer.getAnswerId(),
-////                answer.getAnswerBody(),
-////                answer.getUserId(),
-////                answer.getAnswerCreateAt(),
-////                answer.getAnswerModified());
-////    }
+
+//    public Answer answerPostToAnswer(AnswerPostDto answerPostDto){
+//        return new Answer(answerPostDto.getAnswerId(),
+//                answerPostDto.getAnswerBody());
+//    }
+//
+//    public Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto){
+//        return new Answer(
+//                answerPatchDto.getAnswerId(),
+//                answerPatchDto.getAnswerBody());
+//    }
+//
+//    public AnswerResponseDto answerToAnswerResponseDto(Answer answer){
+//        return new AnswerResponseDto(
+//                answer.getAnswerId(),
+//                answer.getAnswerBody(),
+//                answer.getUserId(),
+//                answer.getAnswerCreateAt(),
+//                answer.getAnswerModified());
+//    }
+
 //
 //}
