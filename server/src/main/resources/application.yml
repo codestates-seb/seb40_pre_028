@@ -1,18 +1,4 @@
 
-#spring:
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/stack_overflow?serverTimezone=Asia/Seoul
-#    username: root
-#    password:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true
-
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/stack_overflow?serverTimezone=Asia/Seoul
@@ -31,5 +17,5 @@ spring:
       org:
         hibernate:
           SQL: DEBUG
-          type:
-            trace
+          type: 
+            trace  
