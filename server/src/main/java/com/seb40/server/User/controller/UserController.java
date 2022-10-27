@@ -1,20 +1,23 @@
 package com.seb40.server.User.controller;
 
+import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import com.seb40.server.User.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -31,12 +34,19 @@ public class UserController {
         );
     }
 
+//    @GetMapping("/login")
+//    public ResponseEntity getUser(@Valid @RequestBody UserLoginDto userLoginDto){
+//
+//
+//       User user = userService.findUser(userLoginDto);
+//
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(userMapper.userToUserResponseDto(user)),
+//                HttpStatus.OK);
+//    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public
 
-
-
-//    @PutMapping("/logout")
-
+////    @PutMapping("/logout")
+//
 }
