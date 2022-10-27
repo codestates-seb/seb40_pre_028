@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import variables from "./GlobalVariables";
+import variables from './GlobalVariables';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
