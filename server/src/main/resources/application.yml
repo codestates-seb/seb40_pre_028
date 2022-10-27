@@ -1,14 +1,3 @@
-#spring:
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2
-#  datasource:
-#    url: jdbc:h2:mem:test
-#  jpa:
-#    hibernate:
-#      ddl-auto: create  # (1) 스키마 자동 생성
-#    show-sql: true      # (2) SQL 쿼리 출력
 
 spring:
   jpa:
@@ -19,6 +8,8 @@ spring:
       hibernate:
         format_sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/stackoverflow?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/stackover_flow?serverTimezone=Asia/Seoul
     username: root
-    password: 3525
+    password:
+
+
