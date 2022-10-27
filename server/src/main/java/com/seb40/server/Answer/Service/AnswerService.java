@@ -17,19 +17,20 @@ public class AnswerService {
     }
 
     public Answer createdAnswer(Answer answer){
+        Answer savedAnswer = answerRepository.save(answer);
 
-        return answerRepository.save(answer);
+        return savedAnswer;
     }
 
     public Answer updateAnswer(Answer answer){
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
+        Answer savedAnswer = answerRepository.save(findAnswer);
 
-        return answerRepository.save(findAnswer);
+        return savedAnswer;
     }
 
     public void deleteAnswer(long answerId){
         Answer findAnswer = findVerifiedAnswer(answerId);
-
         answerRepository.delete(findAnswer);
     }
 
@@ -42,4 +43,5 @@ public class AnswerService {
 
         return findAnswer;
     }
+
 }
