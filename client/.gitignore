@@ -24,3 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 App.js
+Appdev.js
+
+.prettierrc

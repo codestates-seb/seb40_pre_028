@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class AnswerPostDto {
 
+    @NotNull
     private long answerId;
     private long questionId;
     private long userId;

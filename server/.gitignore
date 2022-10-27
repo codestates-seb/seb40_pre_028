@@ -38,3 +38,4 @@ out/
 
 ### password ###
 application.yml
+application.properties
