@@ -16,7 +16,7 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직
+    // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직s
     public Answer createdAnswer(Answer answer){
         Answer savedAnswer = answerRepository.save(answer);
 
@@ -24,22 +24,28 @@ public class AnswerService {
     }
 
     public Answer updateAnswer(Answer answer){
-        // Answer 를 URI로 받는 Answer Id 로 동일한 내용를 찾는다.
+        // Answer Id 로 Answer를  찾는다.
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
         // 찾은 내용에서 Answer 를 바꾼다.
-        Answer savedAnswer = answerRepository.save(findAnswer);
+//        Optional.ofNullable(answer.getAnswerBody())
+//                .isPresent(answerBody -> findAnswer.setAnswerBody(answerBody));
+
 
         // 바꾼 Answer 를 저장 후 반환한다.
-
-        return savedAnswer;
+        return answerRepository.save(findAnswer);
     }
 
     public void deleteAnswer(long answerId){
+        // Answer 를 PK Answer Id 로 찾는다.
         Answer findAnswer = findVerifiedAnswer(answerId);
+        // Repository 에서 삭제한다.
         answerRepository.delete(findAnswer);
+        // 반환 X
     }
 
+    // Answer Id 로 Answer 찾기
     public Answer findVerifiedAnswer(long answerId){
+
         Optional<Answer> optionalAnswer =
                 answerRepository.findByAnswerId(answerId);
         Answer findAnswer =
