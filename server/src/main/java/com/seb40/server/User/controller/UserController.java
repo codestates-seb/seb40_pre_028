@@ -1,9 +1,7 @@
 package com.seb40.server.User.controller;
 
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
-import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Response.SingleResponseDto;
-import com.seb40.server.User.dto.UserLogin;
+import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
@@ -15,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -38,18 +34,17 @@ public class UserController {
         );
     }
 
-//    @GetMapping("/login")
-//    public ResponseEntity getUser(@Valid @RequestBody UserLogin userLogin){
-//
-////        User user = userService.findUser();
-////
-////        return new ResponseEntity<>(
-////                new SingleResponseDto<>(userMapper.userToUserResponseDto(user)),
-////                HttpStatus.OK);
-////    }
-//
-//
-//
+    @GetMapping("/login")
+    public ResponseEntity getUser(@Valid @RequestBody UserLoginDto userLoginDto){
+
+        User user = userService.findUser(userLoginDto);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(userMapper.userToUserResponseDto(user)),
+                HttpStatus.OK);
+    }
+
+
 ////    @PutMapping("/logout")
 //
 }

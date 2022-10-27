@@ -3,6 +3,7 @@ package com.seb40.server.User.service;
 
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class UserService {
     }
 
 
-    public User findUser(Long userId){
-        return findVerifiedUser(userId);
+    public User findUser(UserLoginDto userLoginDto){
+        return findVerifiedUser(userLoginDto.getId());
     }
 
     private User findVerifiedUser(Long userId) {
