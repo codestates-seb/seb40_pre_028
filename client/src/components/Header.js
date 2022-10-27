@@ -28,7 +28,6 @@ export const SHeader = styled.header`
 
 export const SNav = styled.nav`
   display: flex;
-  flex-flow: row nowrap;
   align-items: center;
   width: 100%;
   max-width: 1300px;
@@ -81,7 +80,7 @@ export const HeaderButton = styled.button`
   }
 `;
 
-export const SearchBox = styled.form`
+export const SearchContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +89,7 @@ export const SearchBox = styled.form`
   padding: 0 10px;
   position: relative;
   overflow: hidden;
+  max-width: 750px;
   // 돋보기 아이콘에 적용
   > *:first-child {
     position: absolute;
@@ -121,7 +121,7 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = false;
+  const isLogIn = true;
 
   return (
     <SHeader>
@@ -130,10 +130,10 @@ function Header() {
           <MainLogoSVG />
         </LogoBox>
         <HeaderButton>Products</HeaderButton>
-        <SearchBox>
+        <SearchContainer>
           <MdSearch />
           <SearchBar />
-        </SearchBox>
+        </SearchContainer>
         {isLogIn ? (
           <UserMenus />
         ) : (
