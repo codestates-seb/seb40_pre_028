@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
-import com.seb40.server.Answer.Mapper.AnswerMapper2;
+import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Answer.Service.AnswerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +37,7 @@ public class AnswerControllerSliceTest {
     private AnswerService service;
 
     @Autowired
-    private AnswerMapper2 mapper;
+    private AnswerMapper mapper;
 
     private Answer answer;
     private AnswerPostDto post;

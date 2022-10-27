@@ -26,13 +26,15 @@ public class AnswerService {
     public Answer updateAnswer(Answer answer){
         // Answer Id 로 Answer를  찾는다.
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
-        // 찾은 내용에서 Answer 를 바꾼다.
 //        Optional.ofNullable(answer.getAnswerBody())
-//                .isPresent(answerBody -> findAnswer.setAnswerBody(answerBody));
-
-
+//                .isPresent(answerbody -> findAnswer.setAnswerBody(answerbody));
+        findAnswer.setAnswerBody(answer.getAnswerBody());
         // 바꾼 Answer 를 저장 후 반환한다.
         return answerRepository.save(findAnswer);
+    }
+
+    public Answer findAnswer(long answerId){
+        return findVerifiedAnswer(answerId);
     }
 
     public void deleteAnswer(long answerId){
