@@ -16,7 +16,7 @@ import java.util.List;
 
 @CrossOrigin
 @Transactional
-@RequestMapping("/questions")
+@RequestMapping("/user/question")
 @RestController
 public class QuestionController {
     private final QuestionService questionService;
@@ -28,23 +28,23 @@ public class QuestionController {
         this.mapper = mapper;
     }
 
-    @PostMapping
+    @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
         Question question = mapper.questionPostDtoToQuestion(questionPostDto);
         Question response = questionService.createQuestion(question);
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{question-id}")
-    public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
+    @PatchMapping("/{question_id}")
+    public ResponseEntity patchQuestion(@PathVariable("question_id") @Positive long questionId,
                                     @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
         Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
     }
 
-    @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
+    @GetMapping("/{question_id}")
+    public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
         Question response = questionService.findQuestion(questionId);
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
     }
@@ -59,8 +59,8 @@ public class QuestionController {
 
     }
 
-    @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
+    @DeleteMapping("/{question_id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question_id") @Positive long questionId) {
         System.out.println("questionId: " + questionId);
         // No need business logic
 
