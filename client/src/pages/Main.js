@@ -26,7 +26,7 @@ export const SMain = styled.main`
   flex: 0 1 100%;
   display: flex;
   justify-content: center;
-  padding: 74px 24px 24px 24px;
+  padding: 74px 24px 24px 0px;
   border: solid red 1px;
 `;
 
@@ -41,9 +41,9 @@ const Main = () => {
   return (
     <TopContainer>
       <MainContainer>
-        <NavLayout></NavLayout>
+        <NavLayout />
         <SMain>
-          <MainBar></MainBar>
+          <MainBar />
           <Sidebar>side bar</Sidebar>
         </SMain>
       </MainContainer>
