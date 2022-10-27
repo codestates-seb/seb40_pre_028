@@ -158,7 +158,10 @@ export default function SignUp() {
             <Label htmlFor="password">Password</Label>
             <Input type="text" id="password" />
             <div>
-              <span>Passwords must contain at least eight characters, including at least 1 letter and 1 number.</span>
+              <span>
+                Passwords must contain at least eight characters, including at
+                least 1 letter and 1 number.
+              </span>
             </div>
           </Field>
           <RobotCheck></RobotCheck>
@@ -168,7 +171,8 @@ export default function SignUp() {
             </div>
             <div>
               <label htmlFor="checkbox">
-                Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.
+                Opt-in to receive occasional product updates, user research
+                invitations, company announcements, and digests.
               </label>
             </div>
             <div>
@@ -179,15 +183,27 @@ export default function SignUp() {
           <FieldsetFooter>
             <span>
               By clicking “Sign up”, you agree to our{' '}
-              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
+              <a
+                href="https://stackoverflow.com/legal/terms-of-service/public"
+                target="_blank"
+                rel="noreferrer"
+              >
                 terms of service
               </a>
               ,{' '}
-              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
+              <a
+                href="https://stackoverflow.com/legal/terms-of-service/public"
+                target="_blank"
+                rel="noreferrer"
+              >
                 privacy policy
               </a>{' '}
               and{' '}
-              <a href="https://stackoverflow.com/legal/terms-of-service/public" target="_blank" rel="noreferrer">
+              <a
+                href="https://stackoverflow.com/legal/terms-of-service/public"
+                target="_blank"
+                rel="noreferrer"
+              >
                 cookie policy
               </a>
             </span>
@@ -198,14 +214,21 @@ export default function SignUp() {
         <div>
           <span>
             Already have an account?{' '}
-            <a href="https://stackoverflow.com/users/login?ssrc=head" target="_blank" rel="noreferrer">
+            <a
+              href="https://stackoverflow.com/users/login?ssrc=head"
+              target="_blank"
+              rel="noreferrer"
+            >
               Log in
             </a>
           </span>
         </div>
         <div>
           <span>
-            Are you an employer? <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>Sign up on Talent </a>
+            Are you an employer?{' '}
+            <a href='https://talent.stackoverflow.com/users/login target="_blank" rel="noreferrer'>
+              Sign up on Talent{' '}
+            </a>
           </span>
         </div>
       </TextContainer>
