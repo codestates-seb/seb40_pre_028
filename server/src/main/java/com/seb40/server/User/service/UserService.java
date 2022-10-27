@@ -34,7 +34,8 @@ public class UserService {
 
 
     public User findUser(UserLoginDto userLoginDto){
-        return findVerifiedUser(userLoginDto.getId());
+
+        return findVerifiedUser(userLoginDto.);
     }
 
     private User findVerifiedUser(Long userId) {
