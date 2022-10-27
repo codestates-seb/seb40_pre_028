@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 const variables = css`
   --black-025: hsl(210, 8%, 97.5%);
