@@ -25,11 +25,13 @@ public class AnswerService {
 
     public Answer updateAnswer(Answer answer){
         // Answer Id 로 Answer를  찾는다.
+        // controller에서 받은 answer파라미터의 answerId를 받아서 repository에 있는 answerId 확인 후
+        // findAnswer에 찾아낸 answer 정보를 대입
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
-//        Optional.ofNullable(answer.getAnswerBody())
-//                .isPresent(answerbody -> findAnswer.setAnswerBody(answerbody));
+
+        //findAnswer에 patch로 controller에서 들어온 answer파라미터의 body를 set한다.
         findAnswer.setAnswerBody(answer.getAnswerBody());
-        // 바꾼 Answer 를 저장 후 반환한다.
+        // 새롭게 body가 set 된 Answer 를 repository에 저장 후 반환한다.
         return answerRepository.save(findAnswer);
     }
 
