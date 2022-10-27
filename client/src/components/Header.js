@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as Sprites } from '../assets/img/sprites.svg';
 import { MdSearch } from 'react-icons/md';
 import { BlueButton, PowderButton } from './DefaultButton';
-import { UserMenus } from './UseToolbar/UserToolbar';
+import { UserMenus } from './UserToolbar/UserToolbar';
 
 export const SHeader = styled.header`
   display: flex;
@@ -114,30 +114,6 @@ export const SearchBar = styled.input.attrs({
   }
 `;
 
-// export const SButton = styled.button`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   border-radius: 3px;
-//   border: 1px solid var(--powder-500);
-//   color: var(--powder-700);
-//   padding: 2px 9px;
-//   transition: 0.4s all;
-//   font-size: 0.85rem;
-//   width: max-content;
-//   height: 32px;
-//   background-color: var(--powder-100);
-//   box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
-//   &:hover {
-//     background-color: var(--powder-400);
-//     transition: 0.4s all;
-//   }
-//   &:active {
-//     box-shadow: none;
-//     border-color: var(--powder-600);
-//   }
-// `;
-
 export const AuthBtns = styled.div`
   display: flex;
   column-gap: 3px;
@@ -145,7 +121,7 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = true;
+  const isLogIn = false;
 
   return (
     <SHeader>
