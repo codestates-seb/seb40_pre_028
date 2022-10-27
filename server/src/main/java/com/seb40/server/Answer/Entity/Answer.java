@@ -20,7 +20,7 @@ public class Answer {
 
     @Id // PK
     @Column(name = "answer_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Key 생성전략 MySQL의 auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
     private long answerId;
 
     // @ManyToOne 연결해야함
