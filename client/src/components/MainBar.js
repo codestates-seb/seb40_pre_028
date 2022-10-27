@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
+import QuestionElement from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 
 const SMainBar = styled.div`
@@ -48,6 +49,7 @@ export function MainBar() {
         <div>23,148,368 questions</div>
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
+      <QuestionElement />
     </SMainBar>
   );
 }
