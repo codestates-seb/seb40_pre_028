@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController //bean 등록
-@RequestMapping("/") // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
+@RequestMapping("/user/answer") // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -24,7 +24,7 @@ public class AnswerController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/user/answer/post")
+    @PostMapping("/post")
     public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
         Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
         Answer response = answerService.createdAnswer(answer);
@@ -33,7 +33,7 @@ public class AnswerController {
                 HttpStatus.CREATED);
     }
 
-    @PatchMapping("/user/answer/{answer_id}")
+    @PatchMapping("/{answer_id}")
     public ResponseEntity patchAnswer(@RequestBody AnswerPatchDto answerPatchDto){
         Answer answer = mapper.answerPatchDtoToAnswer(answerPatchDto);
         Answer response = answerService.updateAnswer(answer);
@@ -42,7 +42,7 @@ public class AnswerController {
                 , HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/answer/{answer_id}")
+    @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(long answerId){
         // answerId 로 deleteAnswer 서비스 메소드로 삭제
         answerService.deleteAnswer(answerId);
