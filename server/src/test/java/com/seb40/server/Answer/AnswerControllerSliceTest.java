@@ -44,14 +44,14 @@ public class AnswerControllerSliceTest {
 
     @BeforeEach
     public void init(){
-        this.post = new AnswerPostDto(4,1,2,"hello!222222");
+        this.post = new AnswerPostDto(1,"hello!222222");
         this.answer = mapper.answerPostDtoToAnswer(post);
     }
 
     @Test
     void postAnswerTest1() throws Exception {
         //given 조건, 입력값
-        AnswerPostDto post = new AnswerPostDto(1,1,2,"hello!222222");
+        AnswerPostDto post = new AnswerPostDto(1,"hello!222222");
 
         String content = gson.toJson(post);
 
