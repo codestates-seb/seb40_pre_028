@@ -33,9 +33,10 @@ public class UserService {
     }
 
 
-    public User findUser(UserLoginDto userLoginDto){
-        return findVerifiedUser(userLoginDto.getId());
-    }
+//    public User findUser(UserLoginDto userLoginDto){
+//
+//        return findVerifiedUser(userLoginDto.);
+//    }
 
     private User findVerifiedUser(Long userId) {
         Optional<User> optionalUser =

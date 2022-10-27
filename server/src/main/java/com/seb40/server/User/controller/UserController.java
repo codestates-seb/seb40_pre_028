@@ -34,17 +34,17 @@ public class UserController {
         );
     }
 
-    @GetMapping("/login")
-    public ResponseEntity getUser(@Valid @RequestBody UserLoginDto userLoginDto){
-
-
-        User user = userService.findUser(userLoginDto);
-
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(userMapper.userToUserResponseDto(user)),
-                HttpStatus.OK);
-    }
+//    @GetMapping("/login")
+//    public ResponseEntity getUser(@Valid @RequestBody UserLoginDto userLoginDto){
+//
+//
+//       User user = userService.findUser(userLoginDto);
+//
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(userMapper.userToUserResponseDto(user)),
+//                HttpStatus.OK);
+//    }
 
 
 ////    @PutMapping("/logout")
