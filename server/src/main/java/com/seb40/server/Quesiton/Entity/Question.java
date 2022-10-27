@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +26,8 @@ public class Question {
     private long userId;
     private String questionTitle;
     private String questionBody;
+    @CreatedDate
     private LocalDateTime questionCreateAt;
+    @LastModifiedDate
     private LocalDateTime questionModified;
 }
