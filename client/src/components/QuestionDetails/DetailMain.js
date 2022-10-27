@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
-import { BsBookmark, BsPersonSquare } from "react-icons/bs";
-import { GiBackwardTime } from "react-icons/gi";
+import styled from 'styled-components';
+import { VscTriangleUp, VscTriangleDown } from 'react-icons/vsc';
+import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
+import { GiBackwardTime } from 'react-icons/gi';
 
 const Main = styled.div`
   padding: 10px;
@@ -155,24 +155,15 @@ export const DetailMain = () => {
         </Select>
         <Question>
           <p>
-            This code doesnt compile This code doesnt compileThis code doesnt
-            compile This code doesnt compile This code doesnt compile This code
-            doesnt compile This code doesnt compile This code doesnt compileThis
-            code doesntcompile This code doesnt compile This code doesnt compile
-            This code doesnt compile This code doesnt compile This code doesnt
-            compileThis code doesntcompile This code doesnt compile This code
-            doesnt compile This code doesnt compile This code doesnt compile
-            This code doesnt compileThis code doesnt compile This code doesnt
-            compile This code doesnt compile This code doesnt compileThis code
-            doesnt compile This code doesnt compileThis code doesnt compile This
-            code doesnt compile This code doesnt compile This codedoesnt compile
-            This code doesnt compile This code doesnt compileThis code doesnt
-            compile This code doesnt compile This code doesnt compile This code
-            doesnt compile This code doesnt compile This code doesnt compile
-            This code doesntcompile This code doesnt compile This code doesnt
-            compile This code doesnt compile This code doesnt compile This code
-            doesnt compileThis code doesnt compile This code doesnt compile This
-            code doesnt compile This code doesnt compile
+            This code doesnt compile This code doesnt compileThis code doesnt compile This code doesnt compile This code doesnt compile This code
+            doesnt compile This code doesnt compile This code doesnt compileThis code doesntcompile This code doesnt compile This code doesnt compile
+            This code doesnt compile This code doesnt compile This code doesnt compileThis code doesntcompile This code doesnt compile This code
+            doesnt compile This code doesnt compile This code doesnt compile This code doesnt compileThis code doesnt compile This code doesnt compile
+            This code doesnt compile This code doesnt compileThis code doesnt compile This code doesnt compileThis code doesnt compile This code
+            doesnt compile This code doesnt compile This codedoesnt compile This code doesnt compile This code doesnt compileThis code doesnt compile
+            This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile This code
+            doesntcompile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt
+            compileThis code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile
           </p>
           <PostTag>
             <ul>
@@ -204,10 +195,7 @@ export const DetailMain = () => {
         </Question>
       </Section>
       <Answer>
-        <p>
-          Know someone who can answer? Share a link to this question via email,
-          Twitter, or Facebook.
-        </p>
+        <p>Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.</p>
         <h2>Your Answer</h2>
         <Btn>Post Your Answer</Btn>
       </Answer>
