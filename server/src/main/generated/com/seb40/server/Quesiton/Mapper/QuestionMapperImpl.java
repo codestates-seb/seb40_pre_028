@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-26T18:02:10+0900",
+    date = "2022-10-27T14:19:37+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -25,8 +25,8 @@ public class QuestionMapperImpl implements QuestionMapper {
 
         Question question = new Question();
 
-        question.setQuestion_title( questionPostDto.getQuestion_title() );
-        question.setQuestion_body( questionPostDto.getQuestion_body() );
+        question.setQuestionTitle( questionPostDto.getQuestionTitle() );
+        question.setQuestionBody( questionPostDto.getQuestionBody() );
 
         return question;
     }
@@ -40,8 +40,8 @@ public class QuestionMapperImpl implements QuestionMapper {
         Question question = new Question();
 
         question.setQuestionId( questionPatchDto.getQuestionId() );
-        question.setQuestion_title( questionPatchDto.getQuestion_title() );
-        question.setQuestion_body( questionPatchDto.getQuestion_body() );
+        question.setQuestionTitle( questionPatchDto.getQuestionTitle() );
+        question.setQuestionBody( questionPatchDto.getQuestionBody() );
 
         return question;
     }
@@ -55,8 +55,8 @@ public class QuestionMapperImpl implements QuestionMapper {
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
 
         questionResponseDto.setQuestionId( question.getQuestionId() );
-        questionResponseDto.setQuestion_title( question.getQuestion_title() );
-        questionResponseDto.setQuestion_body( question.getQuestion_body() );
+        questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
+        questionResponseDto.setQuestionBody( question.getQuestionBody() );
 
         return questionResponseDto;
     }
