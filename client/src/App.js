@@ -1,19 +1,13 @@
 import GlobalStyle from './assets/style/GlobalStyle';
-import Header from './components/Header';
-// import LogIn from './pages/Login';
-// import SignUp from './pages/Signup';
-import Footer from './components/Footer';
-import { Nav } from './components/Nav';
+import LogIn from './pages/Login';
+import SignupPage from './pages/Signup';
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <Header />
-      {/* <SignUp />
-      <LogIn /> */}
-      <Nav />
-      <Footer />
+      <SignupPage />
+      <LogIn />
     </div>
   );
 }

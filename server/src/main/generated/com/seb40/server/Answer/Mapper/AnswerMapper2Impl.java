@@ -1,16 +1,15 @@
-package com.seb40.server.ask.answer.Mapper;
+package com.seb40.server.Answer.Mapper;
 
-import com.seb40.server.ask.answer.Dto.AnswerPatchDto;
-import com.seb40.server.ask.answer.Dto.AnswerPostDto;
-import com.seb40.server.ask.answer.Dto.AnswerResponseDto;
-import com.seb40.server.ask.answer.Entity.Answer;
-import java.time.LocalDateTime;
+import com.seb40.server.Answer.Dto.AnswerPatchDto;
+import com.seb40.server.Answer.Dto.AnswerPostDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Entity.Answer;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-26T18:02:10+0900",
+    date = "2022-10-27T14:19:37+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -25,6 +24,8 @@ public class AnswerMapper2Impl implements AnswerMapper2 {
         Answer answer = new Answer();
 
         answer.setAnswerId( answerPostDto.getAnswerId() );
+        answer.setQuestionId( answerPostDto.getQuestionId() );
+        answer.setUserId( answerPostDto.getUserId() );
         answer.setAnswerBody( answerPostDto.getAnswerBody() );
 
         return answer;
@@ -53,17 +54,14 @@ public class AnswerMapper2Impl implements AnswerMapper2 {
         long answerId = 0L;
         String answerBody = null;
         long userId = 0L;
-        LocalDateTime answerCreateAt = null;
-        LocalDateTime answerModified = null;
 
         answerId = answer.getAnswerId();
         answerBody = answer.getAnswerBody();
         userId = answer.getUserId();
-        answerCreateAt = answer.getAnswerCreateAt();
-        answerModified = answer.getAnswerModified();
 
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, answerCreateAt, answerModified );
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId );
 
         return answerResponseDto;
     }
 }
+

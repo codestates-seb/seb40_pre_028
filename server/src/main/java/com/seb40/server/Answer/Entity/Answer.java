@@ -19,25 +19,21 @@ import java.time.LocalDateTime;
 public class Answer {
 
     @Id // PK
-    @Column(name = "answer_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Key 생성전략 MySQL의 auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
     private long answerId;
 
     // @ManyToOne 연결해야함
-    @Column(name = "question_id")
     private long questionId;
 
     // @ManyToOne 연결해야함
-    @JoinColumn(name = "user_id")
     private long userId;
 
-    @Column(name = "answer_createAt", nullable = false)
+    @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
 
-    @Column(name = "answer_modied",nullable = false)
+    @Column(nullable = false)
     private LocalDateTime answerModified  = LocalDateTime.now();
 
-    @Column(name = "answer_body")
     private String answerBody;
 
 }
