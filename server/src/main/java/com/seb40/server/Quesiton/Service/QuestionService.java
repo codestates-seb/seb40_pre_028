@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class QuestionService {
-    // (1)
     private final QuestionRepository questionRepository;
 
     public QuestionService(QuestionRepository questionRepository) {
@@ -21,15 +20,15 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
 
-        return questionRepository.save(question);  // (2)
+        return questionRepository.save(question);
     }
 
     public Question updateQuestion(Question question){
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
-        Optional.ofNullable(question.getQuestion_title())
-                .ifPresent(question_title ->findQuestion.setQuestion_title(question_title));
-        Optional.ofNullable(question.getQuestion_body())
-                .ifPresent((question_body ->findQuestion.setQuestion_body(question_body)));
+        Optional.ofNullable(question.getQuestionTitle())
+                .ifPresent(questionTitle ->findQuestion.setQuestionTitle(questionTitle));
+        Optional.ofNullable(question.getQuestionBody())
+                .ifPresent((questionBody ->findQuestion.setQuestionBody(questionBody)));
 
         return questionRepository.save(findQuestion);
     }
