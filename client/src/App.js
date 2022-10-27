@@ -3,7 +3,8 @@ import Header from './components/Header';
 // import LogIn from './pages/Login';
 // import SignUp from './pages/Signup';
 import Footer from './components/Footer';
-import { Nav } from './components/Nav';
+// import { Nav } from './components/Nav';
+import Main from './pages/Main';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Header />
       {/* <SignUp /> */}
       {/* <LogIn /> */}
-      <Nav />
+      {/* <Nav /> */}
+      <Main />
       <Footer />
     </div>
   );
