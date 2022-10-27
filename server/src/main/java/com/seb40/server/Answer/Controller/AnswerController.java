@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController //bean 등록
-@RequestMapping("/user/answer") // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
+@RequestMapping("/user/answer")
+// 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
 
+    // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
     private final AnswerMapper2 mapper;
 
