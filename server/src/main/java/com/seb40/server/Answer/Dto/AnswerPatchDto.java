@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerPatchDto {
+
     private long answerId;
     private String answerBody;
 

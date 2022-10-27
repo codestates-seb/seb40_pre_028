@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class AnswerController {
 
     private final AnswerService answerService;
-//    private final AnswerMapper mapper;
     private final AnswerMapper2 mapper;
 
     public AnswerController(AnswerService answerService, AnswerMapper2 mapper) {
@@ -28,7 +27,7 @@ public class AnswerController {
     @PostMapping("/post")
     public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
         Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-        Answer response = answerService.creatAnswer(answer);
+        Answer response = answerService.createdAnswer(answer);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
                 HttpStatus.CREATED);

@@ -7,7 +7,9 @@ public enum ExceptionCode {
     USER_EXISTS(409, "User exists"),
     Question_NOT_FOUND(404, "Question not found"),
     Question_EXISTS(409, "Question exists"),
-    NOT_IMPLEMENTATION(501, "Not Implementation");
+    NOT_IMPLEMENTATION(501, "Not Implementation"),
+    ANSWER_NOT_FOUND(404, "Answer not found");
+
 
     @Getter
     private int status;
