@@ -11,7 +11,7 @@ export const DefaultButton = styled.button`
   width: max-content;
   height: 32px;
   box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
-  ${({ color, colorCode, borderCode, activeBorderCode, bgCode, hoverBgCode, activeBgCode }) => css`
+  ${({ color, colorCode, borderCode, activeBorderCode, bgCode, hoverBgCode, activeBgCode, width }) => css`
     border: 1px solid ${`var(--${color}-${borderCode})`};
     color: ${`var(--${color}-${colorCode})`};
     background-color: ${`var(--${color}-${bgCode})`};
