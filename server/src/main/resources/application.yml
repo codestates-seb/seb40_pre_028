@@ -1,9 +1,8 @@
-
 spring:
   datasource:
-#    url: jdbc:mysql://localhost:3306/stackover_flow?serverTimezone=Asia/Seoul
-#    username: root
-#    password: 3525
+    url: jdbc:mysql://localhost:3306/stackover_flow?serverTimezone=Asia/Seoul
+    username: root
+    password: 3525
 
     driver-class-name: com.mysql.cj.jdbc.Driver
 

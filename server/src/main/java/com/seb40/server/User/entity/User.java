@@ -21,15 +21,23 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
+<<<<<<< HEAD
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false, updatable = false, unique = true)
+=======
+    @Column( nullable = false, name="user_name")
+    private String name;
+
+    @Column( nullable = false, updatable = false, unique = true, name = "user_email")
+>>>>>>> dev
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name ="user_password")
     private String password;
 
 
