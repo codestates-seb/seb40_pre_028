@@ -1,6 +1,5 @@
 package com.seb40.server.User.service;
 
-
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.User.dto.UserLoginDto;
@@ -32,11 +31,20 @@ public class UserService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 
+    public User longinUser( User user) {
 
-//    public User findUser(UserLoginDto userLoginDto){
-//
-//        return findVerifiedUser(userLoginDto.);
-//    }
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        Optional<User> checkLogin = userRepository.findByEmailAndPassword(email, password);
+
+        User loginUser = checkLogin.orElseThrow(()->
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        return loginUser;
+
+    }
+
 
     private User findVerifiedUser(Long userId) {
         Optional<User> optionalUser =
@@ -49,6 +57,7 @@ public class UserService {
         return findUser;
 
     }
+
 
 
 }

@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity // DB 테이블 뜻 함
@@ -19,14 +18,19 @@ import java.time.LocalDateTime;
 public class Answer {
 
     @Id // PK
+    @Column(name="answer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
     private long answerId;
 
-    // @ManyToOne 연결해야함
+    // @ManyToOne 연결
+//    @ManyToOne
+//    @JoinColumn(name="question_id")
     private long questionId;
 
-    // @ManyToOne 연결해야함
-    private long userId;
+    // @ManyToOne 연결
+//    @ManyToOne
+//    @JoinColumn(name ="user_id")
+    private String userName;
 
     @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
@@ -36,4 +40,10 @@ public class Answer {
 
     private String answerBody;
 
+    // 답변투표와 연결
+//    private int answerVoteValue;
+
+    public Answer (String answerBody){
+        this.answerBody = answerBody;
+    }
 }

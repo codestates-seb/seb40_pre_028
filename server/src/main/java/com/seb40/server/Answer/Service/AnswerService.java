@@ -4,6 +4,9 @@ import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,14 +28,25 @@ public class AnswerService {
 
     public Answer updateAnswer(Answer answer){
         // Answer Id 로 Answer를  찾는다.
+        // controller에서 받은 answer파라미터의 answerId를 받아서 repository에 있는 answerId 확인 후
+        // findAnswer에 찾아낸 answer 정보를 대입
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
-        // 찾은 내용에서 Answer 를 바꾼다.
-//        Optional.ofNullable(answer.getAnswerBody())
-//                .isPresent(answerBody -> findAnswer.setAnswerBody(answerBody));
 
-
-        // 바꾼 Answer 를 저장 후 반환한다.
+        //findAnswer에 patch로 controller에서 들어온 answer파라미터의 body를 set한다.
+        findAnswer.setAnswerBody(answer.getAnswerBody());
+        // 새롭게 body가 set 된 Answer 를 repository에 저장 후 반환한다.
         return answerRepository.save(findAnswer);
+    }
+
+    public Answer findAnswer(long answerId){
+        return findVerifiedAnswer(answerId);
+    }
+
+
+    // Answer를 page 로 찾기
+    public Page<Answer> findAnswers(int page, int size) {
+        return answerRepository.findAll(PageRequest.of(page, size,
+                Sort.by("answerId").descending()));
     }
 
     public void deleteAnswer(long answerId){
@@ -43,7 +57,7 @@ public class AnswerService {
         // 반환 X
     }
 
-    // Answer Id 로 Answer 찾기
+    // Answer Id 로 저장된 Answer 찾기
     public Answer findVerifiedAnswer(long answerId){
 
         Optional<Answer> optionalAnswer =

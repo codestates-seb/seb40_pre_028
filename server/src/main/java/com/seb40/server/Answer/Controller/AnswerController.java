@@ -6,10 +6,15 @@ import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
+import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 
 @RestController //bean 등록
@@ -36,20 +41,46 @@ public class AnswerController {
     }
 
     @PatchMapping("/{answer_id}")
-    public ResponseEntity patchAnswer(@RequestBody AnswerPatchDto answerPatchDto){
-        Answer answer = mapper.answerPatchDtoToAnswer(answerPatchDto);
-        Answer response = answerService.updateAnswer(answer);
+    public ResponseEntity patchAnswer(@PathVariable("answer_id")
+                                          @Positive long answerId,
+                                      @RequestBody AnswerPatchDto answerPatchDto){
+        answerPatchDto.setAnswerId(answerId);
+        Answer response = answerService.updateAnswer(
+                mapper.answerPatchDtoToAnswer(answerPatchDto));
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response)
                 , HttpStatus.OK);
     }
 
+    @GetMapping("/{answer_id}")
+    public ResponseEntity getAnswer(@PathVariable("answer_id")
+                                    @Positive long answerId){
+        Answer response = answerService.findVerifiedAnswer(answerId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // Get answer List
+    @GetMapping
+    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+                                     @Positive @RequestParam int size) {
+        Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
+        List<Answer> answers = pageAnswers.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+                HttpStatus.OK);
+    }
+
+
+
     @DeleteMapping("/{answer_id}")
-    public ResponseEntity deleteAnswer(long answerId){
+    public ResponseEntity deleteAnswer(@PathVariable("answer_id")
+                                           @Positive long answerId){
         // answerId 로 deleteAnswer 서비스 메소드로 삭제
         answerService.deleteAnswer(answerId);
 
         // 삭제요청, ok 반환
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

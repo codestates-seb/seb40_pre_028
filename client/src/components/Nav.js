@@ -4,19 +4,18 @@ import { FaGlobeAmericas } from 'react-icons/fa';
 const NavTap = styled.div`
   display: inline-block;
   padding-top: 100px;
-  height: 100vh;
   color: #6a737c;
   font-size: 11px;
   width: 100px;
   position: sticky;
+  width: 150px;
   top: 0px;
   li {
     margin-top: 10px;
     color: #525960;
     font-size: 13px;
-    width: 157px;
     height: 30px;
-    display: inline-block;
+    display: block;
     padding-left: 15px;
   }
   .title {
@@ -35,9 +34,8 @@ const NavTap = styled.div`
 `;
 
 const NavLayout = styled.div`
-  height: 100%;
-  width: 180px;
   border-right: solid var(--black-100) 1px;
+  width: 150px;
 `;
 
 function Nav() {
