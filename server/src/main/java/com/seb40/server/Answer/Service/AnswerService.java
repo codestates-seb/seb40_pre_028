@@ -20,7 +20,7 @@ public class AnswerService {
     }
 
     // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직s
-    public Answer createdAnswer(Answer answer){
+    public Answer createAnswer(Answer answer){
         Answer savedAnswer = answerRepository.save(answer);
 
         return savedAnswer;

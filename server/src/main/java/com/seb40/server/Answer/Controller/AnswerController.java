@@ -34,7 +34,7 @@ public class AnswerController {
     @PostMapping("/post")
     public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
         Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-        Answer response = answerService.createdAnswer(answer);
+        Answer response = answerService.createAnswer(answer);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
                 HttpStatus.CREATED);
@@ -46,7 +46,7 @@ public class AnswerController {
                                      @RequestBody AnswerPostDto answerPostDto){
         answerPostDto.setQuestionId(questionId);
         Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-        Answer response = answerService.createdAnswer(answer);
+        Answer response = answerService.createAnswer(answer);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
                 HttpStatus.CREATED);
