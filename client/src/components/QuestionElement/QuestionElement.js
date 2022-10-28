@@ -1,25 +1,13 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
 
-export const MainUList = styled.ul`
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 16px;
-  padding: 0px 0px 5px 0px;
-
-  @media (max-width: 640px) {
-    justify-content: flex-start;
-    flex-direction: column;
-  }
-`;
-
 export const SQuestionList = styled.li`
   display: flex;
   flex-flow: row nowrap;
   row-gap: 7px;
   padding: 14px;
   width: 100%;
-  border-top: 0.2px solid var(--black-100);
+  border-top: 1px solid var(--black-100);
 
   @media (max-width: 640px) {
     justify-content: flex-start;
@@ -58,7 +46,7 @@ export const STextP = styled.p`
   padding-right: 23px;
   line-height: 1.3rem;
   max-height: 43px;
-  width: calc(100%);
+  width: 100%;
   overflow: hidden;
   word-break: break-all;
 
@@ -139,24 +127,22 @@ const UserFooter = () => {
 
 const QuestionElement = () => {
   return (
-    <MainUList>
-      <SQuestionList>
-        <LeftCounts />
-        <Container>
-          <STitleLink>This is subject</STitleLink>
-          <STextP>This is content</STextP>
-          <ContentFooter>
-            <Tags>
-              <div>Tag1</div>
-              <div>Tag2</div>
-              <div>Tag3</div>
-            </Tags>
-            <UserFooter />
-          </ContentFooter>
-        </Container>
-      </SQuestionList>
-    </MainUList>
+    <SQuestionList>
+      <LeftCounts />
+      <Container>
+        <STitleLink>This is subject</STitleLink>
+        <STextP>This is content</STextP>
+        <ContentFooter>
+          <Tags>
+            <div>Tag1</div>
+            <div>Tag2</div>
+            <div>Tag3</div>
+          </Tags>
+          <UserFooter />
+        </ContentFooter>
+      </Container>
+    </SQuestionList>
   );
 };
 
-export default QuestionElement;
+export { QuestionElement };
