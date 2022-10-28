@@ -17,6 +17,8 @@ public class AnswerResponseDto {
     private String answerBody;
     private long userId;
 
+    private long questionId;//추가
+
     private LocalDateTime answerCreatedAt;
     private LocalDateTime answerModified;
 

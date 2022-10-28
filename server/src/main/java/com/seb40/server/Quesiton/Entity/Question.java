@@ -21,6 +21,7 @@ import java.util.List;
 @Entity
 public class Question{
     @Id
+    @Column( nullable = false, name="question_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
 
@@ -28,11 +29,17 @@ public class Question{
 //    @JoinColumn(name="user_id")
 //    private long id;
 
-//    @OneToMany(mappedBy = "question")
-//    private List<Answer> answers = new ArrayList<>();
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
+    private List<Answer> answers = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "question")
 //    private List<Tag> tags = new ArrayList<>();
+
+    //@OneToMany()//질문 코멘트
+
+
+
+
 
     private String questionTitle;
     private String questionBody;
