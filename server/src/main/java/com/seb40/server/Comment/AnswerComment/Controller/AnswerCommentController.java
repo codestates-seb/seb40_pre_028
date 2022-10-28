@@ -1,12 +1,14 @@
 package com.seb40.server.Comment.AnswerComment.Controller;
 
+import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentPatchDto;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentPostDto;
-import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
 import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Comment.AnswerComment.Service.AnswerCommentService;
+import com.seb40.server.Response.MultiResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,14 +60,20 @@ public class AnswerCommentController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-//    @GetMapping("/{answer-id}")
-//    public ResponseEntity getAnswerComment(
-//            @PathVariable("answer-id") @Positive long answerId){
-//
-//        List<>
-//
-//        return
-//    }
+    //답변 코멘트 List
+    @GetMapping("/{answer-id}")
+    public ResponseEntity getAnswerComments(
+            @PathVariable("answer-id") @Positive long answerId,
+            @Positive @RequestParam int page,
+            @Positive @RequestParam int size){
+
+        Page<AnswerComment> pageAnswers = commentService.findComments(page - 1, size);
+        List<AnswerComment> comments = pageAnswers.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments), pageAnswers),
+                HttpStatus.OK);
+    }
 
     //답변 코멘트 삭제
     @DeleteMapping("/{answer-id}/{answerComment-id}")

@@ -5,6 +5,9 @@ import com.seb40.server.Comment.AnswerComment.Repository.AnswerCommentRepository
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,6 +34,15 @@ public class AnswerCommentService {
 
         comment.setAnswerCommentBody(answerComment.getAnswerCommentBody());
         return commentRepository.save(comment);
+
+    }
+
+    public AnswerComment findComment(long commentId){
+        return findVerifiedAnswerComment(commentId);
+    }
+
+    public Page<AnswerComment> findComments(int page, int size){
+        return commentRepository.findAll(PageRequest.of(page,size, Sort.by("commentId").descending()));
 
     }
 

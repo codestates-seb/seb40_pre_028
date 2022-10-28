@@ -29,7 +29,7 @@ public class AnswerComment {
     @Column( nullable = false)
     private String answerCommentBody;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime answerCommentCreateAt  = LocalDateTime.now();
 
 }
