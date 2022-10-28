@@ -20,15 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Question{
+public class Question extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
     private String questionTitle;
     private String questionBody;
-    @CreatedDate
-    private LocalDateTime questionCreatedAt = LocalDateTime.now();
-    @LastModifiedDate
-    private LocalDateTime questionModified  = LocalDateTime.now();
-
 }
