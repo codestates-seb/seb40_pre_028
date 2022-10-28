@@ -8,8 +8,8 @@ const NavTap = styled.div`
   font-size: 11px;
   width: 100px;
   position: sticky;
-  top: 0px;
   width: 150px;
+  top: 0px;
   li {
     margin-top: 10px;
     color: #525960;
