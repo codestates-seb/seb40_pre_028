@@ -1,5 +1,7 @@
 package com.seb40.server.Quesiton.Entity;
 
+import com.seb40.server.Answer.Entity.Answer;
+import com.seb40.server.Tag.Entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -19,11 +23,24 @@ public class Question{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
+
+//    @ManyToOne
+//    @JoinColumn(name="user_id")
+//    private long id;
+
+//    @OneToMany(mappedBy = "question")
+//    private List<Answer> answers = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "question")
+//    private List<Tag> tags = new ArrayList<>();
+
     private String questionTitle;
     private String questionBody;
     @CreatedDate
     private LocalDateTime questionCreatedAt = LocalDateTime.now();
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
+
+
 
 }
