@@ -15,5 +15,4 @@ public class AnswerCommentResponseDto {
 
     private String answerCommentBody;
     private LocalDateTime answerCommentCreateAt;
-
 }

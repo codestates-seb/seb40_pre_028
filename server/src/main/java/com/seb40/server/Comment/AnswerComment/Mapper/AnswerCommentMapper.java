@@ -16,5 +16,4 @@ public interface AnswerCommentMapper {
 
     List<AnswerCommentResponseDto> commentsToCommentResponseDtos(List<AnswerComment> comments);
     AnswerCommentResponseDto commentToCommentResponseDto(AnswerComment comment);
-    
 }

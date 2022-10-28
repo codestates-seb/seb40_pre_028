@@ -19,5 +19,4 @@ public class AnswerCommentPostDto {
 
     @NotBlank
     private String answerCommentBody;
-
 }
