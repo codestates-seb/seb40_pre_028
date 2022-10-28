@@ -19,7 +19,6 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tagId;
 
-    @Column(name = "tag_name")
     private String tagName;
 
     private long questionId;

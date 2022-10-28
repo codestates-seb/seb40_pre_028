@@ -1,6 +1,5 @@
 package com.seb40.server.Tag.Service;
 
-import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Tag.Entity.Tag;
@@ -24,9 +23,9 @@ public class TagService {
         return savedTag;
     }
 
-//    public Tag getTag(long tagId){
-//        return findVerifiedTag(tagId);
-//    }
+    public Tag findTag(long tagId){
+        return findVerifiedTag(tagId);
+    }
 
     public void deleteTag(long tagId){
         Tag findTag = findVerifiedTag(tagId);
