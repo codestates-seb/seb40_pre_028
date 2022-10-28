@@ -124,6 +124,35 @@ const Board = styled.div`
     }
   }
 `;
+const TagContainer = styled.div`
+  display: flex;
+`;
+const Tag = styled.div`
+  width: fit-content;
+  color: #39739d;
+  background-color: #e1ecf4;
+  border-radius: 5px;
+  padding: 3px 5px;
+  font-size: 12px;
+
+  margin-right: 3px;
+  button {
+    box-sizing: content-box;
+    width: 7px;
+    margin-left: 3px;
+    border: none;
+    border-radius: 4px;
+    color: #39739d;
+
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+      color: #e1ecf4;
+      background-color: #39739d;
+    }
+  }
+`;
 export default function CreateQuestionPage() {
   const [isAlertMsg1, setIsAlertMsg1] = useState(false);
   const [isAlertMsg2, setIsAlertMsg2] = useState(false);
@@ -132,6 +161,9 @@ export default function CreateQuestionPage() {
   const [btn1, setBtn1] = useState(true);
   const [btn2, setBtn2] = useState(false);
   const [btn3, setBtn3] = useState(false);
+
+  // input3: tag
+  const [tagName, setTagName] = useState([]);
 
   const inputEl1 = useRef(null);
   // const inputEl2 = useRef(null);
@@ -172,6 +204,26 @@ export default function CreateQuestionPage() {
     setBtn3(false);
   };
 
+  //tag handler
+  const tagNameHandlerByKeyup = e => {
+    if (e.key !== ' ') return; // key가 스페이스바 일때만 아래 코드가 실행됨.
+    if (e.target.value.trim() === '') return;
+    if (tagName.includes(e.target.value.trim())) return;
+    setTagName([...tagName, e.target.value.trim()]);
+    e.target.value = '';
+    return;
+  };
+  const tagNameHandlerByFocusout = e => {
+    if (e.target.value.trim() === '') return;
+    if (tagName.includes(e.target.value.trim())) return;
+    setTagName([...tagName, e.target.value.trim()]);
+    e.target.value = '';
+    return;
+  };
+  const tagCloseBtn = (e, el) => {
+    e.preventDefault();
+    setTagName(tagName.filter(tag => tag !== el));
+  };
   useEffect(() => {
     inputEl1.current.focus();
   }, []);
@@ -243,11 +295,29 @@ export default function CreateQuestionPage() {
             ''
           )}
         </FieldSet>
+
         <FieldSet>
           <Field>
             <Label1 htmlFor="tags">Tags</Label1>
             <Label2 htmlFor="tags">Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</Label2>
-            <Input ref={inputEl3} type="text" id="tags" onFocus={AlertMsgHandlerOn3} placeholder="e.g. (excel string regex)"></Input>
+            <Input
+              ref={inputEl3}
+              type="text"
+              id="tags"
+              onFocus={AlertMsgHandlerOn3}
+              onKeyUp={tagNameHandlerByKeyup}
+              onBlur={tagNameHandlerByFocusout}
+              placeholder="e.g. (excel string regex)"
+            />
+
+            <TagContainer>
+              {tagName.map((el, idx) => (
+                <Tag key={idx}>
+                  <span>{el}</span>
+                  <button onClick={e => tagCloseBtn(e, el)}>X</button>
+                </Tag>
+              ))}
+            </TagContainer>
             {btn3 ? <Button onClick={btnHandler3}>Next</Button> : ''}
           </Field>
           {isAlertMsg3 ? (
