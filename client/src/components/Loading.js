@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const LoadingContainer = styled.div`
-  width: 300px;
-  height: 500px;
+  width: 200px;
+  height: 200px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@ const LoadingContainer = styled.div`
 export function Loading() {
   return (
     <LoadingContainer>
-      <h3>Loading...</h3>
+      <h3>Not Found</h3>
     </LoadingContainer>
   );
 }

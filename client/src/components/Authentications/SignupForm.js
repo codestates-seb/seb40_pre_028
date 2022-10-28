@@ -130,6 +130,7 @@ export function SignupForm({ setUserData, setIsLoading }) {
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [nameValue, setNameValue] = useState('');
+
   // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
@@ -146,7 +147,8 @@ export function SignupForm({ setUserData, setIsLoading }) {
     if (!LoginForm.emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
 
-    if (emailValid || emailValid2 || passwordValid) return;
+    if (emailValue === '' || passwordValue === '' || !LoginForm.emailValidation(emailValue)) return;
+
     console.log('login varified: ');
     console.log({
       name: nameValue,
@@ -159,12 +161,10 @@ export function SignupForm({ setUserData, setIsLoading }) {
       password: passwordValue,
     });
 
-    // fetch('', {
+    // fetch('https://9d19-110-13-106-62.jp.ngrok.io/user/join', {
     //   method: 'POST',
-    //   mode: 'cors',
-    //   credentials: 'same-origin',
     //   headers: {
-    //     'Content-Type': 'application/json'
+    //     'Content-Type': 'application/json',
     //   },
     //   body: payload,
     // })
@@ -172,6 +172,7 @@ export function SignupForm({ setUserData, setIsLoading }) {
     //   .then(data => {
     //     console.log(data);
     //     setIsLoading(false);
+    //     setTest(data);
     //     setUserData(data);
     //   })
     //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
@@ -243,6 +244,7 @@ export function SignupForm({ setUserData, setIsLoading }) {
             </div>
           </Checkbox>
           <Button>Sign up</Button>
+
           <FieldsetFooter>
             <span>
               By clicking “Sign up”, you agree to our{' '}
