@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Positive;
 
 
+
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
@@ -57,6 +58,13 @@ public class AnswerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/{answer_id}")
+    public ResponseEntity getAnswer(@PathVariable("answer_id")
+                                    @Positive long answerId){
+        Answer response = answerService.findVerifiedAnswer(answerId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 
 
