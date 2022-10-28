@@ -5,6 +5,9 @@ import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +40,9 @@ public class QuestionService {
         return findVerifiedQuestion(questionId);
     }
 
-    public List<Question> findQuestions(){
-        return (List<Question>) questionRepository.findAll();
+    public Page<Question> findQuestions(int page, int size){
+        return questionRepository.findAll(PageRequest.of(page,size,
+                Sort.by("questionId").descending()));
     }
 
     public void deleteQuestion(long questionId){
