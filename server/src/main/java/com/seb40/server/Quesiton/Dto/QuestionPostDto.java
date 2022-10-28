@@ -13,10 +13,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class QuestionPostDto {
     @NotBlank
-    private long userId;
-    @NotBlank
     private String questionTitle;
+
     @NotBlank
     private String questionBody;
-
 }
