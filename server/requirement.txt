@@ -1,0 +1,16 @@
+김영희 해야할일 (매핑 이렇게 하는게 맞겠죵?ㅋㅋ)
+Question (n) <---- (1) User
+User (1) ----> (n) Question
+
+Question (1) ----> (n) Answer
+Answer (n) <---- (1) Question
+
+QuestionComment (n) <---- (1) Question
+Question (1) ----> (n) QuestionComment
+
+Question (1) ----> (n) Vote
+Vote (n) <---- (1) Question
+
+QuestionService에 UserService를 주입하여
+질문을 하기 전에 그 user가 존재하는지 확인해야함
+userService.findVerifiedUser(question.getUser().getId()); // 아마 코드 이럴듯
