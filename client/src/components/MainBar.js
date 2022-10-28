@@ -68,6 +68,16 @@ export function MainBar() {
         <QuestionElement />
         <QuestionElement />
         <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
+        <QuestionElement />
       </MainUList>
     </SMainBar>
   );

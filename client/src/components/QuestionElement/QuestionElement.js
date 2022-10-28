@@ -7,7 +7,7 @@ export const SQuestionList = styled.li`
   row-gap: 7px;
   padding: 14px;
   width: 100%;
-  border-top: 0.2px solid var(--black-100);
+  border-top: 1px solid var(--black-100);
 
   @media (max-width: 640px) {
     justify-content: flex-start;
