@@ -5,9 +5,11 @@ import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Tag.Entity.Tag;
 import com.seb40.server.Tag.Repository.TagRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class TagService {
 
     private final TagRepository tagRepository;
