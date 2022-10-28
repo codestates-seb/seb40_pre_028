@@ -14,7 +14,6 @@ public interface AnswerCommentMapper {
     AnswerComment commentPostDtoToComment(AnswerCommentPostDto commentPostDto);
     AnswerComment commentPatchDtoToComment(AnswerCommentPatchDto commentPatchDto);
 
-    List<AnswerCommentResponseDto> commentToCommentResponseDto(List<AnswerComment> comment);
+    List<AnswerCommentResponseDto> commentsToCommentResponseDtos(List<AnswerComment> comments);
     AnswerCommentResponseDto commentToCommentResponseDto(AnswerComment comment);
-
 }

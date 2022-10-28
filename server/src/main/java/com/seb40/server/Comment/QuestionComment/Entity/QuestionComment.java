@@ -1,4 +1,4 @@
-package com.seb40.server.Comment.AnswerComment.Entity;
+package com.seb40.server.Comment.QuestionComment.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,23 +13,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "answerComment")
-public class AnswerComment {
+@Table(name = "questionComment")
+public class QuestionComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long answerCommentId;
+    private Long questionCommentId;
 
     @Column( nullable = false)
-    private Long answerId;
+    private Long questionId;
 
     @Column( nullable = false)
     private Long userId;
 
     @Column( nullable = false)
-    private String answerCommentBody;
+    private String questionCommentBody;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime answerCommentCreateAt  = LocalDateTime.now();
+    private LocalDateTime questionCommentCreateAt  = LocalDateTime.now();
 
 }
