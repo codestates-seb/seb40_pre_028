@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
+
 
 @RestController //bean 등록
 @RequestMapping("/user/answer")
@@ -36,20 +38,32 @@ public class AnswerController {
     }
 
     @PatchMapping("/{answer_id}")
-    public ResponseEntity patchAnswer(@RequestBody AnswerPatchDto answerPatchDto){
-        Answer answer = mapper.answerPatchDtoToAnswer(answerPatchDto);
-        Answer response = answerService.updateAnswer(answer);
+    public ResponseEntity patchAnswer(@PathVariable("answer_id")
+                                          @Positive long answerId,
+                                      @RequestBody AnswerPatchDto answerPatchDto){
+        answerPatchDto.setAnswerId(answerId);
+        Answer response = answerService.updateAnswer(
+                mapper.answerPatchDtoToAnswer(answerPatchDto));
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response)
                 , HttpStatus.OK);
     }
 
+    @GetMapping("/{answer_id}")
+    public ResponseEntity getAnswer(@PathVariable("answer_id")
+                                    @Positive long answerId){
+        Answer response = answerService.findVerifiedAnswer(answerId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{answer_id}")
-    public ResponseEntity deleteAnswer(long answerId){
+    public ResponseEntity deleteAnswer(@PathVariable("answer_id")
+                                           @Positive long answerId){
         // answerId 로 deleteAnswer 서비스 메소드로 삭제
         answerService.deleteAnswer(answerId);
 
         // 삭제요청, ok 반환
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

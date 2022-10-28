@@ -14,8 +14,6 @@ public class AnswerPostDto {
 
     @NotNull
     private long answerId;
-    private long questionId;
-    private long userId;
     private String answerBody;
 
 }
