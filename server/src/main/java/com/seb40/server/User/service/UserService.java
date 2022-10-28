@@ -18,12 +18,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+
     public User createUser(User user){
         //이메일 등록 확인
         verifyExistsEmail(user.getEmail());
 
         return userRepository.save(user);
     }
+
 
     private void verifyExistsEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -32,11 +34,6 @@ public class UserService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 
-
-//    public User findUser(UserLoginDto userLoginDto){
-//
-//        return findVerifiedUser(userLoginDto.);
-//    }
 
     private User findVerifiedUser(Long userId) {
         Optional<User> optionalUser =
@@ -49,6 +46,5 @@ public class UserService {
         return findUser;
 
     }
-
 
 }

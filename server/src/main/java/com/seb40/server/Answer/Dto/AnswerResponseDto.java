@@ -15,7 +15,5 @@ public class AnswerResponseDto {
     private long answerId;
     private String answerBody;
     private long userId;
-//    private LocalDateTime answerCreateAt;
-//    private LocalDateTime answerModified;
 
 }

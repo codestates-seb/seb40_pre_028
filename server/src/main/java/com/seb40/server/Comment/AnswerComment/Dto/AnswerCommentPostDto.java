@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 public class AnswerCommentPostDto {
 
     private long answerCommentId;
+    private long answerId;
+    private long userId;
 
     @NotBlank
     private String answerCommentBody;
