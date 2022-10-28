@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
+import { getDateToString } from '../../utils/dateFormat';
+
+//! UI
 
 export const SQuestionList = styled.li`
   display: flex;
@@ -23,6 +26,7 @@ export const Container = styled.section`
   width: 100%;
 `;
 
+// 라우터 Link로 바꿔야함
 export const STitleLink = styled.a`
   margin-bottom: 5px;
   font-size: 17px;
@@ -77,13 +81,14 @@ export const Tags = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: var(--blue-600);
-    background-color: var(--blue-100);
+    /* height: 23px; */
+    font-size: 12px;
+    color: var(--powder-700);
+    background-color: var(--powder-100);
     border-radius: 3px;
     padding: 2px 6px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 2px;
+    padding: 4.8px 6px;
     cursor: pointer;
   }
 `;
@@ -116,29 +121,28 @@ export const UserAsked = styled.div`
   color: var(--black-600);
 `;
 
-const UserFooter = () => {
-  return (
-    <UserContainer>
-      <UserName>User name</UserName>
-      <UserAsked>asked 1 hour ago</UserAsked>
-    </UserContainer>
-  );
+const Tag = ({ tag }) => {
+  return <div>{tag}</div>;
 };
 
-const QuestionElement = () => {
+const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
+  console.log('123', title, body, tag, name, createdAt, votes, answers, views);
   return (
     <SQuestionList>
-      <LeftCounts />
+      <LeftCounts votes={votes} answer={answers} views={views} />
       <Container>
-        <STitleLink>This is subject</STitleLink>
-        <STextP>This is content</STextP>
+        <STitleLink>{title}</STitleLink>
+        <STextP>{body}</STextP>
         <ContentFooter>
           <Tags>
-            <div>Tag1</div>
-            <div>Tag2</div>
-            <div>Tag3</div>
+            {tag.map(tag => (
+              <Tag key={tag} tag={tag} />
+            ))}
           </Tags>
-          <UserFooter />
+          <UserContainer>
+            <UserName>{name}</UserName>
+            <UserAsked> {`asked ${getDateToString(createdAt)}`}</UserAsked>
+          </UserContainer>
         </ContentFooter>
       </Container>
     </SQuestionList>

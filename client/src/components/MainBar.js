@@ -51,6 +51,33 @@ export const MainUList = styled.ul`
   margin-left: -32px;
 `;
 
+let questions = [
+  {
+    id: 1,
+    title: 'This is title',
+    body: 'This is body',
+    tag: ['Tag1', 'Tag2', 'Tag3'],
+    name: 'User name',
+    createAt: '2022-10-22 00:00:00',
+    modifiedAt: '2022-02-02 00:00:00',
+    votes: 123,
+    answers: 10,
+    views: 100,
+  },
+  {
+    id: 2,
+    title: 'This is title',
+    body: 'This is body',
+    tag: ['Tag1', 'Tag2', 'Tag3'],
+    name: 'User name',
+    createdAt: '2022-10-28 00:00:00',
+    modifiedAt: '2022-02-02 00:00:00',
+    votes: 123,
+    answers: 10,
+    views: 100,
+  },
+];
+
 export function MainBar() {
   return (
     <SMainBar>
@@ -63,21 +90,20 @@ export function MainBar() {
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
+        {questions.map(question => (
+          <QuestionElement
+            key={question.id}
+            title={question.title}
+            body={question.body}
+            tag={question.tag}
+            name={question.name}
+            createdAt={question.createdAt}
+            modifiedAt={question.modifiedAt}
+            votes={question.votes}
+            answers={question.answers}
+            views={question.views}
+          />
+        ))}
       </MainUList>
     </SMainBar>
   );
