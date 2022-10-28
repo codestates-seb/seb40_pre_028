@@ -26,7 +26,7 @@ public class AnswerCommentController {
     private final AnswerCommentMapper mapper;
 
     //답변 코멘트 작성
-    @PostMapping("answer/{answer_id}")
+    @PostMapping("/{answer_id}")
     public ResponseEntity postComment(@Valid @RequestBody AnswerCommentPostDto commentPostDto){
 
         AnswerComment comment = mapper.commentPostDtoToComment(commentPostDto);
