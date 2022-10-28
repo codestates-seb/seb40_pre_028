@@ -17,7 +17,7 @@ public class AnswerResponseDto {
     private String answerBody;
     private long userId;
 
-    private LocalDateTime answerCreateAt;
+    private LocalDateTime answerCreatedAt;
     private LocalDateTime answerModified;
 
     private int voteId; // id 로 vote 수 뽑기
