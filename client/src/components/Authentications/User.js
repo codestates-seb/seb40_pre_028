@@ -2,28 +2,23 @@ import styled from 'styled-components';
 import StackIcon from '../../assets/img/stackicon.png';
 
 const UserContainer = styled.div`
-  width: 300px;
-  height: 500px;
+  width: 200px;
+  height: 200px;
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-
-  position: relative;
+  /* position: relative; */
   h2 {
-    position: absolute;
-    top: 100px;
+    margin-bottom: 20px;
   }
   h4 {
-    position: absolute;
-    top: 150px;
-  }
-  div {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 const Logo = styled.div`
+  margin: 10px 0;
   img {
     width: 60px;
   }
@@ -34,10 +29,11 @@ export function User({ userData }) {
       <Logo>
         <img src={StackIcon} alt="logo" />
       </Logo>
-      <h2>안녕하세요 {userData.user_name}님 </h2>
-      <h4>*회원정보*</h4>
-      <div>ID: {userData.user_id}</div>
-      <div>Email: {userData.user_email}</div>
+      <h2>* 회원정보 *</h2>
+      <div>
+        <h4>이름: {userData.name} </h4>
+        <h4>Email: {userData.email}</h4>
+      </div>
     </UserContainer>
   );
 }
