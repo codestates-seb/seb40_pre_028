@@ -2,6 +2,7 @@ package com.seb40.server.Answer.Entity;
 
 
 
+import com.seb40.server.Quesiton.Entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +24,9 @@ public class Answer {
     private long answerId;
 
     // @ManyToOne 연결
-//    @ManyToOne
-//    @JoinColumn(name="question_id")
-    private long questionId;
+    @ManyToOne(targetEntity = Question.class) //추가
+    @JoinColumn(name="question_id")  //questionId ->question_id
+    private Question question; //추가
 
     // @ManyToOne 연결
 //    @ManyToOne

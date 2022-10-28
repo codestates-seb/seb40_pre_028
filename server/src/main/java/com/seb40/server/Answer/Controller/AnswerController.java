@@ -40,6 +40,20 @@ public class AnswerController {
                 HttpStatus.CREATED);
     }
 
+    @PostMapping("/{question_id}/post")
+    public ResponseEntity postAnswer(@PathVariable("question_id")
+                                         @Positive long questionId,
+                                     @RequestBody AnswerPostDto answerPostDto){
+        answerPostDto.setQuestionId(questionId);
+        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
+        Answer response = answerService.createdAnswer(answer);
+
+        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
+                HttpStatus.CREATED);
+    }
+
+
+
     @PatchMapping("/{answer_id}")
     public ResponseEntity patchAnswer(@PathVariable("answer_id")
                                           @Positive long answerId,

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionPostDto {
+public class QuestionPostDto { // user_id있어야함
     @NotBlank
     private String questionTitle;
 
