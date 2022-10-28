@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Loading } from '../components/Loading';
-import { User } from '../components/User';
+import { User } from '../components/Authentications/User';
 
 const Bg = styled.div`
   background-color: #f1f2f3;

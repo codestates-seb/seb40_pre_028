@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StackIcon from '../assets/img/stackicon.png';
+import StackIcon from '../../assets/img/stackicon.png';
 
 const UserContainer = styled.div`
   width: 300px;

@@ -123,13 +123,13 @@ const TextContainer = styled.div`
     }
   }
 `;
-export function SignupForm() {
+export function SignupForm({ setUserData, setIsLoading }) {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-
+  const [nameValue, setNameValue] = useState('');
   // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
@@ -145,6 +145,31 @@ export function SignupForm() {
     // 형식 체크
     if (!LoginForm.emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
+
+    if (emailValid || emailValid2 || passwordValid) return;
+    console.log('login varified');
+    const payload = JSON.stringify({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    });
+    setIsLoading(false);
+    // fetch('', {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   credentials: 'same-origin',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: payload,
+    // })
+    //   .then(res => res.json)
+    //   .then(data => {
+    //     console.log(data);
+    //     setIsLoading(false);
+    //     setUserData(data);
+    //   })
+    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   const emailValueHandler = e => {
@@ -153,13 +178,16 @@ export function SignupForm() {
   const passwordValueHandler = e => {
     setPasswordValue(e.target.value);
   };
+  const nameValueHandler = e => {
+    setNameValue(e.target.value);
+  };
   return (
     <>
       <Form onSubmit={formSubmitHandler}>
         <Fieldset>
           <Field>
             <LoginForm.Label htmlFor="name">Display name</LoginForm.Label>
-            <LoginForm.Input type="text" id="name" />
+            <LoginForm.Input type="text" id="name" onChange={nameValueHandler} />
           </Field>
 
           <Field>
