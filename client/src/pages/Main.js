@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import { Aside } from '../components/Aside';
 import { MainBar } from '../components/MainBar';
+import { Nav } from '../components/Nav';
 
 const TopContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100%;
 `;
 
 const MainContainer = styled.div`
@@ -15,19 +18,13 @@ const MainContainer = styled.div`
   max-width: 1264px;
 `;
 
-const NavLayout = styled.div`
-  height: 100vh;
-  flex: 0 0 170px;
-  border: skyblue 1px solid;
-`;
-
 export const SMain = styled.main`
   position: relative;
   flex: 0 1 100%;
   display: flex;
   justify-content: center;
-  padding: 74px 24px 24px 24px;
-  border: solid red 1px;
+  margin-top: 50px;
+  padding: 24px 24px 24px 0px;
 `;
 
 export const Sidebar = styled.div`
@@ -41,10 +38,10 @@ const Main = () => {
   return (
     <TopContainer>
       <MainContainer>
-        <NavLayout></NavLayout>
+        <Nav />
         <SMain>
-          <MainBar></MainBar>
-          <Sidebar>side bar</Sidebar>
+          <MainBar />
+          <Aside>side bar</Aside>
         </SMain>
       </MainContainer>
     </TopContainer>
