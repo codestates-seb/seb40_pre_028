@@ -26,5 +26,4 @@ public class Question extends BaseTimeEntity{
     private long questionId;
     private String questionTitle;
     private String questionBody;
-
 }
