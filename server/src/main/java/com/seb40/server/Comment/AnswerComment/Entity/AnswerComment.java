@@ -32,4 +32,5 @@ public class AnswerComment {
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime answerCommentCreateAt  = LocalDateTime.now();
 
+
 }
