@@ -1,7 +1,7 @@
 /** getDateToString('2022-10-28') or getDateToString('2022-10-28 00:00:00') */
 export const getDateToString = value => {
   const today = new Date();
-  const timeValue = new Date(`${value}`);
+  const timeValue = new Date(`${value}Z`);
 
   const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
   if (betweenTime < 60) {

@@ -126,7 +126,6 @@ const Tag = ({ tag }) => {
 };
 
 const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
-  console.log('123', title, body, tag, name, createdAt, votes, answers, views);
   return (
     <SQuestionList>
       <LeftCounts votes={votes} answer={answers} views={views} />
