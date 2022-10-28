@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { OauthBtn } from '../components/OauthButton';
-import { SignupForm } from '../components/SignupForm';
+import { OauthBtn } from '../components/Authentications/OauthButton';
+import { SignupForm } from '../components/Authentications/SignupForm';
 
 const Bg = styled.div`
   background-color: #f1f2f3;
@@ -11,11 +11,11 @@ const Bg = styled.div`
   justify-content: center;
 `;
 
-export default function SignupPage() {
+export default function SignupPage({ setIsLoading, setUserData }) {
   return (
     <Bg>
       <OauthBtn />
-      <SignupForm />
+      <SignupForm setIsLoading={setIsLoading} setUserData={setUserData} />
     </Bg>
   );
 }

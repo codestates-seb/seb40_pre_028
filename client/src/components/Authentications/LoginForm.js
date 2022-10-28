@@ -108,7 +108,7 @@ const emailValidation = str => {
   // 숫자 (0~9) or 알파벳 (a~z, A~Z) 으로 시작하며 중간에 -_. 문자가 있을 수 있으며 그 후 숫자 (0~9) or 알파벳 (a~z, A~Z)이 올 수도 있고 연달아 올 수도 있고 없을 수도 있다. @는 반드시 존재하며 . 도 반드시 존재하고 a~z, A~Z 의 문자가 2,3개 존재하고 i = 대소문자 구분 안한다.
 };
 
-export function LoginForm({ setUserData, setIsLoading }) {
+export function LoginForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValid, setEmailValid] = useState(false);
@@ -129,30 +129,6 @@ export function LoginForm({ setUserData, setIsLoading }) {
     // 형식 체크
     if (!emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
-
-    if (emailValid || emailValid2 || passwordValid) return;
-    console.log('login varified');
-    const payload = JSON.stringify({
-      email: emailValue,
-      password: passwordValue,
-    });
-
-    // fetch('', {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   credentials: 'same-origin',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: payload,
-    // })
-    //   .then(res => res.json)
-    //   .then(data => {
-    //     console.log(data);
-    //     setIsLoading(false);
-    //     setUserData(data);
-    //   })
-    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   const emailValueHandler = e => {

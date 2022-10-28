@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ReactComponent as GoogleFavicon } from '../assets/img/google_favicon.svg';
-import { ReactComponent as GithubFavicon } from '../assets/img/github_favicon.svg';
-import { ReactComponent as FacebookFavicon } from '../assets/img/facebook_favicon.svg';
+import { ReactComponent as GoogleFavicon } from '../../assets/img/google_favicon.svg';
+import { ReactComponent as GithubFavicon } from '../../assets/img/github_favicon.svg';
+import { ReactComponent as FacebookFavicon } from '../../assets/img/facebook_favicon.svg';
 
 const BtnContainer = styled.div`
   display: flex;
