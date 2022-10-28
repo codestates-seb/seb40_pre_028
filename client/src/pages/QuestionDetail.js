@@ -8,6 +8,7 @@ import { Aside } from '../components//Aside';
 export const TopContainer = styled.div`
   display: flex;
   justify-content: center;
+  height: 1725px;
   Aside {
     margin-top: 20px;
   }
