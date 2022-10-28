@@ -24,27 +24,28 @@ public class UserController {
 
     public final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-
     private final UserService userService;
     private final UserMapper userMapper;
 
     @PostMapping("/join")
-    public ResponseEntity postUser(@Valid @RequestBody UserPostDto userPostDto){
+    public ResponseEntity postUser( @RequestBody UserPostDto userPostDto){
         User user = userMapper.userPostDtoUser(userPostDto);
         User response = userService.createUser(user);
 
+//        return new ResponseEntity<>(response,HttpStatus.CREATED);
         return new ResponseEntity<>(
                 userMapper.userToUserResponseDto(response),
                 HttpStatus.CREATED
         );
+
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestBody UserLoginDto userLoginDto) {
-
         User user = userMapper.userLoginDtoUser(userLoginDto);
+        User response = userService.longinUser(user);
 
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -52,7 +53,5 @@ public class UserController {
     public ResponseEntity<Object> logoutUser() {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
-
-
 
 }
