@@ -18,5 +18,4 @@ public class QuestionCommentPatchDto {
     @NotBlank
     private String questionCommentBody;
 
-
 }

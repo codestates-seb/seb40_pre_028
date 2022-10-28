@@ -19,4 +19,5 @@ public class QuestionCommentPostDto {
 
     @NotBlank
     private String questionCommentBody;
+
 }
