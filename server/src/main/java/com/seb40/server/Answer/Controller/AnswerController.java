@@ -6,13 +6,15 @@ import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
+import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
-
+import java.util.List;
 
 
 @RestController //bean 등록
@@ -58,12 +60,16 @@ public class AnswerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{answer_id}")
-    public ResponseEntity getAnswer(@PathVariable("answer_id")
-                                    @Positive long answerId){
-        Answer response = answerService.findVerifiedAnswer(answerId);
+    // Get answer List
+    @GetMapping
+    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+                                     @Positive @RequestParam int size) {
+        Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
+        List<Answer> answers = pageAnswers.getContent();
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+                HttpStatus.OK);
     }
 
 
