@@ -16,3 +16,4 @@ public class MultiResponseDto<T> {
                 page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 }
+
