@@ -6,6 +6,8 @@ import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
+import com.seb40.server.Response.MultiResponseDto;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,19 +52,19 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions() {
-        List<Question> questions = questionService.findQuestions();
-        List<QuestionResponseDto> response = mapper.questionsToQuestionResponseDtos(questions);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-
+    public ResponseEntity getQuestions(@Positive @RequestParam int page,
+                                       @Positive @RequestParam int size) {
+        Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
+        List<Question> questions = pageQuestions.getContent();// 내용까지도
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
+                        pageQuestions),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{question_id}")
     public ResponseEntity deleteQuestion(@PathVariable("question_id") @Positive long questionId) {
-        System.out.println("questionId: " + questionId);
-        // No need business logic
+        questionService.deleteQuestion(questionId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

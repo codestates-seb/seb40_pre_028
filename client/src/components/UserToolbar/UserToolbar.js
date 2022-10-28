@@ -1,11 +1,13 @@
-import { AchievementSVG, HelpSVG, InboxSVG, List, MenuUList, SwitchSVG, UserMenusBox } from './style';
-// import UserProfile from './UserProfile/UserProfile';
+import { SUserProfile, AchievementSVG, HelpSVG, InboxSVG, List, MenuUList, SwitchSVG, UserMenusBox } from './style';
+import { AiOutlineUser } from 'react-icons/ai';
 
 export const UserMenus = () => {
   return (
     <UserMenusBox>
-      {/* <UserProfile /> */}
-      <div></div>
+      <SUserProfile>
+        <AiOutlineUser />
+        <div>1</div>
+      </SUserProfile>
       <MenuUList>
         <List>
           <InboxSVG />

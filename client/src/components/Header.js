@@ -28,10 +28,9 @@ export const SHeader = styled.header`
 
 export const SNav = styled.nav`
   display: flex;
-  flex-flow: row nowrap;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1264px;
   height: 50px;
   padding-top: 3px;
 `;
@@ -81,7 +80,7 @@ export const HeaderButton = styled.button`
   }
 `;
 
-export const SearchBox = styled.form`
+export const SearchContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +120,7 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = false;
+  const isLogIn = true;
 
   return (
     <SHeader>
@@ -130,10 +129,10 @@ function Header() {
           <MainLogoSVG />
         </LogoBox>
         <HeaderButton>Products</HeaderButton>
-        <SearchBox>
+        <SearchContainer>
           <MdSearch />
           <SearchBar />
-        </SearchBox>
+        </SearchContainer>
         {isLogIn ? (
           <UserMenus />
         ) : (

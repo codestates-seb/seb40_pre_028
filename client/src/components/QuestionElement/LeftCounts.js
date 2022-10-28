@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  border: red 1px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
