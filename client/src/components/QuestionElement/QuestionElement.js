@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
 
+//! UI
+
 export const SQuestionList = styled.li`
   display: flex;
   flex-flow: row nowrap;
@@ -23,6 +25,7 @@ export const Container = styled.section`
   width: 100%;
 `;
 
+// 라우터 Link로 바꿔야함
 export const STitleLink = styled.a`
   margin-bottom: 5px;
   font-size: 17px;
@@ -77,13 +80,14 @@ export const Tags = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: var(--blue-600);
-    background-color: var(--blue-100);
+    /* height: 23px; */
+    font-size: 12px;
+    color: var(--powder-700);
+    background-color: var(--powder-100);
     border-radius: 3px;
     padding: 2px 6px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 2px;
+    padding: 4.8px 6px;
     cursor: pointer;
   }
 `;
@@ -124,6 +128,8 @@ const UserFooter = () => {
     </UserContainer>
   );
 };
+
+//! Features
 
 const QuestionElement = () => {
   return (

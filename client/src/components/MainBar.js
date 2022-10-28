@@ -51,6 +51,33 @@ export const MainUList = styled.ul`
   margin-left: -32px;
 `;
 
+let data = [
+  {
+    questionId: 1,
+    questionTitle: 'This is title',
+    questionBody: 'This is body',
+    questionTag: ['Tag1', 'Tag2', 'Tag3'],
+    questionUserName: 'User name',
+    questionCreateAt: '2022-01-01 00:00:00',
+    questionModifiedAt: '2022-02-02 00:00:00',
+    questionVotes: 123,
+    questionAnswers: 10,
+    questionViews: 100,
+  },
+  {
+    questionId: 2,
+    questionTitle: 'This is title',
+    questionBody: 'This is body',
+    questionTag: ['Tag1', 'Tag2', 'Tag3'],
+    questionUserName: 'User name',
+    questionCreateAt: '2022-01-01 00:00:00',
+    questionModifiedAt: '2022-02-02 00:00:00',
+    questionVotes: 123,
+    questionAnswers: 10,
+    questionViews: 100,
+  },
+];
+
 export function MainBar() {
   return (
     <SMainBar>
@@ -63,21 +90,20 @@ export function MainBar() {
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
-        <QuestionElement />
+        {data.map(question => {
+          <QuestionElement
+            questionId={question.questionId}
+            questionTitle={question.questionTitle}
+            questionBody={question.questionBody}
+            questionTag={question.questionTag}
+            questionUserName={question.questionUserName}
+            questionCreateAt={question.questionCreateAt}
+            questionModifiedAt={question.questionModifiedAt}
+            questionVotes={question.questionVotes}
+            questionAnswers={question.questionAnswers}
+            questionViews={question.questionViews}
+          />;
+        })}
       </MainUList>
     </SMainBar>
   );
