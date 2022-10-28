@@ -4,7 +4,8 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 
 const Main = styled.div`
-  padding: 10px;
+  padding: 5px 40px 10px 5px;
+  width: 772px;
 `;
 
 const Section = styled.div`
@@ -89,7 +90,7 @@ const Select = styled.div`
 
 const Question = styled.div`
   p {
-    margin: 30px 0;
+    margin: 20px 0;
   }
   display: flex;
   flex-direction: column;
