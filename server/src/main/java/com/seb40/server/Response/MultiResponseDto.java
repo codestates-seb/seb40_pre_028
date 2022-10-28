@@ -1,5 +1,6 @@
 package com.seb40.server.Response;
 
+import com.seb40.server.Response.PageInfo;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
@@ -16,3 +17,4 @@ public class MultiResponseDto<T> {
                 page.getSize(), page.getTotalElements(), page.getTotalPages());
     }
 }
+

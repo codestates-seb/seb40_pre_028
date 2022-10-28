@@ -2,7 +2,6 @@ package com.seb40.server.Quesiton.Service;
 
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import org.springframework.data.domain.Page;
@@ -15,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class QuestionService {
+    // (1)
     private final QuestionRepository questionRepository;
 
     public QuestionService(QuestionRepository questionRepository) {
@@ -23,7 +23,7 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
 
-        return questionRepository.save(question);
+        return questionRepository.save(question);  // (2)
     }
 
     public Question updateQuestion(Question question){
@@ -31,7 +31,7 @@ public class QuestionService {
         Optional.ofNullable(question.getQuestionTitle())
                 .ifPresent(questionTitle ->findQuestion.setQuestionTitle(questionTitle));
         Optional.ofNullable(question.getQuestionBody())
-                .ifPresent((questionBody ->findQuestion.setQuestionBody(questionBody)));
+                .ifPresent((question_body ->findQuestion.setQuestionBody(question_body)));
 
         return questionRepository.save(findQuestion);
     }
@@ -47,7 +47,6 @@ public class QuestionService {
 
     public void deleteQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
-
         questionRepository.delete(findQuestion);
     }
 

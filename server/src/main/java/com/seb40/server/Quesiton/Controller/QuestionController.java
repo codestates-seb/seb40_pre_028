@@ -1,8 +1,6 @@
 package com.seb40.server.Quesiton.Controller;
-
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
-
 @CrossOrigin
 @Transactional
 @RequestMapping("/user/question")
@@ -23,13 +20,13 @@ import java.util.List;
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-
     public QuestionController(QuestionService questionService,
                               QuestionMapper mapper) {
         this.questionService = questionService;
         this.mapper = mapper;
     }
 
+    // 질문 작성 API
     @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
         Question question = mapper.questionPostDtoToQuestion(questionPostDto);
@@ -37,20 +34,23 @@ public class QuestionController {
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.CREATED);
     }
 
+    // 선택 질문 수정 API
     @PatchMapping("/{question_id}")
     public ResponseEntity patchQuestion(@PathVariable("question_id") @Positive long questionId,
-                                    @Valid @RequestBody QuestionPatchDto questionPatchDto) {
+                                        @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
         Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
     }
 
+    // 선택 질문페이지 이동 API
     @GetMapping("/{question_id}")
     public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
         Question response = questionService.findQuestion(questionId);
         return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
     }
 
+    // 전체 질문페이지 이동 API
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size) {
@@ -62,6 +62,7 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
+    // 선택 질문 삭제 API
     @DeleteMapping("/{question_id}")
     public ResponseEntity deleteQuestion(@PathVariable("question_id") @Positive long questionId) {
         questionService.deleteQuestion(questionId);

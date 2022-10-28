@@ -4,6 +4,9 @@ import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -37,6 +40,13 @@ public class AnswerService {
 
     public Answer findAnswer(long answerId){
         return findVerifiedAnswer(answerId);
+    }
+
+
+    // Answer를 page 로 찾기
+    public Page<Answer> findAnswers(int page, int size) {
+        return answerRepository.findAll(PageRequest.of(page, size,
+                Sort.by("answerId").descending()));
     }
 
     public void deleteAnswer(long answerId){

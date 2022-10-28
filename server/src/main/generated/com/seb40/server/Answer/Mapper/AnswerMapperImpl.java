@@ -5,12 +5,14 @@ import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-28T10:06:54+0900",
+    date = "2022-10-28T16:33:01+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -52,19 +54,34 @@ public class AnswerMapperImpl implements AnswerMapper {
 
         long answerId = 0L;
         String answerBody = null;
+        LocalDateTime answerCreatedAt = null;
         LocalDateTime answerModified = null;
 
         answerId = answer.getAnswerId();
         answerBody = answer.getAnswerBody();
+        answerCreatedAt = answer.getAnswerCreatedAt();
         answerModified = answer.getAnswerModified();
 
         long userId = 0L;
-        LocalDateTime answerCreateAt = null;
         int voteId = 0;
         int commentId = 0;
 
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, answerCreateAt, answerModified, voteId, commentId );
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, answerCreatedAt, answerModified, voteId, commentId );
 
         return answerResponseDto;
+    }
+
+    @Override
+    public List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers) {
+        if ( answers == null ) {
+            return null;
+        }
+
+        List<AnswerResponseDto> list = new ArrayList<AnswerResponseDto>( answers.size() );
+        for ( Answer answer : answers ) {
+            list.add( answerToAnswerResponseDto( answer ) );
+        }
+
+        return list;
     }
 }
