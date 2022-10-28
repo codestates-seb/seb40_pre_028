@@ -24,9 +24,9 @@ public class TagService {
         return savedTag;
     }
 
-    public Tag getTag(long tagId){
-        return findVerifiedTag(tagId);
-    }
+//    public Tag getTag(long tagId){
+//        return findVerifiedTag(tagId);
+//    }
 
     public void deleteTag(long tagId){
         Tag findTag = findVerifiedTag(tagId);
