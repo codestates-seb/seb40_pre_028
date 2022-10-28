@@ -40,7 +40,7 @@ public class TagController {
                         @Positive long tagId){
         Tag response = tagService.findVerifiedTag(tagId);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.tagToTagResponseDto(response), HttpStatus.OK);
     }
 
     // 태그name GET ?
