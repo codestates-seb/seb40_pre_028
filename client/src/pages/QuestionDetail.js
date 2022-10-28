@@ -2,10 +2,9 @@ import { DetailHeader } from '../components/QuestionDetails/DetailHeader';
 import { DetailMain } from '../components/QuestionDetails/DetailMain';
 import { DetailAnswer } from '../components/QuestionDetails/DetailAnswer';
 
-function QuestionDetail() {
+export default function QuestionDetail() {
   return (
     <div>
-      {/* header */}
       {/* nav */}
       <section>
         <div>
@@ -20,5 +19,3 @@ function QuestionDetail() {
     </div>
   );
 }
-
-export default QuestionDetail;
