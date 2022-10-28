@@ -3,14 +3,14 @@ import { Aside } from '../components/Aside';
 import { MainBar } from '../components/MainBar';
 import { Nav } from '../components/Nav';
 
-const TopContainer = styled.div`
+export const TopContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
 `;
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -41,7 +41,7 @@ const Main = () => {
         <Nav />
         <SMain>
           <MainBar />
-          <Aside>side bar</Aside>
+          <Aside />
         </SMain>
       </MainContainer>
     </TopContainer>
