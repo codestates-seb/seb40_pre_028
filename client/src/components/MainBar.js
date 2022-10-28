@@ -51,30 +51,30 @@ export const MainUList = styled.ul`
   margin-left: -32px;
 `;
 
-let data = [
+let questions = [
   {
-    questionId: 1,
-    questionTitle: 'This is title',
-    questionBody: 'This is body',
-    questionTag: ['Tag1', 'Tag2', 'Tag3'],
-    questionUserName: 'User name',
-    questionCreateAt: '2022-01-01 00:00:00',
-    questionModifiedAt: '2022-02-02 00:00:00',
-    questionVotes: 123,
-    questionAnswers: 10,
-    questionViews: 100,
+    id: 1,
+    title: 'This is title',
+    body: 'This is body',
+    tag: ['Tag1', 'Tag2', 'Tag3'],
+    name: 'User name',
+    createAt: '2022-10-22 00:00:00',
+    modifiedAt: '2022-02-02 00:00:00',
+    votes: 123,
+    answers: 10,
+    views: 100,
   },
   {
-    questionId: 2,
-    questionTitle: 'This is title',
-    questionBody: 'This is body',
-    questionTag: ['Tag1', 'Tag2', 'Tag3'],
-    questionUserName: 'User name',
-    questionCreateAt: '2022-01-01 00:00:00',
-    questionModifiedAt: '2022-02-02 00:00:00',
-    questionVotes: 123,
-    questionAnswers: 10,
-    questionViews: 100,
+    id: 2,
+    title: 'This is title',
+    body: 'This is body',
+    tag: ['Tag1', 'Tag2', 'Tag3'],
+    name: 'User name',
+    createdAt: '2022-10-28 00:00:00',
+    modifiedAt: '2022-02-02 00:00:00',
+    votes: 123,
+    answers: 10,
+    views: 100,
   },
 ];
 
@@ -90,20 +90,20 @@ export function MainBar() {
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        {data.map(question => {
+        {questions.map(question => (
           <QuestionElement
-            questionId={question.questionId}
-            questionTitle={question.questionTitle}
-            questionBody={question.questionBody}
-            questionTag={question.questionTag}
-            questionUserName={question.questionUserName}
-            questionCreateAt={question.questionCreateAt}
-            questionModifiedAt={question.questionModifiedAt}
-            questionVotes={question.questionVotes}
-            questionAnswers={question.questionAnswers}
-            questionViews={question.questionViews}
-          />;
-        })}
+            key={question.id}
+            title={question.title}
+            body={question.body}
+            tag={question.tag}
+            name={question.name}
+            createdAt={question.createdAt}
+            modifiedAt={question.modifiedAt}
+            votes={question.votes}
+            answers={question.answers}
+            views={question.views}
+          />
+        ))}
       </MainUList>
     </SMainBar>
   );

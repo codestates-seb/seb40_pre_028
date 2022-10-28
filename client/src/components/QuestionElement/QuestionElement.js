@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
+import { getDateToString } from '../../utils/dateFormat';
 
 //! UI
 
@@ -120,31 +121,28 @@ export const UserAsked = styled.div`
   color: var(--black-600);
 `;
 
-const UserFooter = () => {
-  return (
-    <UserContainer>
-      <UserName>User name</UserName>
-      <UserAsked>asked 1 hour ago</UserAsked>
-    </UserContainer>
-  );
+const Tag = ({ tag }) => {
+  return <div>{tag}</div>;
 };
 
-//! Features
-
-const QuestionElement = () => {
+const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
+  console.log('123', title, body, tag, name, createdAt, votes, answers, views);
   return (
     <SQuestionList>
-      <LeftCounts />
+      <LeftCounts votes={votes} answer={answers} views={views} />
       <Container>
-        <STitleLink>This is subject</STitleLink>
-        <STextP>This is content</STextP>
+        <STitleLink>{title}</STitleLink>
+        <STextP>{body}</STextP>
         <ContentFooter>
           <Tags>
-            <div>Tag1</div>
-            <div>Tag2</div>
-            <div>Tag3</div>
+            {tag.map(tag => (
+              <Tag key={tag} tag={tag} />
+            ))}
           </Tags>
-          <UserFooter />
+          <UserContainer>
+            <UserName>{name}</UserName>
+            <UserAsked> {`asked ${getDateToString(createdAt)}`}</UserAsked>
+          </UserContainer>
         </ContentFooter>
       </Container>
     </SQuestionList>

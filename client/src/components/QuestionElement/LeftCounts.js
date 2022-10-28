@@ -28,13 +28,12 @@ export const Container = styled.div`
   }
 `;
 
-const LeftCounts = () => {
-  const [vote, view, answers] = [1, 2, 3];
+const LeftCounts = ({ votes, answers, views }) => {
   return (
     <Container>
-      <Wrapper>{vote} votes</Wrapper>
+      <Wrapper>{votes} votes</Wrapper>
       <Wrapper>{answers} answers</Wrapper>
-      <Wrapper>{view} views</Wrapper>
+      <Wrapper>{views} views</Wrapper>
     </Container>
   );
 };
