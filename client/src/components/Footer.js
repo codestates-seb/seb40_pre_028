@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import StackIcon from "../assets/img/stackicon.png";
+import styled from 'styled-components';
+import StackIcon from '../assets/img/stackicon.png';
 
 const FooterLayout = styled.div`
   background-color: #232629;
@@ -112,28 +112,20 @@ function Footer() {
               <a href="https://stackoverflow.co/company/work-here">Work Here</a>
             </li>
             <li>
-              <a href="https://stackoverflow.com/legal/terms-of-service">
-                Legal
-              </a>
+              <a href="https://stackoverflow.com/legal/terms-of-service">Legal</a>
             </li>
             <li>
-              <a href="https://stackoverflow.com/legal/privacy-policy">
-                Privacy Policy
-              </a>
+              <a href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a>
             </li>
             <li>
-              <a href="https://stackoverflow.com/legal/terms-of-service">
-                Terms of Service
-              </a>
+              <a href="https://stackoverflow.com/legal/terms-of-service">Terms of Service</a>
             </li>
             <li>
               <a href="https://stackoverflow.co/company/contact">Contact Us</a>
             </li>
             <li>Cookie Settings</li>
             <li>
-              <a href="https://stackoverflow.com/legal/cookie-policy">
-                Cookie Policy
-              </a>
+              <a href="https://stackoverflow.com/legal/cookie-policy">Cookie Policy</a>
             </li>
           </ul>
         </Column>
@@ -143,14 +135,10 @@ function Footer() {
               <a href="https://stackexchange.com/">STACK EXCHANGE NETWORK</a>
             </div>
             <li>
-              <a href="https://stackexchange.com/sites#technology">
-                Technology
-              </a>
+              <a href="https://stackexchange.com/sites#technology">Technology</a>
             </li>
             <li>
-              <a href="https://stackexchange.com/sites#culturerecreation">
-                Culture & recreation
-              </a>
+              <a href="https://stackexchange.com/sites#culturerecreation">Culture & recreation</a>
             </li>
             <li>
               <a href="https://stackexchange.com/sites#lifearts">Life & arts</a>
@@ -159,9 +147,7 @@ function Footer() {
               <a href="https://stackexchange.com/sites#science">Science</a>
             </li>
             <li>
-              <a href="https://stackexchange.com/sites#professional">
-                Professional
-              </a>
+              <a href="https://stackexchange.com/sites#professional">Professional</a>
             </li>
             <li>
               <a href="https://stackexchange.com/sites#business">Business</a>
@@ -181,22 +167,16 @@ function Footer() {
               <a href="https://stackoverflow.blog/?blb=1">Blog</a>
             </li>
             <li>
-              <a href="https://www.facebook.com/officialstackoverflow/">
-                FaceBook
-              </a>
+              <a href="https://www.facebook.com/officialstackoverflow/">FaceBook</a>
             </li>
             <li>
               <a href="https://twitter.com/stackoverflow">Twitter</a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/company/stack-overflow">
-                Linkedin
-              </a>
+              <a href="https://www.linkedin.com/company/stack-overflow">Linkedin</a>
             </li>
             <li>
-              <a href="https://www.instagram.com/thestackoverflow/">
-                Instagram
-              </a>
+              <a href="https://www.instagram.com/thestackoverflow/">Instagram</a>
             </li>
           </ul>
           <div className="pre028">

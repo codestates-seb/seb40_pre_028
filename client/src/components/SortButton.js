@@ -38,11 +38,8 @@ export const Container = styled.div`
 export const SortButton = ({ nameList }) => {
   return (
     <Container>
-      {nameList.map((name) => (
-        <button
-          key={name}
-          type="button"
-        >
+      {nameList.map(name => (
+        <button key={name} type="button">
           {name}
         </button>
       ))}

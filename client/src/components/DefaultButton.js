@@ -11,20 +11,12 @@ export const DefaultButton = styled.button`
   width: max-content;
   height: 32px;
   box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
-  ${({
-    color,
-    colorCode,
-    borderCode,
-    activeBorderCode,
-    bgCode,
-    hoverBgCode,
-    activeBgCode,
-    width,
-  }) => css`
+  ${({ color, colorCode, borderCode, activeBorderCode, bgCode, hoverBgCode, activeBgCode, width, height }) => css`
     border: 1px solid ${`var(--${color}-${borderCode})`};
     color: ${`var(--${color}-${colorCode})`};
     background-color: ${`var(--${color}-${bgCode})`};
     width: ${width};
+    height: ${height};
     &:hover {
       background-color: ${`var(--${color}-${hoverBgCode})`};
       transition: 0.4s all;
@@ -37,7 +29,7 @@ export const DefaultButton = styled.button`
   `}
 `;
 
-export const PowderButton = ({ children, width }) => {
+export const PowderButton = ({ children, width, height }) => {
   return (
     <DefaultButton
       color="powder"
@@ -48,13 +40,14 @@ export const PowderButton = ({ children, width }) => {
       hoverBgCode="300"
       activeBgCode="400"
       width={width}
+      height={height}
     >
       {children}
     </DefaultButton>
   );
 };
 
-export const BlueButton = ({ children, width }) => {
+export const BlueButton = ({ children, width, height }) => {
   return (
     <DefaultButton
       color="blue"
@@ -65,6 +58,7 @@ export const BlueButton = ({ children, width }) => {
       hoverBgCode="600"
       activeBgCode="700"
       width={width}
+      height={height}
     >
       {children}
     </DefaultButton>

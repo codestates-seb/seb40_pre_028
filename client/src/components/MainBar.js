@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
+import QuestionElement from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 
 const SMainBar = styled.div`
@@ -13,40 +14,42 @@ const SMainBar = styled.div`
   padding-right: 24px;
 `;
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   height: 50px;
   margin-bottom: 12px;
+
   > h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 `;
 
 const InfoContainer = styled.div`
   display: flex;
-  border: 1px solid red;
+  justify-content: space-between;
+  margin-bottom: 12px;
 
   > div {
+    display: flex;
     align-items: center;
     justify-content: center;
     min-width: 100px;
-    height: 45px;
-    margin-right: 12px;
   }
 `;
 
 export function MainBar() {
   return (
     <SMainBar>
-      <Header>
+      <HeaderContainer>
         <h1>All Questions</h1>
-        <BlueButton>Ask Question</BlueButton>
-        <SortButton nameList={['Newest', 'Votes']}></SortButton>
-      </Header>
+        <BlueButton height="40px">Ask Question</BlueButton>
+      </HeaderContainer>
       <InfoContainer>
         <div>23,148,368 questions</div>
+        <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
+      <QuestionElement />
     </SMainBar>
   );
 }
