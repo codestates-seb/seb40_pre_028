@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ReactComponent as spotPencil } from '../../assets/img/spotPencil.svg';
 
 const AlertMsgContainer = styled.div`
-  width: 280px;
-  height: 170px;
+  /* width: 300px;
+  height: 200px; */
   background-color: white;
 
   border: 1px solid var(--black-100);
@@ -17,7 +17,7 @@ const AlertMsgTitle = styled.div`
   border-bottom: 1px solid var(--black-100);
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 16px;
 `;
 const AlertMsgContents = styled.div`
   height: 74%;
@@ -31,6 +31,7 @@ const AlertMsgContents = styled.div`
       color: var(--black-700);
       display: block;
       margin-bottom: 10px;
+      width: 260px;
     }
   }
 `;

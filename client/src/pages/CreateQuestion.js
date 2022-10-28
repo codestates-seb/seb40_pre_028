@@ -15,6 +15,12 @@ const Bg = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  h1 {
+    font-family: 'sans-serif';
+    font-weight: 800;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
 `;
 const FieldSet = styled.div`
   display: flex;
@@ -47,9 +53,22 @@ const Label2 = styled.label`
   font-size: 14px;
   font-weight: 100px;
 `;
+const Button = styled.button`
+  width: 50px;
+  height: 30px;
+  color: white;
+  background-color: #0996ff;
+  border: none;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    background-color: #077cd2;
+  }
+`;
 const Input = styled.input`
   display: block;
   width: 100%;
+  margin-bottom: 0.4rem;
   padding: 0.6rem 0.7rem;
   border: ${props => (props.error ? '1px solid #de4f55' : '1px solid rgba(0, 0, 0, 0.3)')};
 
@@ -69,46 +88,127 @@ const AlertMsgTitle = styled.div`
   margin-left: 20px;
 `;
 
+const Board = styled.div`
+  width: 700px;
+  height: 210px;
+  padding: 24px;
+  margin-bottom: 20px;
+
+  border: 1px solid #a5cfed;
+  background-color: #ecf4fb;
+
+  font-family: 'Noto Sans KR';
+
+  ul {
+    list-style: disc;
+  }
+  div {
+    margin-bottom: 9px;
+    &:nth-child(1) {
+      font-size: 20px;
+    }
+    &:nth-child(2) {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  ul {
+    span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    li {
+      margin-top: 4px;
+      margin-left: 30px;
+      font-size: 13px;
+    }
+  }
+`;
 export default function CreateQuestionPage() {
   const [isAlertMsg1, setIsAlertMsg1] = useState(false);
   const [isAlertMsg2, setIsAlertMsg2] = useState(false);
   const [isAlertMsg3, setIsAlertMsg3] = useState(false);
 
-  const inputEl = useRef(null);
+  const [btn1, setBtn1] = useState(true);
+  const [btn2, setBtn2] = useState(false);
+  const [btn3, setBtn3] = useState(false);
+
+  const inputEl1 = useRef(null);
+  // const inputEl2 = useRef(null);
+  const inputEl3 = useRef(null);
 
   const AlertMsgHandlerOn1 = () => {
     setIsAlertMsg1(true);
-  };
-  const AlertMsgHandlerOn2 = () => {
-    setIsAlertMsg2(true);
-  };
-  const AlertMsgHandlerOn3 = () => {
-    setIsAlertMsg3(true);
-  };
-  const AlertMsgHandlerOff = () => {
-    setIsAlertMsg1(false);
     setIsAlertMsg2(false);
     setIsAlertMsg3(false);
   };
+  const AlertMsgHandlerOn2 = () => {
+    setIsAlertMsg1(false);
+    setIsAlertMsg2(true);
+    setIsAlertMsg3(false);
+  };
+  const AlertMsgHandlerOn3 = () => {
+    setIsAlertMsg1(false);
+    setIsAlertMsg3(false);
+    setIsAlertMsg3(true);
+  };
+  const btnHandler1 = e => {
+    e.preventDefault();
+    inputEl3.current.focus();
+    setBtn1(false);
+    setBtn2(false);
+    setBtn3(true);
+  };
+  const btnHandler2 = e => {
+    e.preventDefault();
+    setBtn1(false);
+    setBtn2(false);
+    setBtn3(true);
+  };
+  const btnHandler3 = e => {
+    e.preventDefault();
+    setBtn1(false);
+    setBtn2(false);
+    setBtn3(false);
+  };
 
   useEffect(() => {
-    inputEl.current.focus();
+    inputEl1.current.focus();
   }, []);
+
   return (
     <Bg>
       <Form>
+        <h1>Ask a public question</h1>
+        <Board>
+          <div>
+            <span>Writing a good question</span>
+          </div>
+          <div>
+            <span>You’re ready to ask a programming-related question and this form will help guide you through the process.</span>
+            <span>Looking to ask a non-programming question? See the topics here to find a relevant site.</span>
+          </div>
+          <ul>
+            <span>Steps</span>
+            <li>Summarize your problem in a one-line title.</li>
+            <li>Describe your problem in more detail.</li>
+            <li>Describe what you tried and what you expected to happen.</li>
+            <li>Add “tags” which help surface your question to members of the community.</li>
+            <li>Review your question and post it to the site.</li>
+          </ul>
+        </Board>
         <FieldSet>
           <Field>
             <Label1 htmlFor="title">Title</Label1>
             <Label2 htmlFor="title">Be specific and imagine you’re asking a question to another person.</Label2>
             <Input
-              ref={inputEl}
+              ref={inputEl1}
               type="text"
               id="title"
               onFocus={AlertMsgHandlerOn1}
-              onBlur={AlertMsgHandlerOff}
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             ></Input>
+            {btn1 ? <Button onClick={btnHandler1}>Next</Button> : ''}
           </Field>
 
           {isAlertMsg1 ? (
@@ -147,7 +247,8 @@ export default function CreateQuestionPage() {
           <Field>
             <Label1 htmlFor="tags">Tags</Label1>
             <Label2 htmlFor="tags">Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</Label2>
-            <Input type="text" id="tags" onFocus={AlertMsgHandlerOn3} onBlur={AlertMsgHandlerOff} placeholder="e.g. (excel string regex)"></Input>
+            <Input ref={inputEl3} type="text" id="tags" onFocus={AlertMsgHandlerOn3} placeholder="e.g. (excel string regex)"></Input>
+            {btn3 ? <Button onClick={btnHandler3}>Next</Button> : ''}
           </Field>
           {isAlertMsg3 ? (
             <AlertMsgTitle>
