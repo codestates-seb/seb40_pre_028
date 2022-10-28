@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin(originPatterns = "*")
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -24,12 +25,11 @@ public class UserController {
 
     public final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-
     private final UserService userService;
     private final UserMapper userMapper;
 
     @PostMapping("/join")
-    public ResponseEntity postUser(@Valid @RequestBody UserPostDto userPostDto){
+    public ResponseEntity postUser( @RequestBody UserPostDto userPostDto){
         User user = userMapper.userPostDtoUser(userPostDto);
         User response = userService.createUser(user);
 
@@ -37,16 +37,16 @@ public class UserController {
                 userMapper.userToUserResponseDto(response),
                 HttpStatus.CREATED
         );
+
     }
 
     @PostMapping("/login")
     public ResponseEntity<Object> loginUser(@RequestBody UserLoginDto userLoginDto) {
-
         User user = userMapper.userLoginDtoUser(userLoginDto);
+        User response = userService.longinUser(user);
 
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 
     @PostMapping("/logout")
     public ResponseEntity<Object> logoutUser() {
@@ -54,5 +54,6 @@ public class UserController {
     }
 
 
+    //사용자 탈퇴 구현
 
 }

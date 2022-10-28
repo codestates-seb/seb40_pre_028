@@ -1,6 +1,5 @@
 package com.seb40.server.User.service;
 
-
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.User.dto.UserLoginDto;
@@ -18,7 +17,6 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-
     public User createUser(User user){
         //이메일 등록 확인
         verifyExistsEmail(user.getEmail());
@@ -26,12 +24,25 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
     private void verifyExistsEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent())
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
+    }
+
+    public User longinUser( User user) {
+
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        Optional<User> checkLogin = userRepository.findByEmailAndPassword(email, password);
+
+        User loginUser = checkLogin.orElseThrow(()->
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        return loginUser;
+
     }
 
 
@@ -46,5 +57,7 @@ public class UserService {
         return findUser;
 
     }
+
+
 
 }
