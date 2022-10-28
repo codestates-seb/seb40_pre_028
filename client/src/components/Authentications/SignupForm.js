@@ -147,23 +147,28 @@ export function SignupForm({ setUserData, setIsLoading }) {
     else setEmailValid2(false);
 
     if (emailValid || emailValid2 || passwordValid) return;
-    console.log('login varified');
+    console.log('login varified: ');
+    console.log({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    });
     const payload = JSON.stringify({
       name: nameValue,
       email: emailValue,
       password: passwordValue,
     });
-    setIsLoading(false);
+
     // fetch('', {
     //   method: 'POST',
     //   mode: 'cors',
     //   credentials: 'same-origin',
     //   headers: {
-    //     'Content-Type': 'application/json',
+    //     'Content-Type': 'application/json'
     //   },
     //   body: payload,
     // })
-    //   .then(res => res.json)
+    //   .then(res => res.json())
     //   .then(data => {
     //     console.log(data);
     //     setIsLoading(false);
