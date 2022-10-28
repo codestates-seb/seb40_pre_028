@@ -1,5 +1,6 @@
 package com.seb40.server.User.mapper;
 
+import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.dto.UserResponseDto;
 import com.seb40.server.User.entity.User;
@@ -26,6 +27,20 @@ public class UserMapperImpl implements UserMapper {
         user.setName( userDto.getName() );
         user.setEmail( userDto.getEmail() );
         user.setPassword( userDto.getPassword() );
+
+        return user;
+    }
+
+    @Override
+    public User userLoginDtoUser(UserLoginDto userLoginDto) {
+        if ( userLoginDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setEmail( userLoginDto.getEmail() );
+        user.setPassword( userLoginDto.getPassword() );
 
         return user;
     }
