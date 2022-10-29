@@ -9,8 +9,10 @@ import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
+import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
+import com.seb40.server.Response.SingleResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,15 +33,18 @@ public class AnswerController {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final AnswerMapper mapper;
+    private final QuestionService questionService;
 
     public AnswerController(AnswerService answerService,
                             QuestionRepository questionRepository,
                             AnswerMapper mapper,
-                            AnswerRepository answerRepository) {
+                            AnswerRepository answerRepository,
+                            QuestionService questionService) {
         this.answerService = answerService;
         this.questionRepository = questionRepository;
         this.mapper = mapper;
         this.answerRepository=answerRepository;
+        this.questionService = questionService;
     }
 
 //    @PostMapping("/post")
@@ -86,7 +91,6 @@ public class AnswerController {
 
 
 
-
     @PatchMapping("/{answer_id}")
     public ResponseEntity patchAnswer(@PathVariable("answer_id")
                                           @Positive long answerId,
@@ -118,6 +122,7 @@ public class AnswerController {
                 new MultiResponseDto<>(mapper.answersToAnswerResponseDtos(answers), pageAnswers),
                 HttpStatus.OK);
     }
+
 
 
 
