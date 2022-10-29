@@ -33,6 +33,7 @@ export const SMain = styled.main`
   display: flex;
   justify-content: center;
   padding: 24px 24px 24px 0px;
+  border-left: 1px solid var(--black-100);
 `;
 
 const Main = () => {

@@ -8,7 +8,7 @@ export const SQuestionList = styled.li`
   display: flex;
   flex-flow: row nowrap;
   row-gap: 7px;
-  padding: 14px;
+  padding: 16px;
   width: 100%;
   border-top: 1px solid var(--black-100);
 
@@ -47,7 +47,6 @@ export const STextP = styled.p`
   font-size: 14px;
   color: var(--black-700);
   margin-bottom: 8px;
-  padding-right: 23px;
   line-height: 1.3rem;
   max-height: 43px;
   width: 100%;
@@ -66,22 +65,18 @@ export const ContentFooter = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding-right: 23px;
 `;
 
 export const Tags = styled.div`
   display: flex;
   flex-flow: wrap;
   row-gap: 1px;
+  margin-bottom: 8px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 5px;
-  }
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* height: 23px; */
     font-size: 12px;
     color: var(--powder-700);
     background-color: var(--powder-100);

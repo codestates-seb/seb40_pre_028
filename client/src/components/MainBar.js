@@ -13,6 +13,7 @@ const SMainBar = styled.div`
   min-height: calc(100vh - 420px);
   overflow-x: hidden;
   padding: 0 24px 0 24px;
+  margin-left: -2px;
 
   @media (max-width: 1100px) {
     width: 100%;
@@ -46,13 +47,11 @@ const InfoContainer = styled.div`
 export const MainUList = styled.ul`
   display: flex;
   flex-flow: column nowrap;
-  padding: 16px;
 
-  @media (max-width: 640px) {
+  @media (max-width: 1100px) {
     justify-content: flex-start;
-    flex-direction: column;
   }
-  margin-left: -32px;
+  margin-left: -24px;
   border-bottom: 1px solid var(--black-100);
 `;
 

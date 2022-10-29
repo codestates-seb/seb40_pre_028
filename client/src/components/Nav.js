@@ -6,7 +6,7 @@ const NavTap = styled.div`
   color: #6a737c;
   font-size: 11px;
   position: sticky;
-  width: 150px;
+  width: 162px;
   top: 110px;
   li {
     margin-top: 10px;
@@ -18,7 +18,7 @@ const NavTap = styled.div`
   }
   .title {
     background-color: #f1f2f3;
-    border-right: 3px solid #f38225; // 여기 적용 안됨
+    border-right: 3px solid #f38225;
     color: #0d0d0e;
     font-weight: bold;
     display: flex;
@@ -32,8 +32,8 @@ const NavTap = styled.div`
 `;
 
 const NavLayout = styled.div`
-  border-right: solid var(--black-100) 1px;
-  width: 150px;
+  /* border-right: solid var(--black-100) 1px; */
+  /* width: 162px; */
 `;
 
 function Nav() {
