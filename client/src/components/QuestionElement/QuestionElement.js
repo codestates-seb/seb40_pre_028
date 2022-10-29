@@ -18,7 +18,7 @@ export const SQuestionList = styled.li`
   }
 `;
 
-export const Container = styled.section`
+export const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
@@ -129,7 +129,7 @@ const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, vi
   return (
     <SQuestionList>
       <LeftCounts votes={votes} answer={answers} views={views} />
-      <Container>
+      <SectionContainer>
         <STitleLink>{title}</STitleLink>
         <STextP>{body}</STextP>
         <ContentFooter>
@@ -143,7 +143,7 @@ const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, vi
             <UserAsked> {`asked ${getDateToString(createdAt)}`}</UserAsked>
           </UserContainer>
         </ContentFooter>
-      </Container>
+      </SectionContainer>
     </SQuestionList>
   );
 };
