@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-function Pagenation({ total, limit, page, setPage }) {
+function Pagenation({ total, limit, page, setPage, perPage, setPerPage }) {
   const numPages = Math.ceil(total / limit);
 
   return (
-    <>
+    <PagenationContainer>
       <Nav>
         <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
           Prev
@@ -20,9 +20,26 @@ function Pagenation({ total, limit, page, setPage }) {
           Next
         </Button>
       </Nav>
-    </>
+      <Nav>
+        <Button onClick={() => setPerPage(10)} aria-current={perPage === 10 ? true : null}>
+          10
+        </Button>
+        <Button onClick={() => setPerPage(20)} aria-current={perPage === 20 ? true : null}>
+          20
+        </Button>
+        <Button onClick={() => setPerPage(30)} aria-current={perPage === 30 ? true : null}>
+          30
+        </Button>
+        <span>per page</span>
+      </Nav>
+    </PagenationContainer>
   );
 }
+
+const PagenationContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const Nav = styled.nav`
   display: flex;
@@ -30,7 +47,11 @@ const Nav = styled.nav`
   align-items: center;
   gap: 5px;
   margin: 70px 16px 16px 16px;
-  border-top: 3px solid var(--gray-300);
+  > span {
+    font-size: 12px;
+    color: var(--black-700);
+    padding: 8px;
+  }
 `;
 
 const Button = styled.button`
@@ -38,10 +59,11 @@ const Button = styled.button`
   height: 30px;
   border: 1px solid var(--black-100);
   border-radius: 3px;
+  padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #3b4045;
+  color: var(--black-700);
   font-size: 13px;
   background-color: white;
 
@@ -58,8 +80,8 @@ const Button = styled.button`
   }
 
   &[aria-current] {
+    color: white;
     background: var(--orange-400);
-    font-weight: bold;
     cursor: revert;
     transform: revert;
   }

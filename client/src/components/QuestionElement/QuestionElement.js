@@ -123,7 +123,7 @@ const Tag = ({ tag }) => {
 const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
   return (
     <SQuestionList>
-      <LeftCounts votes={votes} answer={answers} views={views} />
+      <LeftCounts votes={votes} answers={answers} views={views} />
       <SectionContainer>
         <STitleLink>{title}</STitleLink>
         <STextP>{body.length > 235 ? `${body.slice(0, 235)}...` : body}</STextP>

@@ -69,10 +69,10 @@ export function MainBar() {
 
   useEffect(() => {
     getData();
-  }, [page]);
+  }, [page, perPage]);
 
   const getData = async () => {
-    const res = await fetch(`http://localhost:3001/questions?_page=${page}&_limit=5`);
+    const res = await fetch(`http://localhost:3001/questions?_page=${page}&_limit=${perPage}`);
     const data = await res.json();
     setQuestions(data);
     setIsLoading(false);
@@ -111,7 +111,7 @@ export function MainBar() {
           ))
         )}
       </MainUList>
-      <Pagenation total={11} limit={5} page={page} setPage={setPage} />
+      <Pagenation total={11} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
     </SMainBar>
   );
 }
