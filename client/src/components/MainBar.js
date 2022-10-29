@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
+import { Pagenation } from '../utils/Pagenation';
 
 const SMainBar = styled.div`
   position: relative;
@@ -10,9 +11,12 @@ const SMainBar = styled.div`
   flex-flow: column nowrap;
   width: calc(100% - 300px);
   min-height: calc(100vh - 420px);
-  max-width: 1300px;
   overflow-x: hidden;
   padding: 0 24px 0 24px;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -43,28 +47,33 @@ export const MainUList = styled.ul`
   display: flex;
   flex-flow: column nowrap;
   padding: 16px;
-  padding: 0px 0px 5px 0px;
 
   @media (max-width: 640px) {
     justify-content: flex-start;
     flex-direction: column;
   }
   margin-left: -32px;
+  border-bottom: 1px solid var(--black-100);
 `;
 
 export function MainBar() {
   let [questions, setQuestions] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
+  let [page, setPage] = useState(1);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [page]);
 
   const getData = async () => {
-    const res = await fetch('http://localhost:3001/questions');
+    const res = await fetch(`http://localhost:3001/questions?_page=${page}&_limit=5`);
     const data = await res.json();
     setQuestions(data);
     setIsLoading(false);
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -96,6 +105,7 @@ export function MainBar() {
           ))
         )}
       </MainUList>
+      <Pagenation total={11} limit={5} page={page} setPage={setPage} />
     </SMainBar>
   );
 }
