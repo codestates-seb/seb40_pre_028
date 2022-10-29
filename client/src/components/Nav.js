@@ -3,13 +3,11 @@ import { FaGlobeAmericas } from 'react-icons/fa';
 
 const NavTap = styled.div`
   display: inline-block;
-  padding-top: 100px;
   color: #6a737c;
   font-size: 11px;
-  width: 100px;
   position: sticky;
   width: 150px;
-  top: 0px;
+  top: 110px;
   li {
     margin-top: 10px;
     color: #525960;
