@@ -12,11 +12,17 @@ const SMainBar = styled.div`
   width: calc(100% - 300px);
   min-height: calc(100vh - 420px);
   overflow-x: hidden;
-  padding: 0 24px 0 24px;
+  padding: 0 24px;
   margin-left: -2px;
 
   @media (max-width: 1100px) {
     width: 100%;
+    padding: 0 0 0 24px;
+    // 첫번째와 두번째 자식요소 동시에 선택해서 오른쪽 패딩을 24px로 설정
+    > *:first-child,
+    > *:nth-child(2) {
+      padding-right: 24px;
+    }
   }
 `;
 
@@ -59,6 +65,7 @@ export function MainBar() {
   let [questions, setQuestions] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
+  let [perPage, setPerPage] = useState(10);
 
   useEffect(() => {
     getData();

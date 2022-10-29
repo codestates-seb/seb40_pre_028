@@ -34,6 +34,9 @@ export const SMain = styled.main`
   justify-content: center;
   padding: 24px 24px 24px 0px;
   border-left: 1px solid var(--black-100);
+  @media (max-width: 1100px) {
+    padding: 24px 0 24px 0px;
+  }
 `;
 
 const Main = () => {
