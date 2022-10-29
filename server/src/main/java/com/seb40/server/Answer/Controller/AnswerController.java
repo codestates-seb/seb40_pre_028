@@ -3,14 +3,17 @@ package com.seb40.server.Answer.Controller;
 
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
+import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
+import com.seb40.server.Response.SingleResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController //bean 등록
@@ -28,15 +30,17 @@ public class AnswerController {
 
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
+    private final QuestionService questionService;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final AnswerMapper mapper;
 
     public AnswerController(AnswerService answerService,
-                            QuestionRepository questionRepository,
+                            QuestionService questionService, QuestionRepository questionRepository,
                             AnswerMapper mapper,
                             AnswerRepository answerRepository) {
         this.answerService = answerService;
+        this.questionService = questionService;
         this.questionRepository = questionRepository;
         this.mapper = mapper;
         this.answerRepository=answerRepository;
@@ -73,14 +77,16 @@ public class AnswerController {
 //        return answer;
 //    }
 
-        @PostMapping("/{question_id}/post")
-    public ResponseEntity createAnswer(@PathVariable ("question_id")
-                                   @Positive long questionId,
-                               @RequestBody Answer answer){
-        Optional<Question> question = questionRepository.findById(questionId); //
-        answer.setQuestion(question.get());
-        answerRepository.save(answer);
-            return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer),
+    @PostMapping("/{question_id}/post")
+    public ResponseEntity createAnswer(@PathVariable("question_id")
+                                       @Positive long questionId,
+                                       @RequestBody AnswerPostDto answerPostDto){
+        Question question = questionService.findVerifiedQuestion(questionId);
+        Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
+        AnswerResponseDto response = mapper.answerToAnswerResponseDto(answer);
+        response.setQuestionId(question);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(response),
                 HttpStatus.CREATED);
     }
 
