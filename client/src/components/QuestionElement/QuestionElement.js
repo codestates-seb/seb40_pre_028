@@ -131,7 +131,7 @@ const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, vi
       <LeftCounts votes={votes} answer={answers} views={views} />
       <SectionContainer>
         <STitleLink>{title}</STitleLink>
-        <STextP>{body}</STextP>
+        <STextP>{body.length > 235 ? `${body.slice(0, 235)}...` : body}</STextP>
         <ContentFooter>
           <Tags>
             {tag.map(tag => (

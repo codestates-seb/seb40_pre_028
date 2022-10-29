@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
@@ -51,34 +52,21 @@ export const MainUList = styled.ul`
   margin-left: -32px;
 `;
 
-let questions = [
-  {
-    id: 1,
-    title: 'This is title',
-    body: 'This is body',
-    tag: ['Tag1', 'Tag2', 'Tag3'],
-    name: 'User name',
-    createdAt: '2021-10-01 00:00:00',
-    modifiedAt: '2022-02-02 00:00:00',
-    votes: 123,
-    answers: 10,
-    views: 100,
-  },
-  {
-    id: 2,
-    title: 'This is title',
-    body: 'This is body',
-    tag: ['Tag1', 'Tag2', 'Tag3'],
-    name: 'User name',
-    createdAt: '2022-10-01 00:00:00',
-    modifiedAt: '2022-02-02 00:00:00',
-    votes: 123,
-    answers: 10,
-    views: 100,
-  },
-];
-
 export function MainBar() {
+  let [questions, setQuestions] = useState([]);
+  let [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const res = await fetch('http://localhost:3001/questions');
+    const data = await res.json();
+    setQuestions(data);
+    setIsLoading(false);
+  };
+
   return (
     <SMainBar>
       <HeaderContainer>
@@ -90,20 +78,23 @@ export function MainBar() {
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        {questions.map(question => (
-          <QuestionElement
-            key={question.id}
-            title={question.title}
-            body={question.body}
-            tag={question.tag}
-            name={question.name}
-            createdAt={question.createdAt}
-            modifiedAt={question.modifiedAt}
-            votes={question.votes}
-            answers={question.answers}
-            views={question.views}
-          />
-        ))}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          questions.map(question => (
+            <QuestionElement
+              key={question.id}
+              title={question.title}
+              body={question.body}
+              tag={question.tag}
+              name={question.name}
+              createdAt={question.createdAt}
+              votes={question.votes}
+              answers={question.answers}
+              views={question.views}
+            />
+          ))
+        )}
       </MainUList>
     </SMainBar>
   );
