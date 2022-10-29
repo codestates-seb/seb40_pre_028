@@ -3,6 +3,7 @@ package com.seb40.server.Answer.Controller;
 
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
@@ -18,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
@@ -78,11 +81,24 @@ public class AnswerController {
 //        return answer;
 //    }
 
-        @PostMapping("/{question_id}/post")
+    @PostMapping("/{question_id}/post")
+    public ResponseEntity createAnswer(@PathVariable("question_id")
+                                       @Positive long questionId,
+                                       @RequestBody AnswerPostDto answerPostDto){
+        Question question = questionService.findVerifiedQuestion(questionId);
+        Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
+        AnswerResponseDto response = mapper.answerToAnswerResponseDto(answer);
+        response.setQuestionId(question);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(response),
+                HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{question_id}/post")
     public ResponseEntity createAnswer(@PathVariable ("question_id")
-                                   @Positive long questionId,
+                                           @Positive long questionId,
                                @RequestBody Answer answer){
-        Optional<Question> question = questionRepository.findById(questionId); //
+        Optional<Question> question = questionRepository.findById(questionId);
         answer.setQuestion(question.get());
         answerRepository.save(answer);
             return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer),
@@ -135,4 +151,5 @@ public class AnswerController {
         // 삭제요청, ok 반환
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }

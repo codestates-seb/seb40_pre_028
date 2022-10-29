@@ -1,5 +1,6 @@
 package com.seb40.server.Answer.Dto;
 
+import com.seb40.server.Quesiton.Entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,5 +25,9 @@ public class AnswerResponseDto {
 
     private int voteId; // id 로 vote 수 뽑기
     private int commentId; // id 로 코멘트 내용 뽑기 list 형식
+
+//    public void setQuestionId(Question question){
+//        this.questionId = question.getQuestionId();
+//    }
 
 }

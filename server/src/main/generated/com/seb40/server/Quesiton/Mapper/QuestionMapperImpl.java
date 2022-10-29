@@ -101,7 +101,7 @@ public class QuestionMapperImpl implements QuestionMapper {
         int voteId = 0;
         int commentId = 0;
 
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, questionId, answerCreatedAt, answerModified, voteId, commentId );
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
 
         return answerResponseDto;
     }

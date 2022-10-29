@@ -4,6 +4,7 @@ import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
+import com.seb40.server.Quesiton.Service.QuestionService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,27 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T01:15:16+0900",
+    date = "2022-10-30T01:55:33+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.17 (Azul Systems, Inc.)"
 )
 @Component
 public class AnswerMapperImpl implements AnswerMapper {
+
+    @Override
+    public Answer answerPostDtoToAnswer(QuestionService questionService, AnswerPostDto answerPostDto) {
+        if ( questionService == null && answerPostDto == null ) {
+            return null;
+        }
+
+        Answer answer = new Answer();
+
+        if ( answerPostDto != null ) {
+            answer.setAnswerId( answerPostDto.getAnswerId() );
+            answer.setAnswerBody( answerPostDto.getAnswerBody() );
+        }
+
+        return answer;
+    }
 
     @Override
     public Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto) {
