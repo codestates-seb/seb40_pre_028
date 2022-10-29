@@ -6,6 +6,9 @@ import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
+import com.seb40.server.Answer.Repository.AnswerRepository;
+import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController //bean 등록
@@ -24,34 +28,61 @@ public class AnswerController {
 
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
     private final AnswerMapper mapper;
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+    public AnswerController(AnswerService answerService,
+                            QuestionRepository questionRepository,
+                            AnswerMapper mapper,
+                            AnswerRepository answerRepository) {
         this.answerService = answerService;
+        this.questionRepository = questionRepository;
         this.mapper = mapper;
+        this.answerRepository=answerRepository;
     }
 
-    @PostMapping("/post")
-    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
-        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-        Answer response = answerService.createAnswer(answer);
+//    @PostMapping("/post")
+//    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
+//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
+//        Answer response = answerService.createAnswer(answer);
+//
+//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
+//                HttpStatus.CREATED);
+//    }
+//
+//    @PostMapping("/{question_id}/post")
+//    public ResponseEntity postAnswer(@PathVariable("question_id")
+//                                         @Positive long questionId,
+//                                     @RequestBody AnswerPostDto answerPostDto){
+//        answerPostDto.setQuestionId(questionId);
+//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
+//        Answer response = answerService.createAnswer(answer);
+//
+//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
+//                HttpStatus.CREATED);
+//    }
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
-                HttpStatus.CREATED);
-    }
+//    @PostMapping("/{question_id}/post")
+//    public Answer createAnswer(@PathVariable ("question_id")
+//                                   @Positive long questionId,
+//                               @RequestBody Answer answer){
+//        Optional<Question> question = questionRepository.findById(questionId);
+//        answer.setQuestion(question.get());
+//        answerRepository.save(answer);
+//        return answer;
+//    }
 
     @PostMapping("/{question_id}/post")
-    public ResponseEntity postAnswer(@PathVariable("question_id")
-                                         @Positive long questionId,
-                                     @RequestBody AnswerPostDto answerPostDto){
-        answerPostDto.setQuestionId(questionId);
-        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-        Answer response = answerService.createAnswer(answer);
-
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
+    public ResponseEntity createAnswer(@PathVariable ("question_id")
+                               @Positive long questionId,
+                               @RequestBody Answer answer){
+        Optional<Question> question = questionRepository.findById(questionId);
+        answer.setQuestion(question.get());
+        answerRepository.save(answer);
+        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer),
                 HttpStatus.CREATED);
     }
-
 
 
     @PatchMapping("/{answer_id}")
