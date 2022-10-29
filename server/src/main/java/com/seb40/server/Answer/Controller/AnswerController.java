@@ -73,16 +73,18 @@ public class AnswerController {
 //        return answer;
 //    }
 
-    @PostMapping("/{question_id}/post")
+        @PostMapping("/{question_id}/post")
     public ResponseEntity createAnswer(@PathVariable ("question_id")
-                               @Positive long questionId,
+                                   @Positive long questionId,
                                @RequestBody Answer answer){
-        Optional<Question> question = questionRepository.findById(questionId);
+        Optional<Question> question = questionRepository.findById(questionId); //
         answer.setQuestion(question.get());
         answerRepository.save(answer);
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer),
+            return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer),
                 HttpStatus.CREATED);
     }
+
+
 
 
     @PatchMapping("/{answer_id}")

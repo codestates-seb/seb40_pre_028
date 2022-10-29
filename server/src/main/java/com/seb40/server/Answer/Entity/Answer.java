@@ -4,13 +4,13 @@ package com.seb40.server.Answer.Entity;
 
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.User.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @NoArgsConstructor
 @Getter
@@ -44,7 +44,9 @@ public class Answer {
     // 답변투표와 연결
 //    private int answerVoteValue;
 
-    public Answer (String answerBody){
-        this.answerBody = answerBody;
-    }
+//    public Answer (String answerBody){
+//
+//        this.answerBody = answerBody;
+//    }
+
 }
