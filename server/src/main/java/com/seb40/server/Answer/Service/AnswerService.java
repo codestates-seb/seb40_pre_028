@@ -26,7 +26,7 @@ public class AnswerService {
     // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직s
     public Answer createAnswer(Answer answer){
         // 질문이 존재하는지 확인
-        questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId()); // 추가
+//        questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId()); // 추가
 
         Answer savedAnswer = answerRepository.save(answer);
 
