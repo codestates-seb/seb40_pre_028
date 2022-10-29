@@ -3,13 +3,14 @@ package com.seb40.server.Answer.Entity;
 
 
 import com.seb40.server.Quesiton.Entity.Question;
-import lombok.AllArgsConstructor;
+import com.seb40.server.User.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @NoArgsConstructor
 @Getter
@@ -28,10 +29,9 @@ public class Answer {
     @JoinColumn(name="question_id")  //questionId ->question_id
     private Question question; //추가
 
-    // @ManyToOne 연결
-//    @ManyToOne
-//    @JoinColumn(name ="user_id")
-    private String userName;
+    @ManyToOne
+    @JoinColumn(name ="user_id")
+    private User user;
 
     @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
@@ -44,7 +44,9 @@ public class Answer {
     // 답변투표와 연결
 //    private int answerVoteValue;
 
-    public Answer (String answerBody){
-        this.answerBody = answerBody;
-    }
+//    public Answer (String answerBody){
+//
+//        this.answerBody = answerBody;
+//    }
+
 }
