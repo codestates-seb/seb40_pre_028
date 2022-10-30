@@ -1,19 +1,14 @@
 package com.seb40.server.Quesiton.Mapper;
 
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
-import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
-import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDtos;
 import com.seb40.server.Quesiton.Entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -48,6 +43,7 @@ public interface QuestionMapper {
 
 //    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
-    List<QuestionResponseDtos> questionsToQuestionResponseDtos(List<Question> questions);
+
+    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
 }

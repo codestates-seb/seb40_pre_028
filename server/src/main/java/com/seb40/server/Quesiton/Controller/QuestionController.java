@@ -69,6 +69,7 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
                         pageQuestions),

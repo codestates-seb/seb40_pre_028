@@ -4,7 +4,6 @@ import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDtos;
 import com.seb40.server.Quesiton.Entity.Question;
 import java.util.ArrayList;
 import java.util.List;
