@@ -42,9 +42,8 @@ public interface QuestionMapper {
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
     @Mapping(target = "userId",expression = "java(question.getUser().getUserId())")
     QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
-
+    
 //    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
-
 
     List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 

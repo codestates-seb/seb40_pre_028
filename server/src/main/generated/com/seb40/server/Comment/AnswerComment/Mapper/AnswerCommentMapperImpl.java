@@ -1,10 +1,10 @@
 package com.seb40.server.Comment.AnswerComment.Mapper;
 
+import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentPatchDto;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentPostDto;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T16:20:06+0900",
+    date = "2022-10-30T20:03:50+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -27,9 +27,9 @@ public class AnswerCommentMapperImpl implements AnswerCommentMapper {
         AnswerComment answerComment = new AnswerComment();
 
         answerComment.setAnswerCommentId( commentPostDto.getAnswerCommentId() );
-        answerComment.setAnswerId( commentPostDto.getAnswerId() );
         answerComment.setUserId( commentPostDto.getUserId() );
         answerComment.setAnswerCommentBody( commentPostDto.getAnswerCommentBody() );
+        answerComment.setAnswer( answerCommentPostDtoToAnswer( commentPostDto ) );
 
         return answerComment;
     }
@@ -68,26 +68,31 @@ public class AnswerCommentMapperImpl implements AnswerCommentMapper {
             return null;
         }
 
-        long answerCommentId = 0L;
-        long answerId = 0L;
-        long userId = 0L;
-        String answerCommentBody = null;
-        LocalDateTime answerCommentCreateAt = null;
+        AnswerCommentResponseDto answerCommentResponseDto = new AnswerCommentResponseDto();
 
         if ( comment.getAnswerCommentId() != null ) {
-            answerCommentId = comment.getAnswerCommentId();
-        }
-        if ( comment.getAnswerId() != null ) {
-            answerId = comment.getAnswerId();
+            answerCommentResponseDto.setAnswerCommentId( comment.getAnswerCommentId() );
         }
         if ( comment.getUserId() != null ) {
-            userId = comment.getUserId();
+            answerCommentResponseDto.setUserId( comment.getUserId() );
         }
-        answerCommentBody = comment.getAnswerCommentBody();
-        answerCommentCreateAt = comment.getAnswerCommentCreateAt();
+        answerCommentResponseDto.setAnswerCommentBody( comment.getAnswerCommentBody() );
+        answerCommentResponseDto.setAnswerCommentCreateAt( comment.getAnswerCommentCreateAt() );
 
-        AnswerCommentResponseDto answerCommentResponseDto = new AnswerCommentResponseDto( answerCommentId, answerId, userId, answerCommentBody, answerCommentCreateAt );
+        answerCommentResponseDto.setAnswerId( comment.getAnswer().getAnswerId() );
 
         return answerCommentResponseDto;
+    }
+
+    protected Answer answerCommentPostDtoToAnswer(AnswerCommentPostDto answerCommentPostDto) {
+        if ( answerCommentPostDto == null ) {
+            return null;
+        }
+
+        Answer answer = new Answer();
+
+        answer.setAnswerId( answerCommentPostDto.getAnswerId() );
+
+        return answer;
     }
 }
