@@ -14,10 +14,13 @@ import java.util.List;
 public interface AnswerMapper {
 
     @Mapping(target = "question.questionId")
+    @Mapping(target = "user.userId")
     Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
+
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
 
     @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
+    @Mapping(target = "userId", expression = "java(answer.getUser().getUserId())")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 
     // AnswerResponseDto 타입의 List mapper 파라미터로 List<Answer> 타입의 Answer 를 받는다.
