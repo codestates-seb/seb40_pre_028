@@ -10,8 +10,6 @@ import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class QuestionPostDto {
     @Positive
     private Long questionId;

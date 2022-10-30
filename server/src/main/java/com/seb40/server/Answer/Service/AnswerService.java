@@ -16,12 +16,9 @@ import java.util.Optional;
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
-    private final QuestionService questionService;
 
-    public AnswerService(AnswerRepository answerRepository,
-                         QuestionService questionService) {
+    public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
-        this.questionService=questionService;
     }
 
     // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직

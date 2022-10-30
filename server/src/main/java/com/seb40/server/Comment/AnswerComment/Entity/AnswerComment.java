@@ -1,8 +1,7 @@
 package com.seb40.server.Comment.AnswerComment.Entity;
 
-import lombok.AllArgsConstructor;
+import com.seb40.server.Answer.Entity.Answer;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,8 +9,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "answerComment")
 public class AnswerComment {
@@ -20,8 +17,9 @@ public class AnswerComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerCommentId;
 
-    @Column( nullable = false)
-    private Long answerId;
+    @ManyToOne
+    @JoinColumn(name="answer_id")
+    private Answer answer; //추가
 
     @Column( nullable = false)
     private Long userId;

@@ -3,6 +3,7 @@ package com.seb40.server.Quesiton.Entity;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Tag.Entity.Tag;
+import com.seb40.server.User.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Question{
     @Id
@@ -26,9 +25,10 @@ public class Question{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
 
-//    @ManyToOne
-//    @JoinColumn(name="user_id")
-//    private long id;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+    public void setUser(User user){this.user = user;}
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
     private List<Answer> answers = new ArrayList<>();

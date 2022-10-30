@@ -2,6 +2,7 @@ package com.seb40.server.Answer.Entity;
 
 
 
+import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.User.entity.User;
 import lombok.Getter;
@@ -10,9 +11,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity // DB 테이블 뜻 함
@@ -38,6 +40,8 @@ public class Answer {
     @JoinColumn(name ="user_id")
     private User user;
 
+    public void setUser(User user){this.user = user;}
+
     @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
 
@@ -45,6 +49,9 @@ public class Answer {
     private LocalDateTime answerModified  = LocalDateTime.now();
 
     private String answerBody;
+
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
+    private List<AnswerComment> answerComments = new ArrayList<>();
 
     // 답변투표와 연결
 //    private int answerVoteValue;

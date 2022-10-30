@@ -1,23 +1,20 @@
 package com.seb40.server.Quesiton.Mapper;
 
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
-import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
-import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDtos;
 import com.seb40.server.Quesiton.Entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
+
+    @Mapping(target = "user.userId")
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
@@ -43,11 +40,11 @@ public interface QuestionMapper {
 //    }
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+    @Mapping(target = "userId",expression = "java(question.getUser().getUserId())")
     QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
-
-
+    
 //    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
-    List<QuestionResponseDtos> questionsToQuestionResponseDtos(List<Question> questions);
+    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
 }

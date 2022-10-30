@@ -4,6 +4,9 @@ import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
+import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
+import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
+import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Entity.Question;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T16:20:06+0900",
+    date = "2022-10-30T20:03:50+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -47,19 +50,21 @@ public class AnswerMapperImpl implements AnswerMapper {
     }
 
     @Override
-    public AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
-        if ( answer == null ) {
+    public AnswerResponseDto answerToAnswerResponseDto(Answer answer, AnswerCommentMapper answerCommentMapper) {
+        if ( answer == null && answerCommentMapper == null ) {
             return null;
         }
 
         AnswerResponseDto answerResponseDto = new AnswerResponseDto();
 
-        answerResponseDto.setAnswerId( answer.getAnswerId() );
-        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
-        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
-        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
-
+        if ( answer != null ) {
+            answerResponseDto.setAnswerId( answer.getAnswerId() );
+            answerResponseDto.setAnswerBody( answer.getAnswerBody() );
+            answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
+            answerResponseDto.setAnswerModified( answer.getAnswerModified() );
+        }
         answerResponseDto.setQuestionId( answer.getQuestion().getQuestionId() );
+        answerResponseDto.setAnswerComments( answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()) );
 
         return answerResponseDto;
     }
@@ -72,7 +77,7 @@ public class AnswerMapperImpl implements AnswerMapper {
 
         List<AnswerResponseDto> list = new ArrayList<AnswerResponseDto>( answers.size() );
         for ( Answer answer : answers ) {
-            list.add( answerToAnswerResponseDto( answer ) );
+            list.add( answerToAnswerResponseDto1( answer ) );
         }
 
         return list;
@@ -88,5 +93,53 @@ public class AnswerMapperImpl implements AnswerMapper {
         question.setQuestionId( answerPostDto.getQuestionId() );
 
         return question;
+    }
+
+    protected AnswerCommentResponseDto answerCommentToAnswerCommentResponseDto(AnswerComment answerComment) {
+        if ( answerComment == null ) {
+            return null;
+        }
+
+        AnswerCommentResponseDto answerCommentResponseDto = new AnswerCommentResponseDto();
+
+        if ( answerComment.getAnswerCommentId() != null ) {
+            answerCommentResponseDto.setAnswerCommentId( answerComment.getAnswerCommentId() );
+        }
+        if ( answerComment.getUserId() != null ) {
+            answerCommentResponseDto.setUserId( answerComment.getUserId() );
+        }
+        answerCommentResponseDto.setAnswerCommentBody( answerComment.getAnswerCommentBody() );
+        answerCommentResponseDto.setAnswerCommentCreateAt( answerComment.getAnswerCommentCreateAt() );
+
+        return answerCommentResponseDto;
+    }
+
+    protected List<AnswerCommentResponseDto> answerCommentListToAnswerCommentResponseDtoList(List<AnswerComment> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<AnswerCommentResponseDto> list1 = new ArrayList<AnswerCommentResponseDto>( list.size() );
+        for ( AnswerComment answerComment : list ) {
+            list1.add( answerCommentToAnswerCommentResponseDto( answerComment ) );
+        }
+
+        return list1;
+    }
+
+    protected AnswerResponseDto answerToAnswerResponseDto1(Answer answer) {
+        if ( answer == null ) {
+            return null;
+        }
+
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+
+        answerResponseDto.setAnswerId( answer.getAnswerId() );
+        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
+        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
+        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
+        answerResponseDto.setAnswerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
+
+        return answerResponseDto;
     }
 }
