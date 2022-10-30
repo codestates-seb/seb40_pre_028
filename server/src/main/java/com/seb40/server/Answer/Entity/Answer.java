@@ -25,9 +25,14 @@ public class Answer {
     private long answerId;
 
     // @ManyToOne 연결
-    @ManyToOne(targetEntity = Question.class) //추가
+//    @ManyToOne(targetEntity = Question.class) //추가
+    @ManyToOne
     @JoinColumn(name="question_id")  //questionId ->question_id
     private Question question; //추가
+
+    public void setQuestion(Question question){
+        this.question = question;
+    }
 
     @ManyToOne
     @JoinColumn(name ="user_id")

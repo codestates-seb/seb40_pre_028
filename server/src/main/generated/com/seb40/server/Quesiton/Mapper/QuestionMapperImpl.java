@@ -1,12 +1,11 @@
 package com.seb40.server.Quesiton.Mapper;
 
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
-import com.seb40.server.Answer.Entity.Answer;
+import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
+import com.seb40.server.Quesiton.Dto.QuestionResponseDtos;
 import com.seb40.server.Quesiton.Entity.Question;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T02:05:10+0900",
+    date = "2022-10-30T17:11:37+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -53,72 +52,52 @@ public class QuestionMapperImpl implements QuestionMapper {
     }
 
     @Override
-    public QuestionResponseDto questionToQuestionResponseDto(Question question) {
-        if ( question == null ) {
+    public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper) {
+        if ( question == null && answerMapper == null ) {
             return null;
         }
 
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
 
-        questionResponseDto.setQuestionId( question.getQuestionId() );
-        questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
-        questionResponseDto.setQuestionBody( question.getQuestionBody() );
-        questionResponseDto.setQuestionCreatedAt( question.getQuestionCreatedAt() );
-        questionResponseDto.setQuestionModified( question.getQuestionModified() );
-        questionResponseDto.setAnswers( answerListToAnswerResponseDtoList( question.getAnswers() ) );
+        if ( question != null ) {
+            questionResponseDto.setQuestionId( question.getQuestionId() );
+            questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
+            questionResponseDto.setQuestionBody( question.getQuestionBody() );
+            questionResponseDto.setQuestionCreatedAt( question.getQuestionCreatedAt() );
+            questionResponseDto.setQuestionModified( question.getQuestionModified() );
+        }
+        questionResponseDto.setAnswers( answerMapper.answersToAnswerResponseDtos(question.getAnswers()) );
 
         return questionResponseDto;
     }
 
     @Override
-    public List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions) {
+    public List<QuestionResponseDtos> questionsToQuestionResponseDtos(List<Question> questions) {
         if ( questions == null ) {
             return null;
         }
 
-        List<QuestionResponseDto> list = new ArrayList<QuestionResponseDto>( questions.size() );
+        List<QuestionResponseDtos> list = new ArrayList<QuestionResponseDtos>( questions.size() );
         for ( Question question : questions ) {
-            list.add( questionToQuestionResponseDto( question ) );
+            list.add( questionToQuestionResponseDtos( question ) );
         }
 
         return list;
     }
 
-    protected AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
-        if ( answer == null ) {
+    protected QuestionResponseDtos questionToQuestionResponseDtos(Question question) {
+        if ( question == null ) {
             return null;
         }
 
-        long answerId = 0L;
-        String answerBody = null;
-        LocalDateTime answerCreatedAt = null;
-        LocalDateTime answerModified = null;
+        QuestionResponseDtos questionResponseDtos = new QuestionResponseDtos();
 
-        answerId = answer.getAnswerId();
-        answerBody = answer.getAnswerBody();
-        answerCreatedAt = answer.getAnswerCreatedAt();
-        answerModified = answer.getAnswerModified();
+        questionResponseDtos.setQuestionId( question.getQuestionId() );
+        questionResponseDtos.setQuestionTitle( question.getQuestionTitle() );
+        questionResponseDtos.setQuestionBody( question.getQuestionBody() );
+        questionResponseDtos.setQuestionCreatedAt( question.getQuestionCreatedAt() );
+        questionResponseDtos.setQuestionModified( question.getQuestionModified() );
 
-        long userId = 0L;
-        long questionId = 0L;
-        int voteId = 0;
-        int commentId = 0;
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, questionId, answerCreatedAt, answerModified, voteId, commentId );
-
-        return answerResponseDto;
-    }
-
-    protected List<AnswerResponseDto> answerListToAnswerResponseDtoList(List<Answer> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<AnswerResponseDto> list1 = new ArrayList<AnswerResponseDto>( list.size() );
-        for ( Answer answer : list ) {
-            list1.add( answerToAnswerResponseDto( answer ) );
-        }
-
-        return list1;
+        return questionResponseDtos;
     }
 }
