@@ -16,7 +16,9 @@ public class AnswerPostDto {
 //    @NotNull
 //    private long answerId;
 //    @Setter
-    @Positive // 양수여야함
+
+//    @Positive // 양수여야함
+    @Setter
     @NotNull // null 이 아닌 값.
     private long questionId;
 

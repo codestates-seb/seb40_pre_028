@@ -6,18 +6,22 @@ import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-    default Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto, QuestionService questionService){
-        Answer answer = new Answer();
-        answer.setQuestion(questionService.findVerifiedQuestion(answerPostDto.getQuestionId()));
-        answer.setAnswerBody(answerPostDto.getAnswerBody());
+//    default Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto, QuestionService questionService){
+//        Answer answer = new Answer();
+//        answer.setQuestion(questionService.findVerifiedQuestion(answerPostDto.getQuestionId()));
+//        answer.setAnswerBody(answerPostDto.getAnswerBody());
+//
+//        return answer;
+//    }
 
-        return answer;
-    }
+    @Mapping(target = "question.questionId")
+    Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
     default AnswerResponseDto answerToAnswerResponseDto(Answer answer){
         AnswerResponseDto answerResponseDto = new AnswerResponseDto();

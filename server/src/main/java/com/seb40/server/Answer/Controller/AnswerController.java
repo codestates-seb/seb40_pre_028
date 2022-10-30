@@ -70,11 +70,13 @@ public class AnswerController {
 //        return answer;
 //    }
 
-    @PostMapping("/post")
-    public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto){
-
+    @PostMapping("/{question_id}/post")
+    public ResponseEntity postAnswer(@PathVariable("question_id")
+                                         @Positive long questionId,
+                                     @Valid @RequestBody AnswerPostDto answerPostDto){
+        answerPostDto.setQuestionId(questionId);
         Answer answer = answerService.createAnswer(
-                mapper.answerPostDtoToAnswer(answerPostDto,questionService));
+                mapper.answerPostDtoToAnswer(answerPostDto));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
