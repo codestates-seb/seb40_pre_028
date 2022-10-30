@@ -102,10 +102,10 @@ public class AnswerController {
     @GetMapping("/{answer_id}")
     public ResponseEntity getAnswer(@PathVariable("answer_id")
                                     @Positive long answerId){
-        Answer response = answerService.findVerifiedAnswer(answerId);
+        Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer,answerCommentMapper))
                 , HttpStatus.OK);
     }
 
