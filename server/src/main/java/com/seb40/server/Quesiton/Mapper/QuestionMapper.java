@@ -13,6 +13,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
+
+    @Mapping(target = "user.userId")
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
@@ -38,8 +40,8 @@ public interface QuestionMapper {
 //    }
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+    @Mapping(target = "userId",expression = "java(question.getUser().getUserId())")
     QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
-
 
 //    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
 
