@@ -12,27 +12,13 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-//    default Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto, QuestionService questionService){
-//        Answer answer = new Answer();
-//        answer.setQuestion(questionService.findVerifiedQuestion(answerPostDto.getQuestionId()));
-//        answer.setAnswerBody(answerPostDto.getAnswerBody());
-//
-//        return answer;
-//    }
 
     @Mapping(target = "question.questionId")
     Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
-    default AnswerResponseDto answerToAnswerResponseDto(Answer answer){
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
-        answerResponseDto.setAnswerId(answer.getAnswerId());
-        answerResponseDto.setQuestionId(answer.getQuestion().getQuestionId());
-        answerResponseDto.setAnswerBody(answer.getAnswerBody());
-        answerResponseDto.setAnswerCreatedAt(answer.getAnswerCreatedAt());
-        answerResponseDto.setAnswerModified(answer.getAnswerModified());
 
-        return answerResponseDto;
-    }
+    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
+    AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 
     // AnswerResponseDto 타입의 List mapper 파라미터로 List<Answer> 타입의 Answer 를 받는다.
     List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
