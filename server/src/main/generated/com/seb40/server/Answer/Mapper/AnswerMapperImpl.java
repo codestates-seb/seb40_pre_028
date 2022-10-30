@@ -4,7 +4,7 @@ import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
-import java.time.LocalDateTime;
+import com.seb40.server.Quesiton.Entity.Question;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T02:05:10+0900",
+    date = "2022-10-30T15:16:26+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -26,8 +26,8 @@ public class AnswerMapperImpl implements AnswerMapper {
 
         Answer answer = new Answer();
 
-        answer.setAnswerId( answerPostDto.getAnswerId() );
         answer.setAnswerBody( answerPostDto.getAnswerBody() );
+        answer.setQuestion( answerPostDtoToQuestion( answerPostDto ) );
 
         return answer;
     }
@@ -52,22 +52,14 @@ public class AnswerMapperImpl implements AnswerMapper {
             return null;
         }
 
-        long answerId = 0L;
-        String answerBody = null;
-        LocalDateTime answerCreatedAt = null;
-        LocalDateTime answerModified = null;
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
 
-        answerId = answer.getAnswerId();
-        answerBody = answer.getAnswerBody();
-        answerCreatedAt = answer.getAnswerCreatedAt();
-        answerModified = answer.getAnswerModified();
+        answerResponseDto.setAnswerId( answer.getAnswerId() );
+        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
+        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
+        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
 
-        long userId = 0L;
-        long questionId = 0L;
-        int voteId = 0;
-        int commentId = 0;
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, questionId, answerCreatedAt, answerModified, voteId, commentId );
+        answerResponseDto.setQuestionId( answer.getQuestion().getQuestionId() );
 
         return answerResponseDto;
     }
@@ -84,5 +76,17 @@ public class AnswerMapperImpl implements AnswerMapper {
         }
 
         return list;
+    }
+
+    protected Question answerPostDtoToQuestion(AnswerPostDto answerPostDto) {
+        if ( answerPostDto == null ) {
+            return null;
+        }
+
+        Question question = new Question();
+
+        question.setQuestionId( answerPostDto.getQuestionId() );
+
+        return question;
     }
 }

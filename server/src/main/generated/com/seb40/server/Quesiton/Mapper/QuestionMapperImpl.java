@@ -6,7 +6,6 @@ import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T02:05:10+0900",
+    date = "2022-10-30T14:11:27+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -89,22 +88,12 @@ public class QuestionMapperImpl implements QuestionMapper {
             return null;
         }
 
-        long answerId = 0L;
-        String answerBody = null;
-        LocalDateTime answerCreatedAt = null;
-        LocalDateTime answerModified = null;
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
 
-        answerId = answer.getAnswerId();
-        answerBody = answer.getAnswerBody();
-        answerCreatedAt = answer.getAnswerCreatedAt();
-        answerModified = answer.getAnswerModified();
-
-        long userId = 0L;
-        long questionId = 0L;
-        int voteId = 0;
-        int commentId = 0;
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto( answerId, answerBody, userId, questionId, answerCreatedAt, answerModified, voteId, commentId );
+        answerResponseDto.setAnswerId( answer.getAnswerId() );
+        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
+        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
+        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
 
         return answerResponseDto;
     }

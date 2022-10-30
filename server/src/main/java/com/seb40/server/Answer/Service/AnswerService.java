@@ -4,6 +4,7 @@ import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,11 +24,8 @@ public class AnswerService {
         this.questionService=questionService;
     }
 
-    // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직s
+    // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직
     public Answer createAnswer(Answer answer){
-        // 질문이 존재하는지 확인
-//        questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId()); // 추가
-
         Answer savedAnswer = answerRepository.save(answer);
 
         return savedAnswer;
@@ -53,7 +51,7 @@ public class AnswerService {
     // Answer를 page 로 찾기
     public Page<Answer> findAnswers(int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
-                Sort.by("answerId").descending()));
+                Sort.by("answerId")));
     }
 
     public void deleteAnswer(long answerId){
