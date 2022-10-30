@@ -39,9 +39,6 @@ public class Question{
     //@OneToMany()//질문 코멘트
 
 
-
-
-
     private String questionTitle;
     private String questionBody;
     @CreatedDate

@@ -38,37 +38,6 @@ public class AnswerController {
     private final AnswerMapper mapper;
     private final AnswerCommentMapper answerCommentMapper;
 
-//    @PostMapping("/post")
-//    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
-//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-//        Answer response = answerService.createAnswer(answer);
-//
-//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
-//                HttpStatus.CREATED);
-//    }
-//
-//    @PostMapping("/{question_id}/post")
-//    public ResponseEntity postAnswer(@PathVariable("question_id")
-//                                         @Positive long questionId,
-//                                     @RequestBody AnswerPostDto answerPostDto){
-//        answerPostDto.setQuestionId(questionId);
-//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-//        Answer response = answerService.createAnswer(answer);
-//
-//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
-//                HttpStatus.CREATED);
-//    }
-
-//    @PostMapping("/{question_id}/post")
-//    public Answer createAnswer(@PathVariable ("question_id")
-//                                   @Positive long questionId,
-//                               @RequestBody Answer answer){
-//        Optional<Question> question = questionRepository.findById(questionId);
-//        answer.setQuestion(question.get());
-//        answerRepository.save(answer);
-//        return answer;
-//    }
-
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id")
                                          @Positive long questionId,
@@ -99,7 +68,7 @@ public class AnswerController {
                 , HttpStatus.OK);
     }
 
-    @GetMapping("/{answer_id}")
+    @GetMapping("/get/{answer_id}")
     public ResponseEntity getAnswer(@PathVariable("answer_id")
                                     @Positive long answerId){
         Answer answer = answerService.findAnswer(answerId);
@@ -110,9 +79,11 @@ public class AnswerController {
     }
 
     // Get answer List
-    @GetMapping
-    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+    @GetMapping("/{question_id}")
+    public ResponseEntity getAnswers(@PathVariable("question_id")@Positive long questionId,
+                                     @Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {
+
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 

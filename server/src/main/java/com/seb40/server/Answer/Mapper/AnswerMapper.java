@@ -15,16 +15,19 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
 
+//    @Mapping(target = "question.questionId")
     @Mapping(target = "question.questionId")
     @Mapping(target = "user.userId")
     Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
 
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
 
-    @Mapping(target = "answerComments",
-            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
-    @Mapping(target = "userId", expression = "java(answer.getUser().getUserId())")
-    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
+//    @Mapping(target = "answerComments",
+//            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
+//    @Mapping(target = "userId", expression = "java(answer.getUser().getUserId())")
+//    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
+    @Mapping(source = "answer.user.userId", target = "userId")
+    @Mapping(source = "answer.question.questionId", target = "questionId")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
 
 

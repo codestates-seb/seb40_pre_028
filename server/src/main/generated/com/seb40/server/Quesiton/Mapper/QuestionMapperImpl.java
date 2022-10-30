@@ -9,6 +9,7 @@ import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.User.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T21:21:38+0900",
+    date = "2022-10-30T22:44:17+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -35,6 +36,7 @@ public class QuestionMapperImpl implements QuestionMapper {
         }
         question.setQuestionTitle( questionPostDto.getQuestionTitle() );
         question.setQuestionBody( questionPostDto.getQuestionBody() );
+        question.setUser( questionPostDtoToUser( questionPostDto ) );
 
         return question;
     }
@@ -70,6 +72,7 @@ public class QuestionMapperImpl implements QuestionMapper {
             questionResponseDto.setQuestionModified( question.getQuestionModified() );
         }
         questionResponseDto.setAnswers( answerMapper.answersToAnswerResponseDtos(question.getAnswers()) );
+        questionResponseDto.setUserId( question.getUser().getUserId() );
 
         return questionResponseDto;
     }
@@ -86,6 +89,20 @@ public class QuestionMapperImpl implements QuestionMapper {
         }
 
         return list;
+    }
+
+    protected User questionPostDtoToUser(QuestionPostDto questionPostDto) {
+        if ( questionPostDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        if ( questionPostDto.getUserId() != null ) {
+            user.setUserId( questionPostDto.getUserId() );
+        }
+
+        return user;
     }
 
     protected AnswerCommentResponseDto answerCommentToAnswerCommentResponseDto(AnswerComment answerComment) {

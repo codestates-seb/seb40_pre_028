@@ -12,7 +12,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring" )
 public interface QuestionMapper {
 
     @Mapping(target = "user.userId")

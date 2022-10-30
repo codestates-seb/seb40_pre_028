@@ -48,18 +48,20 @@ public class QuestionController {
     public ResponseEntity patchQuestion(@PathVariable("question_id") @Positive long questionId,
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
-        Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response, answerMapper), HttpStatus.OK);
+        Question response = questionService.updateQuestion(
+                mapper.questionPatchDtoToQuestion(questionPatchDto));
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
+                , HttpStatus.OK);
     }
 
     // 선택 질문페이지 이동 API
     @GetMapping("/{question_id}")
     public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
-//        Question response = questionService.findQuestion(questionId);
-        Question question = questionService.findVerifiedQuestion(questionId);
+        Question response = questionService.findQuestion(questionId);
 
         return new ResponseEntity<>( //수정
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
                 , HttpStatus.OK);
     }
 

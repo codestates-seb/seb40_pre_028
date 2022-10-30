@@ -8,6 +8,7 @@ import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
 import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.User.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T21:22:47+0900",
+    date = "2022-10-30T22:44:17+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -32,6 +33,7 @@ public class AnswerMapperImpl implements AnswerMapper {
         answer.setAnswerId( answerPostDto.getAnswerId() );
         answer.setAnswerBody( answerPostDto.getAnswerBody() );
         answer.setQuestion( answerPostDtoToQuestion( answerPostDto ) );
+        answer.setUser( answerPostDtoToUser( answerPostDto ) );
 
         return answer;
     }
@@ -59,6 +61,8 @@ public class AnswerMapperImpl implements AnswerMapper {
         AnswerResponseDto answerResponseDto = new AnswerResponseDto();
 
         if ( answer != null ) {
+            answerResponseDto.setUserId( answerUserUserId( answer ) );
+            answerResponseDto.setQuestionId( answerQuestionQuestionId( answer ) );
             answerResponseDto.setAnswerId( answer.getAnswerId() );
             answerResponseDto.setAnswerBody( answer.getAnswerBody() );
             answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
@@ -93,6 +97,42 @@ public class AnswerMapperImpl implements AnswerMapper {
         question.setQuestionId( answerPostDto.getQuestionId() );
 
         return question;
+    }
+
+    protected User answerPostDtoToUser(AnswerPostDto answerPostDto) {
+        if ( answerPostDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setUserId( answerPostDto.getUserId() );
+
+        return user;
+    }
+
+    private long answerUserUserId(Answer answer) {
+        if ( answer == null ) {
+            return 0L;
+        }
+        User user = answer.getUser();
+        if ( user == null ) {
+            return 0L;
+        }
+        long userId = user.getUserId();
+        return userId;
+    }
+
+    private long answerQuestionQuestionId(Answer answer) {
+        if ( answer == null ) {
+            return 0L;
+        }
+        Question question = answer.getQuestion();
+        if ( question == null ) {
+            return 0L;
+        }
+        long questionId = question.getQuestionId();
+        return questionId;
     }
 
     protected AnswerCommentResponseDto answerCommentToAnswerCommentResponseDto(AnswerComment answerComment) {
