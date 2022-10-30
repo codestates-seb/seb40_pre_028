@@ -94,7 +94,8 @@ public class AnswerController {
         Answer response = answerService.updateAnswer(
                 mapper.answerPatchDtoToAnswer(answerPatchDto));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
                 , HttpStatus.OK);
     }
 
@@ -103,7 +104,9 @@ public class AnswerController {
                                     @Positive long answerId){
         Answer response = answerService.findVerifiedAnswer(answerId);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
+                , HttpStatus.OK);
     }
 
     // Get answer List
