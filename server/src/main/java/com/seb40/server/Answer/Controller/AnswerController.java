@@ -14,17 +14,21 @@ import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController //bean 등록
 @RequestMapping("/user/answer")
+@AllArgsConstructor
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
 
@@ -34,17 +38,6 @@ public class AnswerController {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final AnswerMapper mapper;
-
-    public AnswerController(AnswerService answerService,
-                            QuestionService questionService, QuestionRepository questionRepository,
-                            AnswerMapper mapper,
-                            AnswerRepository answerRepository) {
-        this.answerService = answerService;
-        this.questionService = questionService;
-        this.questionRepository = questionRepository;
-        this.mapper = mapper;
-        this.answerRepository=answerRepository;
-    }
 
 //    @PostMapping("/post")
 //    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
@@ -77,16 +70,14 @@ public class AnswerController {
 //        return answer;
 //    }
 
-    @PostMapping("/{question_id}/post")
-    public ResponseEntity createAnswer(@PathVariable("question_id")
-                                       @Positive long questionId,
-                                       @RequestBody AnswerPostDto answerPostDto){
-        Question question = questionService.findVerifiedQuestion(questionId);
-        Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
-        AnswerResponseDto response = mapper.answerToAnswerResponseDto(answer);
-        response.setQuestionId(question);
+    @PostMapping("/post")
+    public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto){
 
-        return new ResponseEntity<>(new SingleResponseDto<>(response),
+        Answer answer = answerService.createAnswer(
+                mapper.answerPostDtoToAnswer(answerPostDto,questionService));
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
     }
 
@@ -101,7 +92,7 @@ public class AnswerController {
         Answer response = answerService.updateAnswer(
                 mapper.answerPatchDtoToAnswer(answerPatchDto));
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response)
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
                 , HttpStatus.OK);
     }
 
@@ -121,7 +112,8 @@ public class AnswerController {
         List<Answer> answers = pageAnswers.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+                new MultiResponseDto<>(
+                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
                 HttpStatus.OK);
     }
 

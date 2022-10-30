@@ -63,7 +63,7 @@ public class QuestionService {
     // questionId 확인
     public Question findVerifiedQuestion(long questionId){
         Optional<Question> optionalQuestion=
-                questionRepository.findById(questionId);
+                questionRepository.findByQuestionId(questionId); // 수정
         Question findQuestion=
                 optionalQuestion.orElseThrow(()->
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));
