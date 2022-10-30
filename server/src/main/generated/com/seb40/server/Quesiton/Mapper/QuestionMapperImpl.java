@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T14:11:27+0900",
+    date = "2022-10-30T16:24:36+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -49,24 +49,6 @@ public class QuestionMapperImpl implements QuestionMapper {
         question.setQuestionBody( questionPatchDto.getQuestionBody() );
 
         return question;
-    }
-
-    @Override
-    public QuestionResponseDto questionToQuestionResponseDto(Question question) {
-        if ( question == null ) {
-            return null;
-        }
-
-        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-
-        questionResponseDto.setQuestionId( question.getQuestionId() );
-        questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
-        questionResponseDto.setQuestionBody( question.getQuestionBody() );
-        questionResponseDto.setQuestionCreatedAt( question.getQuestionCreatedAt() );
-        questionResponseDto.setQuestionModified( question.getQuestionModified() );
-        questionResponseDto.setAnswers( answerListToAnswerResponseDtoList( question.getAnswers() ) );
-
-        return questionResponseDto;
     }
 
     @Override
@@ -109,5 +91,22 @@ public class QuestionMapperImpl implements QuestionMapper {
         }
 
         return list1;
+    }
+
+    protected QuestionResponseDto questionToQuestionResponseDto(Question question) {
+        if ( question == null ) {
+            return null;
+        }
+
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+
+        questionResponseDto.setQuestionId( question.getQuestionId() );
+        questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
+        questionResponseDto.setQuestionBody( question.getQuestionBody() );
+        questionResponseDto.setQuestionCreatedAt( question.getQuestionCreatedAt() );
+        questionResponseDto.setQuestionModified( question.getQuestionModified() );
+        questionResponseDto.setAnswers( answerListToAnswerResponseDtoList( question.getAnswers() ) );
+
+        return questionResponseDto;
     }
 }
