@@ -4,22 +4,26 @@ import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
     // (1)
     private final QuestionRepository questionRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
+//    public QuestionService(QuestionRepository questionRepository) {
+//        this.questionRepository = questionRepository;
+//    }
 
     // 질문 등록
     public Question createQuestion(Question question) {

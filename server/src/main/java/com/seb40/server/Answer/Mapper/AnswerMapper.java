@@ -8,6 +8,7 @@ import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -18,9 +19,10 @@ public interface AnswerMapper {
     Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
 
-    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
-    @Mapping(target = "answerComments",
-            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
+
+    @Mapping(target = "question.questionId") //, expression = "java(answer.getQuestion().getQuestionId())"
+//    @Mapping(target = "answerComments",
+//            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
 
 

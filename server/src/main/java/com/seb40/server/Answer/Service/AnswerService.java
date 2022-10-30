@@ -6,20 +6,24 @@ import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Service.QuestionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+
 @Service
+@RequiredArgsConstructor
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
-    public AnswerService(AnswerRepository answerRepository) {
-        this.answerRepository = answerRepository;
-    }
+//    public AnswerService(AnswerRepository answerRepository) {
+//        this.answerRepository = answerRepository;
+//    }
 
     // AnswerRepository 에 answer 저장 후 저장된 걸 반환하는 로직
     public Answer createAnswer(Answer answer){

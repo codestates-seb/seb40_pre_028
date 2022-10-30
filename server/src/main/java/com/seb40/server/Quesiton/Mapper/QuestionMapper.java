@@ -11,6 +11,7 @@ import com.seb40.server.Quesiton.Dto.QuestionResponseDtos;
 import com.seb40.server.Quesiton.Entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,6 +42,7 @@ public interface QuestionMapper {
 //
 //        return questionResponseDto;
 //    }
+
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
     QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
