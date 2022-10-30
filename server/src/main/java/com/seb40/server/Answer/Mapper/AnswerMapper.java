@@ -16,13 +16,15 @@ import java.util.List;
 public interface AnswerMapper {
 
     @Mapping(target = "question.questionId")
+    @Mapping(target = "user.userId")
     Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
+
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
 
-
-    @Mapping(target = "question.questionId") //, expression = "java(answer.getQuestion().getQuestionId())"
-//    @Mapping(target = "answerComments",
-//            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
+    @Mapping(target = "answerComments",
+            expression = "java(answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()))")
+    @Mapping(target = "userId", expression = "java(answer.getUser().getUserId())")
+    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
 
 

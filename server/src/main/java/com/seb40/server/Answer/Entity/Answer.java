@@ -40,6 +40,8 @@ public class Answer {
     @JoinColumn(name ="user_id")
     private User user;
 
+    public void setUser(User user){this.user = user;}
+
     @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
 

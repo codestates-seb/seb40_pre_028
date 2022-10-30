@@ -6,6 +6,7 @@ import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import com.seb40.server.User.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 @CrossOrigin(originPatterns = "*")
 @RestController
 @RequestMapping("/user")
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Slf4j
 public class UserController {
 

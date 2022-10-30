@@ -7,6 +7,7 @@ import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,12 @@ import java.util.List;
 @Transactional
 @RequestMapping("/user/question")
 @RestController
+@AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
     private final AnswerMapper answerMapper;
-    public QuestionController(QuestionService questionService,
-                              QuestionMapper mapper, AnswerMapper answerMapper) {
-        this.questionService = questionService;
-        this.mapper = mapper;
-        this.answerMapper = answerMapper;
-    }
+
 
     // 질문 작성 API
 //    @PostMapping("/post")
@@ -72,6 +69,7 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
                         pageQuestions),

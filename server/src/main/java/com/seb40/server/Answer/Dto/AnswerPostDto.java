@@ -22,6 +22,9 @@ public class AnswerPostDto {
     @NotNull // null 이 아닌 값.
     private long questionId;
 
+    @NotNull
+    private long userId;
+
     @NotBlank // null 이 아닌 값, 공백이 아니어야함
     private String answerBody;
 
