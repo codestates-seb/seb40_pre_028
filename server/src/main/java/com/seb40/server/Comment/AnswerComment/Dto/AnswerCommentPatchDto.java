@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class AnswerCommentPatchDto {
 
     private long answerCommentId;

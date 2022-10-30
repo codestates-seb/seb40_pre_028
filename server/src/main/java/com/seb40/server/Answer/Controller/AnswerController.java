@@ -8,6 +8,7 @@ import com.seb40.server.Answer.Entity.Answer;
 //import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Answer.Repository.AnswerRepository;
+import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
@@ -29,16 +30,13 @@ import java.util.Optional;
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
-
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
 
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
-    private final QuestionService questionService;
-    private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
     private final AnswerMapper mapper;
+    private final AnswerCommentMapper answerCommentMapper;
 
 //    @PostMapping("/post")
 //    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
@@ -75,12 +73,13 @@ public class AnswerController {
     public ResponseEntity postAnswer(@PathVariable("question_id")
                                          @Positive long questionId,
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
+        // answerPostDto 에 URI로 받은 questionId 설정
         answerPostDto.setQuestionId(questionId);
         Answer answer = answerService.createAnswer(
                 mapper.answerPostDtoToAnswer(answerPostDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer, answerCommentMapper)),
                 HttpStatus.CREATED);
     }
 
@@ -96,7 +95,7 @@ public class AnswerController {
                 mapper.answerPatchDtoToAnswer(answerPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
                 , HttpStatus.OK);
     }
 
@@ -106,7 +105,7 @@ public class AnswerController {
         Answer response = answerService.findVerifiedAnswer(answerId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
                 , HttpStatus.OK);
     }
 
