@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
+/*
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code.js';
@@ -16,6 +18,8 @@ import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import List from '@ckeditor/ckeditor5-list/src/list.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
+*/
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
 
 const ChContainer = styled.div`
   width: 600px;
@@ -26,20 +30,38 @@ const ChContainer = styled.div`
 //   plugins: [Heading, Bold, Italic, Code, Link, BlockQuote, CodeBlock, Table, HorizontalLine, List, Image],
 //   toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'table', '|', 'horizontalLine', 'list', 'image'],
 // };
-const editorConfiguration = {
-  plugins: [Heading, Bold, Italic, Code, Link, BlockQuote, Essentials, Table, Paragraph, List, Image],
-  toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'table', '|', 'horizontalLine', 'list', 'image'],
-};
+// const editorConfiguration = {
+//   plugins: [Heading, Bold, Italic, Code, Link, BlockQuote, Essentials, Table, Paragraph, List, Image],
+//   toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'table', '|', 'horizontalLine', 'list', 'image'],
+// };
 
 // 'bulletedList', 'numberedList', 'blockQuote'],
-export default function ChEditor() {
+export default function ChEditor({ onfocus }) {
   return (
-    <ChContainer>
-      <h3>Editor</h3>
+    <ChContainer className="App">
+      {''}
+      <h1>test</h1>
       <CKEditor
-        editor={ClassicEditor}
+        editor={Editor}
         // data="<p>Hello from CKEditor 5!</p>"
-        config={editorConfiguration}
+        config={{
+          toolbar: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'code',
+            '|',
+            'link',
+            'blockQuote',
+            'codeBlock',
+            'imageUpload',
+            'table',
+            '|',
+            'horizontalLine',
+            'list',
+          ],
+        }}
         onReady={editor => {
           // You can store the "editor" and use when it is needed.
           console.log('Editor is ready to use!', editor);
@@ -53,6 +75,7 @@ export default function ChEditor() {
         }}
         onFocus={(event, editor) => {
           console.log('Focus.', editor);
+          onfocus();
         }}
       />
     </ChContainer>
