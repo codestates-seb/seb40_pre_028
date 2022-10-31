@@ -130,6 +130,7 @@ const Board = styled.div`
   }
 `;
 const TagContainer = styled.div`
+  margin-bottom: 10px;
   display: flex;
 `;
 const Tag = styled.div`
@@ -195,18 +196,19 @@ export default function CreateQuestionPage() {
   };
   const AlertMsgHandlerOn3 = () => {
     setIsAlertMsg1(false);
-    setIsAlertMsg3(false);
+    setIsAlertMsg2(false);
     setIsAlertMsg3(true);
   };
   const btnHandler1 = e => {
     e.preventDefault();
-    inputEl3.current.focus();
+    // inputEl2.current.focus();
     setBtn1(false);
-    setBtn2(false);
-    setBtn3(true);
+    setBtn2(true);
+    setBtn3(false);
   };
   const btnHandler2 = e => {
     e.preventDefault();
+    inputEl3.current.focus();
     setBtn1(false);
     setBtn2(false);
     setBtn3(true);
@@ -299,7 +301,8 @@ export default function CreateQuestionPage() {
           <Field>
             <Label1 htmlFor="body">Body</Label1>
             <Label2 htmlFor="body">The body of your question contains your problem details and results. Minimum 30 characters.</Label2>
-            <ChEditor />
+            <ChEditor onfocus={AlertMsgHandlerOn2} />
+            {btn2 ? <Button onClick={btnHandler2}>Next</Button> : ''}
           </Field>
           {isAlertMsg2 ? (
             <AlertMsgTitle>
@@ -329,7 +332,6 @@ export default function CreateQuestionPage() {
               onBlur={tagNameHandlerByFocusout}
               placeholder="e.g. (excel string regex)"
             />
-
             <TagContainer>
               {tagName.map((el, idx) => (
                 <Tag key={idx}>
