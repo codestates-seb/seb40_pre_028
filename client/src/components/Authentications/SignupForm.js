@@ -5,6 +5,7 @@ import * as LoginForm from './LoginForm.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authSlice } from '../../redux/slice/authSlice.js';
+import { fetchSignup } from '../../utils/apis.js';
 
 const Form = styled(LoginForm.Form)`
   display: flex;
@@ -159,26 +160,12 @@ export function SignupForm() {
       password: passwordValue,
     });
 
-    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/join', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'skip',
-      },
-      body: payload,
-    })
-      .then(res => {
-        console.log(res);
-        return res.json();
-      })
-      .then(data => {
-        console.log(data);
-        dispatch(authSlice.actions.login());
-        window.localStorage.setItem('user', JSON.stringify(data));
-        window.localStorage.setItem('auth', true);
-        navigate('/');
-      })
-      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+    fetchSignup('/user/join', payload).then(data => {
+      dispatch(authSlice.actions.login());
+      window.localStorage.setItem('user', JSON.stringify(data));
+      window.localStorage.setItem('auth', true);
+      navigate('/');
+    });
   };
 
   const emailValueHandler = e => {

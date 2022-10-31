@@ -60,9 +60,6 @@ const PostTag = styled.div`
 
 const Select = styled.div`
   padding: 10px;
-  & > button {
-    all: unset;
-  }
   & > * {
     display: block;
     display: flex;
@@ -84,6 +81,16 @@ const Select = styled.div`
   }
   .time {
     font-size: 20px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      all: unset;
+    }
   }
 `;
 
@@ -127,21 +134,24 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '123' }) 
     <Main>
       <Section>
         <Select>
-          <button //API PATCH
-            onClick={() => {
-              SetCount(count + 1);
-            }}
-          >
-            <VscTriangleUp className="icon triangle" />
-          </button>
-          <span>{count}</span>
-          <button
-            onClick={() => {
-              SetCount(count - 1);
-            }}
-          >
-            <VscTriangleDown className="icon triangle" />
-          </button>
+          <div>
+            <button //API PATCH
+              onClick={() => {
+                SetCount(count + 1);
+              }}
+            >
+              <VscTriangleUp className="icon triangle" />
+            </button>
+            <span>{count}</span>
+            <button
+              onClick={() => {
+                SetCount(count - 1);
+              }}
+            >
+              <VscTriangleDown className="icon triangle" />
+            </button>
+          </div>
+
           <BsBookmark className="icon booktime" />
           <GiBackwardTime className="icon booktime time" />
         </Select>

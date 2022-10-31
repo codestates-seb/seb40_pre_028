@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authSlice } from '../../redux/slice/authSlice';
 import { userSlice } from '../../redux/slice/userSlice';
+import { fetchLogin } from '../../utils/apis';
 
 const Form = styled.form`
   display: flex;
@@ -155,37 +156,23 @@ export function LoginForm() {
       email: emailValue,
       password: passwordValue,
     });
-    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: payload,
-    })
-      .then(res => {
-        // console.log(res);
-        return res.json();
-      })
-      .then(data => {
-        console.log('login response: ', data);
 
-        // 로그인정보가 다르면 새로고침 후 알림창
-        // alert('로그인 정보가 다릅니다.');
+    fetchLogin('/user/login', payload).then(data => {
+      // 로그인정보가 다르면 새로고침 후 알림창
+      // alert('로그인 정보가 다릅니다.');
 
-        //redux
-        // dispatch(authSlice.actions.login());
-        // dispatch(userSlice.actions.setUser(data));
-        // dispatch(userSlice.actions.setId(data.userId));
-        // dispatch(userSlice.actions.setName(data.userName));
+      //redux
+      // dispatch(authSlice.actions.login());
+      // dispatch(userSlice.actions.setUser(data));
+      // dispatch(userSlice.actions.setId(data.userId));
+      // dispatch(userSlice.actions.setName(data.userName));
 
-        window.localStorage.setItem('user', JSON.stringify(data));
-        window.localStorage.setItem('auth', true);
-        // window.location.href = 'http://localhost:3000';
-        navigate('/');
-      })
-      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+      window.localStorage.setItem('user', JSON.stringify(data));
+      window.localStorage.setItem('auth', true);
+      // window.location.href = 'http://localhost:3000';
+      navigate('/');
+    });
   };
-
   const emailValueHandler = e => {
     setEmailValue(e.target.value);
   };
