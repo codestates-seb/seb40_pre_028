@@ -176,6 +176,28 @@ export function SignupForm({ setUserData, setIsLoading }) {
     //     setUserData(data);
     //   })
     //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+
+    // login post rq
+    fetch('https://4c94-61-255-255-90.jp.ngrok.io/user/join', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setIsLoading(false);
+        // setTest(data);
+        setUserData(data);
+      })
+      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+
+    //
+    fetch(`https://4c94-61-255-255-90.jp.ngrok.io/user/question?page=1&size=10`)
+      .then(res => res.json())
+      .then(data => console.log('question data: ', data));
   };
 
   const emailValueHandler = e => {

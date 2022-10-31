@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { AlertMsg } from '../components/CreateQuestion/AlertMsg';
 import { useState, useRef, useEffect } from 'react';
+import ChEditor from './ChEditor';
 const Bg = styled.div`
   background-color: #f1f2f3;
   /* padding: 20px 0; */
@@ -22,13 +23,14 @@ const Form = styled.form`
     margin-bottom: 30px;
   }
 `;
+
 const FieldSet = styled.div`
   display: flex;
 `;
 const Field = styled.div`
   background-color: white;
   width: 700px;
-  height: 150px;
+  /* height: 180px; */
   padding: 20px 30px;
   border: 0.5px solid var(--black-200);
   border-radius: 2px;
@@ -54,12 +56,15 @@ const Label2 = styled.label`
   font-weight: 100px;
 `;
 const Button = styled.button`
-  width: 50px;
-  height: 30px;
+  padding: 0 12px;
+  /* width: 50px;*/
+  width: fit-content;
+  height: 34px;
   color: white;
   background-color: #0996ff;
   border: none;
   border-radius: 3px;
+
   &:hover {
     cursor: pointer;
     background-color: #077cd2;
@@ -132,7 +137,7 @@ const Tag = styled.div`
   color: #39739d;
   background-color: #e1ecf4;
   border-radius: 5px;
-  padding: 3px 5px;
+  padding: 5px 0 5px 7px;
   font-size: 12px;
 
   margin-right: 3px;
@@ -143,7 +148,6 @@ const Tag = styled.div`
     border: none;
     border-radius: 4px;
     color: #39739d;
-
     background-color: transparent;
 
     &:hover {
@@ -152,6 +156,16 @@ const Tag = styled.div`
       background-color: #39739d;
     }
   }
+`;
+const Overlay = styled.div`
+  /* position: absolute;
+top: 0;
+left: 0; */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
 `;
 export default function CreateQuestionPage() {
   const [isAlertMsg1, setIsAlertMsg1] = useState(false);
@@ -203,6 +217,10 @@ export default function CreateQuestionPage() {
     setBtn2(false);
     setBtn3(false);
   };
+  const onsubmit = e => {
+    e.preventDefault();
+    console.log('form submiting');
+  };
 
   //tag handler
   const tagNameHandlerByKeyup = e => {
@@ -249,6 +267,7 @@ export default function CreateQuestionPage() {
             <li>Review your question and post it to the site.</li>
           </ul>
         </Board>
+
         <FieldSet>
           <Field>
             <Label1 htmlFor="title">Title</Label1>
@@ -280,6 +299,7 @@ export default function CreateQuestionPage() {
           <Field>
             <Label1 htmlFor="body">Body</Label1>
             <Label2 htmlFor="body">The body of your question contains your problem details and results. Minimum 30 characters.</Label2>
+            <ChEditor />
           </Field>
           {isAlertMsg2 ? (
             <AlertMsgTitle>
@@ -334,6 +354,7 @@ export default function CreateQuestionPage() {
             ''
           )}
         </FieldSet>
+        <Button onClick={onsubmit}>Post your question</Button>
       </Form>
     </Bg>
   );
