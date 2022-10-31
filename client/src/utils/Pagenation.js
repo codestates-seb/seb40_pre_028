@@ -48,7 +48,7 @@ const Nav = styled.nav`
   gap: 5px;
   margin: 70px 16px 16px 16px;
   > span {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--black-700);
     padding: 8px;
   }
