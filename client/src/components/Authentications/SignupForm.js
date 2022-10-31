@@ -123,13 +123,15 @@ const TextContainer = styled.div`
     }
   }
 `;
-export function SignupForm() {
+export function SignupForm({ setUserData, setIsLoading }) {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [emailValid, setEmailValid] = useState(false);
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
+  const [nameValue, setNameValue] = useState('');
 
+  // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
   const formSubmitHandler = e => {
@@ -144,6 +146,58 @@ export function SignupForm() {
     // 형식 체크
     if (!LoginForm.emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
+
+    if (emailValue === '' || passwordValue === '' || !LoginForm.emailValidation(emailValue)) return;
+
+    console.log('login varified: ');
+    console.log({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    });
+    const payload = JSON.stringify({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+    });
+
+    // fetch('https://9d19-110-13-106-62.jp.ngrok.io/user/join', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: payload,
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log(data);
+    //     setIsLoading(false);
+    //     setTest(data);
+    //     setUserData(data);
+    //   })
+    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+
+    // login post rq
+    fetch('https://4c94-61-255-255-90.jp.ngrok.io/user/join', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setIsLoading(false);
+        // setTest(data);
+        setUserData(data);
+      })
+      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+
+    //
+    fetch(`https://4c94-61-255-255-90.jp.ngrok.io/user/question?page=1&size=10`)
+      .then(res => res.json())
+      .then(data => console.log('question data: ', data));
   };
 
   const emailValueHandler = e => {
@@ -152,13 +206,16 @@ export function SignupForm() {
   const passwordValueHandler = e => {
     setPasswordValue(e.target.value);
   };
+  const nameValueHandler = e => {
+    setNameValue(e.target.value);
+  };
   return (
     <>
       <Form onSubmit={formSubmitHandler}>
         <Fieldset>
           <Field>
             <LoginForm.Label htmlFor="name">Display name</LoginForm.Label>
-            <LoginForm.Input type="text" id="name" />
+            <LoginForm.Input type="text" id="name" onChange={nameValueHandler} />
           </Field>
 
           <Field>
@@ -209,6 +266,7 @@ export function SignupForm() {
             </div>
           </Checkbox>
           <Button>Sign up</Button>
+
           <FieldsetFooter>
             <span>
               By clicking “Sign up”, you agree to our{' '}
