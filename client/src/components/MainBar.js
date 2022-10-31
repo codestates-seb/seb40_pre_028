@@ -66,15 +66,17 @@ export function MainBar() {
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
   let [perPage, setPerPage] = useState(10);
+  let URL = `https://17ee-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
 
   useEffect(() => {
     getData();
   }, [page, perPage]);
 
   const getData = async () => {
-    const res = await fetch(`http://localhost:3001/questions?_page=${page}&_limit=${perPage}`);
+    const res = await fetch(`${URL}`);
     const data = await res.json();
-    setQuestions(data);
+    console.log(data);
+    setQuestions(data.data);
     setIsLoading(false);
     window.scroll({
       top: 0,
@@ -98,14 +100,14 @@ export function MainBar() {
         ) : (
           questions.map(question => (
             <QuestionElement
-              key={question.id}
-              title={question.title}
-              body={question.body}
+              key={question.questionId}
+              title={question.questionTitle}
+              body={question.questionBody}
               tag={question.tag}
               name={question.name}
-              createdAt={question.createdAt}
+              createdAt={question.questionCreatedAt}
               votes={question.votes}
-              answers={question.answers}
+              answers={question.answers.length}
               views={question.views}
             />
           ))

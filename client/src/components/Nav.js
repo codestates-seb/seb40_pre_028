@@ -29,6 +29,10 @@ const NavTap = styled.div`
   .under {
     margin-left: 15px;
   }
+
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const NavLayout = styled.div`

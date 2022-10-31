@@ -120,7 +120,7 @@ const Tag = ({ tag }) => {
   return <div>{tag}</div>;
 };
 
-const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
+const QuestionElement = ({ title, body, tag = ['Tag1'], name = 'User Name', createdAt, votes = 1, answers = 2, views = 3 }) => {
   return (
     <SQuestionList>
       <LeftCounts votes={votes} answers={answers} views={views} />
