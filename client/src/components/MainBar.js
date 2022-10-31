@@ -66,16 +66,20 @@ export function MainBar() {
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
   let [perPage, setPerPage] = useState(10);
-  let URL = `https://fc0c-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+
+  let [totalElements, setTotalElements] = useState(0);
+  let URL = `https://17ee-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  // let URL = 'http://localhost:3001/user/question?page=1&size=10';
 
   useEffect(() => {
     getData();
   }, [page, perPage]);
 
   const getData = async () => {
-    const res = await fetch(`${URL}`);
+    const res = await fetch(URL);
     const data = await res.json();
-    console.log(data);
+    setTotalElements(data.pageInfo.totalElements);
+
     setQuestions(data.data);
     setIsLoading(false);
     window.scroll({
@@ -91,7 +95,7 @@ export function MainBar() {
         <BlueButton height="40px">Ask Question</BlueButton>
       </HeaderContainer>
       <InfoContainer>
-        <div>23,148,368 questions</div>
+        <div>{totalElements} questions</div>
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
@@ -113,7 +117,7 @@ export function MainBar() {
           ))
         )}
       </MainUList>
-      <Pagenation total={11} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
+      <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
     </SMainBar>
   );
 }

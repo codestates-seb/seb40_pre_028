@@ -26,7 +26,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
@@ -37,6 +37,7 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
     private final AnswerCommentMapper answerCommentMapper;
+
 
 //    @PostMapping("/post")
 //    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
@@ -110,19 +111,43 @@ public class AnswerController {
     }
 
     // Get answer List
+//    @GetMapping
+//    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+//                                     @Positive @RequestParam int size) {
+//        Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
+//        List<Answer> answers = pageAnswers.getContent();
+//
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(
+//                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+//                HttpStatus.OK);
+//    }
+
+    //sh 추가
+    @GetMapping("/sh")
+    public List<AnswerResponseDto> getContents(){
+        return answerService.getAllContents();
+    }
+
     @GetMapping
     public ResponseEntity getAnswers(@Positive @RequestParam int page,
-                                     @Positive @RequestParam int size) {
+                                    @Positive @RequestParam int size) {
+
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
+        List<AnswerResponseDto> response = answerService.getAllContents();
+
+        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
+        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+                        answer1,pageAnswers),
                 HttpStatus.OK);
+
+
     }
-
-
 
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id")

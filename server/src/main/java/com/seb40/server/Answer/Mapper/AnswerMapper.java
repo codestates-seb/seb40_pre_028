@@ -26,8 +26,11 @@ public interface AnswerMapper {
     @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
 
-
     // AnswerResponseDto 타입의 List mapper 파라미터로 List<Answer> 타입의 Answer 를 받는다.
+
+    //   List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
     List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
+
+    List<AnswerResponseDto> answerResponseDtoToAnswerResponseDtos(List<AnswerResponseDto> answerResponseDtos);
 
 }

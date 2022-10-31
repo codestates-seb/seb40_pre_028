@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Transactional
 @RequestMapping("/user/question")
 @RestController
@@ -25,6 +25,7 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
     private final AnswerMapper answerMapper;
+
 
 
     // 질문 작성 API
@@ -53,17 +54,17 @@ public class QuestionController {
     }
 
     // 선택 질문페이지 이동 API
-    @GetMapping("/{question_id}")
-    public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
-//        Question response = questionService.findQuestion(questionId);
-        Question question = questionService.findVerifiedQuestion(questionId);
+//    @GetMapping("/{question_id}")
+//    public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
+////        Question response = questionService.findQuestion(questionId);
+//        Question question = questionService.findVerifiedQuestion(questionId);
+//
+//        return new ResponseEntity<>( //수정
+//                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
+//                , HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>( //수정
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
-                , HttpStatus.OK);
-    }
-
-    // 전체 질문페이지 이동 API
+     //전체 질문페이지 이동 API
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size) {
@@ -83,4 +84,6 @@ public class QuestionController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+
 }
