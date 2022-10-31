@@ -5,22 +5,14 @@ import { Nav } from '../components/Nav';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-<<<<<<< HEAD
-export const TopContainer = styled.div`
-=======
 export const BodyContainter = styled.div`
->>>>>>> b1c62671aa36009ad9884d3aca2b703daaab504e
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 `;
 
-<<<<<<< HEAD
-export const MainContainer = styled.div`
-=======
 export const MiddleContainer = styled.div`
->>>>>>> b1c62671aa36009ad9884d3aca2b703daaab504e
   display: flex;
   justify-content: center;
   flex: 1;
