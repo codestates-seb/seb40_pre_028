@@ -26,8 +26,6 @@ yarn-error.log*
 App.js
 Appdev.js
 
-.prettierrc
-
 /ckeditor5/node_modules
 /ckeditor5/sample
 /ckeditor5/src

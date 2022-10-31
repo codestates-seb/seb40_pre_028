@@ -4,13 +4,13 @@ import lombok.Getter;
 
 @Getter
 public class QuestionPatchDto {
-    private long questionId;
+    private Long questionId;
 
     private String questionTitle;
 
     private String questionBody;
 
-    public void setQuestionId(long questionId){
+    public void setQuestionId(Long questionId){
         this.questionId = questionId;
     }
 }

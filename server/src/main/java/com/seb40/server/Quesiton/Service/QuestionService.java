@@ -21,38 +21,49 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
+    // 질문 등록
     public Question createQuestion(Question question) {
-
-        return questionRepository.save(question);  // (2)
+        return questionRepository.save(question);
     }
 
+    // 질문 수정
     public Question updateQuestion(Question question){
+        // questionId 확인
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+        // questionTitle 수정
         Optional.ofNullable(question.getQuestionTitle())
                 .ifPresent(questionTitle ->findQuestion.setQuestionTitle(questionTitle));
+        // questionBody 수정
         Optional.ofNullable(question.getQuestionBody())
                 .ifPresent((question_body ->findQuestion.setQuestionBody(question_body)));
-
+        // 수정 날짜 및 시간 수정
+        Optional.ofNullable(question.getQuestionModified()) //업데이트 날짜 수정
+                .ifPresent(questionModified->findQuestion.setQuestionModified(questionModified));
         return questionRepository.save(findQuestion);
     }
 
+    // 선택 질문 요청
     public Question findQuestion(long questionId){
+
         return findVerifiedQuestion(questionId);
     }
 
+    // 전체 질문 요청
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page,size,
                 Sort.by("questionId").descending()));
     }
 
+    // 질문 삭제
     public void deleteQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
         questionRepository.delete(findQuestion);
     }
 
+    // questionId 확인
     public Question findVerifiedQuestion(long questionId){
         Optional<Question> optionalQuestion=
-                questionRepository.findById(questionId);
+                questionRepository.findByQuestionId(questionId); // 수정
         Question findQuestion=
                 optionalQuestion.orElseThrow(()->
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));

@@ -15,7 +15,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class UserPostDto {
 
-    private Long id;
+    private Long userId;
 
     @NotBlank(message = "이름은 필수 입력값입니다.")
     private String name;

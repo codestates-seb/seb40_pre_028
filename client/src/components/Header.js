@@ -7,7 +7,8 @@ import { UserMenus } from './UserToolbar/UserToolbar';
 export const SHeader = styled.header`
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 50px;
   background-color: var(--black-025);

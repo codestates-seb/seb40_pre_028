@@ -17,10 +17,10 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tagId;
+    private Long tagId;
 
     private String tagName;
 
-    private long questionId;
+    private Long questionId;
 
 }
