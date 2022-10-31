@@ -66,7 +66,7 @@ export function MainBar() {
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
   let [perPage, setPerPage] = useState(10);
-  let URL = `https://17ee-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  let URL = `https://fc0c-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
 
   useEffect(() => {
     getData();
