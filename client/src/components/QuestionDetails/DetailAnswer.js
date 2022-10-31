@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { DetailMain } from './DetailMain';
+import ChEditor from '../../pages/ChEditor';
 
 const Container = styled.div`
   h2 {
@@ -66,6 +67,7 @@ export const DetailAnswer = () => {
       <DetailMain />
       <Answer>
         <h2>Your Answer</h2>
+        <ChEditor />
         <Btn>Post Your Answer</Btn>
       </Answer>
     </Container>
