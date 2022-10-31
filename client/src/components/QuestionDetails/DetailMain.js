@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { VscTriangleUp, VscTriangleDown } from 'react-icons/vsc';
 import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
+// import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
   padding: 5px 40px 10px 5px;
@@ -142,6 +143,7 @@ export const DetailMain = () => {
             doesntcompile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt
             compileThis code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile
           </p>
+          {/* <MarkdownRenderer /> */}
           <PostTag>
             <ul>
               <li>

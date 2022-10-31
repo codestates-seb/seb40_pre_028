@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DetailMain } from './DetailMain';
 
 const Container = styled.div`
@@ -23,16 +21,6 @@ const Container = styled.div`
 const Answer = styled.div`
   * {
     margin: 20px 0;
-  }
-  .ck.ck-editor {
-    max-width: 100%;
-  }
-  // 에디터 쓸 있는공간(네모박스)
-  .ck-editor__editable {
-    min-height: 300px;
-  }
-  .ck-content .marker-yellow {
-    background-color: var(--ck-highlight-marker-yellow);
   }
   a {
     color: #0074cc;
@@ -68,41 +56,16 @@ export const DetailAnswer = () => {
         <h3 className="qanswer">1 Answer</h3>
         <div>
           <span>sorted by:</span>
-          <select name="" id="" className="select">
-            <option value="scoredesc" selected="selected">
-              Highest score (default)
-            </option>
-            <option value="modifieddesc"> Date modified (newest first) </option>
-            <option value="createdasc"> Date created (oldest first) </option>
+          <select defaultValue="1" name="" id="" className="select">
+            <option value="1">Highest score (default)</option>
+            <option value="0"> Date modified (newest first) </option>
+            <option value="0"> Date created (oldest first) </option>
           </select>
         </div>
       </AnswerCount>
       <DetailMain />
       <Answer>
-        {/* <p>
-          Know someone who can answer? Share a link to this <a href="/question">question</a> via <a href="email">email</a>,{' '}
-          <a href="/twitter">Twitter</a>, or <a href="/Facebook">Facebook</a>.
-        </p> */}
         <h2>Your Answer</h2>
-        <CKEditor
-          editor={ClassicEditor}
-          config={{
-            placeholder: '내용을 입력하세요.',
-          }}
-          onReady={editor => {
-            console.log('Editor is ready to use!', editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log({ event, editor, data });
-          }}
-          onBlur={(event, editor) => {
-            console.log('Blur.', editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log('Focus.', editor);
-          }}
-        />
         <Btn>Post Your Answer</Btn>
       </Answer>
     </Container>
