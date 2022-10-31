@@ -40,8 +40,6 @@ public class Question{
 
 
 
-
-
     private String questionTitle;
     private String questionBody;
     @CreatedDate

@@ -27,6 +27,8 @@ public class AnswerResponseDto {
 
     private List<AnswerCommentResponseDto> answerComments;
 
+    private int answerNum;
+
 
 //    private int voteId; // id 로 vote 수 뽑기
 //    private int commentId; // id 로 코멘트 내용 뽑기 list 형식

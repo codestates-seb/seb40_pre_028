@@ -17,6 +17,7 @@ import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -145,7 +146,10 @@ public class AnswerController {
                 new MultiResponseDto<>(
                         answer1,pageAnswers),
                 HttpStatus.OK);
-
+//        @Query(value = "" +
+//                "select question_id, count(*) as answerNum\n" +
+//                "from answer\n" +
+//                "group by question_id\n", nativeQuery = true)
 
     }
 

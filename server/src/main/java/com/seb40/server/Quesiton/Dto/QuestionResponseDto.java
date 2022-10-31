@@ -23,5 +23,6 @@ public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 
     // UserResponseDto user가 담김
 
     private Long userId;
+    private int answerNum;
 
 }
