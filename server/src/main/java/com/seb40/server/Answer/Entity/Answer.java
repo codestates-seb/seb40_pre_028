@@ -24,7 +24,7 @@ public class Answer {
     @Id // PK
     @Column(name="answer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
-    private long answerId;
+    private Long answerId;
 
     // @ManyToOne 연결
 //    @ManyToOne(targetEntity = Question.class) //추가
