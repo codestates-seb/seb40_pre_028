@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 const Header = styled.div`
   border-bottom: 1px solid #d6d9dc;
+  margin-top: 30px;
+  width: 1070px;
+  height: 102px;
+  padding: 10px;
 `;
 
 const Title = styled.div`

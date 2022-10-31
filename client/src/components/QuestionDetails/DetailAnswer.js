@@ -1,13 +1,29 @@
 import styled from 'styled-components';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DetailMain } from './DetailMain';
+
+const Container = styled.div`
+  h2 {
+    font-size: 20px;
+    border-top: 1px solid #d6d9dc;
+    padding-top: 25px;
+  }
+  .qanswer {
+    padding-left: 20px;
+    font-size: 20px;
+  }
+  margin-top: 30px;
+  .select {
+    margin-left: 10px;
+    padding: 5px;
+  }
+`;
 
 const Answer = styled.div`
   * {
     margin: 20px 0;
   }
-  h2 {
-    font-size: 20px;
+  a {
+    color: #0074cc;
   }
 `;
 
@@ -24,31 +40,34 @@ const Btn = styled.button`
   &:hover {
     background: #0074cc;
   }
+  margin-top: 10px;
+`;
+
+const AnswerCount = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
 `;
 
 export const DetailAnswer = () => {
   return (
-    <Answer>
-      <p>Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.</p>
-      <h2>Your Answer</h2>
-      <CKEditor
-        editor={ClassicEditor}
-        data="<p>Hello from CKEditor 5!</p>"
-        onReady={editor => {
-          console.log('Editor is ready to use!', editor);
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          console.log({ event, editor, data });
-        }}
-        onBlur={(event, editor) => {
-          console.log('Blur.', editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log('Focus.', editor);
-        }}
-      />
-      <Btn>Post Your Answer</Btn>
-    </Answer>
+    <Container>
+      <AnswerCount>
+        <h3 className="qanswer">1 Answer</h3>
+        <div>
+          <span>sorted by:</span>
+          <select defaultValue="1" name="" id="" className="select">
+            <option value="1">Highest score (default)</option>
+            <option value="0"> Date modified (newest first) </option>
+            <option value="0"> Date created (oldest first) </option>
+          </select>
+        </div>
+      </AnswerCount>
+      <DetailMain />
+      <Answer>
+        <h2>Your Answer</h2>
+        <Btn>Post Your Answer</Btn>
+      </Answer>
+    </Container>
   );
 };
