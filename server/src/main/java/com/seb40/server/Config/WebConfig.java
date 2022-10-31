@@ -14,4 +14,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods(ALLOWED_METHOD_NAMES.split(","));
     }
+
 }

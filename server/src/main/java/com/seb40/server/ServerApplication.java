@@ -29,4 +29,5 @@ public class ServerApplication extends SpringBootServletInitializer {
 			}
 		};
 	}
+
 }
