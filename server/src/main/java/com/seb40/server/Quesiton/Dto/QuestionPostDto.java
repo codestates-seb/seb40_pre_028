@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuestionPostDto { // user_id있어야함
+public class QuestionPostDto {
+    @Positive
+    private Long questionId;
+
+    @Positive
+    private Long userId;
+
     @NotBlank
     private String questionTitle;
 

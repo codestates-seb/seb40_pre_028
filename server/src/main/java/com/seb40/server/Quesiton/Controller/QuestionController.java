@@ -1,10 +1,13 @@
 package com.seb40.server.Quesiton.Controller;
+import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
+import com.seb40.server.Response.SingleResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,25 +16,32 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Transactional
 @RequestMapping("/user/question")
 @RestController
+@AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-    public QuestionController(QuestionService questionService,
-                              QuestionMapper mapper) {
-        this.questionService = questionService;
-        this.mapper = mapper;
-    }
+    private final AnswerMapper answerMapper;
+
+
 
     // 질문 작성 API
+//    @PostMapping("/post")
+//    public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+//        Question question = mapper.questionPostDtoToQuestion(questionPostDto);
+//        Question response = questionService.createQuestion(question);
+//        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.CREATED);
+//    }
     @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
-        Question question = mapper.questionPostDtoToQuestion(questionPostDto);
-        Question response = questionService.createQuestion(question);
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.CREATED);
+        Question question = questionService.createQuestion(
+                mapper.questionPostDtoToQuestion(questionPostDto));
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
+                , HttpStatus.CREATED);
     }
 
     // 선택 질문 수정 API
@@ -40,22 +50,27 @@ public class QuestionController {
                                         @Valid @RequestBody QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
         Question response = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response, answerMapper), HttpStatus.OK);
     }
 
     // 선택 질문페이지 이동 API
-    @GetMapping("/{question_id}")
-    public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
-        Question response = questionService.findQuestion(questionId);
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
-    }
+//    @GetMapping("/{question_id}")
+//    public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
+////        Question response = questionService.findQuestion(questionId);
+//        Question question = questionService.findVerifiedQuestion(questionId);
+//
+//        return new ResponseEntity<>( //수정
+//                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
+//                , HttpStatus.OK);
+//    }
 
-    // 전체 질문페이지 이동 API
+     //전체 질문페이지 이동 API
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
                         pageQuestions),
@@ -69,4 +84,6 @@ public class QuestionController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+
 }
