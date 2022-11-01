@@ -1,19 +1,24 @@
 package com.seb40.server.Answer.Service;
 
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -73,6 +78,13 @@ public class AnswerService {
                         new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
 
         return findAnswer;
+    }
+
+
+
+    public List<AnswerResponseDto> getAllContents(){
+        return answerRepository.findAll().stream()
+                .map(AnswerResponseDto::fromEntity).collect(Collectors.toList());
     }
 
 }

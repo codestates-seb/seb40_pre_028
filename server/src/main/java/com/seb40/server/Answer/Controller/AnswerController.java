@@ -17,6 +17,7 @@ import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
@@ -37,6 +38,7 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
     private final AnswerCommentMapper answerCommentMapper;
+
 
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id")
@@ -84,16 +86,25 @@ public class AnswerController {
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {
 
+
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
+        List<AnswerResponseDto> response = answerService.getAllContents();
+
+        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
+        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
+                        answer1,pageAnswers),
                 HttpStatus.OK);
+//        @Query(value = "" +
+//                "select question_id, count(*) as answerNum\n" +
+//                "from answer\n" +
+//                "group by question_id\n", nativeQuery = true)
+
     }
-
-
 
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id")
