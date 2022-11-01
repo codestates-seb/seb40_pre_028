@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 export const TopContainer = styled.div`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   Aside {
     margin-top: 20px;
   }
@@ -28,6 +28,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  border-left: 1px solid #d6d9dc;
 `;
 
 export default function QuestionDetail() {
