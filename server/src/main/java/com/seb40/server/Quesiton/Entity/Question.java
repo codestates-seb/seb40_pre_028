@@ -38,6 +38,7 @@ public class Question{
 
     //@OneToMany()//질문 코멘트
 
+    private int answerNum;
 
 
     private String questionTitle;
