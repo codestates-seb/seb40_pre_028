@@ -67,7 +67,7 @@ export function MainBar() {
   let [page, setPage] = useState(1);
   let [perPage, setPerPage] = useState(10);
   let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://5f73-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  let URL = `https://49c5-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
   // let URL = 'http://localhost:3001/user/question?page=1&size=10';
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export function MainBar() {
   }, [page, perPage]);
 
   const getData = async () => {
-    const res = await fetch(URL);
+    const res = await fetch(URL, { headers: { 'ngrok-skip-browser-warning': 'skip' } });
     const data = await res.json();
     setTotalElements(data.pageInfo.totalElements);
     setQuestions(data.data);
@@ -97,23 +97,34 @@ export function MainBar() {
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          questions.map(question => (
-            <QuestionElement
-              key={question.questionId}
-              title={question.questionTitle}
-              body={question.questionBody}
-              tag={question.tag}
-              name={question.name}
-              createdAt={question.questionCreatedAt}
-              votes={question.votes}
-              answers={question.answers.length}
-              views={question.views}
-            />
-          ))
-        )}
+        {/* 더미데이터 */}
+        <QuestionElement
+          title={'Hi, how I can make a dashboard with JS but I can add graphs according to what is loaded in the excel file or csv file'}
+          body={
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          }
+          tag={['JavaScript', 'Java', 'HTML']}
+          name={'일곱ㅎ쟁이'}
+          createdAt={'2022-01-01 00:00:00'}
+          votes={123}
+          answers={123}
+          views={123}
+        />
+        {isLoading
+          ? null
+          : questions.map(question => (
+              <QuestionElement
+                key={question.questionId}
+                title={question.questionTitle}
+                body={question.questionBody}
+                tag={question.tag}
+                name={question.name}
+                createdAt={question.questionCreatedAt}
+                votes={question.votes}
+                answers={question.answers.length}
+                views={question.views}
+              />
+            ))}
       </MainUList>
       <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
     </SMainBar>
