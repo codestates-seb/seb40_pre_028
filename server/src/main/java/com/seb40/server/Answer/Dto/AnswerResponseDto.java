@@ -18,7 +18,7 @@ public class AnswerResponseDto {
 
     private long answerId;
     private String answerBody;
-    private long userId;
+    private String userName;
 
     private long questionId;
 
@@ -27,21 +27,23 @@ public class AnswerResponseDto {
 
     private List<AnswerCommentResponseDto> answerComments;
 
+    private int answerNum;
+
 
 //    private int voteId; // id 로 vote 수 뽑기
 //    private int commentId; // id 로 코멘트 내용 뽑기 list 형식
 
     //추가
 
-    public static AnswerResponseDto fromEntity(Answer answer){
-        return AnswerResponseDto.builder()
-                .answerId(answer.getAnswerId())
-                .answerBody(answer.getAnswerBody())
-                .questionId(answer.getQuestion().getQuestionId())
-                .answerCreatedAt(answer.getAnswerCreatedAt())
-                .answerModified(answer.getAnswerModified())
-                .userId(answer.getUser().getUserId())
-                .build();
-    }
+//    public static AnswerResponseDto fromEntity(Answer answer){
+//        return AnswerResponseDto.builder()
+//                .answerId(answer.getAnswerId())
+//                .answerBody(answer.getAnswerBody())
+//                .questionId(answer.getQuestion().getQuestionId())
+//                .answerCreatedAt(answer.getAnswerCreatedAt())
+//                .answerModified(answer.getAnswerModified())
+//                .userId(answer.getUser().getUserId())
+//                .build();
+//    }
 
 }

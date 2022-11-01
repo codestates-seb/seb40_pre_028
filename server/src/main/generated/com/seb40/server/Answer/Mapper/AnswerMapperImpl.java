@@ -3,11 +3,13 @@ package com.seb40.server.Answer.Mapper;
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto.AnswerResponseDtoBuilder;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
 import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.User.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,8 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-30T20:03:50+0900",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+    date = "2022-11-01T22:17:01+0900",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
 public class AnswerMapperImpl implements AnswerMapper {
@@ -29,8 +31,10 @@ public class AnswerMapperImpl implements AnswerMapper {
 
         Answer answer = new Answer();
 
+        answer.setAnswerId( answerPostDto.getAnswerId() );
         answer.setAnswerBody( answerPostDto.getAnswerBody() );
         answer.setQuestion( answerPostDtoToQuestion( answerPostDto ) );
+        answer.setUser( answerPostDtoToUser( answerPostDto ) );
 
         return answer;
     }
@@ -55,32 +59,19 @@ public class AnswerMapperImpl implements AnswerMapper {
             return null;
         }
 
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+        AnswerResponseDtoBuilder answerResponseDto = AnswerResponseDto.builder();
 
         if ( answer != null ) {
-            answerResponseDto.setAnswerId( answer.getAnswerId() );
-            answerResponseDto.setAnswerBody( answer.getAnswerBody() );
-            answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
-            answerResponseDto.setAnswerModified( answer.getAnswerModified() );
-        }
-        answerResponseDto.setQuestionId( answer.getQuestion().getQuestionId() );
-        answerResponseDto.setAnswerComments( answerCommentMapper.commentsToCommentResponseDtos(answer.getAnswerComments()) );
-
-        return answerResponseDto;
-    }
-
-    @Override
-    public List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers) {
-        if ( answers == null ) {
-            return null;
+            if ( answer.getAnswerId() != null ) {
+                answerResponseDto.answerId( answer.getAnswerId() );
+            }
+            answerResponseDto.answerBody( answer.getAnswerBody() );
+            answerResponseDto.answerCreatedAt( answer.getAnswerCreatedAt() );
+            answerResponseDto.answerModified( answer.getAnswerModified() );
+            answerResponseDto.answerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
         }
 
-        List<AnswerResponseDto> list = new ArrayList<AnswerResponseDto>( answers.size() );
-        for ( Answer answer : answers ) {
-            list.add( answerToAnswerResponseDto1( answer ) );
-        }
-
-        return list;
+        return answerResponseDto.build();
     }
 
     protected Question answerPostDtoToQuestion(AnswerPostDto answerPostDto) {
@@ -93,6 +84,18 @@ public class AnswerMapperImpl implements AnswerMapper {
         question.setQuestionId( answerPostDto.getQuestionId() );
 
         return question;
+    }
+
+    protected User answerPostDtoToUser(AnswerPostDto answerPostDto) {
+        if ( answerPostDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setUserId( answerPostDto.getUserId() );
+
+        return user;
     }
 
     protected AnswerCommentResponseDto answerCommentToAnswerCommentResponseDto(AnswerComment answerComment) {
@@ -125,21 +128,5 @@ public class AnswerMapperImpl implements AnswerMapper {
         }
 
         return list1;
-    }
-
-    protected AnswerResponseDto answerToAnswerResponseDto1(Answer answer) {
-        if ( answer == null ) {
-            return null;
-        }
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
-
-        answerResponseDto.setAnswerId( answer.getAnswerId() );
-        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
-        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
-        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
-        answerResponseDto.setAnswerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
-
-        return answerResponseDto;
     }
 }

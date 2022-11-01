@@ -17,6 +17,7 @@ import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,37 +39,6 @@ public class AnswerController {
     private final AnswerMapper mapper;
     private final AnswerCommentMapper answerCommentMapper;
 
-
-//    @PostMapping("/post")
-//    public ResponseEntity postAnswer(@RequestBody AnswerPostDto answerPostDto){
-//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-//        Answer response = answerService.createAnswer(answer);
-//
-//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
-//                HttpStatus.CREATED);
-//    }
-//
-//    @PostMapping("/{question_id}/post")
-//    public ResponseEntity postAnswer(@PathVariable("question_id")
-//                                         @Positive long questionId,
-//                                     @RequestBody AnswerPostDto answerPostDto){
-//        answerPostDto.setQuestionId(questionId);
-//        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
-//        Answer response = answerService.createAnswer(answer);
-//
-//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),
-//                HttpStatus.CREATED);
-//    }
-
-//    @PostMapping("/{question_id}/post")
-//    public Answer createAnswer(@PathVariable ("question_id")
-//                                   @Positive long questionId,
-//                               @RequestBody Answer answer){
-//        Optional<Question> question = questionRepository.findById(questionId);
-//        answer.setQuestion(question.get());
-//        answerRepository.save(answer);
-//        return answer;
-//    }
 
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id")
@@ -100,52 +70,39 @@ public class AnswerController {
                 , HttpStatus.OK);
     }
 
-    @GetMapping("/{answer_id}")
+    @GetMapping("/get/{answer_id}")
     public ResponseEntity getAnswer(@PathVariable("answer_id")
                                     @Positive long answerId){
-        Answer response = answerService.findVerifiedAnswer(answerId);
+        Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer,answerCommentMapper))
                 , HttpStatus.OK);
     }
 
     // Get answer List
-//    @GetMapping
-//    public ResponseEntity getAnswers(@Positive @RequestParam int page,
-//                                     @Positive @RequestParam int size) {
-//        Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
-//        List<Answer> answers = pageAnswers.getContent();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(
-//                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
-//                HttpStatus.OK);
-//    }
+    @GetMapping("/{question_id}")
+    public ResponseEntity getAnswers(@PathVariable("question_id")@Positive long questionId,
+                                     @Positive @RequestParam int page,
+                                     @Positive @RequestParam int size) {
 
-    //sh 추가
-    @GetMapping("/sh")
-    public List<AnswerResponseDto> getContents(){
-        return answerService.getAllContents();
-    }
-
-    @GetMapping
-    public ResponseEntity getAnswers(@Positive @RequestParam int page,
-                                    @Positive @RequestParam int size) {
 
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
-        List<AnswerResponseDto> response = answerService.getAllContents();
-
-        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
-        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
+//        List<AnswerResponseDto> response = answerService.getAllContents();
+//
+//        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
+//        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        answer1,pageAnswers),
+                        mapper.answersToAnswerResponseDtos(answers),pageAnswers),
                 HttpStatus.OK);
-
+//        @Query(value = "" +
+//                "select question_id, count(*) as answerNum\n" +
+//                "from answer\n" +
+//                "group by question_id\n", nativeQuery = true)
 
     }
 

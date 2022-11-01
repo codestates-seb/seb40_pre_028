@@ -13,8 +13,8 @@ import javax.validation.constraints.Positive;
 public class AnswerPostDto {
 
 
-//    @NotNull
-//    private long answerId;
+    @NotNull
+    private long answerId;
 //    @Setter
 
 //    @Positive // 양수여야함
