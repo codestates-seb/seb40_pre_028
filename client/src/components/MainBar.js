@@ -68,7 +68,7 @@ export function MainBar() {
   let [perPage, setPerPage] = useState(10);
 
   let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://17ee-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  let URL = `https://49c5-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
   // let URL = 'http://localhost:3001/user/question?page=1&size=10';
 
   useEffect(() => {

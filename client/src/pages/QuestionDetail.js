@@ -4,6 +4,7 @@ import { DetailMain } from '../components/QuestionDetails/DetailMain';
 import { DetailAnswer } from '../components/QuestionDetails/DetailAnswer';
 import { Nav } from '../components//Nav';
 import { Aside } from '../components//Aside';
+import Footer from '../components/Footer';
 
 export const TopContainer = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ export default function QuestionDetail() {
           </Main>
         </MainContainer>
       </TopContainer>
+      <Footer />
     </div>
   );
 }
