@@ -72,6 +72,8 @@ public class AnswerService {
         return findAnswer;
     }
 
+
+
     public List<AnswerResponseDto> getAllContents(){
         return answerRepository.findAll().stream()
                 .map(AnswerResponseDto::fromEntity).collect(Collectors.toList());

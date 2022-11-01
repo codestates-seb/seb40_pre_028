@@ -1,9 +1,12 @@
 package com.seb40.server.Quesiton.Service;
 
+import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -11,15 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
     // (1)
-    private final QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository ;
 
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -70,4 +72,9 @@ public class QuestionService {
         return findQuestion;
     }
 
+    public List<QuestionResponseDto> getAllContents() {
+        return questionRepository.findAll().stream()
+                .map(QuestionResponseDto::fromEntity).collect(Collectors.toList());
+
+    }
 }
