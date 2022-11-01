@@ -34,31 +34,34 @@ export const SMain = styled.main`
   display: flex;
   justify-content: center;
   padding: 24px 24px 24px 0px;
-  border-left: 1px solid var(--black-100);
   @media (max-width: 1100px) {
     padding: 24px 0 24px 0px;
   }
 `;
 
+const asideHideURL = ['/ask', '/login', '/logout', '/signup', '/question'];
+const footerHideURL = ['/login', '/logout', '/signup'];
+const navHideURL = ['/login', '/logout', '/signup', '/ask'];
+
 const SharedLayout = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
-  // const asideHide = asideHideURL.includes(pathname);
-  // const footerHide = footerHideURL.includes(pathname);
-
+  const asideHide = asideHideURL.includes(pathname);
+  const footerHide = footerHideURL.includes(pathname);
+  const navHide = navHideURL.includes(pathname);
+  console.log(asideHide);
   return (
     <BodyContainter>
       <Header />
       <MiddleContainer>
         <MainContainer>
-          <Nav />
+          {navHide || <Nav />}
           <SMain>
             <Outlet />
-            <Aside />
+            {asideHide || <Aside />}
           </SMain>
         </MainContainer>
       </MiddleContainer>
-      <Footer />
+      {footerHide || <Footer />}
     </BodyContainter>
   );
 };

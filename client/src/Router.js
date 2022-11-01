@@ -15,10 +15,10 @@ function Router() {
           <Route index element={<QuestionList />} />
           <Route path="/ask" element={<CreateQuestionPage />} />
           <Route path="/question" element={<QuestionDetail />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </BrowserRouter>
   );
