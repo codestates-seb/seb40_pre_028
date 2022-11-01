@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { Aside } from '../components/Aside';
-import { MainBar } from '../components/MainBar';
 import { Nav } from '../components/Nav';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { Outlet, useLocation } from 'react-router-dom';
 
 export const BodyContainter = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
 `;
 
 export const MiddleContainer = styled.div`
@@ -39,7 +40,12 @@ export const SMain = styled.main`
   }
 `;
 
-const Main = () => {
+const SharedLayout = () => {
+  const { pathname } = useLocation();
+  console.log(pathname);
+  // const asideHide = asideHideURL.includes(pathname);
+  // const footerHide = footerHideURL.includes(pathname);
+
   return (
     <BodyContainter>
       <Header />
@@ -47,7 +53,7 @@ const Main = () => {
         <MainContainer>
           <Nav />
           <SMain>
-            <MainBar />
+            <Outlet />
             <Aside />
           </SMain>
         </MainContainer>
@@ -57,4 +63,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default SharedLayout;

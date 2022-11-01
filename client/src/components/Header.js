@@ -5,6 +5,7 @@ import { BlueButton, PowderButton } from './DefaultButton';
 import { UserMenus } from './UserToolbar/UserToolbar';
 import { SearchModal } from '../components/SearchModal';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SHeader = styled.header`
   display: flex;
@@ -123,13 +124,14 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = true;
+  const isLogIn = false;
   let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
     <SHeader>
       <SNav>
         <LogoBox>
+          <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
         <HeaderButton>Products</HeaderButton>
@@ -142,8 +144,12 @@ function Header() {
           <UserMenus />
         ) : (
           <AuthBtns>
-            <PowderButton>Log in</PowderButton>
-            <BlueButton>Sign up</BlueButton>
+            <Link to="/login">
+              <PowderButton>Log in</PowderButton>
+            </Link>
+            <Link to="/signup">
+              <BlueButton>Sign up</BlueButton>
+            </Link>
           </AuthBtns>
         )}
       </SNav>

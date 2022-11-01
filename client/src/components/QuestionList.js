@@ -4,8 +4,9 @@ import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
+import { Link } from 'react-router-dom';
 
-const SMainBar = styled.div`
+export const MainCointainer = styled.div`
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -61,7 +62,7 @@ export const MainUList = styled.ul`
   border-bottom: 1px solid var(--black-100);
 `;
 
-export function MainBar() {
+export function QuestionList() {
   let [questions, setQuestions] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
@@ -87,10 +88,12 @@ export function MainBar() {
   };
 
   return (
-    <SMainBar>
+    <MainCointainer>
       <HeaderContainer>
         <h1>All Questions</h1>
-        <BlueButton height="40px">Ask Question</BlueButton>
+        <Link to="/ask">
+          <BlueButton height="40px">Ask Question</BlueButton>
+        </Link>
       </HeaderContainer>
       <InfoContainer>
         <div>{totalElements} questions</div>
@@ -127,6 +130,6 @@ export function MainBar() {
             ))}
       </MainUList>
       <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
-    </SMainBar>
+    </MainCointainer>
   );
 }
