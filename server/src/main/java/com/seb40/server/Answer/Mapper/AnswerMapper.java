@@ -29,7 +29,18 @@ public interface AnswerMapper {
 //    @Mapping(target = "questionId", expression = "java(answer.getQuestion().getQuestionId())")
 //    @Mapping(source = "answer.user.userId", target = "userId")
 //    @Mapping(source = "answer.question.questionId", target = "questionId")
-    AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
+//    AnswerResponseDto answerToAnswerResponseDto(Answer answer,AnswerCommentMapper answerCommentMapper);
+
+    default AnswerResponseDto answerToAnswerResponseDto(Answer answer, AnswerCommentMapper answerCommentMapper){
+        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+        answerResponseDto.setQuestionId(answer.getQuestion().getQuestionId());
+        answerResponseDto.setUserName(answer.getUser().getName());
+        answerResponseDto.setAnswerBody(answer.getAnswerBody());
+        answerResponseDto.setAnswerCreatedAt(answer.getAnswerCreatedAt());
+        answerResponseDto.setAnswerModified(answer.getAnswerModified());
+
+        return answerResponseDto;
+    }
 
     // AnswerResponseDto 타입의 List mapper 파라미터로 List<Answer> 타입의 Answer 를 받는다.
 

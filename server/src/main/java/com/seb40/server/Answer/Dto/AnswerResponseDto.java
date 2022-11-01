@@ -4,6 +4,7 @@ import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder // sh 추가
+//@Builder // sh 추가
+@NoArgsConstructor
 public class AnswerResponseDto {
     // post 후 response 내용 answerId , userName, voteNum, answerBody, answerCommnetId
 
@@ -28,6 +30,16 @@ public class AnswerResponseDto {
     private List<AnswerCommentResponseDto> answerComments;
 
     private int answerNum;
+
+    @Builder
+    public AnswerResponseDto(long questionId,String userName,String answerBody,LocalDateTime answerCreatedAt
+    , LocalDateTime answerModified){
+        this.questionId =questionId;
+        this.userName = userName;
+        this.answerBody = answerBody;
+        this.answerCreatedAt = answerCreatedAt;
+        this.answerModified = answerModified;
+    }
 
 
 //    private int voteId; // id 로 vote 수 뽑기
