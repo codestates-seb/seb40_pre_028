@@ -28,9 +28,9 @@ public class Answer {
     @JoinColumn(name="question_id")  //questionId ->question_id
     private Question question; //추가
 
-    public void setQuestion(Question question){
-        this.question = question;
-    }
+//    public void setQuestion(Question question){
+//        this.question.getQuestionId();
+//    }
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name ="user_id")

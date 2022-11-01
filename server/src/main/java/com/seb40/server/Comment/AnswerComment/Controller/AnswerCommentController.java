@@ -31,36 +31,36 @@ public class AnswerCommentController {
     private final AnswerCommentMapper mapper;
 
     //답변 코멘트 작성
-    @PostMapping("/{answer_id}/post")
-    public ResponseEntity postComment(@PathVariable("answer_id")
-                                          @Positive long answerId,
-                                      @Valid @RequestBody AnswerCommentPostDto commentPostDto){
-        commentPostDto.setAnswerId(answerId);
-        AnswerComment comment = commentService.createComment(
-                mapper.commentPostDtoToComment(commentPostDto));
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment))
-                        , HttpStatus.CREATED);
-    }
+//    @PostMapping("/{answer_id}/post")
+//    public ResponseEntity postComment(@PathVariable("answer_id")
+//                                          @Positive long answerId,
+//                                      @Valid @RequestBody AnswerCommentPostDto commentPostDto){
+//        commentPostDto.setAnswerId(answerId);
+//        AnswerComment comment = commentService.createComment(
+//                mapper.commentPostDtoToComment(commentPostDto));
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(mapper.commentToCommentResponseDto(comment))
+//                        , HttpStatus.CREATED);
+//    }
 
     //답변 코멘트 수정
-    @PatchMapping("/{answer-id}/{answerComment-id}")
-    public ResponseEntity patchComment(
-            @PathVariable("answer-id") @Positive long answerId,
-            @PathVariable("answerComment-id") @Positive long commentId,
-            @Valid @RequestBody AnswerCommentPatchDto answerCommentPatchDto){
-
-        answerCommentPatchDto.setAnswerCommentId(commentId);
-        AnswerComment response =
-                commentService.updateComment(
-                        mapper.commentPatchDtoToComment(answerCommentPatchDto));
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.commentToCommentResponseDto(response))
-                , HttpStatus.OK);
-
-    }
+//    @PatchMapping("/{answer-id}/{answerComment-id}")
+//    public ResponseEntity patchComment(
+//            @PathVariable("answer-id") @Positive long answerId,
+//            @PathVariable("answerComment-id") @Positive long commentId,
+//            @Valid @RequestBody AnswerCommentPatchDto answerCommentPatchDto){
+//
+//        answerCommentPatchDto.setAnswerCommentId(commentId);
+//        AnswerComment response =
+//                commentService.updateComment(
+//                        mapper.commentPatchDtoToComment(answerCommentPatchDto));
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(mapper.commentToCommentResponseDto(response))
+//                , HttpStatus.OK);
+//
+//    }
 
     //답변 코멘트 확인
 //    @GetMapping("/{answer-id}/{answerComment-id}")
@@ -72,16 +72,16 @@ public class AnswerCommentController {
 //        return new ResponseEntity<>(
 //                new SingleResponseDto<>(response),HttpStatus.OK);
 //    }
-    @GetMapping("/get/{answerComment-id}")
-    public ResponseEntity getAnswerComment(@PathVariable("answerComment-id")
-                                               @Positive long commentId){
-        AnswerComment response = commentService.findVerifiedAnswerComment(commentId);
-        AnswerCommentResponseDto answerCommentResponseDto =
-                mapper.commentToCommentResponseDto(response);
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(response),HttpStatus.OK);
-    }
+//    @GetMapping("/get/{answerComment-id}")
+//    public ResponseEntity getAnswerComment(@PathVariable("answerComment-id")
+//                                               @Positive long commentId){
+//        AnswerComment response = commentService.findVerifiedAnswerComment(commentId);
+//        AnswerCommentResponseDto answerCommentResponseDto =
+//                mapper.commentToCommentResponseDto(response);
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(response),HttpStatus.OK);
+//    }
 //    @GetMapping("/{answer-id}/{answerComment-id}")
 //    public ResponseEntity getAnswerComment(
 //            @PathVariable("answer-id") @Positive long answerId,
@@ -98,19 +98,19 @@ public class AnswerCommentController {
 //    }
 
     //답변 코멘트 List
-    @GetMapping("/{answer-id}")
-    public ResponseEntity getAnswerComments(
-            @PathVariable("answer-id") @Positive long answerId,
-            @Positive @RequestParam int page,
-            @Positive @RequestParam int size){
-
-        Page<AnswerComment> pageAnswers = commentService.findComments(page - 1, size);
-        List<AnswerComment> comments = pageAnswers.getContent();
-
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments), pageAnswers),
-                HttpStatus.OK);
-    }
+//    @GetMapping("/{answer-id}")
+//    public ResponseEntity getAnswerComments(
+//            @PathVariable("answer-id") @Positive long answerId,
+//            @Positive @RequestParam int page,
+//            @Positive @RequestParam int size){
+//
+//        Page<AnswerComment> pageAnswers = commentService.findComments(page - 1, size);
+//        List<AnswerComment> comments = pageAnswers.getContent();
+//
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(mapper.commentsToCommentResponseDtos(comments), pageAnswers),
+//                HttpStatus.OK);
+//    }
 
     //답변 코멘트 삭제
     @DeleteMapping("/{answer-id}/{answerComment-id}")
