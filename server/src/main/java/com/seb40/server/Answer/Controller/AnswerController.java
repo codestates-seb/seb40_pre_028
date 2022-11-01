@@ -36,13 +36,13 @@ public class AnswerController {
 
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
+    private final QuestionService questionService;
     private final AnswerMapper mapper;
     private final AnswerCommentMapper answerCommentMapper;
 
 
     @PostMapping("/{question_id}/post")
-    public ResponseEntity postAnswer(@PathVariable("question_id")
-                                         @Positive long questionId,
+    public ResponseEntity postAnswer(@PathVariable("question_id") long questionId,
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
         // answerPostDto 에 URI로 받은 questionId 설정
         answerPostDto.setQuestionId(questionId);

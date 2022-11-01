@@ -2,6 +2,7 @@ package com.seb40.server.Comment.AnswerComment.Entity;
 
 import com.seb40.server.Answer.Entity.Answer;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "answerComment")
+@NoArgsConstructor
+@Table(name = "answer_comment")
 public class AnswerComment {
 
     @Id
