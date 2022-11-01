@@ -1,11 +1,13 @@
 package com.seb40.server.Quesiton.Mapper;
 
+import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,8 +19,22 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring" , uses = UserMapper.class)
 public interface QuestionMapper {
 
-    @Mapping(target = "user.userId")
-    Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
+//    @Mapping(target = "user.userId")
+    default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
+        Question question = new Question();
+
+        question.setQuestionTitle(questionPostDto.getQuestionTitle());
+        question.setQuestionBody(questionPostDto.getQuestionBody());
+        question.setUser(questionPostDtoUser(questionPostDto));
+
+        return question;
+    }
+    default User questionPostDtoUser(QuestionPostDto dto){
+        User user = new User();
+        user.setUserId(dto.getUserId());
+
+        return user;
+    }
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
 
