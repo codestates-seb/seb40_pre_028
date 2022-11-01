@@ -33,6 +33,11 @@ public class Question{
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
     private List<Answer> answers = new ArrayList<>();
 
+//    public void addAnswer(Answer answer){
+//        this.answers.add(answer);
+//    }
+
+
 //    @OneToMany(mappedBy = "question")
 //    private List<Tag> tags = new ArrayList<>();
 

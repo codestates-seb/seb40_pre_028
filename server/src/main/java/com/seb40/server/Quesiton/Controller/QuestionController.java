@@ -84,10 +84,10 @@ public class QuestionController {
     }
 
     ///////////////////////////
-    @GetMapping("/sh")
-    public List<QuestionResponseDto> getContents(){
-        return questionService.getAllContents();
-    }
+//    @GetMapping("/sh")
+//    public List<QuestionResponseDto> getContents(){
+//        return questionService.getAllContents();
+//    }
      //전체 질문페이지 이동 API
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
@@ -96,17 +96,16 @@ public class QuestionController {
         List<Question> questions = pageQuestions.getContent();// 내용까지도
 
         //답변수 카운트
-        List<Object[]> list = questionRepository.findbyAnswerNum();
+//        List<Object[]> list = questionRepository.findbyAnswerNum();
+//
+//        Iterator iter = list.iterator();
+//        while(iter.hasNext()){
+//            Object[] obj = (Object[]) iter.next();
+//            String questionId = obj[0].toString();
+//            int answerNum = Integer.valueOf(obj[1].toString());
+//
+//            System.out.printf("questionId : %s, answerNum : %d", questionId, answerNum );
 
-        Iterator iter = list.iterator();
-        while(iter.hasNext()){
-            Object[] obj = (Object[]) iter.next();
-            String questionId = obj[0].toString();
-            int answerNum = Integer.valueOf(obj[1].toString());
-
-            System.out.printf("questionId : %s, answerNum : %d", questionId, answerNum );
-
-        }
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),

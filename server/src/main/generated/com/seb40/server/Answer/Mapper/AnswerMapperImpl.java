@@ -3,6 +3,7 @@ package com.seb40.server.Answer.Mapper;
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDto.AnswerResponseDtoBuilder;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Comment.AnswerComment.Dto.AnswerCommentResponseDto;
 import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-01T21:16:00+0900",
+    date = "2022-11-01T22:17:01+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
@@ -58,33 +59,19 @@ public class AnswerMapperImpl implements AnswerMapper {
             return null;
         }
 
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+        AnswerResponseDtoBuilder answerResponseDto = AnswerResponseDto.builder();
 
         if ( answer != null ) {
-            answerResponseDto.setUserId( answerUserUserId( answer ) );
-            answerResponseDto.setQuestionId( answerQuestionQuestionId( answer ) );
-            answerResponseDto.setAnswerId( answer.getAnswerId() );
-            answerResponseDto.setAnswerBody( answer.getAnswerBody() );
-            answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
-            answerResponseDto.setAnswerModified( answer.getAnswerModified() );
-            answerResponseDto.setAnswerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
+            if ( answer.getAnswerId() != null ) {
+                answerResponseDto.answerId( answer.getAnswerId() );
+            }
+            answerResponseDto.answerBody( answer.getAnswerBody() );
+            answerResponseDto.answerCreatedAt( answer.getAnswerCreatedAt() );
+            answerResponseDto.answerModified( answer.getAnswerModified() );
+            answerResponseDto.answerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
         }
 
-        return answerResponseDto;
-    }
-
-    @Override
-    public List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers) {
-        if ( answers == null ) {
-            return null;
-        }
-
-        List<AnswerResponseDto> list = new ArrayList<AnswerResponseDto>( answers.size() );
-        for ( Answer answer : answers ) {
-            list.add( answerToAnswerResponseDto1( answer ) );
-        }
-
-        return list;
+        return answerResponseDto.build();
     }
 
     protected Question answerPostDtoToQuestion(AnswerPostDto answerPostDto) {
@@ -109,30 +96,6 @@ public class AnswerMapperImpl implements AnswerMapper {
         user.setUserId( answerPostDto.getUserId() );
 
         return user;
-    }
-
-    private long answerUserUserId(Answer answer) {
-        if ( answer == null ) {
-            return 0L;
-        }
-        User user = answer.getUser();
-        if ( user == null ) {
-            return 0L;
-        }
-        long userId = user.getUserId();
-        return userId;
-    }
-
-    private long answerQuestionQuestionId(Answer answer) {
-        if ( answer == null ) {
-            return 0L;
-        }
-        Question question = answer.getQuestion();
-        if ( question == null ) {
-            return 0L;
-        }
-        long questionId = question.getQuestionId();
-        return questionId;
     }
 
     protected AnswerCommentResponseDto answerCommentToAnswerCommentResponseDto(AnswerComment answerComment) {
@@ -165,21 +128,5 @@ public class AnswerMapperImpl implements AnswerMapper {
         }
 
         return list1;
-    }
-
-    protected AnswerResponseDto answerToAnswerResponseDto1(Answer answer) {
-        if ( answer == null ) {
-            return null;
-        }
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
-
-        answerResponseDto.setAnswerId( answer.getAnswerId() );
-        answerResponseDto.setAnswerBody( answer.getAnswerBody() );
-        answerResponseDto.setAnswerCreatedAt( answer.getAnswerCreatedAt() );
-        answerResponseDto.setAnswerModified( answer.getAnswerModified() );
-        answerResponseDto.setAnswerComments( answerCommentListToAnswerCommentResponseDtoList( answer.getAnswerComments() ) );
-
-        return answerResponseDto;
     }
 }

@@ -18,7 +18,7 @@ public class AnswerResponseDto {
 
     private long answerId;
     private String answerBody;
-    private long userId;
+    private String userName;
 
     private long questionId;
 
@@ -35,15 +35,15 @@ public class AnswerResponseDto {
 
     //추가
 
-    public static AnswerResponseDto fromEntity(Answer answer){
-        return AnswerResponseDto.builder()
-                .answerId(answer.getAnswerId())
-                .answerBody(answer.getAnswerBody())
-                .questionId(answer.getQuestion().getQuestionId())
-                .answerCreatedAt(answer.getAnswerCreatedAt())
-                .answerModified(answer.getAnswerModified())
-                .userId(answer.getUser().getUserId())
-                .build();
-    }
+//    public static AnswerResponseDto fromEntity(Answer answer){
+//        return AnswerResponseDto.builder()
+//                .answerId(answer.getAnswerId())
+//                .answerBody(answer.getAnswerBody())
+//                .questionId(answer.getQuestion().getQuestionId())
+//                .answerCreatedAt(answer.getAnswerCreatedAt())
+//                .answerModified(answer.getAnswerModified())
+//                .userId(answer.getUser().getUserId())
+//                .build();
+//    }
 
 }

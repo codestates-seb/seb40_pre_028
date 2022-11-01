@@ -90,14 +90,14 @@ public class AnswerController {
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
-        List<AnswerResponseDto> response = answerService.getAllContents();
-
-        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
-        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
+//        List<AnswerResponseDto> response = answerService.getAllContents();
+//
+//        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
+//        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        answer1,pageAnswers),
+                        mapper.answersToAnswerResponseDtos(answers),pageAnswers),
                 HttpStatus.OK);
 //        @Query(value = "" +
 //                "select question_id, count(*) as answerNum\n" +

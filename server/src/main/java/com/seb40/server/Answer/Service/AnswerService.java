@@ -82,9 +82,9 @@ public class AnswerService {
 
 
 
-    public List<AnswerResponseDto> getAllContents(){
-        return answerRepository.findAll().stream()
-                .map(AnswerResponseDto::fromEntity).collect(Collectors.toList());
-    }
+//    public List<AnswerResponseDto> getAllContents(){
+//        return answerRepository.findAll().stream()
+//                .map(AnswerResponseDto::fromEntity).collect(Collectors.toList());
+//    }
 
 }

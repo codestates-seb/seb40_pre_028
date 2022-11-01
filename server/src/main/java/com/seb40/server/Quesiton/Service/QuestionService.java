@@ -79,9 +79,9 @@ public class QuestionService {
         return findQuestion;
     }
 
-    public List<QuestionResponseDto> getAllContents() {
-        return questionRepository.findAll().stream()
-                .map(QuestionResponseDto::fromEntity).collect(Collectors.toList());
-
-    }
+//    public List<QuestionResponseDto> getAllContents() {
+//        return questionRepository.findAll().stream()
+//                .map(QuestionResponseDto::fromEntity).collect(Collectors.toList());
+//
+//    }
 }
