@@ -22,7 +22,7 @@ function Router() {
           <Route element={<MiddleContainer />}>
             {/* nav */}
             <Route path=":id" element={<QuestionDetail />} />
-            <Route path=":tags" element={<Tags />} />
+            <Route path="tags" element={<Tags />} />
             <Route path="*" element={<NotFound />} />
             <Route element={<MainBox />}>
               {/* aside */}
