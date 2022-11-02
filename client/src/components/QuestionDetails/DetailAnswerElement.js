@@ -61,7 +61,8 @@ export const DetailAnswerElement = ({ answers }) => {
       ))}
       <Answer>
         <h2>Your Answer</h2>
-        <ChEditor />
+        {/* <ChEditor /> */}
+        {/* 이곳입니다 에디터 수정 */}
         <BlueButton>Post Your Answer</BlueButton>
       </Answer>
     </Container>

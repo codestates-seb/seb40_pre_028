@@ -127,7 +127,7 @@ export function QuestionList() {
               name={question.name}
               createdAt={question.questionCreatedAt}
               votes={question.votes}
-              answers={question.answers.length}
+              answers={question.answers}
               views={question.views}
             />
           ))
