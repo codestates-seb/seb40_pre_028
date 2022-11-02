@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnswerMapperImpl implements AnswerMapper {
 
-
     @Override
     public AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
         if ( answer == null ) {

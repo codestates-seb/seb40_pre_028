@@ -24,5 +24,4 @@ public class AnswerResponseDto {
     private LocalDateTime answerModified;
     private int answerNum;
 
-//    private List<AnswerComment> answerComments;
 }

@@ -1,7 +1,6 @@
 package com.seb40.server.Quesiton.Mapper;
 
-import com.seb40.server.Answer.Dto.AnswerPostDto;
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
+
 import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
@@ -11,7 +10,6 @@ import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring" , uses = UserMapper.class)
 public interface QuestionMapper {
 
-//    @Mapping(target = "user.userId")
+
     default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
         Question question = new Question();
 
@@ -47,26 +45,6 @@ public interface QuestionMapper {
 
         return question;
     }
-
-
-//    QuestionResponseDto questionToQuestionResponseDto(Question question);
-
-//    default QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper){
-//        QuestionResponseDto questionResponseDto = new QuestionResponseDto(question);
-//
-//        questionResponseDto.setQuestionId(question.getQuestionId());
-//        questionResponseDto.setQuestionTitle(question.getQuestionTitle());
-//        questionResponseDto.setQuestionBody(question.getQuestionBody());
-//        questionResponseDto.setQuestionCreatedAt(question.getQuestionCreatedAt());
-//        questionResponseDto.setQuestionModified(question.getQuestionModified());
-//
-//        List<AnswerResponseDto> answerResponseDtos =
-//                answerMapper.answersToAnswerResponseDtos(question.getAnswers());
-//
-//        questionResponseDto.setAnswers(answerResponseDtos);
-//
-//        return questionResponseDto;
-//    }
 
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")

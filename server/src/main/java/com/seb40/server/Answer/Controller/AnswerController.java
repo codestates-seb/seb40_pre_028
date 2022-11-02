@@ -29,13 +29,18 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
     private final AnswerService answerService;
+
+    private final QuestionService questionService;
+    private final UserService userService;
+    private final AnswerMapper mapper;
+//    private final AnswerCommentMapper answerCommentMapper;
+
 
     private final UserService userService;
     private final AnswerMapper mapper;
