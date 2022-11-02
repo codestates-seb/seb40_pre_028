@@ -150,23 +150,25 @@ export function SignupForm() {
       password: passwordValue,
     });
 
-    // fetch('/user/join', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: payload,
-    // })
-    //   .then(res => {
-    //     console.log(res);
-    //     window.localStorage.setItem('user', res);
-    //     return res.json();
-    //   })
-    //   .then(data => {
-    //     console.log(data);
-    //     window.location.href = 'http://localhost:3000';
-    //   })
-    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/join', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'skip',
+      },
+      body: payload,
+    })
+      .then(res => {
+        console.log(res);
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        window.localStorage.setItem('user', JSON.stringify(data));
+        window.localStorage.setItem('auth', JSON.stringify(true));
+        // window.location.href = 'http://localhost:3000';
+      })
+      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   const emailValueHandler = e => {

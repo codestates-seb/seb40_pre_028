@@ -247,24 +247,26 @@ export default function CreateQuestionPage() {
     if (questionTitle === '' || questionBody === '') return;
     // console.log('payload: ', questionTitle, questionBody);
     console.log('form submiting');
-
-    // const payload = JSON.stringify({
-    //   questionTitle,
-    //   questionBody,
-    // });
-    // fetch('/questions/post', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: { ...payload, userId: window.localStorage.setItem('id') },
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     window.location.href = 'http://localhost:3000';
-    //   })
-    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+    const payload = JSON.stringify({
+      questionTitle,
+      questionBody,
+      userId: JSON.parse(window.localStorage.getItem('user')).userId,
+    });
+    console.log(JSON.parse(window.localStorage.getItem('user')));
+    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/question/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
+        window.location.href = `http://localhost:3000`;
+      })
+      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   //tag handler

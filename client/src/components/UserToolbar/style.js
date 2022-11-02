@@ -94,3 +94,21 @@ export const SwitchSVG = styled(Switch)`
     fill: var(--orange-400);
   }
 `;
+
+export const UserInfo = styled.div`
+  cursor: default;
+  position: absolute;
+  top: 26px;
+  left: 16px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--black-075);
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  padding: 2px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;

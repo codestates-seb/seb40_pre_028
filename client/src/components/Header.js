@@ -155,7 +155,7 @@ function Header() {
           <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
-        <HeaderButton>Products</HeaderButton>
+        <HeaderButton onClick={() => setIsLogin(!isLogin)}>Products</HeaderButton>
         <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
