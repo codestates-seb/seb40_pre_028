@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface QuestionTagRepository extends JpaRepository<QuestionTag, Long> {
 
+    // questionId에 맞게 tag가져오기
     @Query(value = "select * from questions_tag where question_id = :questionId",nativeQuery = true)
     List<QuestionTag> findAllByQuestionId(@Param("questionId") long questionId);
 
-//    List<QuestionTag> findAllByQuestionAndQuestionsTagStatus(Question question);
 }

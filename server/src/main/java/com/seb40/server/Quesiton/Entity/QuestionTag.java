@@ -20,12 +20,11 @@ public class QuestionTag {
     @Column(nullable = false)
     private String tagName;
 
-    @ManyToOne
+    @ManyToOne // 각자 매핑 끝냈고
     @JoinColumn(name="question_id")
     private Question question;
-    public void addQuestion(Question question){
-        this.question = question;
-    }
-
 
 }
+
+
+

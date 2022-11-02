@@ -24,7 +24,6 @@ public interface QuestionMapper {
     default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){ // <- 원래 이거
         Question question = new Question();
 
-
         question.setQuestionTitle(questionPostDto.getQuestionTitle());
         question.setQuestionBody(questionPostDto.getQuestionBody());
         question.setUser(questionPostDtoUser(questionPostDto));
