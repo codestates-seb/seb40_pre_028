@@ -20,6 +20,7 @@ export const DefaultButton = styled.button`
     &:hover {
       background-color: ${`var(--${color}-${hoverBgCode})`};
       transition: 0.4s all;
+      cursor: pointer;
     }
     &:active {
       box-shadow: none;

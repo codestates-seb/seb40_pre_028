@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import { useRef } from 'react';
 
 const ChContainer = styled.div`
-  width: 600px;
-  height: 140px;
+  margin-bottom: 0.4rem;
 `;
 
-export default function ChEditor({ onfocus }) {
+export default function ChEditor({ onfocus, setInputEl2, onchange }) {
+  const edit = useRef(null);
   return (
     <ChContainer className="App">
       <CKEditor
+        ref={edit}
         editor={Editor}
         config={{
           toolbar: [
@@ -32,13 +33,14 @@ export default function ChEditor({ onfocus }) {
           ],
         }}
         onReady={editor => {
-          console.log('Editor is ready to use!', editor);
+          setInputEl2(editor);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
-          console.log({ event, editor, data });
+          // console.log({ event, editor, data });
+          onchange(data.slice(3, -4));
         }}
-        onFocus={(event, editor) => {
+        onFocus={() => {
           onfocus();
         }}
       />

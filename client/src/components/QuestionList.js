@@ -68,7 +68,7 @@ export function QuestionList() {
   let [page, setPage] = useState(1);
   let [perPage, setPerPage] = useState(10);
   let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://4e1b-61-255-255-90.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  let URL = `https://5273-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
   // let URL = 'http://localhost:3001/user/question?page=1&size=10';
 
   useEffect(() => {
@@ -78,6 +78,7 @@ export function QuestionList() {
   const getData = async () => {
     const res = await fetch(URL);
     const data = await res.json();
+    console.log(data);
     setTotalElements(data.pageInfo.totalElements);
     setQuestions(data.data);
     setIsLoading(false);
@@ -87,6 +88,12 @@ export function QuestionList() {
     });
   };
 
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', () => {
+  //     window.localStorage.removeItem('auth');
+  //     window.localStorage.removeItem('user');
+  //   });
+  // });
   return (
     <MainCointainer>
       <HeaderContainer>
