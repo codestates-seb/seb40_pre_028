@@ -33,4 +33,9 @@ public class User {
     @Column(nullable = false, name ="user_password")
     private String password;
 
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Question> qestions = new ArrayList<>();
+
+
 }

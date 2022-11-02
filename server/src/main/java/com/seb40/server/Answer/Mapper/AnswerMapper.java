@@ -62,6 +62,7 @@ public interface AnswerMapper {
 
     default AnswerResponseDto answerToAnswerResponseDto(Answer answer, AnswerCommentMapper answerCommentMapper){
         AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+        answerResponseDto.setAnswerId(answer.getAnswerId());
         answerResponseDto.setQuestionId(answer.getQuestion().getQuestionId());
         answerResponseDto.setUserName(answer.getUser().getName());
         answerResponseDto.setAnswerBody(answer.getAnswerBody());

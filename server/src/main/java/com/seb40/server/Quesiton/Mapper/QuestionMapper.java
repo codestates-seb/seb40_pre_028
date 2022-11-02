@@ -32,6 +32,7 @@ public interface QuestionMapper {
     default User questionPostDtoUser(QuestionPostDto dto){
         User user = new User();
         user.setUserId(dto.getUserId());
+        user.setName(dto.getName());
 
         return user;
     }
