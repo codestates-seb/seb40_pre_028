@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { AlertMsg } from '../components/CreateQuestion/AlertMsg';
 import { useState, useRef, useEffect } from 'react';
 import ChEditor from './ChEditor';
+import { useSelector } from 'react-redux';
 const Bg = styled.div`
   background-color: #f1f2f3;
   padding: 40px 0;
@@ -181,6 +182,9 @@ const ButtonOveray = styled(Overlay)`
 `;
 
 export default function CreateQuestionPage() {
+  // redux
+  const isLogin = useSelector(state => state.auth.isLogin);
+
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionBody, setQuestionBody] = useState('');
   // const [questionTag, setQuestionBody] = useState('');
@@ -290,6 +294,9 @@ export default function CreateQuestionPage() {
     setTagName(tagName.filter(tag => tag !== el));
   };
   useEffect(() => {
+    if (!isLogin) {
+      window.location.href = 'http://localhost:3000/signup';
+    }
     inputEl1.current.focus();
   }, []);
 

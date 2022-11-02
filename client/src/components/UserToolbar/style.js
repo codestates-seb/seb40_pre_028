@@ -105,7 +105,7 @@ export const UserInfo = styled.div`
   background-color: var(--black-075);
   border-radius: 10px;
   border-top-left-radius: 0;
-  padding: 2px 0;
+  padding: 6px 0;
 
   display: flex;
   flex-direction: column;
