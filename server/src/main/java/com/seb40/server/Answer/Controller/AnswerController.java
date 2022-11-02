@@ -41,11 +41,6 @@ public class AnswerController {
     private final AnswerMapper mapper;
 //    private final AnswerCommentMapper answerCommentMapper;
 
-
-    private final UserService userService;
-    private final AnswerMapper mapper;
-//    private final AnswerCommentMapper answerCommentMapper;
-
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id") long questionId,
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
@@ -100,8 +95,9 @@ public class AnswerController {
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        mapper.answersToAnswerResponseDtos(answers),pageAnswers),
+                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
                 HttpStatus.OK);
+    }
 
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id")
