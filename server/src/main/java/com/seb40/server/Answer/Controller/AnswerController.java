@@ -35,10 +35,7 @@ import java.util.Optional;
 @AllArgsConstructor
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
-
-    // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
-    private final QuestionService questionService;
     private final UserService userService;
     private final AnswerMapper mapper;
 //    private final AnswerCommentMapper answerCommentMapper;
@@ -86,7 +83,6 @@ public class AnswerController {
                 , HttpStatus.OK);
     }
 
-    // Get answer List
     @GetMapping("/{question_id}")
     public ResponseEntity getAnswers(@PathVariable("question_id")@Positive long questionId,
                                      @Positive @RequestParam int page,
@@ -96,20 +92,10 @@ public class AnswerController {
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
-//        List<AnswerResponseDto> response = answerService.getAllContents();
-//
-//        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
-//        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
-
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
                         mapper.answersToAnswerResponseDtos(answers),pageAnswers),
                 HttpStatus.OK);
-//        @Query(value = "" +
-//                "select question_id, count(*) as answerNum\n" +
-//                "from answer\n" +
-//                "group by question_id\n", nativeQuery = true)
-
     }
 
     @DeleteMapping("/{answer_id}")
