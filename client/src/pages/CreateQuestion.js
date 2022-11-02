@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import ChEditor from './ChEditor';
 const Bg = styled.div`
   background-color: #f1f2f3;
-  /* padding: 20px 0; */
-  height: 100vh;
+  padding: 40px 0;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +25,7 @@ const Form = styled.form`
 `;
 
 const FieldSet = styled.div`
+  position: relative;
   display: flex;
 `;
 const Field = styled.div`
@@ -158,17 +159,32 @@ const Tag = styled.div`
     }
   }
 `;
-const Overlay = styled.div`
-  /* position: absolute;
-top: 0;
-left: 0; */
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
-  z-index: 5;
+const SubmitBtnContainer = styled.div`
+  position: relative;
 `;
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 700px;
+  height: 100%;
+  background-color: rgba(251, 251, 251, 0.7);
+  border: none;
+  backdrop-filter: blur(1px);
+  z-index: 5;
+  &:hover {
+    cursor: no-drop;
+  }
+`;
+const ButtonOveray = styled(Overlay)`
+  width: 137px;
+`;
+
 export default function CreateQuestionPage() {
+  const [questionTitle, setQuestionTitle] = useState('');
+  const [questionBody, setQuestionBody] = useState('');
+  // const [questionTag, setQuestionBody] = useState('');
+
   const [isAlertMsg1, setIsAlertMsg1] = useState(false);
   const [isAlertMsg2, setIsAlertMsg2] = useState(false);
   const [isAlertMsg3, setIsAlertMsg3] = useState(false);
@@ -177,11 +193,14 @@ export default function CreateQuestionPage() {
   const [btn2, setBtn2] = useState(false);
   const [btn3, setBtn3] = useState(false);
 
+  const [isOverlay1, setIsOverlay1] = useState(true);
+  const [isOverlay2, setIsOverlay2] = useState(true);
+  const [isOverlay3, setIsOverlay3] = useState(true);
   // input3: tag
   const [tagName, setTagName] = useState([]);
 
   const inputEl1 = useRef(null);
-  // const inputEl2 = useRef(null);
+  const [inputEl2, setInputEl2] = useState(null);
   const inputEl3 = useRef(null);
 
   const AlertMsgHandlerOn1 = () => {
@@ -202,6 +221,8 @@ export default function CreateQuestionPage() {
   const btnHandler1 = e => {
     e.preventDefault();
     // inputEl2.current.focus();
+    inputEl2.focus();
+    setIsOverlay1(false);
     setBtn1(false);
     setBtn2(true);
     setBtn3(false);
@@ -209,19 +230,41 @@ export default function CreateQuestionPage() {
   const btnHandler2 = e => {
     e.preventDefault();
     inputEl3.current.focus();
+    setIsOverlay2(false);
     setBtn1(false);
     setBtn2(false);
     setBtn3(true);
   };
   const btnHandler3 = e => {
     e.preventDefault();
+    setIsOverlay3(false);
     setBtn1(false);
     setBtn2(false);
     setBtn3(false);
   };
-  const onsubmit = e => {
+  const formSubmitHandler = e => {
     e.preventDefault();
+    if (questionTitle === '' || questionBody === '') return;
+    // console.log('payload: ', questionTitle, questionBody);
     console.log('form submiting');
+
+    // const payload = JSON.stringify({
+    //   questionTitle,
+    //   questionBody,
+    // });
+    // fetch('/questions/post', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: { ...payload, userId: window.localStorage.setItem('id') },
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log(data);
+    //     window.location.href = 'http://localhost:3000';
+    //   })
+    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   //tag handler
@@ -278,6 +321,7 @@ export default function CreateQuestionPage() {
               ref={inputEl1}
               type="text"
               id="title"
+              onChange={e => setQuestionTitle(e.target.value)}
               onFocus={AlertMsgHandlerOn1}
               placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             ></Input>
@@ -298,10 +342,11 @@ export default function CreateQuestionPage() {
         </FieldSet>
 
         <FieldSet>
+          {isOverlay1 ? <Overlay /> : ''}
           <Field>
             <Label1 htmlFor="body">Body</Label1>
             <Label2 htmlFor="body">The body of your question contains your problem details and results. Minimum 30 characters.</Label2>
-            <ChEditor onfocus={AlertMsgHandlerOn2} />
+            <ChEditor onfocus={AlertMsgHandlerOn2} setInputEl2={setInputEl2} onchange={setQuestionBody} />
             {btn2 ? <Button onClick={btnHandler2}>Next</Button> : ''}
           </Field>
           {isAlertMsg2 ? (
@@ -320,6 +365,7 @@ export default function CreateQuestionPage() {
         </FieldSet>
 
         <FieldSet>
+          {isOverlay2 ? <Overlay /> : ''}
           <Field>
             <Label1 htmlFor="tags">Tags</Label1>
             <Label2 htmlFor="tags">Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</Label2>
@@ -356,7 +402,11 @@ export default function CreateQuestionPage() {
             ''
           )}
         </FieldSet>
-        <Button onClick={onsubmit}>Post your question</Button>
+        <SubmitBtnContainer>
+          {isOverlay3 ? <ButtonOveray /> : ''}
+
+          <Button onClick={formSubmitHandler}>Post your question</Button>
+        </SubmitBtnContainer>
       </Form>
     </Bg>
   );
