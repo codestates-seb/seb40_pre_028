@@ -53,14 +53,10 @@ public class AnswerVoteController {
 
         List<Object[]> list = answerVoteRepository.findByAnswerVoteCnt();
         Iterator iter = list.iterator();
-        System.out.println("왜 안뜨는가1");
 
         while (iter.hasNext()) {
             Object[] obj = (Object[]) iter.next();
-            System.out.println("왜 안뜨는가2");
-
             answerId = Long.valueOf(obj[0].toString());
-            System.out.println("왜 안뜨는가3");
 
             int answerVoteSum = Integer.valueOf(obj[1].toString());
 
@@ -69,15 +65,13 @@ public class AnswerVoteController {
             answer.setAnswerId(answerId);
             answer.setAnswerVoteSum(answerVoteSum);
 
-
         }
-        System.out.println("왜 안뜨는가4");
-
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.answerToVoteResponseDto(answer)), HttpStatus.CREATED);
 
     }
+
 
 
 

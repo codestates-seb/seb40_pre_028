@@ -8,8 +8,8 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
   background-color: white;
   width: 340px;
-  height: 280px;
-  padding: 30px 30px;
+  /* height: 280px; */
+  padding: 30px 30px 0 30px;
   border-radius: 10px;
   border: none;
   margin: 20px;
@@ -74,13 +74,22 @@ const Button = styled.button`
   width: 100%;
   height: 2.4rem;
   color: white;
-  background-color: #0996ff;
-  border: none;
+  /* border: none; */
   border-radius: 4px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  border: 1px solid var(--blue-500);
+  color: var(--blue-050);
+  background-color: var(--blue-500);
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
   &:hover {
+    background-color: var(--blue-600);
+    transition: 0.4s all;
     cursor: pointer;
-    background-color: #077cd2;
+  }
+  &:active {
+    box-shadow: none;
+    border-color: var(--blue-500);
+    background-color: var(--blue-700);
   }
 `;
 const TextContainer = styled.div`
@@ -111,6 +120,7 @@ const emailValidation = str => {
 export function LoginForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+
   const [emailValid, setEmailValid] = useState(false);
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
@@ -129,6 +139,31 @@ export function LoginForm() {
     // 형식 체크
     if (!emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
+
+    if (emailValue === '' || passwordValue === '' || !emailValidation(emailValue)) return;
+    console.log('login varified');
+    const payload = JSON.stringify({
+      email: emailValue,
+      password: passwordValue,
+    });
+    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    })
+      .then(res => {
+        console.log(res);
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        window.localStorage.setItem('user', JSON.stringfy(data));
+        window.localStorage.setItem('auth', JSON.stringfy(true));
+        window.location.href = 'http://localhost:3000';
+      })
+      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
 
   const emailValueHandler = e => {
@@ -137,6 +172,7 @@ export function LoginForm() {
   const passwordValueHandler = e => {
     setPasswordValue(e.target.value);
   };
+
   return (
     <>
       <Form onSubmit={formSubmitHandler}>

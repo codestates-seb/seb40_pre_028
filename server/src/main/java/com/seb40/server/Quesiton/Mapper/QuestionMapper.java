@@ -49,6 +49,7 @@ public interface QuestionMapper {
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
     @Mapping(target = "name",expression = "java(question.getUser().getName())")
+    @Mapping(target = "views", expression = "java(question.getViews())")
     QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
     default List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
         return questions.stream()
