@@ -10,6 +10,8 @@ import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.User.entity.User;
+import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
+    private final UserService userService;
     private final QuestionMapper mapper;
     private final AnswerMapper answerMapper;
 
@@ -43,6 +46,9 @@ public class QuestionController {
 //    }
     @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+        User user = userService.findVerifiedUser(questionPostDto.getUserId());
+        questionPostDto.setName(user.getName());
+
         Question question = questionService.createQuestion(
                 mapper.questionPostDtoToQuestion(questionPostDto));
         return new ResponseEntity<>(

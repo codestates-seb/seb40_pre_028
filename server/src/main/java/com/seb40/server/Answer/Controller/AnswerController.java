@@ -15,6 +15,8 @@ import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.User.entity.User;
+import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Query;
@@ -37,8 +39,9 @@ public class AnswerController {
     // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
     private final QuestionService questionService;
+    private final UserService userService;
     private final AnswerMapper mapper;
-    private final AnswerCommentMapper answerCommentMapper;
+//    private final AnswerCommentMapper answerCommentMapper;
 
 
     @PostMapping("/{question_id}/post")
@@ -46,11 +49,14 @@ public class AnswerController {
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
         // answerPostDto 에 URI로 받은 questionId 설정
         answerPostDto.setQuestionId(questionId);
+        User user = userService.findVerifiedUser(answerPostDto.getUserId());
+        answerPostDto.setName(user.getName());
+
         Answer answer = answerService.createAnswer(
                 mapper.answerPostDtoToAnswer(answerPostDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer, answerCommentMapper)),
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
     }
 
@@ -66,7 +72,7 @@ public class AnswerController {
                 mapper.answerPatchDtoToAnswer(answerPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
                 , HttpStatus.OK);
     }
 
@@ -76,7 +82,7 @@ public class AnswerController {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer,answerCommentMapper))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer))
                 , HttpStatus.OK);
     }
 
