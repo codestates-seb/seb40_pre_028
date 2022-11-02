@@ -61,7 +61,7 @@ export const DetailAnswerElement = ({ answers }) => {
       ))}
       <Answer>
         <h2>Your Answer</h2>
-        <ChEditor />
+        {/* <ChEditor /> */}
         <BlueButton>Post Your Answer</BlueButton>
       </Answer>
     </Container>

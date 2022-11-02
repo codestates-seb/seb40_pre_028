@@ -42,7 +42,7 @@ export default function QuestionDetail() {
   let [isLoading, setIsLoading] = useState(true);
   let { id } = useParams();
 
-  let URL = `https://4e1b-61-255-255-90.jp.ngrok.io/user/question/2`;
+  let URL = `https://5273-14-39-204-244.jp.ngrok.io/user/question/${id}`;
 
   const getData = async () => {
     const res = await fetch(URL);
