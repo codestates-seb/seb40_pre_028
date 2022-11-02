@@ -24,6 +24,7 @@ function Router() {
             <Route index element={<QuestionList />} />
             <Route path="tags" element={<Tags />} />
             <Route path=":id" element={<QuestionDetail />} />
+            <Route path="tags" element={<Tags />} />
             <Route path="*" element={<NotFound />} />
             {/* <Route path="/" element={<MainBox />}> */}
             {/* aside */}
