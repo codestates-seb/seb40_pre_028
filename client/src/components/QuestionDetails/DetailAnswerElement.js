@@ -21,11 +21,11 @@ const Container = styled.div`
 `;
 
 const Answer = styled.div`
-  * {
-    margin: 20px 0;
-  }
   a {
     color: #0074cc;
+  }
+
+  h1 {
   }
 `;
 
@@ -61,8 +61,7 @@ export const DetailAnswerElement = ({ answers }) => {
       ))}
       <Answer>
         <h2>Your Answer</h2>
-        {/* <ChEditor /> */}
-        {/* 이곳입니다 에디터 수정 */}
+        <ChEditor />
         <BlueButton>Post Your Answer</BlueButton>
       </Answer>
     </Container>

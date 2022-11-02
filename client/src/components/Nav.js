@@ -61,7 +61,7 @@ function Nav() {
     <NavLayout>
       <NavTap>
         <div>public</div>
-        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/que">
+        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/">
           <FaGlobeAmericas className="reactIcon" />
           Question
         </NavLink>

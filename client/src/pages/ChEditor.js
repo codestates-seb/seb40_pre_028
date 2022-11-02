@@ -6,7 +6,6 @@ import { useRef } from 'react';
 const ChContainer = styled.div`
   margin-bottom: 0.4rem;
 `;
-
 export default function ChEditor({ onfocus, setInputEl2, onchange }) {
   const edit = useRef(null);
   return (
@@ -33,15 +32,15 @@ export default function ChEditor({ onfocus, setInputEl2, onchange }) {
           ],
         }}
         onReady={editor => {
-          setInputEl2(editor);
+          setInputEl2?.(editor);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
           // console.log({ event, editor, data });
-          onchange(data.slice(3, -4));
+          onchange?.(data.slice(3, -4));
         }}
         onFocus={() => {
-          onfocus();
+          onfocus?.();
         }}
       />
     </ChContainer>
