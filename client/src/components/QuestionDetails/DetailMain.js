@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { VscTriangleUp, VscTriangleDown } from 'react-icons/vsc';
 import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
+// import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
-  padding: 10px;
+  padding: 5px 40px 10px 5px;
+  width: 772px;
 `;
 
 const Section = styled.div`
@@ -89,7 +91,7 @@ const Select = styled.div`
 
 const Question = styled.div`
   p {
-    margin: 30px 0;
+    margin: 20px 0;
   }
   display: flex;
   flex-direction: column;
@@ -141,6 +143,7 @@ export const DetailMain = () => {
             doesntcompile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile This code doesnt
             compileThis code doesnt compile This code doesnt compile This code doesnt compile This code doesnt compile
           </p>
+          {/* <MarkdownRenderer /> */}
           <PostTag>
             <ul>
               <li>

@@ -3,6 +3,9 @@ import { ReactComponent as Sprites } from '../assets/img/sprites.svg';
 import { MdSearch } from 'react-icons/md';
 import { BlueButton, PowderButton } from './DefaultButton';
 import { UserMenus } from './UserToolbar/UserToolbar';
+import { SearchModal } from '../components/SearchModal';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SHeader = styled.header`
   display: flex;
@@ -51,6 +54,7 @@ export const LogoBox = styled.div`
   cursor: pointer;
   height: 100%;
   overflow: hidden;
+  transition: background-color 0.4s;
   a {
     display: block;
     position: absolute;
@@ -89,7 +93,6 @@ export const SearchContainer = styled.form`
   height: 100%;
   padding: 0 10px;
   position: relative;
-  overflow: hidden;
   // 돋보기 아이콘에 적용
   > *:first-child {
     position: absolute;
@@ -121,25 +124,32 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = true;
+  const isLogIn = false;
+  let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
     <SHeader>
       <SNav>
         <LogoBox>
+          <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
         <HeaderButton>Products</HeaderButton>
-        <SearchContainer>
+        <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
+          {!!isSearchModalOpen && <SearchModal setIsSearchModalOpen={setIsSearchModalOpen} />}
         </SearchContainer>
         {isLogIn ? (
           <UserMenus />
         ) : (
           <AuthBtns>
-            <PowderButton>Log in</PowderButton>
-            <BlueButton>Sign up</BlueButton>
+            <Link to="/login">
+              <PowderButton>Log in</PowderButton>
+            </Link>
+            <Link to="/signup">
+              <BlueButton>Sign up</BlueButton>
+            </Link>
           </AuthBtns>
         )}
       </SNav>

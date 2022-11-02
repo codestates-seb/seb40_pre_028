@@ -1,24 +1,30 @@
+import styled from 'styled-components';
 import { DetailHeader } from '../components/QuestionDetails/DetailHeader';
 import { DetailMain } from '../components/QuestionDetails/DetailMain';
 import { DetailAnswer } from '../components/QuestionDetails/DetailAnswer';
 
-function QuestionDetail() {
+const Section = styled.div`
+  display: flex;
+`;
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+export default function QuestionDetail() {
   return (
     <div>
-      {/* header */}
-      {/* nav */}
-      <section>
-        <div>
-          <DetailHeader />
+      <Main>
+        <DetailHeader />
+        <Section>
           <div>
             <DetailMain />
             <DetailAnswer />
-            {/* aside */}
           </div>
-        </div>
-      </section>
+        </Section>
+      </Main>
     </div>
   );
 }
-
-export default QuestionDetail;

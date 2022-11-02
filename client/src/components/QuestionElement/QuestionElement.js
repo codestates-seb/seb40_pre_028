@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
 import { getDateToString } from '../../utils/dateFormat';
+import { Link } from 'react-router-dom';
 
 //! UI
 
@@ -27,7 +28,7 @@ export const SectionContainer = styled.section`
 `;
 
 // 라우터 Link로 바꿔야함
-export const STitleLink = styled.a`
+export const STitleLink = styled(Link)`
   margin-bottom: 5px;
   font-size: 17px;
   line-height: 1.4rem;
@@ -120,13 +121,13 @@ const Tag = ({ tag }) => {
   return <div>{tag}</div>;
 };
 
-const QuestionElement = ({ title, body, tag, name, createdAt, votes, answers, views }) => {
+const QuestionElement = ({ title, body, tag = ['Tag1'], name = 'User Name', createdAt, votes = 1, answers, views = 3 }) => {
   return (
     <SQuestionList>
       <LeftCounts votes={votes} answers={answers} views={views} />
       <SectionContainer>
-        <STitleLink>{title}</STitleLink>
-        <STextP>{body.length > 235 ? `${body.slice(0, 235)}...` : body}</STextP>
+        <STitleLink to="/question">{title}</STitleLink>
+        <STextP>{body.length > 160 ? `${body.slice(0, 160)}...` : body}</STextP>
         <ContentFooter>
           <Tags>
             {tag.map(tag => (
