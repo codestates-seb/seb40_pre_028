@@ -20,7 +20,7 @@ function Router() {
           <Route path="ask" element={<CreateQuestionPage />} />
           <Route element={<MiddleContainer />}>
             {/* nav */}
-            <Route path="question" element={<QuestionDetail />} />
+            <Route path=":id" element={<QuestionDetail />} />
             <Route path="*" element={<NotFound />} />
             <Route element={<MainBox />}>
               {/* aside */}

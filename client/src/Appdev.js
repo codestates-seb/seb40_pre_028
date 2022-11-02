@@ -1,13 +1,15 @@
+import QuestionDetail from './pages/QuestionDetail';
 import GlobalStyle from './assets/style/GlobalStyle';
-import Main from './pages/Main';
+import Header from './components/Header';
 
-function Appdev() {
+function AppDev() {
   return (
     <div>
       <GlobalStyle />
-      <Main />
+      <Header />
+      <QuestionDetail />
     </div>
   );
 }
 
-export default Appdev;
+export default AppDev;

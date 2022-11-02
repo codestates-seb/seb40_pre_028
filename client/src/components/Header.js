@@ -122,10 +122,31 @@ export const AuthBtns = styled.div`
   column-gap: 3px;
   margin-right: 20px;
 `;
+const Userbox = styled.div`
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  span {
+    margin-right: 5px;
+  }
+`;
+const UserIcon = styled.div`
+  background-color: var(--blue-200);
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--blue-300);
+  }
+`;
 function Header() {
-  const isLogIn = false;
+  // const isLogIn = true;
   let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <SHeader>
@@ -134,13 +155,13 @@ function Header() {
           <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
-        <HeaderButton>Products</HeaderButton>
+        <HeaderButton onClick={() => setIsLogin(!isLogin)}>Products</HeaderButton>
         <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
           {!!isSearchModalOpen && <SearchModal setIsSearchModalOpen={setIsSearchModalOpen} />}
         </SearchContainer>
-        {isLogIn ? (
+        {isLogin ? (
           <UserMenus />
         ) : (
           <AuthBtns>
@@ -150,6 +171,14 @@ function Header() {
             <Link to="/signup">
               <BlueButton>Sign up</BlueButton>
             </Link>
+            {isLogin ? (
+              <Userbox>
+                <span>히쟁이님</span>
+                <UserIcon />
+              </Userbox>
+            ) : (
+              ''
+            )}
           </AuthBtns>
         )}
       </SNav>

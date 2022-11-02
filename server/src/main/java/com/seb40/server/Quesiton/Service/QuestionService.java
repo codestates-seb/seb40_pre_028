@@ -21,14 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
-    // (1)
+
     private final QuestionRepository questionRepository ;
-
-
-//    public QuestionService(QuestionRepository questionRepository) {
-//        this.questionRepository = questionRepository;
-//    }
-
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -79,9 +73,12 @@ public class QuestionService {
         return findQuestion;
     }
 
-//    public List<QuestionResponseDto> getAllContents() {
-//        return questionRepository.findAll().stream()
-//                .map(QuestionResponseDto::fromEntity).collect(Collectors.toList());
-//
-//    }
+    public Question addViews(Question question){
+        long views = question.getViews();
+        views++;
+        question.setViews(views);
+
+        return questionRepository.save(question);
+    }
+
 }
