@@ -6,14 +6,12 @@ import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.User.entity.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -26,17 +24,15 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
     private Long answerId;
 
-    // @ManyToOne 연결
-//    @ManyToOne(targetEntity = Question.class) //추가
-    @ManyToOne
+    @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name="question_id")  //questionId ->question_id
     private Question question; //추가
 
-    public void setQuestion(Question question){
-        this.question = question;
-    }
+//    public void setQuestion(Question question){
+//        this.question.getQuestionId();
+//    }
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name ="user_id")
     private User user;
 
@@ -48,6 +44,7 @@ public class Answer {
     @Column(nullable = false)
     private LocalDateTime answerModified  = LocalDateTime.now();
 
+    @Column(nullable = false)
     private String answerBody;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)

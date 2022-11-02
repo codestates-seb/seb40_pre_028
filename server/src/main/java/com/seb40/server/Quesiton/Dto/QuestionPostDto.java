@@ -14,7 +14,7 @@ public class QuestionPostDto {
     @Positive
     private Long questionId;
 
-    @Positive
+
     private Long userId;
 
     @NotBlank

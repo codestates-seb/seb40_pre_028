@@ -51,7 +51,7 @@ const NavTap = styled.div`
 `;
 
 const NavLayout = styled.div`
-  /* border-right: solid var(--black-100) 1px; */
+  border-right: solid var(--black-100) 1px;
   /* width: 162px; */
 `;
 
