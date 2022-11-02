@@ -41,23 +41,6 @@ const UserInfo = styled(Section)`
   }
 `;
 
-const PostTag = styled.div`
-  & a {
-    background-color: #d9eaf7;
-    color: #38749d;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  & li {
-    float: left;
-    margin-right: 10px;
-  }
-  & ul {
-    display: block;
-  }
-  margin-bottom: 40px;
-`;
-
 const Select = styled.div`
   padding: 10px;
   & > button {
@@ -108,17 +91,7 @@ const SEF = styled.div`
   }
 `;
 
-const Tag = ({ tag }) => {
-  return (
-    <ul>
-      <li>
-        <a href="/question">{tag}</a>
-      </li>
-    </ul>
-  );
-};
-
-export const DetailMainElement = ({ body, createdAt, name, tag, vote = '123' }) => {
+export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
   let [count, SetCount] = useState(vote);
 
   return (
@@ -145,12 +118,6 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '123' }) 
         </Select>
         <Question>
           <p>{body}</p>
-          {/* <MarkdownRenderer /> */}
-          <PostTag>
-            {tag.map(tag => (
-              <Tag key={tag} tag={tag} />
-            ))}
-          </PostTag>
           <User>
             <SEF>
               <a href="question">Share</a>

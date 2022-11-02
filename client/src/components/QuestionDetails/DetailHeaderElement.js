@@ -43,7 +43,7 @@ export const DetailHeaderElement = ({ title, createdAt, modified, views }) => {
       <TitleSet>
         <Title>{title}</Title>
         <Link to="/ask">
-          <BlueButton>Ask Question</BlueButton>
+          <BlueButton height="40px">Ask Question</BlueButton>
         </Link>
       </TitleSet>
       <TitleInfo>
