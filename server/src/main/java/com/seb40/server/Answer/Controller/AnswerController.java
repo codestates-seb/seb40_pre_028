@@ -36,10 +36,10 @@ import java.util.Optional;
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
     private final AnswerService answerService;
+
     private final UserService userService;
     private final AnswerMapper mapper;
 //    private final AnswerCommentMapper answerCommentMapper;
-
 
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id") long questionId,
@@ -79,6 +79,7 @@ public class AnswerController {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
+
                 new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer))
                 , HttpStatus.OK);
     }
@@ -96,7 +97,6 @@ public class AnswerController {
                 new MultiResponseDto<>(
                         mapper.answersToAnswerResponseDtos(answers),pageAnswers),
                 HttpStatus.OK);
-    }
 
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id")

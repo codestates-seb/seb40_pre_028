@@ -20,6 +20,7 @@ public class Answer {
 
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name="question_id")  //questionId ->question_id
+    
     private Question question;
 
     @ManyToOne(targetEntity = User.class)
