@@ -20,10 +20,10 @@ public class QuestionTagService {
         return questionTags.stream().map(questionTag -> questionTagRepository.save(questionTag)).collect(Collectors.toList());
     }
 
-    public List<QuestionTag> findVerifiedQuestionTags(Question question){
-        List<QuestionTag> findQuestionTags= questionTagRepository.findAllByQuestionAndQuestionsTagStatus(question);
-        return findQuestionTags;
-    }
+//    public List<QuestionTag> findVerifiedQuestionTags(Question question){
+//        List<QuestionTag> findQuestionTags= questionTagRepository.findAllByQuestionAndQuestionsTagStatus(question);
+//        return findQuestionTags;
+//    }
 
 
 
