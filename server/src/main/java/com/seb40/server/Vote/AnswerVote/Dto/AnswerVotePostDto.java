@@ -10,9 +10,7 @@ import lombok.Setter;
 public class AnswerVotePostDto {
 
     private long answerId;
-
     private long userId;
-
     private int answerVoteCnt;
 
 }

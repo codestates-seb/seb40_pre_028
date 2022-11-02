@@ -73,7 +73,6 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));
         return findQuestion;
     }
-<<<<<<< HEAD
 
     public Question addViews(Question question){
         long views = question.getViews();
@@ -82,7 +81,4 @@ public class QuestionService {
 
         return questionRepository.save(question);
     }
-
-=======
->>>>>>> 73e0dbe03f0922281166aed48b7a647c99934925
 }
