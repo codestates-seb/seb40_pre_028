@@ -1,14 +1,12 @@
-// import GlobalStyle from './assets/style/GlobalStyle';
-// import LogIn from './pages/Login';
-// import SignupPage from './pages/Signup';
+import GlobalStyle from './assets/style/GlobalStyle';
+import Router from './Router';
 
 function App() {
   return (
-    <div>
-      {/* <GlobalStyle />
-      <SignupPage />
-      <LogIn /> */}
-    </div>
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
   );
 }
 

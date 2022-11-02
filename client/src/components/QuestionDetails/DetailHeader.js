@@ -1,81 +1,37 @@
-import styled from 'styled-components';
-
-const Header = styled.div`
-  border-bottom: 1px solid #d6d9dc;
-  width: 1070px;
-  height: 102px;
-  padding: 10px;
-`;
-
-const Title = styled.div`
-  a {
-    font-size: 1.6rem;
-    color: #3b4045;
-    line-height: 40px;
-  }
-`;
-
-const Btn = styled.button`
-  all: unset;
-  height: 20px;
-  width: 110px;
-  text-align: center;
-  color: white;
-  background-color: #0a96ff;
-  cursor: pointer;
-  padding: 0.8em;
-  border-radius: 5px;
-  &:hover {
-    background: #0074cc;
-  }
-`;
-
-const TitleSet = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-`;
-
-const TitleInfo = styled.div`
-  display: flex;
-  div {
-    margin: 0 10px 10px 0;
-  }
-  & a {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
-const Span = styled.span`
-  margin-right: 10px;
-  color: #6b737d;
-`;
+import { DetailHeaderElement } from './DetailHeaderElement';
+import { useState, useEffect } from 'react';
 
 export const DetailHeader = () => {
+  let [question, setQuestions] = useState([]);
+
+  const getData = async () => {
+    const res = await fetch(URL, { headers: { 'ngrok-skip-browser-warning': 'skip' } });
+    const data = await res.json();
+    setQuestions(data.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <Header>
-      <TitleSet>
-        <Title>
-          <a href="/question">Cannot move behind a shared reference</a>
-        </Title>
-        <Btn>Ask Question</Btn>
-      </TitleSet>
-      <TitleInfo>
-        <div>
-          <Span>Asked</Span>
-          <time>today</time>
-        </div>
-        <div>
-          <Span>Modified</Span>
-          <a href="?lastactivity">today</a>
-        </div>
-        <div>
-          <Span>Viewed</Span>
-          14 times
-        </div>
-      </TitleInfo>
-      <div></div>
-    </Header>
+    <>
+      {/* 더미데이터 */}
+      <DetailHeaderElement
+        title={'Hi, how I can make a dashboard with JS but I can add'}
+        createdAt={'2022-01-01 00:00:00'}
+        modified={'2022-01-01 00:00:00'}
+        views={123}
+      />
+      {question.map(question => (
+        <DetailHeaderElement
+          key={question.questionId}
+          title={question.questionTitle}
+          createdAt={question.questionCreatedAt}
+          modified={question.questionModified}
+          views={question.views}
+        />
+      ))}
+    </>
   );
 };
