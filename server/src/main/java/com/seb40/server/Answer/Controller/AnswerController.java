@@ -29,6 +29,8 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
