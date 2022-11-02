@@ -1,3 +1,4 @@
+
 //package com.seb40.server.Vote.AnswerVote.Controller;
 //
 //import com.seb40.server.Answer.Service.AnswerService;
@@ -15,6 +16,7 @@
 //@RequestMapping("/user")
 //@AllArgsConstructor
 //public class AnswerVoteController {
+
 //
 //    private final AnswerService answerService;
 //    private final UserService userService;
@@ -33,3 +35,4 @@
 //    }
 //
 //}
+

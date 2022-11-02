@@ -1,3 +1,4 @@
+
 //package com.seb40.server.Vote.AnswerVote.Repository;
 //
 //import com.seb40.server.Vote.AnswerVote.Entity.AnswerVote;
@@ -13,3 +14,4 @@
 //    List<Object[]> findByAnswerVoteCnt;
 //
 //}
+

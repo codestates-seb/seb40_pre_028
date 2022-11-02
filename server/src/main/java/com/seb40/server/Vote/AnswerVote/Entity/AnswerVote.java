@@ -21,7 +21,7 @@ public class AnswerVote {
     private User user;
 
     @ManyToOne(targetEntity = Answer.class)
-    @JoinColumn(name = "answerVoteCnt")
+    @JoinColumn(name = "answervotesum")
     private Answer answer;
 
     @Column(name = "answerVote_cnt")
