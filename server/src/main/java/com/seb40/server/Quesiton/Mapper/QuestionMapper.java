@@ -32,17 +32,27 @@ public interface QuestionMapper {
     default User questionPostDtoUser(QuestionPostDto dto){
         User user = new User();
         user.setUserId(dto.getUserId());
+        user.setName(dto.getName());
+
 
         return user;
     }
 
-    Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
+    default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
+        Question question = new Question();
+
+        question.setQuestionId(questionPatchDto.getQuestionId());
+        question.setQuestionTitle(questionPatchDto.getQuestionTitle());
+        question.setQuestionBody(questionPatchDto.getQuestionBody());
+
+        return question;
+    }
 
 
 //    QuestionResponseDto questionToQuestionResponseDto(Question question);
 
 //    default QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper){
-//        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+//        QuestionResponseDto questionResponseDto = new QuestionResponseDto(question);
 //
 //        questionResponseDto.setQuestionId(question.getQuestionId());
 //        questionResponseDto.setQuestionTitle(question.getQuestionTitle());

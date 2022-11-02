@@ -21,6 +21,8 @@ public class AnswerPostDto {
 
     private long userId;
 
+    private String name;
+
     @NotBlank // null 이 아닌 값, 공백이 아니어야함
     private String answerBody;
 

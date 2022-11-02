@@ -46,7 +46,7 @@ public class UserService {
     }
 
 
-    private User findVerifiedUser(Long userId) {
+    public User findVerifiedUser(Long userId) {
         Optional<User> optionalUser =
                 userRepository.findById(userId);
 
