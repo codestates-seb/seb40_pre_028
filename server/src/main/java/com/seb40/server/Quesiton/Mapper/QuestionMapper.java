@@ -37,27 +37,15 @@ public interface QuestionMapper {
         return user;
     }
 
-    Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
+    default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
+        Question question = new Question();
 
+        question.setQuestionId(questionPatchDto.getQuestionId());
+        question.setQuestionTitle(questionPatchDto.getQuestionTitle());
+        question.setQuestionBody(questionPatchDto.getQuestionBody());
 
-//    QuestionResponseDto questionToQuestionResponseDto(Question question);
-
-//    default QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper){
-//        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
-//
-//        questionResponseDto.setQuestionId(question.getQuestionId());
-//        questionResponseDto.setQuestionTitle(question.getQuestionTitle());
-//        questionResponseDto.setQuestionBody(question.getQuestionBody());
-//        questionResponseDto.setQuestionCreatedAt(question.getQuestionCreatedAt());
-//        questionResponseDto.setQuestionModified(question.getQuestionModified());
-//
-//        List<AnswerResponseDto> answerResponseDtos =
-//                answerMapper.answersToAnswerResponseDtos(question.getAnswers());
-//
-//        questionResponseDto.setAnswers(answerResponseDtos);
-//
-//        return questionResponseDto;
-//    }
+        return question;
+    }
 
 
     @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")

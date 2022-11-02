@@ -14,14 +14,14 @@ import java.util.List;
 @Getter
 @Setter
 //@Builder // sh 추가
-@NoArgsConstructor
+@Builder
 public class AnswerResponseDto {
     // post 후 response 내용 answerId , userName, voteNum, answerBody, answerCommnetId
 
 
     private long answerId;
     private String answerBody;
-    private String userName;
+    private String name;
 
     private long questionId;
 
@@ -30,20 +30,20 @@ public class AnswerResponseDto {
     private int answerNum;
 
 
-    private List<AnswerComment> answerComments;
+//    private List<AnswerComment> answerComments;
 
 
 
-    @Builder
-    public AnswerResponseDto(long questionId,String userName,String answerBody,LocalDateTime answerCreatedAt
-    , LocalDateTime answerModified, List<AnswerComment> answerComments){
-        this.questionId = questionId;
-        this.userName = userName;
-        this.answerBody = answerBody;
-        this.answerCreatedAt = answerCreatedAt;
-        this.answerModified = answerModified;
-        this.answerComments = answerComments;
-    }
+
+//    public AnswerResponseDto(Answer answer){
+//        this.answerId = answer.getAnswerId();
+//        this.questionId = answer.getQuestion().getQuestionId();
+//        this.name = answer.getUser().getName();
+//        this.answerBody = answer.getAnswerBody();
+//        this.answerCreatedAt = answer.getAnswerCreatedAt();
+//        this.answerModified = answer.getAnswerModified();
+////        this.answerComments = answer.getAnswerComments();
+//    }
 
 
 
