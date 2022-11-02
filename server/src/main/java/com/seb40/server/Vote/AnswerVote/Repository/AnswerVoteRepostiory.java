@@ -9,7 +9,6 @@ import java.util.List;
 public interface AnswerVoteRepostiory extends JpaRepository<AnswerVote, Long> {
 
 
-    @Query("SELECT sum(av.answerVoteCnt) as answerVoteSum from answerVote av group by av.answer.answerId")
-    List<Object[]> findByAnswerVoteCnt;
+
 
 }

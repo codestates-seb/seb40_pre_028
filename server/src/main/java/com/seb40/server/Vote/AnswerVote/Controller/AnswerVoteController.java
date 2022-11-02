@@ -15,21 +15,21 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 @AllArgsConstructor
 public class AnswerVoteController {
-
-    private final AnswerService answerService;
-    private final UserService userService;
-    private final AswerVoteMapper mapper;
-
-
-    @PostMapping("/{answer_id}/vote")
-    public ResponseEntity postVote(@PathVariable("answer_id") long answerId,
-                                   @Valid @RequestBody AnswerVotePostDto answerVotePostDto){
-
-        answerVotePostDto.setAnswerId(answerId);
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.voteToVoteResponseDto()), HttpStatus.CREATED)
-
-    }
+//
+//    private final AnswerService answerService;
+//    private final UserService userService;
+//    private final AswerVoteMapper mapper;
+//
+//
+//    @PostMapping("/{answer_id}/vote")
+//    public ResponseEntity postVote(@PathVariable("answer_id") long answerId,
+//                                   @Valid @RequestBody AnswerVotePostDto answerVotePostDto){
+//
+//        answerVotePostDto.setAnswerId(answerId);
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(mapper.voteToVoteResponseDto()), HttpStatus.CREATED);
+//
+//    }
 
 }
