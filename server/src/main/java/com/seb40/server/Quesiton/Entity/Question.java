@@ -43,6 +43,9 @@ public class Question{
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    private List<QuestionTag> questionTags = new ArrayList<>();
+
 
 
 }

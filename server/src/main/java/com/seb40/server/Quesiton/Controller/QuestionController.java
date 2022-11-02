@@ -6,6 +6,7 @@ import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
+import com.seb40.server.Quesiton.Service.QuestionTagService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
 import com.seb40.server.User.entity.User;
@@ -31,6 +32,8 @@ public class QuestionController {
     private final UserService userService;
     private final QuestionMapper mapper;
     private final AnswerMapper answerMapper;
+    private final QuestionTagService questionTagService;
+
 
 
 
@@ -76,18 +79,6 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
-
-        //답변수 카운트
-//        List<Object[]> list = questionRepository.findbyAnswerNum();
-//
-//        Iterator iter = list.iterator();
-//        while(iter.hasNext()){
-//            Object[] obj = (Object[]) iter.next();
-//            String questionId = obj[0].toString();
-//            int answerNum = Integer.valueOf(obj[1].toString());
-//
-//            System.out.printf("questionId : %s, answerNum : %d", questionId, answerNum );
-
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
