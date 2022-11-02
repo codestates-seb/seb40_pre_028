@@ -6,6 +6,7 @@ import { useRef } from 'react';
 const ChContainer = styled.div`
   margin-bottom: 0.4rem;
 `;
+
 export default function ChEditor({ onfocus, setInputEl2, onchange }) {
   const edit = useRef(null);
   return (

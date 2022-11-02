@@ -1,11 +1,20 @@
 import { DetailAnswerElement } from './DetailAnswerElement';
 
-export const DetailAnswer = ({ answers }) => {
+export const DetailAnswer = ({
+  answers = [
+    {
+      answerId: 0,
+      answerBody: 'helloo!!!!!!!!!!!!!!!',
+      name: '555',
+      questionId: 2,
+      answerCreatedAt: '2022-11-01T16:04:32.804473',
+      answerModified: '2022-11-01T16:04:32.804473',
+      answerNum: 0,
+    },
+  ],
+}) => {
   return (
     <>
-      {/* 더미데이터 */}
-      {/* <DetailAnswerElement body={'안녕하세요'} createdAt={'2022-01-01 00:00:00'} modified={'2022-01-01 00:00:00'} name={'helloUser'} /> */}
-
       <DetailAnswerElement answers={answers} />
     </>
   );
