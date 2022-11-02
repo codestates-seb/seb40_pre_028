@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { BrowserRouter, NavLink, Routes } from 'react-router-dom';
 
@@ -61,14 +61,14 @@ function Nav() {
     <NavLayout>
       <NavTap>
         <div>public</div>
-        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/que">
+        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/">
           <FaGlobeAmericas className="reactIcon" />
           Question
         </NavLink>
-        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="tags">
+        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/tags">
           Tags
         </NavLink>
-        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="users">
+        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/users">
           Users
         </NavLink>
       </NavTap>

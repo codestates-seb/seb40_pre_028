@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <UserPage />
-      </BrowserRouter>
+      <Router />
     </>
   );
 }
