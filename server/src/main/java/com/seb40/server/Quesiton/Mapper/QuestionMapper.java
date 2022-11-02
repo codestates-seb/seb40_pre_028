@@ -5,9 +5,12 @@ import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
+import com.seb40.server.Quesiton.Dto.QuestionTagDto;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.Quesiton.Entity.QuestionTag;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
+import com.seb40.server.User.service.UserService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,8 +21,9 @@ import java.util.stream.Collectors;
 public interface QuestionMapper {
 
 
-    default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
+    default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){ // <- 원래 이거
         Question question = new Question();
+
 
         question.setQuestionTitle(questionPostDto.getQuestionTitle());
         question.setQuestionBody(questionPostDto.getQuestionBody());
@@ -27,6 +31,8 @@ public interface QuestionMapper {
 
         return question;
     }
+
+
     default User questionPostDtoUser(QuestionPostDto dto){
         User user = new User();
         user.setUserId(dto.getUserId());
@@ -64,6 +70,28 @@ public interface QuestionMapper {
                         .build())
                 .collect(Collectors.toList());
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
