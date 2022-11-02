@@ -22,6 +22,7 @@ import javax.validation.constraints.Positive;
 import java.util.Iterator;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Transactional
 @RequestMapping("/user/question")
 @RestController
