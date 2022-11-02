@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { AiOutlineSearch } from 'react-icons/ai';
+import React from 'react';
 
 function Tags() {
   return (

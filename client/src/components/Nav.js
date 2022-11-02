@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from 'react';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { BrowserRouter, NavLink, Routes } from 'react-router-dom';
 
