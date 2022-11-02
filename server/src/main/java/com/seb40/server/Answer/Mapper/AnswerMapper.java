@@ -43,7 +43,7 @@ public interface AnswerMapper {
     default Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto) {
         Answer answer = new Answer();
         answer.setAnswerId(answerPatchDto.getAnswerId());
-        answer.setAnswerBody(answer.getAnswerBody());
+        answer.setAnswerBody(answerPatchDto.getAnswerBody());
 
         return answer;
     }
