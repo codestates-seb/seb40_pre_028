@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  border: red 1px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -29,13 +28,12 @@ export const Container = styled.div`
   }
 `;
 
-const LeftCounts = () => {
-  const [vote, view, answers] = [1, 2, 3];
+const LeftCounts = ({ votes, answers, views }) => {
   return (
     <Container>
-      <Wrapper>{vote} votes</Wrapper>
+      <Wrapper>{votes} votes</Wrapper>
       <Wrapper>{answers} answers</Wrapper>
-      <Wrapper>{view} views</Wrapper>
+      <Wrapper>{views} views</Wrapper>
     </Container>
   );
 };

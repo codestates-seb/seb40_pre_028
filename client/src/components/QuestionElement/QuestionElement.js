@@ -1,25 +1,17 @@
 import styled from 'styled-components';
 import LeftCounts from './LeftCounts';
+import { getDateToString } from '../../utils/dateFormat';
+import { Link } from 'react-router-dom';
 
-export const MainUList = styled.ul`
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 16px;
-  padding: 0px 0px 5px 0px;
-
-  @media (max-width: 640px) {
-    justify-content: flex-start;
-    flex-direction: column;
-  }
-`;
+//! UI
 
 export const SQuestionList = styled.li`
   display: flex;
   flex-flow: row nowrap;
   row-gap: 7px;
-  padding: 14px;
+  padding: 16px;
   width: 100%;
-  border-top: 0.2px solid var(--black-100);
+  border-top: 1px solid var(--black-100);
 
   @media (max-width: 640px) {
     justify-content: flex-start;
@@ -27,7 +19,7 @@ export const SQuestionList = styled.li`
   }
 `;
 
-export const Container = styled.section`
+export const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
@@ -35,7 +27,8 @@ export const Container = styled.section`
   width: 100%;
 `;
 
-export const STitleLink = styled.a`
+// 라우터 Link로 바꿔야함
+export const STitleLink = styled(Link)`
   margin-bottom: 5px;
   font-size: 17px;
   line-height: 1.4rem;
@@ -55,10 +48,9 @@ export const STextP = styled.p`
   font-size: 14px;
   color: var(--black-700);
   margin-bottom: 8px;
-  padding-right: 23px;
   line-height: 1.3rem;
   max-height: 43px;
-  width: calc(100%);
+  width: 100%;
   overflow: hidden;
   word-break: break-all;
 
@@ -74,28 +66,25 @@ export const ContentFooter = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding-right: 23px;
 `;
 
 export const Tags = styled.div`
   display: flex;
   flex-flow: wrap;
   row-gap: 1px;
+  margin-bottom: 8px;
 
-  @media (max-width: 640px) {
-    margin-bottom: 5px;
-  }
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: var(--blue-600);
-    background-color: var(--blue-100);
+    font-size: 12px;
+    color: var(--powder-700);
+    background-color: var(--powder-100);
     border-radius: 3px;
     padding: 2px 6px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 2px;
+    padding: 4.8px 6px;
     cursor: pointer;
   }
 `;
@@ -128,35 +117,31 @@ export const UserAsked = styled.div`
   color: var(--black-600);
 `;
 
-const UserFooter = () => {
+const Tag = ({ tag }) => {
+  return <div>{tag}</div>;
+};
+
+const QuestionElement = ({ title, body, tag = ['Tag1'], name = 'User Name', createdAt, votes = 1, answers, views = 3 }) => {
   return (
-    <UserContainer>
-      <UserName>User name</UserName>
-      <UserAsked>asked 1 hour ago</UserAsked>
-    </UserContainer>
+    <SQuestionList>
+      <LeftCounts votes={votes} answers={answers} views={views} />
+      <SectionContainer>
+        <STitleLink to="/question">{title}</STitleLink>
+        <STextP>{body.length > 160 ? `${body.slice(0, 160)}...` : body}</STextP>
+        <ContentFooter>
+          <Tags>
+            {tag.map(tag => (
+              <Tag key={tag} tag={tag} />
+            ))}
+          </Tags>
+          <UserContainer>
+            <UserName>{name}</UserName>
+            <UserAsked> {`asked ${getDateToString(createdAt)}`}</UserAsked>
+          </UserContainer>
+        </ContentFooter>
+      </SectionContainer>
+    </SQuestionList>
   );
 };
 
-const QuestionElement = () => {
-  return (
-    <MainUList>
-      <SQuestionList>
-        <LeftCounts />
-        <Container>
-          <STitleLink>This is subject</STitleLink>
-          <STextP>This is content</STextP>
-          <ContentFooter>
-            <Tags>
-              <div>Tag1</div>
-              <div>Tag2</div>
-              <div>Tag3</div>
-            </Tags>
-            <UserFooter />
-          </ContentFooter>
-        </Container>
-      </SQuestionList>
-    </MainUList>
-  );
-};
-
-export default QuestionElement;
+export { QuestionElement };

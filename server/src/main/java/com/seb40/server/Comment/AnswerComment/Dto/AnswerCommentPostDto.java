@@ -9,11 +9,11 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class AnswerCommentPostDto {
 
     private long answerCommentId;
+    private long answerId;
+    private long userId;
 
     @NotBlank
     private String answerCommentBody;

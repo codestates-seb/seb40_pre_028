@@ -26,13 +26,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.google.code.gson:gson:2.8.7'
 	implementation 'mysql:mysql-connector-java'
-	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
 
 	compileOnly 'org.projectlombok:lombok'
 	//runtimeOnly 'com.h2database:h2'
 
 	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//testImplementation 'org.springframework.security:spring-security-test'

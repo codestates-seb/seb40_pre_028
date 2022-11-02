@@ -1,36 +1,20 @@
 package com.seb40.server.Quesiton.Mapper;
 
+import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
-import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
+import com.seb40.server.Quesiton.Dto.QuestionResponseDto.QuestionResponseDtoBuilder;
 import com.seb40.server.Quesiton.Entity.Question;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-27T14:19:37+0900",
-
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+    date = "2022-11-02T01:02:59+0900",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
-
-    @Override
-    public Question questionPostDtoToQuestion(QuestionPostDto questionPostDto) {
-        if ( questionPostDto == null ) {
-            return null;
-        }
-
-        Question question = new Question();
-
-        question.setQuestionTitle( questionPostDto.getQuestionTitle() );
-        question.setQuestionBody( questionPostDto.getQuestionBody() );
-
-        return question;
-    }
 
     @Override
     public Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {
@@ -48,31 +32,24 @@ public class QuestionMapperImpl implements QuestionMapper {
     }
 
     @Override
-    public QuestionResponseDto questionToQuestionResponseDto(Question question) {
-        if ( question == null ) {
+    public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper) {
+        if ( question == null && answerMapper == null ) {
             return null;
         }
 
-        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        QuestionResponseDtoBuilder questionResponseDto = QuestionResponseDto.builder();
 
-        questionResponseDto.setQuestionId( question.getQuestionId() );
-        questionResponseDto.setQuestionTitle( question.getQuestionTitle() );
-        questionResponseDto.setQuestionBody( question.getQuestionBody() );
-
-        return questionResponseDto;
-    }
-
-    @Override
-    public List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions) {
-        if ( questions == null ) {
-            return null;
+        if ( question != null ) {
+            questionResponseDto.questionId( question.getQuestionId() );
+            questionResponseDto.questionTitle( question.getQuestionTitle() );
+            questionResponseDto.questionBody( question.getQuestionBody() );
+            questionResponseDto.questionCreatedAt( question.getQuestionCreatedAt() );
+            questionResponseDto.questionModified( question.getQuestionModified() );
+            questionResponseDto.answerNum( question.getAnswerNum() );
         }
+        questionResponseDto.answers( answerMapper.answersToAnswerResponseDtos(question.getAnswers()) );
+        questionResponseDto.name( question.getUser().getName() );
 
-        List<QuestionResponseDto> list = new ArrayList<QuestionResponseDto>( questions.size() );
-        for ( Question question : questions ) {
-            list.add( questionToQuestionResponseDto( question ) );
-        }
-
-        return list;
+        return questionResponseDto.build();
     }
 }

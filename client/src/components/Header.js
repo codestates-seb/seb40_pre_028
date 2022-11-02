@@ -3,11 +3,15 @@ import { ReactComponent as Sprites } from '../assets/img/sprites.svg';
 import { MdSearch } from 'react-icons/md';
 import { BlueButton, PowderButton } from './DefaultButton';
 import { UserMenus } from './UserToolbar/UserToolbar';
+import { SearchModal } from '../components/SearchModal';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SHeader = styled.header`
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 50px;
   background-color: var(--black-025);
@@ -28,10 +32,9 @@ export const SHeader = styled.header`
 
 export const SNav = styled.nav`
   display: flex;
-  flex-flow: row nowrap;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1264px;
   height: 50px;
   padding-top: 3px;
 `;
@@ -51,6 +54,7 @@ export const LogoBox = styled.div`
   cursor: pointer;
   height: 100%;
   overflow: hidden;
+  transition: background-color 0.4s;
   a {
     display: block;
     position: absolute;
@@ -81,7 +85,7 @@ export const HeaderButton = styled.button`
   }
 `;
 
-export const SearchBox = styled.form`
+export const SearchContainer = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +93,6 @@ export const SearchBox = styled.form`
   height: 100%;
   padding: 0 10px;
   position: relative;
-  overflow: hidden;
   // 돋보기 아이콘에 적용
   > *:first-child {
     position: absolute;
@@ -122,24 +125,31 @@ export const AuthBtns = styled.div`
 
 function Header() {
   const isLogIn = false;
+  let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
     <SHeader>
       <SNav>
         <LogoBox>
+          <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
         <HeaderButton>Products</HeaderButton>
-        <SearchBox>
+        <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
-        </SearchBox>
+          {!!isSearchModalOpen && <SearchModal setIsSearchModalOpen={setIsSearchModalOpen} />}
+        </SearchContainer>
         {isLogIn ? (
           <UserMenus />
         ) : (
           <AuthBtns>
-            <PowderButton>Log in</PowderButton>
-            <BlueButton>Sign up</BlueButton>
+            <Link to="/login">
+              <PowderButton>Log in</PowderButton>
+            </Link>
+            <Link to="/signup">
+              <BlueButton>Sign up</BlueButton>
+            </Link>
           </AuthBtns>
         )}
       </SNav>

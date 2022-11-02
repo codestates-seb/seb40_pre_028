@@ -2,16 +2,17 @@ package com.seb40.server.Answer.Entity;
 
 
 
-import lombok.AllArgsConstructor;
+import com.seb40.server.Comment.AnswerComment.Entity.AnswerComment;
+import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.User.entity.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity // DB 테이블 뜻 함
@@ -19,14 +20,23 @@ import java.time.LocalDateTime;
 public class Answer {
 
     @Id // PK
+    @Column(name="answer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
-    private long answerId;
+    private Long answerId;
 
-    // @ManyToOne 연결해야함
-    private long questionId;
+    @ManyToOne(targetEntity = Question.class)
+    @JoinColumn(name="question_id")  //questionId ->question_id
+    private Question question; //추가
 
-    // @ManyToOne 연결해야함
-    private long userId;
+//    public void setQuestion(Question question){
+//        this.question.getQuestionId();
+//    }
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name ="user_id")
+    private User user;
+
+    public void setUser(User user){this.user = user;}
 
     @Column(nullable = false)
     private LocalDateTime answerCreatedAt = LocalDateTime.now();
@@ -34,6 +44,18 @@ public class Answer {
     @Column(nullable = false)
     private LocalDateTime answerModified  = LocalDateTime.now();
 
+    @Column(nullable = false)
     private String answerBody;
+
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
+    private List<AnswerComment> answerComments = new ArrayList<>();
+
+    // 답변투표와 연결
+//    private int answerVoteValue;
+
+//    public Answer (String answerBody){
+//
+//        this.answerBody = answerBody;
+//    }
 
 }
