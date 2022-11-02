@@ -4,8 +4,9 @@ import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
+import { Link } from 'react-router-dom';
 
-const SMainBar = styled.div`
+export const MainCointainer = styled.div`
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -61,7 +62,7 @@ export const MainUList = styled.ul`
   border-bottom: 1px solid var(--black-100);
 `;
 
-export function MainBar() {
+export function QuestionList() {
   let [questions, setQuestions] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
   let [page, setPage] = useState(1);
@@ -76,7 +77,7 @@ export function MainBar() {
   }, [page, perPage]);
 
   const getData = async () => {
-    const res = await fetch(URL);
+    const res = await fetch(URL, { headers: { 'ngrok-skip-browser-warning': 'skip' } });
     const data = await res.json();
     setTotalElements(data.pageInfo.totalElements);
 
@@ -89,35 +90,48 @@ export function MainBar() {
   };
 
   return (
-    <SMainBar>
+    <MainCointainer>
       <HeaderContainer>
         <h1>All Questions</h1>
-        <BlueButton height="40px">Ask Question</BlueButton>
+        <Link to="/ask">
+          <BlueButton height="40px">Ask Question</BlueButton>
+        </Link>
       </HeaderContainer>
       <InfoContainer>
         <div>{totalElements} questions</div>
         <SortButton nameList={['Newest', 'Votes']} />
       </InfoContainer>
       <MainUList>
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          questions.map(question => (
-            <QuestionElement
-              key={question.questionId}
-              title={question.questionTitle}
-              body={question.questionBody}
-              tag={question.tag}
-              name={question.name}
-              createdAt={question.questionCreatedAt}
-              votes={question.votes}
-              answers={question.answers.length}
-              views={question.views}
-            />
-          ))
-        )}
+        {/* 더미데이터 */}
+        <QuestionElement
+          title={'Hi, how I can make a dashboard with JS but I can add graphs according to what is loaded in the excel file or csv file'}
+          body={
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+          }
+          tag={['JavaScript', 'Java', 'HTML']}
+          name={'일곱ㅎ쟁이'}
+          createdAt={'2022-01-01 00:00:00'}
+          votes={123}
+          answers={123}
+          views={123}
+        />
+        {isLoading
+          ? null
+          : questions.map(question => (
+              <QuestionElement
+                key={question.questionId}
+                title={question.questionTitle}
+                body={question.questionBody}
+                tag={question.tag}
+                name={question.name}
+                createdAt={question.questionCreatedAt}
+                votes={question.votes}
+                answers={question.answers.length}
+                views={question.views}
+              />
+            ))}
       </MainUList>
       <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
-    </SMainBar>
+    </MainCointainer>
   );
 }
