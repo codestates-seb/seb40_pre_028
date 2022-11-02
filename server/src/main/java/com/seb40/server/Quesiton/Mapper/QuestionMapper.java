@@ -1,3 +1,61 @@
+//
+//default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
+//        Question question = new Question();
+//
+//        question.setQuestionTitle(questionPostDto.getQuestionTitle());
+//        question.setQuestionBody(questionPostDto.getQuestionBody());
+//        question.setUser(questionPostDtoUser(questionPostDto));
+//
+//        return question;
+//        }
+//default User questionPostDtoUser(QuestionPostDto dto){
+//        User user = new User();
+//        user.setUserId(dto.getUserId());
+//        user.setName(dto.getName());
+//
+//
+//        return user;
+//        }
+//
+//default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
+//        Question question = new Question();
+//
+//        question.setQuestionId(questionPatchDto.getQuestionId());
+//        question.setQuestionTitle(questionPatchDto.getQuestionTitle());
+//        question.setQuestionBody(questionPatchDto.getQuestionBody());
+//
+//        return question;
+//        }
+//
+//
+//@Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+//@Mapping(target = "name",expression = "java(question.getUser().getName())")
+//    QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
+//default List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
+//        return questions.stream()
+//        .map(question -> QuestionResponseDto
+//        .builder()
+//        .questionId(question.getQuestionId())
+//        .questionTitle(question.getQuestionTitle())
+//        .questionBody(question.getQuestionBody())
+//        .name(question.getUser().getName())
+//        .questionCreatedAt(question.getQuestionCreatedAt())
+//        .questionModified(question.getQuestionModified())
+//        .answerNum(question.getAnswers().size()) // 답변 수 세기
+//        .build())
+//        .collect(Collectors.toList());
+//        }
+
+
+
+
+
+
+
+
+
+
+
 package com.seb40.server.Quesiton.Mapper;
 
 
@@ -7,10 +65,8 @@ import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Entity.QuestionTag;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
-import com.seb40.server.User.service.UserService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,12 +125,28 @@ public interface QuestionMapper {
     // 따로 responseDto를 만들것인지 아니면 어차피 내생각엔 question엔티티 안에 tag 리스트가 포함된것 같은데
     // 같이 responseDto에 넣을것인지.
 
-    @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
-    @Mapping(target = "name",expression = "java(question.getUser().getName())")
-    QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper);
-    default List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
+//    @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+//    @Mapping(target = "name",expression = "java(question.getUser().getName())")
+    default QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper){
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        questionResponseDto.setQuestionId(question.getQuestionId());
+        questionResponseDto.setQuestionTitle(question.getQuestionTitle());
+        questionResponseDto.setQuestionBody(question.getQuestionBody());
+        questionResponseDto.setQuestionCreatedAt(question.getQuestionCreatedAt());
+        questionResponseDto.setQuestionModified(question.getQuestionModified());
+        questionResponseDto.setQuestionTags(question.getQuestionTags());
+        questionResponseDto.setAnswerNum(question.getAnswerNum());
+        questionResponseDto.setAnswers(answerMapper.answersToAnswerResponseDtos(question.getAnswers()));
+        questionResponseDto.setName(question.getUser().getName());
+
+        return questionResponseDto;
+    }
+
+
+
+    default List<QuestionsResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
         return questions.stream()
-                .map(question -> QuestionResponseDto
+                .map(question -> QuestionsResponseDto
                         .builder()
                         .questionId(question.getQuestionId())
                         .questionTitle(question.getQuestionTitle())

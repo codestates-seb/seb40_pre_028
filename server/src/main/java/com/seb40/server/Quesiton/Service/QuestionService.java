@@ -44,13 +44,11 @@ public class QuestionService {
         Optional.ofNullable(question.getQuestionModified()) //업데이트 날짜 수정
                 .ifPresent(questionModified->findQuestion.setQuestionModified(questionModified));
         Question updatedQuestion = questionRepository.save(findQuestion);
-
         return questionRepository.save(findQuestion);
     }
 
     // 선택 질문 요청
     public Question findQuestion(long questionId){
-
         return findVerifiedQuestion(questionId);
     }
 
@@ -75,6 +73,4 @@ public class QuestionService {
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));
         return findQuestion;
     }
-
-
 }
