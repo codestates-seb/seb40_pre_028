@@ -13,7 +13,6 @@ public interface UserMapper {
 
     @Mapping(target="userId")
     User userPostDtoUser(UserPostDto userDto);
-
     User userLoginDtoUser(UserLoginDto userLoginDto);
     UserResponseDto userToUserResponseDto(User user);
 

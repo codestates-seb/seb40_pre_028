@@ -16,8 +16,10 @@ public interface AnswerCommentMapper {
     AnswerComment commentPostDtoToComment(AnswerCommentPostDto commentPostDto);
     AnswerComment commentPatchDtoToComment(AnswerCommentPatchDto commentPatchDto);
 
-    List<AnswerCommentResponseDto> commentsToCommentResponseDtos(List<AnswerComment> comments);
-    @Mapping(target = "answerId", expression = "java(comment.getAnswer().getAnswerId())")
-    AnswerCommentResponseDto commentToCommentResponseDto(AnswerComment comment);
+//    List<AnswerCommentResponseDto> commentsToCommentResponseDtos(List<AnswerComment> comments);
+//    @Mapping(target = "answerId", expression = "java(comment.getAnswer().getAnswerId())")
+//    default AnswerCommentResponseDto commentToCommentResponseDto(AnswerComment comment){
+//        AnswerCommentResponseDto answerCommentResponseDto =
+//    }
 
 }
