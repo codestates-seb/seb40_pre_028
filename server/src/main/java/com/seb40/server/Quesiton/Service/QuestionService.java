@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     private final QuestionRepository questionRepository ;
+    private final QuestionTagService questionTagService;
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -42,6 +43,8 @@ public class QuestionService {
         // 수정 날짜 및 시간 수정
         Optional.ofNullable(question.getQuestionModified()) //업데이트 날짜 수정
                 .ifPresent(questionModified->findQuestion.setQuestionModified(questionModified));
+        Question updatedQuestion = questionRepository.save(findQuestion);
+
         return questionRepository.save(findQuestion);
     }
 

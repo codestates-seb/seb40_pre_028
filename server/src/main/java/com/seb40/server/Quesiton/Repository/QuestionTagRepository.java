@@ -14,4 +14,6 @@ public interface QuestionTagRepository extends JpaRepository<QuestionTag, Long> 
     @Query(value = "select * from questions_tag where question_id = :questionId",nativeQuery = true)
     List<QuestionTag> findAllByQuestionId(@Param("questionId") long questionId);
 
+    //List<QuestionTag> findAllByQuestionAndQuestionsTagStatus(Question question, QuestionTag.QuestionsTagStatus questionsTagStatus);
+
 }

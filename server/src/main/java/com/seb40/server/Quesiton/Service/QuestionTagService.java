@@ -19,6 +19,4 @@ public class QuestionTagService { // 태그 삭제 안할거면 일단 status필
     public List<QuestionTag> createQuestionTags(List<QuestionTag> questionTags){
         return questionTags.stream().map(questionTag -> questionTagRepository.save(questionTag)).collect(Collectors.toList());
     }
-
-
 }
