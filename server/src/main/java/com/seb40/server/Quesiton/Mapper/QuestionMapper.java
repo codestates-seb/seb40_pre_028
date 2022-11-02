@@ -62,6 +62,7 @@ public interface QuestionMapper {
                         .questionCreatedAt(question.getQuestionCreatedAt())
                         .questionModified(question.getQuestionModified())
                         .answerNum(question.getAnswers().size()) // 답변 수 세기
+                        .views(question.getViews())
                         .build())
                 .collect(Collectors.toList());
     }
