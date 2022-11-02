@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Aside } from '../components/Aside';
 import { Nav } from '../components/Nav';
 import { Outlet } from 'react-router-dom';
 
