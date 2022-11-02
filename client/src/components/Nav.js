@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-import React from 'react';
+import styled, { css } from 'styled-components';
 import { FaGlobeAmericas } from 'react-icons/fa';
-import { BrowserRouter, NavLink, Routes } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 
 const NavTap = styled.div`
   display: inline-block;
@@ -27,6 +26,16 @@ const NavTap = styled.div`
       padding-left: 15px;
       display: flex;
       margin-left: 15px;
+      ${props =>
+        props.isHome === 'true' &&
+        css`
+          border-right: 3px solid #f38225;
+          background-color: #f1f2f3;
+          color: #0d0d0e;
+          font-weight: bold;
+          margin-left: 30px;
+          font-size: 15px;
+        `}
     }
     &.choiceyes {
       border-right: 3px solid #f38225;
@@ -35,6 +44,7 @@ const NavTap = styled.div`
       font-weight: bold;
       margin-left: 30px;
       font-size: 15px;
+      padding-left: 15px;
     }
 
     .reactIcon {
@@ -51,20 +61,46 @@ const NavTap = styled.div`
   }
 `;
 
+const SLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  height: 40px;
+  margin-left: 15px;
+  color: #525960;
+  font-size: 15px;
+  padding-left: 15px;
+  display: flex;
+  margin-left: 15px;
+  ${props =>
+    props.isHome === 'true' &&
+    css`
+      border-right: 3px solid #f38225;
+      background-color: #f1f2f3;
+      color: #0d0d0e;
+      font-weight: bold;
+      margin-left: 30px;
+      font-size: 15px;
+    `}
+`;
+
 const NavLayout = styled.div`
   border-right: solid var(--black-100) 1px;
   /* width: 162px; */
 `;
 
 function Nav() {
+  const match = useMatch('/');
+  const isHome = (match?.pathname === '/').toString();
+  console.log(match);
+
   return (
     <NavLayout>
       <NavTap>
         <div>public</div>
-        <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="/que">
+        <SLink isHome={isHome} to="/">
           <FaGlobeAmericas className="reactIcon" />
           Question
-        </NavLink>
+        </SLink>
         <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="tags">
           Tags
         </NavLink>

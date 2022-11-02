@@ -8,6 +8,7 @@ import QuestionDetail from './pages/QuestionDetail';
 import { QuestionList } from './components/QuestionList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';
+import Tags from './pages/Tags';
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
           <Route element={<MiddleContainer />}>
             {/* nav */}
             <Route path=":id" element={<QuestionDetail />} />
+            <Route path="tags" element={<Tags />} />
             <Route path="*" element={<NotFound />} />
             <Route element={<MainBox />}>
               {/* aside */}
