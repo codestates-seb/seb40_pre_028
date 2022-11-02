@@ -73,5 +73,12 @@ public class QuestionService {
         return findQuestion;
     }
 
+    public Question addViews(Question question){
+        long views = question.getViews();
+        views++;
+        question.setViews(views);
+
+        return questionRepository.save(question);
+    }
 
 }

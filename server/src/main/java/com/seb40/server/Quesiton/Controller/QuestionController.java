@@ -62,6 +62,7 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question_id") @Positive long questionId) {
 
         Question response = questionService.findQuestion(questionId);
+        response = questionService.addViews(response);
 
         return new ResponseEntity<>( //수정
                 new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))

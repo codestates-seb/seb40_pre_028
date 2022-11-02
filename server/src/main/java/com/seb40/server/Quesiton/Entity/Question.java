@@ -34,6 +34,7 @@ public class Question{
 
     private int answerNum;
 
+    private long views;
 
     private String questionTitle;
     private String questionBody;
