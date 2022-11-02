@@ -102,6 +102,7 @@ export function QuestionList() {
       <MainUList>
         {/* 더미데이터 */}
         <QuestionElement
+          id={1}
           title={'Hi, how I can make a dashboard with JS but I can add graphs according to what is loaded in the excel file or csv file'}
           body={
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
@@ -109,25 +110,28 @@ export function QuestionList() {
           tag={['JavaScript', 'Java', 'HTML']}
           name={'일곱ㅎ쟁이'}
           createdAt={'2022-01-01 00:00:00'}
-          votes={123}
-          answers={123}
-          views={123}
+          votes={1}
+          answers={2}
+          views={3}
         />
-        {isLoading
-          ? null
-          : questions.map(question => (
-              <QuestionElement
-                key={question.questionId}
-                title={question.questionTitle}
-                body={question.questionBody}
-                tag={question.tag}
-                name={question.name}
-                createdAt={question.questionCreatedAt}
-                votes={question.votes}
-                answers={question.answers}
-                views={question.views}
-              />
-            ))}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          questions.map(question => (
+            <QuestionElement
+              key={question.questionId}
+              id={question.questionId}
+              title={question.questionTitle}
+              body={question.questionBody}
+              tag={question.tag}
+              name={question.name}
+              createdAt={question.questionCreatedAt}
+              votes={question.votes}
+              answers={question.answers.length}
+              views={question.views}
+            />
+          ))
+        )}
       </MainUList>
       <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
     </MainCointainer>

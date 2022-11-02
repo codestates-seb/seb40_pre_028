@@ -10,7 +10,6 @@ public enum ExceptionCode {
     ANSWER_NOT_FOUND(404, "Answer not found"),
     TAG_NOT_FOUND(404, "Tag not found"),
     USER_EXISTS(409, "User exists"),
-
     Question_EXISTS(409, "Question exists"),
 
     NOT_IMPLEMENTATION(501, "Not Implementation");

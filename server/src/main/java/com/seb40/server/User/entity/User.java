@@ -1,15 +1,11 @@
 package com.seb40.server.User.entity;
 
-import com.seb40.server.Quesiton.Entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Getter
 @Setter
@@ -32,5 +28,10 @@ public class User {
 
     @Column(nullable = false, name ="user_password")
     private String password;
+
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<Question> qestions = new ArrayList<>();
+
 
 }
