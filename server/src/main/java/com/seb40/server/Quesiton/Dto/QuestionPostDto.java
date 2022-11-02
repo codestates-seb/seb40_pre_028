@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +25,7 @@ public class QuestionPostDto {
 
     @NotBlank
     private String questionBody;
+
+    @NotNull(message = "태그를 기입해주세요.") // 태그 넣을 수 있게 했고,
+    private List<QuestionTagDto> questionTags;
 }

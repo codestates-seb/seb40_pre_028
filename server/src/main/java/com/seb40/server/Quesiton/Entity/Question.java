@@ -34,7 +34,9 @@ public class Question{
 
     private int answerNum;
 
+
     private long views;
+
 
     private String questionTitle;
     private String questionBody;
@@ -42,6 +44,9 @@ public class Question{
     private LocalDateTime questionCreatedAt = LocalDateTime.now();
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    private List<QuestionTag> questionTags = new ArrayList<>();
 
 
 
