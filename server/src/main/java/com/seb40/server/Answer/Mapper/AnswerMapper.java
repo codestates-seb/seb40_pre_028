@@ -4,11 +4,9 @@ import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
-import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
 import com.seb40.server.Quesiton.Entity.Question;
-import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.User.entity.User;
-import com.seb40.server.User.mapper.UserMapper;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -48,16 +46,13 @@ public interface AnswerMapper {
         answer.setAnswerBody(answer.getAnswerBody());
 
         return answer;
-
     }
 
     @Mapping(source = "answer.user.name", target = "name")
     @Mapping(source = "answer.question.questionId", target = "questionId")
     AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 
-    // AnswerResponseDto 타입의 List mapper 파라미터로 List<Answer> 타입의 Answer 를 받는다.
 
-    //   List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
     default List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers){
         return answers.stream()
                 .map(answer -> AnswerResponseDto
@@ -71,7 +66,4 @@ public interface AnswerMapper {
                 .collect(Collectors.toList());
 
     }
-
-//    List<AnswerResponseDto> answerResponseDtoToAnswerResponseDtos(List<AnswerResponseDto> answerResponseDtos);
-
 }
