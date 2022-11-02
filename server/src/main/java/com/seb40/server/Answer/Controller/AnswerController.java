@@ -39,7 +39,6 @@ public class AnswerController {
     private final QuestionService questionService;
     private final UserService userService;
     private final AnswerMapper mapper;
-//    private final AnswerCommentMapper answerCommentMapper;
 
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id") long questionId,
