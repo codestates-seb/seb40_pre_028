@@ -9,6 +9,7 @@ import { QuestionList } from './components/QuestionList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Tags from './pages/Tags';
+import UserPage from './pages/UserPage';
 
 function Router() {
   return (
@@ -24,7 +25,7 @@ function Router() {
             <Route index element={<QuestionList />} />
             <Route path="tags" element={<Tags />} />
             <Route path=":id" element={<QuestionDetail />} />
-            <Route path="tags" element={<Tags />} />
+            <Route path="users" element={<UserPage />} />
             <Route path="*" element={<NotFound />} />
             {/* <Route path="/" element={<MainBox />}> */}
             {/* aside */}
