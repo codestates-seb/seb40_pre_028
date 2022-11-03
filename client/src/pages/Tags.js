@@ -103,7 +103,7 @@ const TagLayout = styled.div`
 const TagFrom = styled.div`
   h1 {
     font-size: 27px;
-    margin: 0px 0px 16px;
+    margin: 0px 0px 27px;
   }
   p {
     overflow: auto;
@@ -123,7 +123,7 @@ const TagFrom = styled.div`
 const FilterBar = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 30px;
 
   .searchBar {
     border: 1px solid gray;
