@@ -6,6 +6,8 @@ import { UserMenus } from './UserToolbar/UserToolbar';
 import { SearchModal } from '../components/SearchModal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSlice } from '../App';
 
 export const SHeader = styled.header`
   display: flex;
@@ -122,32 +124,13 @@ export const AuthBtns = styled.div`
   column-gap: 3px;
   margin-right: 20px;
 `;
-const Userbox = styled.div`
-  width: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  span {
-    margin-right: 5px;
-  }
-`;
-const UserIcon = styled.div`
-  background-color: var(--blue-200);
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: var(--blue-300);
-  }
-`;
 function Header() {
-  // const isLogIn = true;
   let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
+  //redux
+  const isLogin = useSelector(state => state.auth.isLogin);
+  const dispatch = useDispatch();
   return (
     <SHeader>
       <SNav>
@@ -155,7 +138,13 @@ function Header() {
           <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
-        <HeaderButton onClick={() => setIsLogin(!isLogin)}>Products</HeaderButton>
+        <HeaderButton
+          onClick={() => {
+            dispatch(authSlice.actions.login());
+          }}
+        >
+          Products
+        </HeaderButton>
         <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
@@ -171,14 +160,6 @@ function Header() {
             <Link to="/signup">
               <BlueButton>Sign up</BlueButton>
             </Link>
-            {isLogin ? (
-              <Userbox>
-                <span>히쟁이님</span>
-                <UserIcon />
-              </Userbox>
-            ) : (
-              ''
-            )}
           </AuthBtns>
         )}
       </SNav>

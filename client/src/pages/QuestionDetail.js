@@ -44,12 +44,14 @@ export default function QuestionDetail() {
   const { id } = useParams();
   const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/`;
 
+
   const getData = async () => {
     const res = await fetch(URL + `question/${id}`);
     const data = await res.json();
     setQuestion(data.data);
     setIsLoading(false);
   };
+
 
   useEffect(() => {
     getData();

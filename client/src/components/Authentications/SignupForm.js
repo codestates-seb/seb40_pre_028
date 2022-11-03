@@ -2,6 +2,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { FaQuestionCircle } from 'react-icons/fa';
 import * as LoginForm from './LoginForm.js';
+import { useDispatch } from 'react-redux';
+import { authSlice } from '../../App.js';
+import { useNavigate } from 'react-router-dom';
 
 const Form = styled(LoginForm.Form)`
   display: flex;
@@ -123,6 +126,12 @@ export function SignupForm() {
   // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
+  //  redux state
+  const dispatch = useDispatch();
+
+  // router
+  const navigate = useNavigate();
+
   const formSubmitHandler = e => {
     e.preventDefault();
 
@@ -164,9 +173,10 @@ export function SignupForm() {
       })
       .then(data => {
         console.log(data);
+        dispatch(authSlice.actions.login());
         window.localStorage.setItem('user', JSON.stringify(data));
-        window.localStorage.setItem('auth', JSON.stringify(true));
-        // window.location.href = 'http://localhost:3000';
+        window.localStorage.setItem('auth', true);
+        navigate('/');
       })
       .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };

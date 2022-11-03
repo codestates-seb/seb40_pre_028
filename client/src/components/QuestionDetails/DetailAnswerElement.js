@@ -24,6 +24,9 @@ const Answer = styled.div`
   a {
     color: #0074cc;
   }
+
+  h1 {
+  }
 `;
 
 const AnswerCount = styled.div`

@@ -5,6 +5,7 @@ import { useRef } from 'react';
 
 const ChContainer = styled.div`
   margin-bottom: 0.4rem;
+
   .ck-editor__editable {
     min-height: 150px;
   }
@@ -41,7 +42,6 @@ export default function ChEditor({ onfocus, setInputEl2, onchange }) {
         onChange={(event, editor) => {
           const data = editor.getData();
           // console.log({ event, editor, data });
-          // console.log(data.slice(3, -4));
           onchange?.(data.slice(3, -4));
         }}
         onFocus={() => {
