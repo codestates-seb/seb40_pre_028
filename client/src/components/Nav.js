@@ -72,7 +72,7 @@ const SLink = styled(NavLink)`
   display: flex;
   margin-left: 15px;
   ${props =>
-    props.isHome === 'true' &&
+    props.ishome === 'true' &&
     css`
       border-right: 3px solid #f38225;
       background-color: #f1f2f3;
@@ -90,14 +90,14 @@ const NavLayout = styled.div`
 
 function Nav() {
   const match = useMatch('/');
-  const isHome = (match?.pathname === '/').toString();
+  const ishome = (match?.pathname === '/').toString();
   console.log(match);
 
   return (
     <NavLayout>
       <NavTap>
         <div>public</div>
-        <SLink isHome={isHome} to="/">
+        <SLink ishome={ishome} to="/">
           <FaGlobeAmericas className="reactIcon" />
           Question
         </SLink>
