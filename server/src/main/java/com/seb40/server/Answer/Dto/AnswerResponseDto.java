@@ -2,7 +2,6 @@ package com.seb40.server.Answer.Dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -22,6 +21,6 @@ public class AnswerResponseDto {
 
     private LocalDateTime answerCreatedAt;
     private LocalDateTime answerModified;
-//    private int answerNum;
+    private int answerNum;
 
 }

@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import javax.validation.Valid;
-import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
