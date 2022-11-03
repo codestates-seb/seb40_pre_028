@@ -1,4 +1,6 @@
+
 package com.seb40.server.Vote.AnswerVote.Controller;
+
 
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVotePatchDto;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVoteResponseDto;
@@ -9,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import javax.validation.Valid;
-import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -17,7 +18,6 @@ import java.util.List;
 @RequestMapping("/user")
 @AllArgsConstructor
 public class AnswerVoteController {
-
     private final AnswerVoteSevice answerVoteSevice;
     private final AnswerVoteRepository answerVoteRepository;
 
@@ -43,19 +43,10 @@ public class AnswerVoteController {
         answerVoteResponseDto.setAnswerId(answerId);
         answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
 
-       //답변에 대한 투표값확인
-//        Iterator iter = list.iterator();
-//
-//        while (iter.hasNext()) {
-//            Object[] obj = (Object[]) iter.next();
-//            Long anwerId = Long.valueOf(obj[0].toString());
-//            int answerVoteSum = Integer.parseInt(obj[1].toString());
-//            System.out.printf("answerID2 : %d , answerVoteSum2 : %d",anwerId, answerVoteSum );
-//
-//        }
 
         return new ResponseEntity(answerVoteResponseDto, HttpStatus.CREATED);
 
     }
 
 }
+

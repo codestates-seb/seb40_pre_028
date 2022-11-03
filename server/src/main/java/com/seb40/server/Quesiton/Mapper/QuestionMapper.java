@@ -2,11 +2,9 @@ package com.seb40.server.Quesiton.Mapper;
 
 
 import com.seb40.server.Answer.Mapper.AnswerMapper;
-import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
-import com.seb40.server.Quesiton.Dto.QuestionPostDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
+import com.seb40.server.Quesiton.Dto.*;
 import com.seb40.server.Quesiton.Entity.Question;
-
+import com.seb40.server.Quesiton.Entity.QuestionTag;
 import com.seb40.server.Tag.Entity.Tag;
 import com.seb40.server.Tag.Mapper.TagMapper;
 import com.seb40.server.User.entity.User;
@@ -14,61 +12,94 @@ import com.seb40.server.User.mapper.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring" , uses = {UserMapper.class, TagMapper.class})
 public interface QuestionMapper {
 
-
+    // tag 포함된 postDto를 entity로 변환
     default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
-        Question question = new Question();
+        Question question = new Question(); // 질문 만들어짐 이 안에 title, body, tag가 있음
+        // 아래문장: questionPostDto에서 tag이름만 뽑아옴(?)
+        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPostDto.getTags(),question);
+        question.setQuestionTags(questionTags); // question에 tag가 더해지며 수정됨
         question.setQuestionTitle(questionPostDto.getQuestionTitle());
         question.setQuestionBody(questionPostDto.getQuestionBody());
         question.setUser(questionPostDtoUser(questionPostDto));
-        question.setTags(questionPostDto.getTags()); // null
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+question.getTags()); // []
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+question.getQuestionTitle());
         return question;
     }
+
+    // tag포함된 patchDto를 entity로 변환
+    default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
+        Question question = new Question(); // 질문 만들어짐 이 안에 title, body, tag가 있음
+        // 아래문장: questionPatchDto에서 tag이름만 뽑아옴(?)
+        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPatchDto.getTags(),question);
+        question.setQuestionTags(questionTags);
+        question.setQuestionId(questionPatchDto.getQuestionId());
+        question.setQuestionTitle(questionPatchDto.getQuestionTitle());
+        question.setQuestionBody(questionPatchDto.getQuestionBody());
+        return question;
+    }
+
+
+    // tag와 question 합쳐버려
+    default List<QuestionTag> questionTagsDtosToQuestionTags(List<Tag> questionTagsDtos, Question question){
+
+        return questionTagsDtos.stream().map(questionTagDto -> {
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.addQuestion(question);
+            questionTag.setTagName(questionTagDto.getTagName());
+            return questionTag;
+        }).collect(Collectors.toList());
+    }
+
 
 
     default User questionPostDtoUser(QuestionPostDto dto){
         User user = new User();
         user.setUserId(dto.getUserId());
         user.setName(dto.getName());
-
-
         return user;
     }
 
-    default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
-        Question question = new Question();
 
-        question.setQuestionId(questionPatchDto.getQuestionId());
-        question.setQuestionTitle(questionPatchDto.getQuestionTitle());
-        question.setQuestionBody(questionPatchDto.getQuestionBody());
+    ///////////////////////위에서 questionDto tagDto가 합쳐진 question엔티티감 만들어진것 같은데..
 
-        return question;
+
+    // tag list이것도 같이 responseDto로 만들어주고 싶은데 표현방법을 어떻게 할지 연구 및 구현 중
+    // 따로 responseDto를 만들것인지 아니면 어차피 내생각엔 question엔티티 안에 tag 리스트가 포함된것 같은데
+    // 같이 responseDto에 넣을것인지.
+
+//    @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+//    @Mapping(target = "name",expression = "java(question.getUser().getName())")
+    default QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper){
+        QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        questionResponseDto.setQuestionId(question.getQuestionId());
+        questionResponseDto.setQuestionTitle(question.getQuestionTitle());
+        questionResponseDto.setQuestionBody(question.getQuestionBody());
+        questionResponseDto.setQuestionCreatedAt(question.getQuestionCreatedAt());
+        questionResponseDto.setQuestionModified(question.getQuestionModified());
+        questionResponseDto.setQuestionTags(question.getQuestionTags());
+        questionResponseDto.setAnswerNum(question.getAnswerNum());
+        questionResponseDto.setAnswers(answerMapper.answersToAnswerResponseDtos(question.getAnswers()));
+        questionResponseDto.setName(question.getUser().getName());
+
+        return questionResponseDto;
     }
 
 
-
-    @Mapping(target = "views", expression = "java(question.getViews())")
-    @Mapping(target = "tags", expression = "java(question.getTags())")
-    @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
-    @Mapping(target = "name",expression = "java(question.getUser().getName())")
-
-    QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper, TagMapper tagMapper);
-
-//    @Mapping(target = "tags", expression = "java(tagMapper.tagsToTagResponseDtos(question.getTags()))")
-//    QuestionResponseDto questionTagToQuesetionResponseDto(Question question, TagMapper tagMapper);
+        @Mapping(target = "views", expression = "java(question.getViews())")
+        @Mapping(target = "tags", expression = "java(question.getTags())")
+        @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+        @Mapping(target = "name", expression = "java(question.getUser().getName())")
+        QuestionResponseDto questionToQuestionResponseDto (Question question, AnswerMapper answerMapper, TagMapper
+        tagMapper);
 
 
-    default List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
+    default List<QuestionsResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
         return questions.stream()
-                .map(question -> QuestionResponseDto
+                .map(question -> QuestionsResponseDto
                         .builder()
                         .questionId(question.getQuestionId())
                         .questionTitle(question.getQuestionTitle())
@@ -77,7 +108,9 @@ public interface QuestionMapper {
                         .questionCreatedAt(question.getQuestionCreatedAt())
                         .questionModified(question.getQuestionModified())
                         .answerNum(question.getAnswers().size()) // 답변 수 세기
+                        .views(question.getViews())
                         .build())
                 .collect(Collectors.toList());
+
     }
 }

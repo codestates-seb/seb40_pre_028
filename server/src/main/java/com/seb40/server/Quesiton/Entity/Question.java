@@ -38,12 +38,16 @@ public class Question{
 
     private long views;
 
+
     private String questionTitle;
     private String questionBody;
     @CreatedDate
     private LocalDateTime questionCreatedAt = LocalDateTime.now();
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    private List<QuestionTag> questionTags = new ArrayList<>();
 
 
 

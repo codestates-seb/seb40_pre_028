@@ -8,7 +8,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class TagResponseDto {
-
     private long tagId;
     private String tagName;
 

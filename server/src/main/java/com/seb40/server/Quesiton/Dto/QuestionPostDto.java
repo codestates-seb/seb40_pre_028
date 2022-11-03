@@ -1,6 +1,5 @@
 package com.seb40.server.Quesiton.Dto;
 
-import com.seb40.server.Tag.Dto.TagPostDto;
 import com.seb40.server.Tag.Entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

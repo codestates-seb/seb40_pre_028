@@ -1,5 +1,7 @@
 package com.seb40.server.Tag.Mapper;
 
+import com.seb40.server.Quesiton.Dto.TagPostDto;
+import com.seb40.server.Quesiton.Dto.TagResponseDto;
 import com.seb40.server.Tag.Entity.Tag;
 import org.mapstruct.Mapper;
 

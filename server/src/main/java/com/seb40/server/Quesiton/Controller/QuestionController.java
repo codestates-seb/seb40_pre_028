@@ -5,8 +5,10 @@ import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
 import com.seb40.server.Quesiton.Service.QuestionService;
+import com.seb40.server.Quesiton.Service.QuestionTagService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.Tag.Mapper.TagMapper;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,17 +21,17 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Transactional
 @RequestMapping("/user/question")
 @RestController
 @AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    private final UserService userService;
     private final QuestionMapper mapper;
-    private final AnswerMapper answerMapper;
+    private final UserService userService;
     private final TagMapper tagMapper;
-
+    private final AnswerMapper answerMapper;
 
 
     @PostMapping("/post")
@@ -77,7 +79,6 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
-
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
