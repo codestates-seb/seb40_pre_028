@@ -2,7 +2,7 @@ import GlobalStyle from './assets/style/GlobalStyle';
 import Router from './Router';
 import { Provider } from 'react-redux';
 import { createSlice, configureStore } from '@reduxjs/toolkit';
-import { questionReducer } from './redux/slice/questionSlice';
+import questionSlice from './redux/slice/questionSlice';
 
 // redux
 export const authSlice = createSlice({
@@ -36,11 +36,12 @@ export const userSlice = createSlice({
     },
   },
 });
-export const store = configureStore({
+
+const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     user: userSlice.reducer,
-    question: questionReducer.reducer,
+    question: questionSlice.reducer,
   },
 });
 

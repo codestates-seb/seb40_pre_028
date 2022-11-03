@@ -1,13 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getQuestionList } from '../action/questionListAction';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
+  questions: [],
   page: 1,
   size: 10,
-  totalElements: 2,
-  questions: [],
-  errorMsg: '',
+  totalElements: 0,
   isLoading: false,
+  errorMsg: '',
   // sortOption: 'newest',
 };
 
@@ -18,6 +17,9 @@ const questionSlice = createSlice({
   reducers: {
     changeQPage: (state, { payload }) => {
       state.page = payload;
+    },
+    changeQSize: (state, { payload }) => {
+      state.size = payload;
     },
   },
   extraReducers: builder =>
@@ -41,6 +43,17 @@ const questionSlice = createSlice({
       }),
 });
 
+export const getQuestionList = createAsyncThunk('question/getQuestionList', async (_, thunkAPI) => {
+  try {
+    const { page, size } = thunkAPI.getState().question;
+    const response = await fetch(`http://localhost:3001/question?page=${page}&size=${size}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 // 리듀서 & 액션 리턴
-export const { changeQPage } = questionSlice.actions;
-export const questionReducer = questionSlice.reducer;
+export const { changeQPage, changeQSize } = questionSlice.actions;
+export default questionSlice;
