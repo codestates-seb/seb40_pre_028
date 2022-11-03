@@ -2,6 +2,7 @@ import GlobalStyle from './assets/style/GlobalStyle';
 import Router from './Router';
 import { Provider } from 'react-redux';
 import store from './redux/store/store';
+
 // dispatch
 // 1. login & signup -> header
 // 2. logout -> header, UserToolbar

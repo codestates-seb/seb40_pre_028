@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { authSlice } from '../redux/slice/authSlice';
 import { userSlice } from '../redux/slice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
+
 
 export const MainCointainer = styled.div`
   position: relative;
@@ -66,34 +68,21 @@ export const MainUList = styled.ul`
 `;
 
 export function QuestionList() {
-  let [questions, setQuestions] = useState([]);
-  let [isLoading, setIsLoading] = useState(true);
-  let [page, setPage] = useState(1);
-  let [perPage, setPerPage] = useState(10);
-
-  let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
-  // let URL = 'http://localhost:3001/user/question?page=1&size=10';
+  const dispatch = useDispatch();
+  const { questions, page, size, totalElements, isLoading } = useSelector(store => store.question);
 
   useEffect(() => {
-    getData();
-  }, [page, perPage]);
+    dispatch(getQuestionList());
+  }, [dispatch]);
 
-  const getData = async () => {
-    const res = await fetch(URL);
-    const data = await res.json();
-    console.log(data);
-    setTotalElements(data.pageInfo.totalElements);
-
-    setQuestions(data.data);
-    setIsLoading(false);
-    window.scroll({
-      top: 0,
-      behavior: 'smooth',
-    });
+  const setPage = page => {
+    dispatch(changeQPage(page));
   };
 
-  const dispatch = useDispatch();
+  const setSize = size => {
+    dispatch(changeQSize(size));
+  };
+
   // 새로고침시 로컬스토리지에 사용자 정보를 확인함
   // 사용자가 사이트를 떠나면 사용자 정보를 삭제함
   useEffect(() => {
@@ -154,7 +143,7 @@ export function QuestionList() {
           ))
         )}
       </MainUList>
-      <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
+      <Pagenation total={totalElements} page={page} size={size} setPage={setPage} setSize={setSize} />
     </MainCointainer>
   );
 }
