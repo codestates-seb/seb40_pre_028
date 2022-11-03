@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { BlueButton } from '../DefaultButton';
 import { AnswerMainElement } from './AnswerMainElement';
-import ChEditor from '../../pages/ChEditor';
+import ChEditor from '../ChEditor';
 
 const Container = styled.div`
   h2 {
@@ -21,11 +21,11 @@ const Container = styled.div`
 `;
 
 const Answer = styled.div`
-  * {
-    margin: 20px 0;
-  }
   a {
     color: #0074cc;
+  }
+
+  h1 {
   }
 `;
 
@@ -35,7 +35,7 @@ const AnswerCount = styled.div`
   padding-right: 30px;
 `;
 
-export const DetailAnswerElement = ({ answers }) => {
+export const DetailAnswerElement = ({ answers, onchange, postData }) => {
   return (
     <Container>
       <AnswerCount>
@@ -51,7 +51,7 @@ export const DetailAnswerElement = ({ answers }) => {
       </AnswerCount>
       {answers.map(answer => (
         <AnswerMainElement
-          key={answer.answerId}
+          key={answer.answerCreatedAt} //key 중복오류
           id={answer.answerId}
           createdAt={answer.answerCreatedAt}
           body={answer.answerBody}
@@ -61,8 +61,8 @@ export const DetailAnswerElement = ({ answers }) => {
       ))}
       <Answer>
         <h2>Your Answer</h2>
-        <ChEditor />
-        <BlueButton>Post Your Answer</BlueButton>
+        <ChEditor onchange={onchange} />
+        <BlueButton onClick={() => postData()}>Post Your Answer</BlueButton>
       </Answer>
     </Container>
   );

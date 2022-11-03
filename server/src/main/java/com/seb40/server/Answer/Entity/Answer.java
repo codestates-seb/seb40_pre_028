@@ -20,12 +20,13 @@ public class Answer {
 
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name="question_id")  //questionId ->question_id
-    
     private Question question;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name ="user_id")
     private User user;
+
+    private long answerVoteSum;
 
     public void setUser(User user){this.user = user;}
 
@@ -40,6 +41,5 @@ public class Answer {
 
 //    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
 //    private List<AnswerComment> answerComments = new ArrayList<>();
-
 
 }

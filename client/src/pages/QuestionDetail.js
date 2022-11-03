@@ -38,23 +38,41 @@ const Main = styled.div`
 // }
 
 export default function QuestionDetail() {
-  let [question, setQuestion] = useState({});
-  let [isLoading, setIsLoading] = useState(true);
-  let { id } = useParams();
-
-  let URL = `https://4e1b-61-255-255-90.jp.ngrok.io/user/question/2`;
+  const [question, setQuestion] = useState({});
+  const [answerBody, setAnswerBody] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // true로 나중에 변경
+  const { id } = useParams();
+  const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/`;
 
   const getData = async () => {
-    const res = await fetch(URL);
+    const res = await fetch(URL + `question/${id}`);
     const data = await res.json();
     setQuestion(data.data);
     setIsLoading(false);
-    console.log(question.answers);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const postData = async (userId = 3) => {
+    // console.log('q: ', questionId);
+    try {
+      await fetch(URL + `answer/${id}/post`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // questionId,
+          userId,
+          answerBody,
+        }),
+      }).then(() => getData());
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -76,7 +94,7 @@ export default function QuestionDetail() {
                 tag={question.tag}
                 vote={question.vote}
               />
-              <DetailAnswer answers={question.answers} />
+              <DetailAnswer answers={question.answers} onchange={setAnswerBody} postData={postData} />
             </div>
             <Aside />
           </Section>

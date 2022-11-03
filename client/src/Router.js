@@ -8,6 +8,8 @@ import QuestionDetail from './pages/QuestionDetail';
 import { QuestionList } from './components/QuestionList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';
+import Tags from './pages/Tags';
+import UserPage from './pages/UserPage';
 
 function Router() {
   return (
@@ -18,11 +20,13 @@ function Router() {
           <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignupPage />} />
           <Route path="ask" element={<CreateQuestionPage />} />
-          <Route element={<MiddleContainer />}>
+          <Route path="/" element={<MiddleContainer />}>
             {/* nav */}
+            <Route path="tags" element={<Tags />} />
             <Route path=":id" element={<QuestionDetail />} />
+            <Route path="users" element={<UserPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route element={<MainBox />}>
+            <Route path="/" element={<MainBox />}>
               {/* aside */}
               <Route index element={<QuestionList />} />
             </Route>

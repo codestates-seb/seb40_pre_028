@@ -25,7 +25,8 @@ public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 
 
     private long views;
 
-    private List<QuestionTag> questionTags;
+    private List<QuestionTagResponseDto> questionTags;
+
 
 
 }

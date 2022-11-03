@@ -11,11 +11,11 @@ const Bg = styled.div`
   justify-content: center;
 `;
 
-export default function SignupPage({ setIsLoading, setUserData }) {
+export default function SignupPage() {
   return (
     <Bg>
       <OauthBtn />
-      <SignupForm setIsLoading={setIsLoading} setUserData={setUserData} />
+      <SignupForm />
     </Bg>
   );
 }

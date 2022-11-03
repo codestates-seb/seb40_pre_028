@@ -36,6 +36,7 @@ public class Question{
 
     private long views;
 
+
     private String questionTitle;
     private String questionBody;
     @CreatedDate

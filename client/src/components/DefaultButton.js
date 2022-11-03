@@ -20,6 +20,7 @@ export const DefaultButton = styled.button`
     &:hover {
       background-color: ${`var(--${color}-${hoverBgCode})`};
       transition: 0.4s all;
+      cursor: pointer;
     }
     &:active {
       box-shadow: none;
@@ -29,7 +30,7 @@ export const DefaultButton = styled.button`
   `}
 `;
 
-export const PowderButton = ({ children, width, height }) => {
+export const PowderButton = ({ children, width, height, onclick }) => {
   return (
     <DefaultButton
       color="powder"
@@ -41,15 +42,19 @@ export const PowderButton = ({ children, width, height }) => {
       activeBgCode="400"
       width={width}
       height={height}
+      onClick={() => {
+        onclick?.();
+      }}
     >
       {children}
     </DefaultButton>
   );
 };
 
-export const BlueButton = ({ children, width, height }) => {
+export const BlueButton = ({ children, width, height, onClick }) => {
   return (
     <DefaultButton
+      onClick={onClick}
       color="blue"
       colorCode="050"
       borderCode="500"
