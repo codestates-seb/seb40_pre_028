@@ -5,6 +5,8 @@ import com.seb40.server.Answer.Repository.AnswerRepository;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 
+import com.seb40.server.Vote.AnswerVote.Entity.AnswerVote;
+import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
