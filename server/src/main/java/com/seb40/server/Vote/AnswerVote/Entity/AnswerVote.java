@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 @Entity
 public class AnswerVote {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long answerVoteId;
@@ -21,10 +20,10 @@ public class AnswerVote {
     private User user;
 
     @ManyToOne(targetEntity = Answer.class)
-    @JoinColumn(name = "answervotesum")
+    @JoinColumn(name = "answer_id")
     private Answer answer;
 
-    @Column(name = "answerVote_cnt")
-    public int answerVoteCnt;
+    @Column(name = "answerVoteCnt")
+    public long answerVoteCnt;
 
 }

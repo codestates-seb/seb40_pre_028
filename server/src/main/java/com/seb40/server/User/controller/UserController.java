@@ -46,7 +46,7 @@ public class UserController {
         User user = userMapper.userLoginDtoUser(userLoginDto);
         User response = userService.longinUser(user);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(userMapper.userToUserResponseDto(response), HttpStatus.OK);
     }
 
     @PostMapping("/logout")

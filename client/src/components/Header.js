@@ -6,6 +6,8 @@ import { UserMenus } from './UserToolbar/UserToolbar';
 import { SearchModal } from '../components/SearchModal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSlice } from '../redux/slice/authSlice';
 
 export const SHeader = styled.header`
   display: flex;
@@ -124,9 +126,11 @@ export const AuthBtns = styled.div`
 `;
 
 function Header() {
-  const isLogIn = false;
   let [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
+  //redux
+  const isLogin = useSelector(state => state.auth.isLogin);
+  const dispatch = useDispatch();
   return (
     <SHeader>
       <SNav>
@@ -134,13 +138,19 @@ function Header() {
           <Link to="/" />
           <MainLogoSVG />
         </LogoBox>
-        <HeaderButton>Products</HeaderButton>
+        <HeaderButton
+          onClick={() => {
+            dispatch(authSlice.actions.login());
+          }}
+        >
+          Products
+        </HeaderButton>
         <SearchContainer onFocus={() => setIsSearchModalOpen(true)}>
           <MdSearch />
           <SearchBar />
           {!!isSearchModalOpen && <SearchModal setIsSearchModalOpen={setIsSearchModalOpen} />}
         </SearchContainer>
-        {isLogIn ? (
+        {isLogin ? (
           <UserMenus />
         ) : (
           <AuthBtns>
