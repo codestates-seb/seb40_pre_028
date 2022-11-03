@@ -121,12 +121,14 @@ const Tag = ({ tag }) => {
   return <div>{tag}</div>;
 };
 
-const QuestionElement = ({ title, body, tag = ['Tag1'], name = 'User Name', createdAt, votes = 1, answers, views = 3 }) => {
+const QuestionElement = ({ id, title, body, tag = ['Tag1'], name = 'User Name', createdAt, votes = 1, answers, views = 3 }) => {
   return (
     <SQuestionList>
       <LeftCounts votes={votes} answers={answers} views={views} />
       <SectionContainer>
-        <STitleLink to="/question">{title}</STitleLink>
+        <STitleLink to={`/${id}`} state={name}>
+          {title}
+        </STitleLink>
         <STextP>{body.length > 160 ? `${body.slice(0, 160)}...` : body}</STextP>
         <ContentFooter>
           <Tags>
