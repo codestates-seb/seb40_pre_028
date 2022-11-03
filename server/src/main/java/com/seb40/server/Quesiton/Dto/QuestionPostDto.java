@@ -23,6 +23,7 @@ public class QuestionPostDto {
 
 
     private Long userId;
+    private String name;
 
     @NotBlank
     private String questionTitle;

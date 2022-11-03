@@ -11,8 +11,15 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
     date = "2022-11-04T00:29:15+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.17 (Azul Systems, Inc.)"
+=======
+
+    date = "2022-11-02T11:20:13+0900",
+
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+>>>>>>> 06dcbaffcd10d9529ca58934d61bd58af8f155ab
 )
 @Component
 public class TagMapperImpl implements TagMapper {

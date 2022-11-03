@@ -26,3 +26,5 @@ yarn-error.log*
 /ckeditor5/node_modules
 /ckeditor5/sample
 /ckeditor5/src
+
+Appdev.js

@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { BlueButton } from './DefaultButton';
 import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
+import { authSlice } from '../redux/slice/authSlice';
+import { userSlice } from '../redux/slice/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
+
 
 export const MainCointainer = styled.div`
   position: relative;
@@ -63,29 +68,34 @@ export const MainUList = styled.ul`
 `;
 
 export function QuestionList() {
-  let [questions, setQuestions] = useState([]);
-  let [isLoading, setIsLoading] = useState(true);
-  let [page, setPage] = useState(1);
-  let [perPage, setPerPage] = useState(10);
-  let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://49c5-110-13-106-62.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
-  // let URL = 'http://localhost:3001/user/question?page=1&size=10';
+  const dispatch = useDispatch();
+  const { questions, page, size, totalElements, isLoading } = useSelector(store => store.question);
 
   useEffect(() => {
-    getData();
-  }, [page, perPage]);
+    dispatch(getQuestionList());
+  }, [dispatch]);
 
-  const getData = async () => {
-    const res = await fetch(URL, { headers: { 'ngrok-skip-browser-warning': 'skip' } });
-    const data = await res.json();
-    setTotalElements(data.pageInfo.totalElements);
-    setQuestions(data.data);
-    setIsLoading(false);
-    window.scroll({
-      top: 0,
-      behavior: 'smooth',
-    });
+  const setPage = page => {
+    dispatch(changeQPage(page));
   };
+
+  const setSize = size => {
+    dispatch(changeQSize(size));
+  };
+
+  // 새로고침시 로컬스토리지에 사용자 정보를 확인함
+  // 사용자가 사이트를 떠나면 사용자 정보를 삭제함
+  useEffect(() => {
+    const user = window.localStorage.getItem('user');
+    const auth = window.localStorage.getItem('auth');
+    user && dispatch(userSlice.actions.setUser(JSON.parse(user)));
+    auth && dispatch(authSlice.actions.login());
+
+    window.addEventListener('beforeunload', () => {
+      window.localStorage.removeItem('auth');
+      window.localStorage.removeItem('user');
+    });
+  }, []);
 
   return (
     <MainCointainer>
@@ -102,6 +112,7 @@ export function QuestionList() {
       <MainUList>
         {/* 더미데이터 */}
         <QuestionElement
+          id={1}
           title={'Hi, how I can make a dashboard with JS but I can add graphs according to what is loaded in the excel file or csv file'}
           body={
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
@@ -109,27 +120,30 @@ export function QuestionList() {
           tag={['JavaScript', 'Java', 'HTML']}
           name={'일곱ㅎ쟁이'}
           createdAt={'2022-01-01 00:00:00'}
-          votes={123}
-          answers={123}
-          views={123}
+          votes={1}
+          answers={2}
+          views={3}
         />
-        {isLoading
-          ? null
-          : questions.map(question => (
-              <QuestionElement
-                key={question.questionId}
-                title={question.questionTitle}
-                body={question.questionBody}
-                tag={question.tag}
-                name={question.name}
-                createdAt={question.questionCreatedAt}
-                votes={question.votes}
-                answers={question.answers.length}
-                views={question.views}
-              />
-            ))}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          questions.map(question => (
+            <QuestionElement
+              key={question.questionId}
+              id={question.questionId}
+              title={question.questionTitle}
+              body={question.questionBody}
+              tag={question.tag}
+              name={question.name}
+              createdAt={question.questionCreatedAt}
+              votes={question.votes}
+              answers={question.answers}
+              views={question.views}
+            />
+          ))
+        )}
       </MainUList>
-      <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
+      <Pagenation total={totalElements} page={page} size={size} setPage={setPage} setSize={setSize} />
     </MainCointainer>
   );
 }

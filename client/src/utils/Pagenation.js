@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-function Pagenation({ total, limit, page, setPage, perPage, setPerPage }) {
-  const numPages = Math.ceil(total / limit);
+function Pagenation({ total, size, page, setPage, setSize }) {
+  const numPages = Math.ceil(total / size);
 
   return (
     <PagenationContainer>
@@ -21,13 +21,13 @@ function Pagenation({ total, limit, page, setPage, perPage, setPerPage }) {
         </Button>
       </Nav>
       <Nav>
-        <Button onClick={() => setPerPage(10)} aria-current={perPage === 10 ? true : null}>
+        <Button onClick={() => setSize(10)} aria-current={size === 10 ? true : null}>
           10
         </Button>
-        <Button onClick={() => setPerPage(20)} aria-current={perPage === 20 ? true : null}>
+        <Button onClick={() => setSize(20)} aria-current={size === 20 ? true : null}>
           20
         </Button>
-        <Button onClick={() => setPerPage(30)} aria-current={perPage === 30 ? true : null}>
+        <Button onClick={() => setSize(30)} aria-current={size === 30 ? true : null}>
           30
         </Button>
         <span>per page</span>

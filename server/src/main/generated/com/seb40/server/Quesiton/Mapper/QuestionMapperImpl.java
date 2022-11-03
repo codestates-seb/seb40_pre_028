@@ -1,7 +1,7 @@
 package com.seb40.server.Quesiton.Mapper;
 
 import com.seb40.server.Answer.Mapper.AnswerMapper;
-import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
+
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto.QuestionResponseDtoBuilder;
 import com.seb40.server.Quesiton.Entity.Question;
@@ -11,18 +11,21 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
     date = "2022-11-04T00:35:16+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.17 (Azul Systems, Inc.)"
+=======
+    date = "2022-11-02T11:20:14+0900",
+
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+>>>>>>> 06dcbaffcd10d9529ca58934d61bd58af8f155ab
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
 
     @Override
-    public Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {
-        if ( questionPatchDto == null ) {
-            return null;
-        }
 
+<<<<<<< HEAD
         Question question = new Question();
 
         question.setQuestionId( questionPatchDto.getQuestionId() );
@@ -35,6 +38,10 @@ public class QuestionMapperImpl implements QuestionMapper {
     @Override
     public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper, TagMapper tagMapper) {
         if ( question == null && answerMapper == null && tagMapper == null ) {
+=======
+    public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper) {
+        if ( question == null && answerMapper == null ) {
+>>>>>>> 06dcbaffcd10d9529ca58934d61bd58af8f155ab
             return null;
         }
 

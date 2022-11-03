@@ -33,14 +33,10 @@ public class Question{
     @OneToMany(mappedBy = "question")
     private ArrayList<Tag> tags = new ArrayList<>();
 
-//    private List<String> tag = new ArrayList<>();
-//    public List<String> getTag(){
-//        return tag;
-//    }
-
 
     private int answerNum;
 
+    private long views;
 
     private String questionTitle;
     private String questionBody;
