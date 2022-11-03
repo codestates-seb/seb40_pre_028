@@ -1,80 +1,61 @@
 package com.seb40.server.Vote.AnswerVote.Controller;
 
-import com.seb40.server.Answer.Repository.AnswerRepository;
-import com.seb40.server.Answer.Service.AnswerService;
-import com.seb40.server.Response.SingleResponseDto;
-import com.seb40.server.User.service.UserService;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVotePatchDto;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVoteResponseDto;
-import com.seb40.server.Vote.AnswerVote.Entity.AnswerVote;
-import com.seb40.server.Vote.AnswerVote.Mapper.AnswerVoteMapper;
 import com.seb40.server.Vote.AnswerVote.service.AnswerVoteSevice;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.seb40.server.Answer.Entity.Answer;
-import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepostiory;
+import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.Iterator;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AnswerVoteController {
 
-    private final AnswerService answerService;
-
-    private final AnswerVoteRepostiory answerVoteRepository;
-
     private final AnswerVoteSevice answerVoteSevice;
-    private final AnswerVoteMapper mapper;
-
+    private final AnswerVoteRepository answerVoteRepository;
 
     //답변글 추천 비추천
-    @PatchMapping("/{answer_id}/vote")
-    public ResponseEntity postVote(@PathVariable("answer_id") @Positive @NotNull long answerId,
-                                   @Valid @RequestBody AnswerVotePatchDto answerVotePatchDto) {
+    @PatchMapping("/vote")
+    public ResponseEntity postVote(@Valid @RequestBody AnswerVotePatchDto answerVotePatchDto) {
 
-        answerVoteSevice.voteAnswer(answerVotePatchDto);
+        AnswerVoteResponseDto answerVoteResponseDto = new AnswerVoteResponseDto();
+        answerVoteSevice.vote(answerVotePatchDto);
 
-        Answer answer = answerService.findVerifiedAnswer(answerVotePatchDto.getAnswerId());
-
-
-
-        AnswerVote answerVote = mapper.answerToAnswerVote(answer);
-        answerVote.setAnswerVoteCnt(answerVotePatchDto.getAnswerVoteCnt());
-
-        //answervote DB 저장
-        answerVoteRepository.save(answerVote);
-
+        //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = answerVoteRepository.findByAnswerVoteCnt();
-        Iterator iter = list.iterator();
 
-        while (iter.hasNext()) {
-            Object[] obj = (Object[]) iter.next();
-            answerId = Long.valueOf(obj[0].toString());
+        //Long -> int
+        Long answerid= answerVotePatchDto.getAnswerId();
+        int index = answerid.intValue();
 
-            int answerVoteSum = Integer.valueOf(obj[1].toString());
+        //answerId에 대한 사용자 총투표값 확인
+        Long answerId= Long.valueOf(list.get(index-1)[0].toString());
+        Integer answerVoteSum = Integer.valueOf(list.get(index-1)[1].toString());
 
-            System.out.printf("questionId : %d, answerNum : %d", answerId, answerVoteSum);
 
-            answer.setAnswerId(answerId);
-            answer.setAnswerVoteSum(answerVoteSum);
+        answerVoteResponseDto.setAnswerId(answerId);
+        answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
 
-        }
+       //답변에 대한 투표값확인
+//        Iterator iter = list.iterator();
+//
+//        while (iter.hasNext()) {
+//            Object[] obj = (Object[]) iter.next();
+//            Long anwerId = Long.valueOf(obj[0].toString());
+//            int answerVoteSum = Integer.parseInt(obj[1].toString());
+//            System.out.printf("answerID2 : %d , answerVoteSum2 : %d",anwerId, answerVoteSum );
+//
+//        }
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToVoteResponseDto(answer)), HttpStatus.CREATED);
+        return new ResponseEntity(answerVoteResponseDto, HttpStatus.CREATED);
 
     }
-
-
-
-
-
 
 }

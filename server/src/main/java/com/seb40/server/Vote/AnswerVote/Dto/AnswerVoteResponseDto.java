@@ -1,5 +1,6 @@
 package com.seb40.server.Vote.AnswerVote.Dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,6 @@ import lombok.Setter;
 public class AnswerVoteResponseDto {
 
     private Long answerId;
-
     private int answerVoteSum;
 
 }
