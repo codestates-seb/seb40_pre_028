@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { BlueButton } from '../DefaultButton';
 import { AnswerMainElement } from './AnswerMainElement';
-import ChEditor from '../../pages/ChEditor';
+import ChEditor from '../ChEditor';
 
 const Container = styled.div`
   h2 {

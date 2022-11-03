@@ -165,13 +165,17 @@ export function LoginForm() {
       .then(data => {
         console.log(data);
 
+        // 로그인정보가 다르면 새로고침 후 알림창
+        alert('로그인 정보가 다릅니다.');
+
         //redux
         dispatch(authSlice.actions.login());
-        dispatch(userSlice.actions.setId(data.userId));
-        dispatch(userSlice.actions.setName(data.userName));
+        dispatch(userSlice.actions.setUser(data));
+        // dispatch(userSlice.actions.setId(data.userId));
+        // dispatch(userSlice.actions.setName(data.userName));
 
-        // window.localStorage.setItem('user', JSON.stringfy(data));
-        // window.localStorage.setItem('auth', JSON.stringfy(true));
+        window.localStorage.setItem('user', JSON.stringfy(data));
+        window.localStorage.setItem('auth', JSON.stringfy(true));
         window.location.href = 'http://localhost:3000';
       })
       .catch(err => console.error('LOGIN FETCH ERROR: ', err));
