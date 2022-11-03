@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authSlice, userSlice } from '../../App';
+import { authSlice } from '../slice/authSlice';
+import { userSlice } from '../slice/userSlice';
 import questionSlice from '../slice/questionSlice';
 
 const store = configureStore({

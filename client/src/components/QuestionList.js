@@ -5,9 +5,11 @@ import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
+import { authSlice } from '../redux/slice/authSlice';
+import { userSlice } from '../redux/slice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSlice, userSlice } from '../App';
 import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
+
 
 export const MainCointainer = styled.div`
   position: relative;

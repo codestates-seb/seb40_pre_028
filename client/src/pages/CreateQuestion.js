@@ -268,7 +268,7 @@ export default function CreateQuestionPage() {
       userId: JSON.parse(window.localStorage.getItem('user')).userId,
     });
 
-    console.log(JSON.parse(window.localStorage.getItem('user')));
+    console.log('cq user: ', JSON.parse(window.localStorage.getItem('user')));
     fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/question/post', {
       method: 'POST',
       headers: {
@@ -278,9 +278,10 @@ export default function CreateQuestionPage() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        const { data: question } = data;
+        console.log('cq response: ', data);
         // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
-        navigate('/questionId');
+        navigate(`/${question.questionId}`);
       })
       .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };

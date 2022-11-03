@@ -2,7 +2,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { authSlice, userSlice } from '../../App';
+import { useNavigate } from 'react-router-dom';
+import { authSlice } from '../../redux/slice/authSlice';
+import { userSlice } from '../../redux/slice/userSlice';
 
 const Form = styled.form`
   display: flex;
@@ -131,6 +133,8 @@ export function LoginForm() {
 
   //  redux state
   const dispatch = useDispatch();
+  // router
+  const navigate = useNavigate();
 
   const formSubmitHandler = e => {
     e.preventDefault();
@@ -151,7 +155,7 @@ export function LoginForm() {
       email: emailValue,
       password: passwordValue,
     });
-    fetch('https://f1e5-14-39-204-244.jp.ngrok.io/user/login', {
+    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -159,24 +163,25 @@ export function LoginForm() {
       body: payload,
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        console.log('login response: ', data);
 
         // 로그인정보가 다르면 새로고침 후 알림창
-        alert('로그인 정보가 다릅니다.');
+        // alert('로그인 정보가 다릅니다.');
 
         //redux
-        dispatch(authSlice.actions.login());
-        dispatch(userSlice.actions.setUser(data));
+        // dispatch(authSlice.actions.login());
+        // dispatch(userSlice.actions.setUser(data));
         // dispatch(userSlice.actions.setId(data.userId));
         // dispatch(userSlice.actions.setName(data.userName));
 
-        window.localStorage.setItem('user', JSON.stringfy(data));
-        window.localStorage.setItem('auth', JSON.stringfy(true));
-        window.location.href = 'http://localhost:3000';
+        window.localStorage.setItem('user', JSON.stringify(data));
+        window.localStorage.setItem('auth', true);
+        // window.location.href = 'http://localhost:3000';
+        navigate('/');
       })
       .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };

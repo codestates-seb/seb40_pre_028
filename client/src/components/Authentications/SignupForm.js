@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { FaQuestionCircle } from 'react-icons/fa';
 import * as LoginForm from './LoginForm.js';
 import { useDispatch } from 'react-redux';
-import { authSlice } from '../../App.js';
 import { useNavigate } from 'react-router-dom';
+import { authSlice } from '../../redux/slice/authSlice.js';
 
 const Form = styled(LoginForm.Form)`
   display: flex;

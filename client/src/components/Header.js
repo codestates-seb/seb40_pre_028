@@ -7,7 +7,7 @@ import { SearchModal } from '../components/SearchModal';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSlice } from '../App';
+import { authSlice } from '../redux/slice/authSlice';
 
 export const SHeader = styled.header`
   display: flex;
