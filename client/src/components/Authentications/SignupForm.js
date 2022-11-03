@@ -150,7 +150,7 @@ export function SignupForm() {
       password: passwordValue,
     });
 
-    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/join', {
+    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/join', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
