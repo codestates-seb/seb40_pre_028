@@ -1,5 +1,6 @@
 package com.seb40.server.Tag.Entity;
 
+import com.seb40.server.Quesiton.Entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,8 @@ public class Tag {
 
     private String tagName;
 
-    private Long questionId;
+    @ManyToOne(targetEntity = Question.class)
+    @JoinColumn(name="question_id")  //questionId ->question_id
+    private Question question; //추가
 
 }

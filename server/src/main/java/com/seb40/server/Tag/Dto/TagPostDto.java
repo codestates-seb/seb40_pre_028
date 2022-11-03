@@ -5,10 +5,12 @@ import com.seb40.server.Tag.Entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TagPostDto {
 
     private long tagId;

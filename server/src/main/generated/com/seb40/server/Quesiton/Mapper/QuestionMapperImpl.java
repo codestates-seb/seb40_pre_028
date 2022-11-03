@@ -5,13 +5,14 @@ import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto.QuestionResponseDtoBuilder;
 import com.seb40.server.Quesiton.Entity.Question;
+import com.seb40.server.Tag.Mapper.TagMapper;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-02T01:02:59+0900",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+    date = "2022-11-04T00:35:16+0900",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.17 (Azul Systems, Inc.)"
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
@@ -32,8 +33,8 @@ public class QuestionMapperImpl implements QuestionMapper {
     }
 
     @Override
-    public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper) {
-        if ( question == null && answerMapper == null ) {
+    public QuestionResponseDto questionToQuestionResponseDto(Question question, AnswerMapper answerMapper, TagMapper tagMapper) {
+        if ( question == null && answerMapper == null && tagMapper == null ) {
             return null;
         }
 
@@ -47,6 +48,7 @@ public class QuestionMapperImpl implements QuestionMapper {
             questionResponseDto.questionModified( question.getQuestionModified() );
             questionResponseDto.answerNum( question.getAnswerNum() );
         }
+        questionResponseDto.tags( question.getTags() );
         questionResponseDto.answers( answerMapper.answersToAnswerResponseDtos(question.getAnswers()) );
         questionResponseDto.name( question.getUser().getName() );
 
