@@ -51,9 +51,10 @@ export const PowderButton = ({ children, width, height, onclick }) => {
   );
 };
 
-export const BlueButton = ({ children, width, height }) => {
+export const BlueButton = ({ children, width, height, onClick }) => {
   return (
     <DefaultButton
+      onClick={onClick}
       color="blue"
       colorCode="050"
       borderCode="500"

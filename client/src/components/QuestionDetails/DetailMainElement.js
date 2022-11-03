@@ -90,6 +90,8 @@ const Select = styled.div`
 const Question = styled.div`
   p {
     margin: 20px 0;
+    width: 650px;
+    height: 100px;
   }
   display: flex;
   flex-direction: column;

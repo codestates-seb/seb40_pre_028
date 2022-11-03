@@ -267,8 +267,9 @@ export default function CreateQuestionPage() {
       questionBody,
       userId: JSON.parse(window.localStorage.getItem('user')).userId,
     });
-    // console.log(JSON.parse(window.localStorage.getItem('user')));
-    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/question/post', {
+
+    console.log(JSON.parse(window.localStorage.getItem('user')));
+    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/question/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
