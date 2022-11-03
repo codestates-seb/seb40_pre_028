@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface AnswerVoteRepostiory extends JpaRepository<AnswerVote, Long> {
 
-
+    @Query(value = "SELECT av.answer.answerId, sum(av.answerVoteCnt) as answerVoteSum FROM AnswerVote av GROUP BY av.answer.answerId")
+    List<Object[]> findByAnswerVoteCnt();
 
 
 }
