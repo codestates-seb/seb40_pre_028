@@ -91,7 +91,6 @@ const NavLayout = styled.div`
 function Nav() {
   const match = useMatch('/');
   const ishome = (match?.pathname === '/').toString();
-  console.log(match);
 
   return (
     <NavLayout>

@@ -5,7 +5,7 @@ import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSlice, userSlice } from '../App';
 
 export const MainCointainer = styled.div`
@@ -65,24 +65,26 @@ export const MainUList = styled.ul`
 `;
 
 export function QuestionList() {
-  let [questions, setQuestions] = useState([]);
-  let [isLoading, setIsLoading] = useState(true);
-  let [page, setPage] = useState(1);
-  let [perPage, setPerPage] = useState(10);
+  const { page, size, totalElements, isLoading } = useSelector(store => store.question);
 
-  let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
-  // let URL = 'http://localhost:3001/user/question?page=1&size=10';
+  // const [questions, setQuestions] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [page, setPage] = useState(1);
+  // const [perPage, setPerPage] = useState(10);
+  // const [totalElements, setTotalElements] = useState(0);
+
+  // const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  const URL = `http://localhost:3001/question?page=${page}&size=${size}`;
 
   useEffect(() => {
     getData();
-  }, [page, perPage]);
+  }, [page, size]);
 
   const getData = async () => {
     const res = await fetch(URL);
     const data = await res.json();
-    console.log(data);
-    setTotalElements(data.pageInfo.totalElements);
+    console.log(data.data);
+    setTotalElements(data?.pageInfo?.totalElements);
 
     setQuestions(data.data);
     setIsLoading(false);
@@ -106,6 +108,7 @@ export function QuestionList() {
       window.localStorage.removeItem('user');
     });
   }, []);
+
   return (
     <MainCointainer>
       <HeaderContainer>
@@ -152,7 +155,7 @@ export function QuestionList() {
           ))
         )}
       </MainUList>
-      <Pagenation total={totalElements} limit={perPage} page={page} setPage={setPage} perPage={perPage} setPerPage={setPerPage} />
+      <Pagenation total={totalElements} limit={size} page={page} setPage={setPage} size={size} setSize={setSize} />
     </MainCointainer>
   );
 }
