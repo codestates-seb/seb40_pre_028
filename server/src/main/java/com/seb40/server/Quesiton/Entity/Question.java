@@ -1,11 +1,9 @@
 package com.seb40.server.Quesiton.Entity;
 
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
+import com.seb40.server.Tag.Entity.Tag;
 import com.seb40.server.User.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,6 +29,10 @@ public class Question{
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
     private List<Answer> answers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question")
+    private ArrayList<Tag> tags = new ArrayList<>();
+
 
     private int answerNum;
 

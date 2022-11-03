@@ -1,6 +1,6 @@
 import { DetailHeaderElement } from './DetailHeaderElement';
 
-export const DetailHeader = ({ title = 'title', createdAt, modified, views = 123 }) => {
+export const DetailHeader = ({ title = 'title', createdAt, modified, views = 12 }) => {
   return (
     <>
       {/* 더미데이터 */}

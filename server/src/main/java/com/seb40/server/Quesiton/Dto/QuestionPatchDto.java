@@ -1,9 +1,10 @@
 package com.seb40.server.Quesiton.Dto;
 
-import lombok.Getter;
-import lombok.Setter;
 
+import com.seb40.server.Tag.Entity.Tag;
+import lombok.Getter;
 import java.util.List;
+import javax.validation.Valid;
 
 @Getter
 public class QuestionPatchDto {
@@ -13,8 +14,8 @@ public class QuestionPatchDto {
 
     private String questionBody;
 
-    @Setter
-    private List<QuestionTagDto> questionTags;
+    @Valid
+    private List<Tag> tags; // tagId, tagName;
 
     public void setQuestionId(Long questionId){
         this.questionId = questionId;

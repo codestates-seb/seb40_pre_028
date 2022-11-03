@@ -4,11 +4,11 @@ import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
-import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Quesiton.Service.QuestionTagService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.Tag.Mapper.TagMapper;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -29,23 +28,24 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    private final UserService userService;
     private final QuestionMapper mapper;
+    private final UserService userService;
+    private final TagMapper tagMapper;
     private final AnswerMapper answerMapper;
-    private final QuestionTagService questionTagService;
-
-
 
 
     @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+        System.out.println(questionPostDto.getTags());
+
         User user = userService.findVerifiedUser(questionPostDto.getUserId());
         questionPostDto.setName(user.getName());
+
 
         Question question = questionService.createQuestion(
                 mapper.questionPostDtoToQuestion(questionPostDto));
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper, tagMapper))
                 , HttpStatus.CREATED);
     }
 
@@ -57,7 +57,7 @@ public class QuestionController {
         Question response = questionService.updateQuestion(
                 mapper.questionPatchDtoToQuestion(questionPatchDto));
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper, tagMapper))
                 , HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class QuestionController {
         response = questionService.addViews(response);
 
         return new ResponseEntity<>( //수정
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper,tagMapper))
                 , HttpStatus.OK);
     }
 

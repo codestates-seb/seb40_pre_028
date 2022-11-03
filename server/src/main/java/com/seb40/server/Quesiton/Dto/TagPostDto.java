@@ -4,13 +4,14 @@ package com.seb40.server.Quesiton.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Id;
 
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
-public class QuestionTagDto { // 태그에 어떤 내용 들어가는지 만들었고,
+@NoArgsConstructor
+public class TagPostDto {
 
     private long tagId;
     private String tagName;

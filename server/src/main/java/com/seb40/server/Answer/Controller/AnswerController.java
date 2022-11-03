@@ -86,10 +86,12 @@ public class AnswerController {
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
+
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
                         mapper.answersToAnswerResponseDtos(answers), pageAnswers),
                 HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{answer_id}")

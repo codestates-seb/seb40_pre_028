@@ -5,21 +5,24 @@ import com.seb40.server.Answer.Mapper.AnswerMapper;
 import com.seb40.server.Quesiton.Dto.*;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Entity.QuestionTag;
+import com.seb40.server.Tag.Entity.Tag;
+import com.seb40.server.Tag.Mapper.TagMapper;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring" , uses = UserMapper.class)
+@Mapper(componentModel = "spring" , uses = {UserMapper.class, TagMapper.class})
 public interface QuestionMapper {
 
     // tag 포함된 postDto를 entity로 변환
     default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto){
         Question question = new Question(); // 질문 만들어짐 이 안에 title, body, tag가 있음
         // 아래문장: questionPostDto에서 tag이름만 뽑아옴(?)
-        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPostDto.getQuestionTags(),question);
+        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPostDto.getTags(),question);
         question.setQuestionTags(questionTags); // question에 tag가 더해지며 수정됨
         question.setQuestionTitle(questionPostDto.getQuestionTitle());
         question.setQuestionBody(questionPostDto.getQuestionBody());
@@ -31,7 +34,7 @@ public interface QuestionMapper {
     default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto){
         Question question = new Question(); // 질문 만들어짐 이 안에 title, body, tag가 있음
         // 아래문장: questionPatchDto에서 tag이름만 뽑아옴(?)
-        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPatchDto.getQuestionTags(),question);
+        List<QuestionTag> questionTags = questionTagsDtosToQuestionTags(questionPatchDto.getTags(),question);
         question.setQuestionTags(questionTags);
         question.setQuestionId(questionPatchDto.getQuestionId());
         question.setQuestionTitle(questionPatchDto.getQuestionTitle());
@@ -41,7 +44,7 @@ public interface QuestionMapper {
 
 
     // tag와 question 합쳐버려
-    default List<QuestionTag> questionTagsDtosToQuestionTags(List<QuestionTagDto> questionTagsDtos,Question question){
+    default List<QuestionTag> questionTagsDtosToQuestionTags(List<Tag> questionTagsDtos, Question question){
 
         return questionTagsDtos.stream().map(questionTagDto -> {
             QuestionTag questionTag = new QuestionTag();
@@ -50,6 +53,7 @@ public interface QuestionMapper {
             return questionTag;
         }).collect(Collectors.toList());
     }
+
 
 
     default User questionPostDtoUser(QuestionPostDto dto){
@@ -84,8 +88,16 @@ public interface QuestionMapper {
         return questionResponseDto;
     }
 
-    default List<QuestionsResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
 
+        @Mapping(target = "views", expression = "java(question.getViews())")
+        @Mapping(target = "tags", expression = "java(question.getTags())")
+        @Mapping(target = "answers", expression = "java(answerMapper.answersToAnswerResponseDtos(question.getAnswers()))")
+        @Mapping(target = "name", expression = "java(question.getUser().getName())")
+        QuestionResponseDto questionToQuestionResponseDto (Question question, AnswerMapper answerMapper, TagMapper
+        tagMapper);
+
+
+    default List<QuestionsResponseDto> questionsToQuestionResponseDtos(List<Question> questions){
         return questions.stream()
                 .map(question -> QuestionsResponseDto
                         .builder()
@@ -101,5 +113,4 @@ public interface QuestionMapper {
                 .collect(Collectors.toList());
 
     }
-
 }
