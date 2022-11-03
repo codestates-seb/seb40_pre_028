@@ -15,4 +15,5 @@ public class AnswerVotePatchDto {
 
     private int answerVoteCnt;
 
+
 }

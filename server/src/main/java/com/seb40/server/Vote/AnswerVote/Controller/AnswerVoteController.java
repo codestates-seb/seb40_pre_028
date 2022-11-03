@@ -11,6 +11,7 @@ import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
 @RequestMapping("/user")
@@ -37,7 +38,7 @@ public class AnswerVoteController {
         //answerId에 대한 사용자 총투표값 확인
         Long answerId= Long.valueOf(list.get(index-1)[0].toString());
         Integer answerVoteSum = Integer.valueOf(list.get(index-1)[1].toString());
-        
+
 
         answerVoteResponseDto.setAnswerId(answerId);
         answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);

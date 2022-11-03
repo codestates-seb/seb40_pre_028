@@ -13,4 +13,5 @@ public interface AnswerVoteMapper {
     @Mapping(source = "answerVoteCnt",target = "answerVoteCnt")
     AnswerVote answerVotePatchDtoTOAnswerVote(AnswerVotePatchDto answerVotePatchDto);
 
+
 }

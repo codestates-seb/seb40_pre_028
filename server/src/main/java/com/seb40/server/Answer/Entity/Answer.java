@@ -42,5 +42,4 @@ public class Answer {
 //    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
 //    private List<AnswerComment> answerComments = new ArrayList<>();
 
-
 }

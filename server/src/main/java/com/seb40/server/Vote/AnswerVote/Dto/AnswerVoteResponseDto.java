@@ -11,7 +11,6 @@ import lombok.Setter;
 public class AnswerVoteResponseDto {
 
     private Long answerId;
-
     private int answerVoteSum;
 
 }
