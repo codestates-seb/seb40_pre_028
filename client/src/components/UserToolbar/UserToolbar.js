@@ -3,19 +3,16 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { PowderButton } from '../DefaultButton';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSlice } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import { authSlice } from '../../redux/slice/authSlice';
 
 export const UserMenus = () => {
   const [userInfoClick, setUserInfoClick] = useState(false);
-  const navigate = useNavigate();
   // redux
-  const user = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
   const dispatch = useDispatch();
-  const logoutBtnHandler = e => {
-    // e.preventDefault();
+  const logoutBtnHandler = () => {
     dispatch(authSlice.actions.logout());
-    navigate('/');
+    window.location.reload();
   };
 
   return (

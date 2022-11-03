@@ -21,15 +21,14 @@ function Router() {
           <Route path="ask" element={<CreateQuestionPage />} />
           <Route path="/" element={<MiddleContainer />}>
             {/* nav */}
-            <Route index element={<QuestionList />} />
             <Route path="tags" element={<Tags />} />
             <Route path=":id" element={<QuestionDetail />} />
             <Route path="tags" element={<Tags />} />
             <Route path="*" element={<NotFound />} />
-            {/* <Route path="/" element={<MainBox />}> */}
-            {/* aside */}
-            {/* <Route index element={<QuestionList />} /> */}
-            {/* </Route> */}
+            <Route path="/" element={<MainBox />}>
+              {/* aside */}
+              <Route index element={<QuestionList />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

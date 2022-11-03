@@ -6,7 +6,8 @@ import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authSlice, userSlice } from '../App';
+import { authSlice } from '../redux/slice/authSlice';
+import { userSlice } from '../redux/slice/userSlice';
 
 export const MainCointainer = styled.div`
   position: relative;
@@ -106,6 +107,7 @@ export function QuestionList() {
       window.localStorage.removeItem('user');
     });
   }, []);
+
   return (
     <MainCointainer>
       <HeaderContainer>
