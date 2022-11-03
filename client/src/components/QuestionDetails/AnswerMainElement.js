@@ -22,7 +22,7 @@ const User = styled.div`
 
 const UserInfo = styled(Section)`
   padding: 10px 50px 10px 10px;
-  background-color: #d9eaf7;
+  width: 200px;
   display: flex;
   flex-direction: column;
   font-size: 12px;
@@ -52,6 +52,8 @@ const Select = styled.div`
   }
   & > span {
     width: 10px;
+    color: #6b737d;
+    font-size: 20px;
   }
   .triangle {
     font-size: 40px;
@@ -81,6 +83,7 @@ const Select = styled.div`
 const Question = styled.div`
   p {
     margin: 20px 0;
+    width: 650px;
   }
   display: flex;
   flex-direction: column;
