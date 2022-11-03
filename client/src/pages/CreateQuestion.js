@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { AlertMsg } from '../components/CreateQuestion/AlertMsg';
 import { useState, useRef, useEffect } from 'react';
-import ChEditor from './ChEditor';
+import ChEditor from '../components/ChEditor';
 const Bg = styled.div`
   background-color: #f1f2f3;
   padding: 40px 0;
@@ -253,7 +253,7 @@ export default function CreateQuestionPage() {
       userId: JSON.parse(window.localStorage.getItem('user')).userId,
     });
     console.log(JSON.parse(window.localStorage.getItem('user')));
-    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/question/post', {
+    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/question/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
