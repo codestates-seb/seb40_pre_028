@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { authSlice, userSlice } from '../../App';
 
 const Form = styled.form`
   display: flex;
@@ -127,6 +129,9 @@ export function LoginForm() {
 
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
+  //  redux state
+  const dispatch = useDispatch();
+
   const formSubmitHandler = e => {
     e.preventDefault();
 
@@ -146,7 +151,7 @@ export function LoginForm() {
       email: emailValue,
       password: passwordValue,
     });
-    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/login', {
+    fetch('https://f1e5-14-39-204-244.jp.ngrok.io/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -159,6 +164,16 @@ export function LoginForm() {
       })
       .then(data => {
         console.log(data);
+
+        // 로그인정보가 다르면 새로고침 후 알림창
+        alert('로그인 정보가 다릅니다.');
+
+        //redux
+        dispatch(authSlice.actions.login());
+        dispatch(userSlice.actions.setUser(data));
+        // dispatch(userSlice.actions.setId(data.userId));
+        // dispatch(userSlice.actions.setName(data.userName));
+
         window.localStorage.setItem('user', JSON.stringfy(data));
         window.localStorage.setItem('auth', JSON.stringfy(true));
         window.location.href = 'http://localhost:3000';

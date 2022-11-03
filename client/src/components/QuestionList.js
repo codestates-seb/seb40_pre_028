@@ -5,6 +5,8 @@ import { QuestionElement } from './QuestionElement/QuestionElement';
 import { SortButton } from './SortButton';
 import { Pagenation } from '../utils/Pagenation';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authSlice, userSlice } from '../App';
 
 export const MainCointainer = styled.div`
   position: relative;
@@ -69,7 +71,7 @@ export function QuestionList() {
   let [perPage, setPerPage] = useState(10);
 
   let [totalElements, setTotalElements] = useState(0);
-  let URL = `https://5273-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
+  let URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${perPage}`;
   // let URL = 'http://localhost:3001/user/question?page=1&size=10';
 
   useEffect(() => {
@@ -90,12 +92,20 @@ export function QuestionList() {
     });
   };
 
-  // useEffect(() => {
-  //   window.addEventListener('beforeunload', () => {
-  //     window.localStorage.removeItem('auth');
-  //     window.localStorage.removeItem('user');
-  //   });
-  // });
+  const dispatch = useDispatch();
+  // 새로고침시 로컬스토리지에 사용자 정보를 확인함
+  // 사용자가 사이트를 떠나면 사용자 정보를 삭제함
+  useEffect(() => {
+    const user = window.localStorage.getItem('user');
+    const auth = window.localStorage.getItem('auth');
+    user && dispatch(userSlice.actions.setUser(JSON.parse(user)));
+    auth && dispatch(authSlice.actions.login());
+
+    window.addEventListener('beforeunload', () => {
+      window.localStorage.removeItem('auth');
+      window.localStorage.removeItem('user');
+    });
+  }, []);
   return (
     <MainCointainer>
       <HeaderContainer>

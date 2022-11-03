@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { AlertMsg } from '../components/CreateQuestion/AlertMsg';
 import { useState, useRef, useEffect } from 'react';
-import ChEditor from './ChEditor';
+import ChEditor from '../components/ChEditor';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 const Bg = styled.div`
   background-color: #f1f2f3;
   padding: 40px 0;
@@ -181,6 +184,12 @@ const ButtonOveray = styled(Overlay)`
 `;
 
 export default function CreateQuestionPage() {
+  // redux
+  const isLogin = useSelector(state => state.auth.isLogin);
+
+  // router
+  const navigate = useNavigate();
+
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionBody, setQuestionBody] = useState('');
   // const [questionTag, setQuestionBody] = useState('');
@@ -221,6 +230,10 @@ export default function CreateQuestionPage() {
   const btnHandler1 = e => {
     e.preventDefault();
     // inputEl2.current.focus();
+    if (questionTitle === '') {
+      inputEl1.current.focus();
+      return;
+    }
     inputEl2.focus();
     setIsOverlay1(false);
     setBtn1(false);
@@ -229,6 +242,10 @@ export default function CreateQuestionPage() {
   };
   const btnHandler2 = e => {
     e.preventDefault();
+    if (questionBody === '') {
+      inputEl2.focus();
+      return;
+    }
     inputEl3.current.focus();
     setIsOverlay2(false);
     setBtn1(false);
@@ -245,15 +262,14 @@ export default function CreateQuestionPage() {
   const formSubmitHandler = e => {
     e.preventDefault();
     if (questionTitle === '' || questionBody === '') return;
-    // console.log('payload: ', questionTitle, questionBody);
-    console.log('form submiting');
     const payload = JSON.stringify({
       questionTitle,
       questionBody,
       userId: JSON.parse(window.localStorage.getItem('user')).userId,
     });
+
     console.log(JSON.parse(window.localStorage.getItem('user')));
-    fetch('https://5273-14-39-204-244.jp.ngrok.io/user/question/post', {
+    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/question/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -264,7 +280,7 @@ export default function CreateQuestionPage() {
       .then(data => {
         console.log(data);
         // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
-        window.location.href = `http://localhost:3000`;
+        navigate('/questionId');
       })
       .catch(err => console.error('LOGIN FETCH ERROR: ', err));
   };
@@ -289,7 +305,12 @@ export default function CreateQuestionPage() {
     e.preventDefault();
     setTagName(tagName.filter(tag => tag !== el));
   };
+
   useEffect(() => {
+    if (!isLogin) {
+      // window.location.href = 'http://localhost:3000/login';
+      navigate('/login');
+    }
     inputEl1.current.focus();
   }, []);
 

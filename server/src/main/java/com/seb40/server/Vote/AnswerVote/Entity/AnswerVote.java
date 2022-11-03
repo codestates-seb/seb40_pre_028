@@ -21,10 +21,10 @@ public class AnswerVote {
     private User user;
 
     @ManyToOne(targetEntity = Answer.class)
-    @JoinColumn(name = "answervotesum")
+    @JoinColumn(name = "answer_id")
     private Answer answer;
 
-    @Column(name = "answerVote_cnt")
-    public int answerVoteCnt;
+    @Column(name = "answerVoteCnt")
+    public long answerVoteCnt;
 
 }
