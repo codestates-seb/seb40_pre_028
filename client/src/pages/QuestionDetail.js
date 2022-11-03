@@ -8,13 +8,16 @@ import { useParams } from 'react-router-dom';
 
 const Section = styled.div`
   display: flex;
+  Aside {
+    margin-top: 20px;
+  }
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border-left: 1px solid #d6d9dc;
+  padding: 0 20px 20px 20px;
+  /* border-left: 1px solid #d6d9dc; */
 `;
 // {
 //     "data": {
@@ -44,14 +47,12 @@ export default function QuestionDetail() {
   const { id } = useParams();
   const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/`;
 
-
   const getData = async () => {
     const res = await fetch(URL + `question/${id}`);
     const data = await res.json();
     setQuestion(data.data);
     setIsLoading(false);
   };
-
 
   useEffect(() => {
     getData();
