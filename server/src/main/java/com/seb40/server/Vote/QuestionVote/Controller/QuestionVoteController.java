@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -31,30 +32,19 @@ public class QuestionVoteController {
         //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = questionVoteRepository.findByQuestionVoteCnt();
 
-        //Long -> int
-        Long questionid= questionVotePatchDto.getQuestionId();
-        int index = questionid.intValue();
-        System.out.println();
-        System.out.printf("index: %d", index);
-        System.out.println();
+        //질문에 대한 투표값확인
+        Iterator iter = list.iterator();
 
-        //questionId에 대한 사용자 총투표값 확인
-        Long questionId= Long.valueOf(list.get(index-1)[0].toString());
-        Integer questionVoteSum = Integer.valueOf(list.get(index-1)[1].toString());
+        while (iter.hasNext()) {
+            Object[] obj = (Object[]) iter.next();
+            Long questionId = Long.valueOf(obj[0].toString());
+            int questionVoteSum = Integer.parseInt(obj[1].toString());
 
-        questionVoteResponseDto.setQuestionId(questionId);
-        questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+            questionVoteResponseDto.setQuestionId(questionId);
+            questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
 
-        //답변에 대한 투표값확인
-//        Iterator iter = list.iterator();
-//
-//        while (iter.hasNext()) {
-//            Object[] obj = (Object[]) iter.next();
-//            Long anwerId = Long.valueOf(obj[0].toString());
-//            int answerVoteSum = Integer.parseInt(obj[1].toString());
-//            System.out.printf("answerID2 : %d , answerVoteSum2 : %d",anwerId, answerVoteSum );
-//
-//        }
+            if(questionId == questionVotePatchDto.getQuestionId()) break;
+        }
 
         return new ResponseEntity(questionVoteResponseDto, HttpStatus.CREATED);
 
