@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -31,16 +32,19 @@ public class QuestionVoteController {
         //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = questionVoteRepository.findByQuestionVoteCnt();
 
-        //Long -> int
-        Long questionid= questionVotePatchDto.getQuestionId();
-        int index = questionid.intValue();
+        //질문에 대한 투표값확인
+        Iterator iter = list.iterator();
 
-        //questionId에 대한 사용자 총투표값 확인
-        Long questionId= Long.valueOf(list.get(index-1)[0].toString());
-        Integer questionVoteSum = Integer.valueOf(list.get(index-1)[1].toString());
+        while (iter.hasNext()) {
+            Object[] obj = (Object[]) iter.next();
+            Long questionId = Long.valueOf(obj[0].toString());
+            int questionVoteSum = Integer.parseInt(obj[1].toString());
 
-        questionVoteResponseDto.setQuestionId(questionId);
-        questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+            questionVoteResponseDto.setQuestionId(questionId);
+            questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+
+            if(questionId == questionVotePatchDto.getQuestionId()) break;
+        }
 
         return new ResponseEntity(questionVoteResponseDto, HttpStatus.CREATED);
 

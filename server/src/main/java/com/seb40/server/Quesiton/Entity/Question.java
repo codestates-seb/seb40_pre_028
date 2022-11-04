@@ -30,8 +30,8 @@ public class Question{
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
     private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question")
-    private ArrayList<Tag> tags = new ArrayList<>();
+//    @OneToMany(mappedBy = "question")
+//    private ArrayList<Tag> tags = new ArrayList<>();
 
 
     private int answerNum;
@@ -46,8 +46,8 @@ public class Question{
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
-    private List<QuestionTag> questionTags = new ArrayList<>();
+//    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+//    private List<QuestionTag> questionTags = new ArrayList<>();
 
 
 
