@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.seb40.server.Vote.AnswerVote.Repository.AnswerVoteRepository;
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -31,18 +32,20 @@ public class AnswerVoteController {
         //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = answerVoteRepository.findByAnswerVoteCnt();
 
-        //Long -> int
-        Long answerid= answerVotePatchDto.getAnswerId();
-        int index = answerid.intValue();
+        //답변에 대한 투표값확인
+        Iterator iter = list.iterator();
 
-        //answerId에 대한 사용자 총투표값 확인
-        Long answerId= Long.valueOf(list.get(index-1)[0].toString());
-        Integer answerVoteSum = Integer.valueOf(list.get(index-1)[1].toString());
+        while (iter.hasNext()) {
+            Object[] obj = (Object[]) iter.next();
+            Long answerId = Long.valueOf(obj[0].toString());
+            int answerVoteSum = Integer.parseInt(obj[1].toString());
 
 
-        answerVoteResponseDto.setAnswerId(answerId);
-        answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
+            answerVoteResponseDto.setAnswerId(answerId);
+            answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
 
+            if(answerId == answerVotePatchDto.getAnswerId()) break;
+        }
 
         return new ResponseEntity(answerVoteResponseDto, HttpStatus.CREATED);
 

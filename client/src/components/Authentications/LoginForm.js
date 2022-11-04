@@ -131,7 +131,7 @@ export function LoginForm() {
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
 
   //  redux state
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // router
   const navigate = useNavigate();
 
@@ -165,7 +165,7 @@ export function LoginForm() {
       // dispatch(userSlice.actions.setUser(data));
       // dispatch(userSlice.actions.setId(data.userId));
       // dispatch(userSlice.actions.setName(data.userName));
-
+      console.log('login data', data);
       window.localStorage.setItem('user', JSON.stringify(data));
       window.localStorage.setItem('auth', true);
       // window.location.href = 'http://localhost:3000';
