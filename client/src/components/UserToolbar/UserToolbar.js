@@ -12,6 +12,8 @@ export const UserMenus = () => {
   const dispatch = useDispatch();
   const logoutBtnHandler = () => {
     dispatch(authSlice.actions.logout());
+    window.localStorage.removeItem('auth');
+    window.localStorage.removeItem('user');
     window.location.reload();
   };
 

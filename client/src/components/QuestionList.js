@@ -83,17 +83,11 @@ export function QuestionList() {
   };
 
   // 새로고침시 로컬스토리지에 사용자 정보를 확인함
-  // 사용자가 사이트를 떠나면 사용자 정보를 삭제함
   useEffect(() => {
     const user = window.localStorage.getItem('user');
     const auth = window.localStorage.getItem('auth');
     user && dispatch(userSlice.actions.setUser(JSON.parse(user)));
     auth && dispatch(authSlice.actions.login());
-
-    window.addEventListener('beforeunload', () => {
-      window.localStorage.removeItem('auth');
-      window.localStorage.removeItem('user');
-    });
   }, []);
 
   return (
