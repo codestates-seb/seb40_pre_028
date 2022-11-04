@@ -1,6 +1,6 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://4f1a-14-39-204-244.jp.ngrok.io';
 
-export const fetchLogin = (url, payload) => {
+export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
     headers: {
@@ -15,7 +15,7 @@ export const fetchLogin = (url, payload) => {
     .catch(err => console.error('LOGIN FETCH ERROR: ', err));
 };
 
-export const fetchSignup = (url, payload) => {
+export const fetchCreateSignup = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
     headers: {
@@ -40,4 +40,45 @@ export const fetchCreateQuestion = (url, payload) => {
   })
     .then(res => res.json())
     .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+};
+
+export const fetchQuestion = async url => {
+  const res = await fetch(BASE_URL + url);
+  const data = await res.json();
+  return data;
+};
+
+export const fetchCreateAnswer = async (url, payload) => {
+  try {
+    const res = await fetch(URL + url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: payload,
+    });
+    return res;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchDelete = url => {
+  return fetch(BASE_URL + url, {
+    method: 'DELETE',
+  }).catch(error => {
+    console.error('Error', error);
+  });
+};
+
+export const fetchUpdateVote = (url, payload) => {
+  return fetch(BASE_URL + url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'Application/json' },
+    body: payload,
+  })
+    .then(res => res.json())
+    .catch(error => {
+      console.error('Error', error);
+    });
 };

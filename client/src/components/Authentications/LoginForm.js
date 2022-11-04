@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authSlice } from '../../redux/slice/authSlice';
-import { userSlice } from '../../redux/slice/userSlice';
-import { fetchLogin } from '../../utils/apis';
+import { fetchCreateLogin } from '../../utils/apis';
 
 const Form = styled.form`
   display: flex;
@@ -157,7 +155,8 @@ export function LoginForm() {
       password: passwordValue,
     });
 
-    fetchLogin('/user/login', payload).then(data => {
+    //fetch
+    fetchCreateLogin('/user/login', payload).then(data => {
       // 로그인정보가 다르면 새로고침 후 알림창
       // alert('로그인 정보가 다릅니다.');
 

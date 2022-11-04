@@ -5,7 +5,7 @@ import * as LoginForm from './LoginForm.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authSlice } from '../../redux/slice/authSlice.js';
-import { fetchSignup } from '../../utils/apis.js';
+import { fetchCreateSignup } from '../../utils/apis.js';
 
 const Form = styled(LoginForm.Form)`
   display: flex;
@@ -160,7 +160,7 @@ export function SignupForm() {
       password: passwordValue,
     });
 
-    fetchSignup('/user/join', payload).then(data => {
+    fetchCreateSignup('/user/join', payload).then(data => {
       dispatch(authSlice.actions.login());
       window.localStorage.setItem('user', JSON.stringify(data));
       window.localStorage.setItem('auth', true);
