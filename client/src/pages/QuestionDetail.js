@@ -45,7 +45,7 @@ export default function QuestionDetail() {
   const [answerBody, setAnswerBody] = useState('');
   const [isLoading, setIsLoading] = useState(false); // true로 나중에 변경
   const { id } = useParams();
-  const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/`;
+  const URL = `https://4f1a-14-39-204-244.jp.ngrok.io//user/`;
 
   const getData = async () => {
     const res = await fetch(URL + `question/${id}`);
