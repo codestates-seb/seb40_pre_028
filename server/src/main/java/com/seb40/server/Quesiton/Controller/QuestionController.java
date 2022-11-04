@@ -4,10 +4,11 @@ import com.seb40.server.Quesiton.Dto.QuestionPatchDto;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Mapper.QuestionMapper;
-import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
+import com.seb40.server.Quesiton.Service.QuestionTagService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.Tag.Mapper.TagMapper;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
@@ -18,25 +19,28 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.util.Iterator;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Transactional
 @RequestMapping("/user/question")
 @RestController
 @AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-    private final UserService userService;
     private final QuestionMapper mapper;
+    private final UserService userService;
+    private final TagMapper tagMapper;
     private final AnswerMapper answerMapper;
-
 
 
     @PostMapping("/post")
     public ResponseEntity postQuestion(@RequestBody QuestionPostDto questionPostDto) {
+        System.out.println(questionPostDto.getTags());
+
         User user = userService.findVerifiedUser(questionPostDto.getUserId());
         questionPostDto.setName(user.getName());
+
 
         Question question = questionService.createQuestion(
                 mapper.questionPostDtoToQuestion(questionPostDto));
@@ -75,18 +79,6 @@ public class QuestionController {
                                        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page-1, size);
         List<Question> questions = pageQuestions.getContent();// 내용까지도
-
-        //답변수 카운트
-//        List<Object[]> list = questionRepository.findbyAnswerNum();
-//
-//        Iterator iter = list.iterator();
-//        while(iter.hasNext()){
-//            Object[] obj = (Object[]) iter.next();
-//            String questionId = obj[0].toString();
-//            int answerNum = Integer.valueOf(obj[1].toString());
-//
-//            System.out.printf("questionId : %s, answerNum : %d", questionId, answerNum );
-
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),

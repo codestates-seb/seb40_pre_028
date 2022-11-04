@@ -7,7 +7,7 @@ const Container = styled.div`
   h2 {
     font-size: 20px;
     border-top: 1px solid #d6d9dc;
-    padding-top: 25px;
+    padding: 25px 0;
   }
   .qanswer {
     padding-left: 20px;
@@ -24,9 +24,6 @@ const Answer = styled.div`
   a {
     color: #0074cc;
   }
-
-  h1 {
-  }
 `;
 
 const AnswerCount = styled.div`
@@ -35,11 +32,15 @@ const AnswerCount = styled.div`
   padding-right: 30px;
 `;
 
+const Blank = styled.div`
+  height: 20px;
+`;
+
 export const DetailAnswerElement = ({ answers, onchange, postData }) => {
   return (
     <Container>
       <AnswerCount>
-        <h3 className="qanswer">{answers.length} Answer</h3>
+        <h3 className="qanswer">{answers.length} Answers</h3>
         <div>
           <span>sorted by:</span>
           <select defaultValue="1" name="" id="" className="select">
@@ -62,7 +63,10 @@ export const DetailAnswerElement = ({ answers, onchange, postData }) => {
       <Answer>
         <h2>Your Answer</h2>
         <ChEditor onchange={onchange} />
-        <BlueButton onClick={() => postData()}>Post Your Answer</BlueButton>
+        <Blank />
+        <BlueButton onClick={() => postData()} height="35px">
+          Post Your Answer
+        </BlueButton>
       </Answer>
     </Container>
   );

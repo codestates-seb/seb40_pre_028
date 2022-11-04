@@ -5,16 +5,21 @@ import { DetailAnswer } from '../components/QuestionDetails/DetailAnswer';
 import { Aside } from '../components/Aside';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchCreateAnswer, fetchQuestion } from '../utils/apis';
+import { useSelector } from 'react-redux';
 
 const Section = styled.div`
   display: flex;
+  Aside {
+    margin-top: 20px;
+  }
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border-left: 1px solid #d6d9dc;
+  padding: 0 20px 20px 20px;
+  /* border-left: 1px solid #d6d9dc; */
 `;
 // {
 //     "data": {
@@ -42,37 +47,54 @@ export default function QuestionDetail() {
   const [answerBody, setAnswerBody] = useState('');
   const [isLoading, setIsLoading] = useState(false); // true로 나중에 변경
   const { id } = useParams();
-  const URL = `https://4ab3-14-39-204-244.jp.ngrok.io/user/`;
+  const { user } = useSelector(state => state.user);
 
-  const getData = async () => {
-    const res = await fetch(URL + `question/${id}`);
-    const data = await res.json();
-    setQuestion(data.data);
-    setIsLoading(false);
+  // const URL = `https://4f1a-14-39-204-244.jp.ngrok.io/user/`;
+  // const getData = async () => {
+  //   const res = await fetch(URL + `question/${id}`);
+  //   const data = await res.json();
+  // setQuestion(data.data);
+  // setIsLoading(false);
+  // };
+
+  const payload = JSON.stringify({
+    userId: user?.userId ?? 0,
+    answerBody,
+  });
+  console.log('p: ', payload);
+
+  const getData = () => {
+    fetchQuestion(`/user/question/${id}`).then(data => {
+      setQuestion(data.data);
+      setIsLoading(false);
+    });
   };
+
+  const postData = () => {
+    fetchCreateAnswer(`/user/answer/${id}/post`, payload).then(() => {
+      getData();
+    });
+    // window.location.reload();
+  };
+
+  // async (userId = 3) => {
+  //   // console.log('q: ', questionId);
+  //   try {
+  //     await fetch(URL + `answer/${id}/post`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: payload,
+  //     }).then(() => getData());
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
     getData();
   }, []);
-
-  const postData = async (userId = 3) => {
-    // console.log('q: ', questionId);
-    try {
-      await fetch(URL + `answer/${id}/post`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          // questionId,
-          userId,
-          answerBody,
-        }),
-      }).then(() => getData());
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div>

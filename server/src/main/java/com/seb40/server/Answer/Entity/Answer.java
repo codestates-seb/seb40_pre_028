@@ -26,7 +26,7 @@ public class Answer {
     @JoinColumn(name ="user_id")
     private User user;
 
-    private int answerVoteSum;
+    private long answerVoteSum;
 
     public void setUser(User user){this.user = user;}
 
@@ -41,6 +41,5 @@ public class Answer {
 
 //    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
 //    private List<AnswerComment> answerComments = new ArrayList<>();
-
 
 }

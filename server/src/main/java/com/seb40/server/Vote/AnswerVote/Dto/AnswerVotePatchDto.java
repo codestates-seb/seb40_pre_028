@@ -1,10 +1,10 @@
+
+
 package com.seb40.server.Vote.AnswerVote.Dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
@@ -17,4 +17,6 @@ public class AnswerVotePatchDto {
 
     private int answerVoteCnt;
 
+
 }
+

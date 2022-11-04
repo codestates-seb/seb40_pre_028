@@ -57,6 +57,7 @@ public interface AnswerMapper {
         return answers.stream()
                 .map(answer -> AnswerResponseDto
                         .builder()
+                        .answerId(answer.getAnswerId()) // 추가
                         .questionId(answer.getQuestion().getQuestionId())
                         .name(answer.getUser().getName())
                         .answerBody(answer.getAnswerBody())
