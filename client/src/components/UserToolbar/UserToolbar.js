@@ -25,7 +25,7 @@ export const UserMenus = () => {
         {userInfoClick ? (
           <UserInfo>
             <span>안녕하세요</span>
-            <span>{user.name || 'test'} 님</span>
+            <span>{user?.name || 'test'} 님</span>
             <PowderButton width={'70%'} height={'35%'} onclick={logoutBtnHandler}>
               logout
             </PowderButton>
