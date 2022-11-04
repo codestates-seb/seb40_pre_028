@@ -4,6 +4,9 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 import { useState } from 'react';
 import { getDateToString } from '../../utils/dateFormat';
+import { fetchUpdateVote } from '../../utils/apis';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 // import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
@@ -43,9 +46,7 @@ const UserInfo = styled(Section)`
 
 const Select = styled.div`
   padding: 10px;
-  & > button {
-    all: unset;
-  }
+
   & > * {
     display: block;
     display: flex;
@@ -69,6 +70,16 @@ const Select = styled.div`
   }
   .time {
     font-size: 20px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      all: unset;
+    }
   }
 `;
 
@@ -96,26 +107,46 @@ const SEF = styled.div`
 
 export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
   let [count, SetCount] = useState(vote);
+  const { user } = useSelector(state => state.user);
+  const { id: answerId } = useParams();
+
+  const voteHandler = action => {
+    let answerVoteCnt = 0;
+    if (action === 'up') answerVoteCnt = 1;
+    if (action === 'down') answerVoteCnt = -1;
+
+    const payload = {
+      userId: user.userId,
+      answerId,
+      answerVoteCnt,
+    };
+
+    fetchUpdateVote('/user/answervote', JSON.stringify(payload)).then(data => {
+      SetCount(data.questionVoteSum);
+    });
+  };
 
   return (
     <Main>
       <Section>
         <Select>
-          <button //API PATCH
-            onClick={() => {
-              SetCount(count + 1);
-            }}
-          >
-            <VscTriangleUp className="icon triangle" />
-          </button>
-          <span>{count}</span>
-          <button
-            onClick={() => {
-              SetCount(count - 1);
-            }}
-          >
-            <VscTriangleDown className="icon triangle" />
-          </button>
+          <div>
+            <button //API PATCH
+              onClick={() => {
+                voteHandler('up');
+              }}
+            >
+              <VscTriangleUp className="icon triangle" />
+            </button>
+            <span>{count}</span>
+            <button
+              onClick={() => {
+                voteHandler('down');
+              }}
+            >
+              <VscTriangleDown className="icon triangle" />
+            </button>
+          </div>
           <BsBookmark className="icon booktime" />
           <GiBackwardTime className="icon booktime time" />
         </Select>

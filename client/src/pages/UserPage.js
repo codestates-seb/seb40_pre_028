@@ -15,6 +15,7 @@ function UserPage() {
       })
       .catch(error => console.error(error));
   }, [click]);
+
   return (
     <UserLayout>
       <UserFrom>

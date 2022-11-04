@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import ChEditor from '../components/ChEditor';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { fetchCreateQuestion } from '../utils/apis';
 
 const Bg = styled.div`
   background-color: #f1f2f3;
@@ -269,21 +270,12 @@ export default function CreateQuestionPage() {
     });
 
     console.log('cq user: ', JSON.parse(window.localStorage.getItem('user')));
-    fetch('https://4ab3-14-39-204-244.jp.ngrok.io/user/question/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: payload,
-    })
-      .then(res => res.json())
-      .then(data => {
-        const { data: question } = data;
-        console.log('cq response: ', data);
-        // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
-        navigate(`/${question.questionId}`);
-      })
-      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+
+    fetchCreateQuestion('/user/question/post', payload).then(data => {
+      const { data: question } = data;
+      // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
+      navigate(`/${question.questionId}`);
+    });
   };
 
   //tag handler
