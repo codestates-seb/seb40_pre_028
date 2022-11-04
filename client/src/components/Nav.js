@@ -89,7 +89,7 @@ function Nav() {
         <div>public</div>
         <SLink ishome={ishome} to="/">
           <FaGlobeAmericas className="reactIcon" />
-          Question
+          Questions
         </SLink>
         <NavLink className={({ isActive }) => 'choice' + (isActive ? 'yes' : '')} to="tags">
           Tags
