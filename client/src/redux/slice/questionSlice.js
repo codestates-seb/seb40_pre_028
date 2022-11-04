@@ -46,7 +46,7 @@ const questionSlice = createSlice({
 export const getQuestionList = createAsyncThunk('question/getQuestionList', async (_, thunkAPI) => {
   try {
     const { page, size } = thunkAPI.getState().question;
-    const response = await fetch(`http://localhost:3001/question?page=${page}&size=${size}`);
+    const response = await fetch(`https://4f1a-14-39-204-244.jp.ngrok.io/user/question?page=${page}&size=${size}`);
     const data = await response.json();
     return data;
   } catch (error) {

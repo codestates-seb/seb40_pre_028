@@ -10,7 +10,6 @@ import { userSlice } from '../redux/slice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
 
-
 export const MainCointainer = styled.div`
   position: relative;
   display: flex;
