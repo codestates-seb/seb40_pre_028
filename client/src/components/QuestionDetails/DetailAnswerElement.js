@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { BlueButton } from '../DefaultButton';
 import { AnswerMainElement } from './AnswerMainElement';
 import ChEditor from '../ChEditor';
+import { useState } from 'react';
 
 const Container = styled.div`
   h2 {
@@ -37,6 +38,12 @@ const Blank = styled.div`
 `;
 
 export const DetailAnswerElement = ({ answers, onchange, postData }) => {
+  const [editorBody, setInputEl2] = useState('');
+  const editorInit = () => {
+    editorBody.setData('');
+    // editorBody.focus(); 작성 후 인풋박스 포커싱
+  };
+
   return (
     <Container>
       <AnswerCount>
@@ -62,9 +69,15 @@ export const DetailAnswerElement = ({ answers, onchange, postData }) => {
       ))}
       <Answer>
         <h2>Your Answer</h2>
-        <ChEditor onchange={onchange} />
+        <ChEditor onchange={onchange} setInputEl2={setInputEl2} />
         <Blank />
-        <BlueButton onClick={() => postData()} height="35px">
+        <BlueButton
+          onClick={() => {
+            postData();
+            editorInit();
+          }}
+          height="35px"
+        >
           Post Your Answer
         </BlueButton>
       </Answer>

@@ -133,7 +133,7 @@ const Tag = ({ tag }) => {
   );
 };
 
-export const DetailMainElement = ({ body, createdAt, name, tag, vote = '123' }) => {
+export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) => {
   let [count, SetCount] = useState(vote);
   const { user } = useSelector(state => state.user);
   const { id: questionId } = useParams();

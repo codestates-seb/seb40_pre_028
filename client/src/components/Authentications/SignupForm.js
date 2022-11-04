@@ -148,12 +148,6 @@ export function SignupForm() {
 
     if (emailValue === '' || passwordValue === '' || !LoginForm.emailValidation(emailValue)) return;
 
-    console.log('login varified: ');
-    console.log({
-      name: nameValue,
-      email: emailValue,
-      password: passwordValue,
-    });
     const payload = JSON.stringify({
       name: nameValue,
       email: emailValue,
@@ -161,6 +155,12 @@ export function SignupForm() {
     });
 
     fetchCreateSignup('/user/join', payload).then(data => {
+      //  db에 동일한 이메일이 있으면 알림창
+      if (data.status >= 500) {
+        alert('이미 존재하는 이메일 입니다😞');
+        return;
+      }
+
       dispatch(authSlice.actions.login());
       window.localStorage.setItem('user', JSON.stringify(data));
       window.localStorage.setItem('auth', true);

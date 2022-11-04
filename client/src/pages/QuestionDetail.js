@@ -61,7 +61,6 @@ export default function QuestionDetail() {
     userId: user?.userId ?? 0,
     answerBody,
   });
-  console.log('p: ', payload);
 
   const getData = () => {
     fetchQuestion(`/user/question/${id}`).then(data => {
