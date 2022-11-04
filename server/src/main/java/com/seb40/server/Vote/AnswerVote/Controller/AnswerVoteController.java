@@ -22,7 +22,7 @@ public class AnswerVoteController {
     private final AnswerVoteRepository answerVoteRepository;
 
     //답변글 추천 비추천
-    @PatchMapping("/vote")
+    @PatchMapping("/answervote")
     public ResponseEntity postVote(@Valid @RequestBody AnswerVotePatchDto answerVotePatchDto) {
 
         AnswerVoteResponseDto answerVoteResponseDto = new AnswerVoteResponseDto();
