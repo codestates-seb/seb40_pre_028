@@ -5,16 +5,15 @@ import ChEditor from '../ChEditor';
 import { useState } from 'react';
 
 const Container = styled.div`
+  margin-top: 30px;
+  padding-right: 30px;
   h2 {
     font-size: 20px;
-    border-top: 1px solid #d6d9dc;
     padding: 25px 0;
   }
   .qanswer {
-    padding-left: 20px;
     font-size: 20px;
   }
-  margin-top: 30px;
   .select {
     margin-left: 10px;
     padding: 5px;

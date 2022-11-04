@@ -4,11 +4,15 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 import { useState } from 'react';
 import { getDateToString } from '../../utils/dateFormat';
+import { fetchUpdateVote, fetchDelete } from '../../utils/apis';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 // import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
   padding: 5px 40px 10px 5px;
-  width: 772px;
+  width: 740px;
+  border-bottom: 1px solid #d6d9dc;
 `;
 
 const Section = styled.div`
@@ -50,10 +54,9 @@ const Select = styled.div`
     margin: auto;
     margin-bottom: 5px;
   }
-  & > span {
-    width: 10px;
+  span {
     color: #6b737d;
-    font-size: 20px;
+    font-size: 18px;
   }
   .triangle {
     font-size: 40px;
@@ -102,8 +105,27 @@ const SEF = styled.div`
   }
 `;
 
-export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
+export const AnswerMainElement = ({ id, body, createdAt, name, vote = '123' }) => {
   let [count, SetCount] = useState(vote);
+  const { user } = useSelector(state => state.user);
+  const { id: answerId } = useParams();
+
+  const voteHandler = action => {
+    let answerVoteCnt = 0;
+    if (action === 'up') answerVoteCnt = '+1';
+    if (action === 'down') answerVoteCnt = '-1';
+
+    const payload = {
+      userId: user.userId,
+      answerId,
+      answerVoteCnt,
+    };
+
+    fetchUpdateVote('/user/answervote', JSON.stringify(payload)).then(data => {
+      console.log('vote: ', data);
+      SetCount(data.answerVoteSum);
+    });
+  };
 
   return (
     <Main>
@@ -112,7 +134,7 @@ export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
           <div>
             <button //API PATCH
               onClick={() => {
-                SetCount(count + 1);
+                voteHandler('up');
               }}
             >
               <VscTriangleUp className="icon triangle" />
@@ -120,7 +142,7 @@ export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
             <span>{count}</span>
             <button
               onClick={() => {
-                SetCount(count - 1);
+                voteHandler('down');
               }}
             >
               <VscTriangleDown className="icon triangle" />
@@ -136,6 +158,7 @@ export const AnswerMainElement = ({ body, createdAt, name, vote = '123' }) => {
               <a href="question">Share</a>
               <button>Edit</button>
               <button>Follow</button>
+              <button onClick={() => fetchDelete(`/user/answer/${id}`).then(window.location.reload)}>Delete</button>
             </SEF>
             <UserInfo>
               <div>asked {getDateToString(createdAt)}</div>

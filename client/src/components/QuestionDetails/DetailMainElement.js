@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const Main = styled.div`
   padding: 5px 40px 10px 5px;
-  width: 772px;
+  width: 740px;
 `;
 
 const Section = styled.div`
@@ -47,14 +47,15 @@ const UserInfo = styled(Section)`
 
 const PostTag = styled.div`
   & a {
-    background-color: #d9eaf7;
-    color: #38749d;
-    border-radius: 5px;
-    padding: 5px;
+    background-color: var(--powder-100);
+    color: var(--powder-700);
+    border-radius: 3px;
+    padding: 3px 6px;
   }
   & li {
     float: left;
     margin-right: 10px;
+    font-size: 12px;
   }
   & ul {
     display: block;
@@ -70,10 +71,9 @@ const Select = styled.div`
     margin: auto;
     margin-bottom: 5px;
   }
-  & > span {
-    width: 10px;
+  span {
     color: #6b737d;
-    font-size: 20px;
+    font-size: 18px;
   }
   .triangle {
     font-size: 40px;
@@ -140,8 +140,8 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
 
   const voteHandler = action => {
     let questionVoteCnt = 0;
-    if (action === 'up') questionVoteCnt = 1;
-    if (action === 'down') questionVoteCnt = -1;
+    if (action === 'up') questionVoteCnt = '+1';
+    if (action === 'down') questionVoteCnt = '-1';
 
     const payload = {
       userId: user.userId,
@@ -193,6 +193,7 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
               <a href="question">Share</a>
               <button>Edit</button>
               <button>Follow</button>
+              <button>Delete</button>
             </SEF>
             <UserInfo>
               <div>asked {getDateToString(createdAt)}</div>
