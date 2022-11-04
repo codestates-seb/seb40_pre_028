@@ -1,6 +1,5 @@
 package com.seb40.server.Vote.QuestionVote.Entity;
 
-import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.User.entity.User;
 import lombok.Getter;
