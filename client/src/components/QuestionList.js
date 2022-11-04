@@ -10,7 +10,6 @@ import { userSlice } from '../redux/slice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
 
-
 export const MainCointainer = styled.div`
   position: relative;
   display: flex;
@@ -91,6 +90,10 @@ export function QuestionList() {
     user && dispatch(userSlice.actions.setUser(JSON.parse(user)));
     auth && dispatch(authSlice.actions.login());
 
+    console.log(
+      'redux/user: ',
+      useSelector(state => state.user)
+    );
     window.addEventListener('beforeunload', () => {
       window.localStorage.removeItem('auth');
       window.localStorage.removeItem('user');

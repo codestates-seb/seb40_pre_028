@@ -8,7 +8,8 @@ const NavTap = styled.div`
   font-size: 13px;
   position: sticky;
   width: 162px;
-  top: 110px; // top 적용안됨 확인 필요
+  top: 110px;
+  // top 적용안됨 확인 필요
   row-gap: 20px;
 
   a {
