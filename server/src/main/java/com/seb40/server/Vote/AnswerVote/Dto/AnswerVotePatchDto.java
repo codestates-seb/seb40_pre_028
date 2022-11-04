@@ -1,3 +1,5 @@
+
+
 package com.seb40.server.Vote.AnswerVote.Dto;
 
 import lombok.Getter;
@@ -17,3 +19,4 @@ public class AnswerVotePatchDto {
 
 
 }
+

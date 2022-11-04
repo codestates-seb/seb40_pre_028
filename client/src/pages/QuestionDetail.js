@@ -8,13 +8,16 @@ import { useParams } from 'react-router-dom';
 
 const Section = styled.div`
   display: flex;
+  Aside {
+    margin-top: 20px;
+  }
 `;
 
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border-left: 1px solid #d6d9dc;
+  padding: 0 20px 20px 20px;
+  /* border-left: 1px solid #d6d9dc; */
 `;
 // {
 //     "data": {

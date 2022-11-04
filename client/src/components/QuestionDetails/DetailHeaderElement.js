@@ -24,6 +24,7 @@ const TitleSet = styled.div`
 
 const TitleInfo = styled.div`
   display: flex;
+  font-size: 13px;
   div {
     margin: 0 10px 10px 0;
   }
@@ -57,7 +58,7 @@ export const DetailHeaderElement = ({ title, createdAt, modified, views }) => {
         </div>
         <div>
           <Span>Viewed</Span>
-          {views}
+          {views} times
         </div>
       </TitleInfo>
     </Header>
