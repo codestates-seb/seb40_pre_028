@@ -45,7 +45,7 @@ public class QuestionController {
         Question question = questionService.createQuestion(
                 mapper.questionPostDtoToQuestion(questionPostDto));
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper, tagMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question, answerMapper))
                 , HttpStatus.CREATED);
     }
 
@@ -57,7 +57,7 @@ public class QuestionController {
         Question response = questionService.updateQuestion(
                 mapper.questionPatchDtoToQuestion(questionPatchDto));
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper, tagMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
                 , HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class QuestionController {
         response = questionService.addViews(response);
 
         return new ResponseEntity<>( //수정
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper,tagMapper))
+                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response, answerMapper))
                 , HttpStatus.OK);
     }
 

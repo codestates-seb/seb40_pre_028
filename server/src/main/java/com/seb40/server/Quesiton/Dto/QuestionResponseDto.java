@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 user_id로 바꾸는듯
     private Long questionId;
     private String questionTitle;
