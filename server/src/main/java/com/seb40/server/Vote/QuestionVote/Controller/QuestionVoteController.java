@@ -34,6 +34,9 @@ public class QuestionVoteController {
         //Long -> int
         Long questionid= questionVotePatchDto.getQuestionId();
         int index = questionid.intValue();
+        System.out.println();
+        System.out.printf("index: %d", index);
+        System.out.println();
 
         //questionId에 대한 사용자 총투표값 확인
         Long questionId= Long.valueOf(list.get(index-1)[0].toString());
@@ -41,6 +44,17 @@ public class QuestionVoteController {
 
         questionVoteResponseDto.setQuestionId(questionId);
         questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+
+        //답변에 대한 투표값확인
+//        Iterator iter = list.iterator();
+//
+//        while (iter.hasNext()) {
+//            Object[] obj = (Object[]) iter.next();
+//            Long anwerId = Long.valueOf(obj[0].toString());
+//            int answerVoteSum = Integer.parseInt(obj[1].toString());
+//            System.out.printf("answerID2 : %d , answerVoteSum2 : %d",anwerId, answerVoteSum );
+//
+//        }
 
         return new ResponseEntity(questionVoteResponseDto, HttpStatus.CREATED);
 
