@@ -150,6 +150,7 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '123' }) 
     };
 
     fetchUpdateVote('/user/questionvote', JSON.stringify(payload)).then(data => {
+      console.log('vote: ', data);
       SetCount(data.questionVoteSum);
     });
   };

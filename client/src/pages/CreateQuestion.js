@@ -187,6 +187,7 @@ const ButtonOveray = styled(Overlay)`
 export default function CreateQuestionPage() {
   // redux
   const isLogin = useSelector(state => state.auth.isLogin);
+  const { user } = useSelector(state => state.user);
 
   // router
   const navigate = useNavigate();
@@ -266,15 +267,13 @@ export default function CreateQuestionPage() {
     const payload = JSON.stringify({
       questionTitle,
       questionBody,
-      userId: JSON.parse(window.localStorage.getItem('user')).userId,
+      userId: user.userId,
     });
 
-    console.log('cq user: ', JSON.parse(window.localStorage.getItem('user')));
-
-    fetchCreateQuestion('/user/question/post', payload).then(data => {
-      const { data: question } = data;
+    fetchCreateQuestion('/user/question/post', payload).then(res => {
+      const { data } = res;
       // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
-      navigate(`/${question.questionId}`);
+      navigate(`/${data.questionId}`);
     });
   };
 
