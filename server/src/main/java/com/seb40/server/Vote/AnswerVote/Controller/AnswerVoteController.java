@@ -40,16 +40,18 @@ public class AnswerVoteController {
             Long answerId = Long.valueOf(obj[0].toString());
             int answerVoteSum = Integer.parseInt(obj[1].toString());
 
-
-            answerVoteResponseDto.setAnswerId(answerId);
-            answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
-
-            if(answerId == answerVotePatchDto.getAnswerId()) break;
+            if(answerId == answerVotePatchDto.getAnswerId()){
+                answerVoteResponseDto.setAnswerId(answerId);
+                answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
+                break;
+            }
+            else{
+                answerVoteResponseDto.setAnswerVoteSum(0);
+            }
         }
 
         return new ResponseEntity(answerVoteResponseDto, HttpStatus.CREATED);
 
     }
-
 }
 
