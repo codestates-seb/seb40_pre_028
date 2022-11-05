@@ -19,8 +19,8 @@ public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 
     private String questionBody;
     private LocalDateTime questionCreatedAt;
     private LocalDateTime questionModified;
-    private List<AnswerResponseDto> answers; // 이 안에
-    private List<Tag> tags;
+    private List<AnswerResponseDto> answers;
+    private String tags; // 수정
     private String name;
     private int answerNum;
     private long views;

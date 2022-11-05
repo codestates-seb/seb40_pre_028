@@ -49,6 +49,8 @@ public class Question{
 //    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
 //    private List<QuestionTag> questionTags = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
+    private List<QuestionTag> tags = new ArrayList<>();
 
 
 }

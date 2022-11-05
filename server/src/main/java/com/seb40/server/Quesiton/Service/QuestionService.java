@@ -3,6 +3,7 @@ package com.seb40.server.Quesiton.Service;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
@@ -81,4 +82,18 @@ public class QuestionService {
 
         return questionRepository.save(question);
     }
+
+    // 태그 검증
+    public void addTags(QuestionPostDto questionPostDto){
+        String tags = questionPostDto.getTags();
+
+        for(int i = 0; i < tags.split(",").length; i++){
+
+        }
+    }
+    // string  을 받아서 쪼개기
+    // 쪼개진 string tag 를 중복 검사하기
+    // 저장소에 있다면 저장소의 동일 tag Id를 가져오기
+    // 저장소에 없다면 저장소에 저장해서 새로운 tag Id 를 받아서 List tags에 add 넣기
+    // 넣은 List 를 question 의 tags 에 set 하기
 }
