@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchQuestionList } from '../../utils/apis';
 
 const initialState = {
   questions: [],
@@ -46,8 +47,7 @@ const questionSlice = createSlice({
 export const getQuestionList = createAsyncThunk('question/getQuestionList', async (_, thunkAPI) => {
   try {
     const { page, size } = thunkAPI.getState().question;
-    const response = await fetch(`https://4f1a-14-39-204-244.jp.ngrok.io/question?page=${page}&size=${size}`);
-    const data = await response.json();
+    const data = await fetchQuestionList(`/user/question?page=${page}&size=${size}`);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

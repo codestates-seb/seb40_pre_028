@@ -63,14 +63,14 @@ export default function QuestionDetail() {
   });
 
   const getData = () => {
-    fetchQuestion(`/question/${id}`).then(data => {
+    fetchQuestion(`/user/question/${id}`).then(data => {
       setQuestion(data.data);
       setIsLoading(false);
     });
   };
 
   const postData = () => {
-    fetchCreateAnswer(`/answer/${id}/post`, payload).then(() => {
+    fetchCreateAnswer(`/user/answer/${id}/post`, payload).then(() => {
       getData();
     });
     // window.location.reload();

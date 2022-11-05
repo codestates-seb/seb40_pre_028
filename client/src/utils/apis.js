@@ -1,5 +1,4 @@
-const BASE_URL = 'https://4f1a-14-39-204-244.jp.ngrok.io';
-
+export const BASE_URL = 'https://fc28-14-39-204-244.jp.ngrok.io';
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
@@ -50,7 +49,7 @@ export const fetchQuestion = async url => {
 
 export const fetchCreateAnswer = async (url, payload) => {
   try {
-    const res = await fetch(URL + url, {
+    const res = await fetch(BASE_URL + url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,4 +80,8 @@ export const fetchUpdateVote = (url, payload) => {
     .catch(error => {
       console.error('Error', error);
     });
+};
+
+export const fetchQuestionList = url => {
+  return fetch(BASE_URL + url).then(res => res.json());
 };
