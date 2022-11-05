@@ -243,7 +243,7 @@ export function LoginForm() {
                   <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
                 </span>
               </div>
-              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              <Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
               {passwordValid ? (
                 <ErrorMSG>
                   Password cannot be empty.
