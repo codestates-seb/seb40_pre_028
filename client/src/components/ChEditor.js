@@ -8,6 +8,7 @@ const ChContainer = styled.div`
 
   .ck-editor__editable {
     min-height: 150px;
+    font-size: 13px;
   }
 `;
 
@@ -19,25 +20,11 @@ export default function ChEditor({ onfocus, setInputEl2, onchange }) {
         ref={edit}
         editor={Editor}
         config={{
-          toolbar: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'code',
-            '|',
-            'link',
-            'blockQuote',
-            'codeBlock',
-            'imageUpload',
-            'table',
-            '|',
-            'horizontalLine',
-            'list',
-          ],
+          toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'imageUpload', '|', 'horizontalLine'],
         }}
         onReady={editor => {
           setInputEl2?.(editor);
+          // editorInit?.(edit);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();

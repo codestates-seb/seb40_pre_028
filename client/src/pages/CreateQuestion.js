@@ -31,6 +31,8 @@ const Form = styled.form`
 const FieldSet = styled.div`
   position: relative;
   display: flex;
+
+  margin-bottom: 20px;
 `;
 const Field = styled.div`
   background-color: white;
@@ -40,7 +42,7 @@ const Field = styled.div`
   border: 0.5px solid var(--black-200);
   border-radius: 2px;
 
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
 const Label1 = styled.label`
   font-family: 'Noto Sans KR';
@@ -194,7 +196,7 @@ export default function CreateQuestionPage() {
 
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionBody, setQuestionBody] = useState('');
-  // const [questionTag, setQuestionBody] = useState('');
+  const [questionTag, setQuestionTag] = useState('');
 
   const [isAlertMsg1, setIsAlertMsg1] = useState(false);
   const [isAlertMsg2, setIsAlertMsg2] = useState(false);
@@ -211,7 +213,7 @@ export default function CreateQuestionPage() {
   const [tagName, setTagName] = useState([]);
 
   const inputEl1 = useRef(null);
-  const [inputEl2, setInputEl2] = useState(null);
+  const [inputEl2, setInputEl2] = useState(null); // chEditor
   const inputEl3 = useRef(null);
 
   const AlertMsgHandlerOn1 = () => {
@@ -268,8 +270,9 @@ export default function CreateQuestionPage() {
       questionTitle,
       questionBody,
       userId: user.userId,
+      questionTags: tagName.join(','),
     });
-
+    // console.log(payload);
     fetchCreateQuestion('/user/question/post', payload).then(res => {
       const { data } = res;
       // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;

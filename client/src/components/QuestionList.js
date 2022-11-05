@@ -9,6 +9,7 @@ import { authSlice } from '../redux/slice/authSlice';
 import { userSlice } from '../redux/slice/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionList, changeQPage, changeQSize } from '../redux/slice/questionSlice';
+import { LoadingSpinner } from './LoadingSpinner';
 
 export const MainCointainer = styled.div`
   position: relative;
@@ -24,8 +25,8 @@ export const MainCointainer = styled.div`
     width: 100%;
     padding: 0 0 0 24px;
     // 첫번째와 두번째 자식요소 동시에 선택해서 오른쪽 패딩을 24px로 설정
-    > *:first-child,
-    > *:nth-child(2) {
+    *:first-child,
+    *:nth-child(2) {
       padding-right: 24px;
     }
   }
@@ -37,7 +38,7 @@ const HeaderContainer = styled.div`
   height: 50px;
   margin-bottom: 12px;
 
-  > h1 {
+  h1 {
     font-size: 1.7rem;
   }
 `;
@@ -47,7 +48,7 @@ const InfoContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 12px;
 
-  > div {
+  div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,17 +84,11 @@ export function QuestionList() {
   };
 
   // 새로고침시 로컬스토리지에 사용자 정보를 확인함
-  // 사용자가 사이트를 떠나면 사용자 정보를 삭제함
   useEffect(() => {
     const user = window.localStorage.getItem('user');
     const auth = window.localStorage.getItem('auth');
     user && dispatch(userSlice.actions.setUser(JSON.parse(user)));
     auth && dispatch(authSlice.actions.login());
-
-    window.addEventListener('beforeunload', () => {
-      window.localStorage.removeItem('auth');
-      window.localStorage.removeItem('user');
-    });
   }, []);
 
   return (
@@ -110,7 +105,7 @@ export function QuestionList() {
       </InfoContainer>
       <MainUList>
         {/* 더미데이터 */}
-        <QuestionElement
+        {/* <QuestionElement
           id={1}
           title={'Hi, how I can make a dashboard with JS but I can add graphs according to what is loaded in the excel file or csv file'}
           body={
@@ -122,9 +117,9 @@ export function QuestionList() {
           votes={1}
           answers={2}
           views={3}
-        />
+        /> */}
         {isLoading ? (
-          <div>Loading...</div>
+          <LoadingSpinner />
         ) : (
           questions.map(question => (
             <QuestionElement
@@ -136,7 +131,7 @@ export function QuestionList() {
               name={question.name}
               createdAt={question.questionCreatedAt}
               votes={question.votes}
-              answers={question.answers}
+              answers={question.answerNum}
               views={question.views}
             />
           ))
