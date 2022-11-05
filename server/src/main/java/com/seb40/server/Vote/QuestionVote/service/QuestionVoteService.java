@@ -25,9 +25,6 @@ public class QuestionVoteService {
             if(questionVotePatchDto.getQuestionVoteCnt() != optionalQuestionVote.get().questionVoteCnt){
                 questionVoteRepository.deleteById(optionalQuestionVote.get().questionVoteId);
             }
-//            QuestionVote findQuestionVote = optionalQuestionVote.orElseThrow();
-//            findQuestionVote.setQuestionVoteCnt(questionVotePatchDto.getQuestionVoteCnt());
-//            questionVoteRepository.save(findQuestionVote);
         }
         // 투표한 적이 없을 때
         else{

@@ -18,9 +18,6 @@ public class AnswerVoteSevice {
     public void vote(AnswerVotePatchDto answerVotePatchDto ) {
         Optional<AnswerVote>  optionalAnswerVote =  answerVoteRepository.findAnswerVotesByUser_UserIdAndAnswer_AnswerId(answerVotePatchDto.getUserId(),
                                                                                                                         answerVotePatchDto.getAnswerId());
-        //좋아요 or 싫어요 두번 누르면 db에 내용이 삭제됨으로 사용할 수 없음
-        //answerVoteRepository.deleteById(optionalAnswerVote.get().answerVoteId);
-
         // 기존에 투표한 사람으로 투표값 update
         if(optionalAnswerVote.isPresent()){
             System.out.println("중복됨");
@@ -32,9 +29,6 @@ public class AnswerVoteSevice {
                 System.out.println();
                 answerVoteRepository.deleteById(optionalAnswerVote.get().answerVoteId);
                 System.out.print("값이 다를때 삭제 완료");
-            }
-            else{
-
             }
 
             //answerVoteRepository.save(findAnswerVote);
