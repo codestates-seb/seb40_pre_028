@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://3ee6-14-39-204-244.jp.ngrok.io/';
+export const BASE_URL = 'https://fc28-14-39-204-244.jp.ngrok.io';
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
