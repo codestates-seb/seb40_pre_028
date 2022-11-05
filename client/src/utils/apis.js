@@ -1,11 +1,11 @@
 export const BASE_URL = process.env.REACT_APP_HOST;
+// export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com';
 
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'ngrok-skip-browser-warning': 'skip',
     },
     body: payload,
   })
@@ -20,7 +20,6 @@ export const fetchCreateSignup = (url, payload) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'ngrok-skip-browser-warning': 'skip',
     },
     body: payload,
   })

@@ -206,7 +206,7 @@ export function SignupForm() {
 
           <Field>
             <LoginForm.Label htmlFor="password">Password</LoginForm.Label>
-            <LoginForm.Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+            <LoginForm.Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
             {passwordValid ? (
               <LoginForm.ErrorMSG>
                 Password cannot be empty.
