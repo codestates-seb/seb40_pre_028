@@ -24,7 +24,7 @@ public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 
     private String name;
     private int answerNum;
     private long views;
-
+    private long questionVoteSum;
     private List<QuestionTag> questionTags;
 
 }
