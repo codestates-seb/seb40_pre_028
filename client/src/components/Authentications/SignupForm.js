@@ -158,6 +158,7 @@ export function SignupForm() {
       //  db에 동일한 이메일이 있으면 알림창
       if (data.status >= 500) {
         alert('이미 존재하는 이메일 입니다😞');
+        setVerifiSuccess(true);
         return;
       }
 
