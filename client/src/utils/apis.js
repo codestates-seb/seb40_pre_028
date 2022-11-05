@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://3ee6-14-39-204-244.jp.ngrok.io';
+export const BASE_URL = process.env.REACT_APP_HOST;
+
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
     method: 'POST',
