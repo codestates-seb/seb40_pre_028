@@ -4,7 +4,7 @@
 
 
 ## 팀원
-| 김명환(팀장 & FE) | 권수현(팀원 & FE) | 방기현(서기 & FE) | 우상현(Git & FE) |
+| 김명환(팀장 & FE) | 권수현(팀원 & FE) | 방기현(서기 & FE) | 우상헌(Git & FE) |
 |:----------:|:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/106420520?v=4" width=100px>](https://github.com/kongchip)|[<img src ="https://avatars.githubusercontent.com/u/99517342?v=4" width=100px>](https://github.com/x-xuhxun)|[<img src ="https://avatars.githubusercontent.com/u/102677317?v=4" width=100px>](https://github.com/kihyeoon)|[<img src ="https://avatars.githubusercontent.com/u/98410418?v=4" width=100px>](https://github.com/Withlaw)|
 | 김영희(팀원 & BE) | 신승현(팀원 & BE) | 제민혜(팀원 & BE) |
