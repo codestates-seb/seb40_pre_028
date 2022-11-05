@@ -6,10 +6,10 @@
 ## 팀원
 | 김명환 | 권수현 | 방기현 | 우상현 |
 |:----------:|:----------:|:----------:|:----------:|
-|[![김명환](https://avatars.githubusercontent.com/u/106420520?v=4)](https://github.com/kongchip)|[![권수현](https://avatars.githubusercontent.com/u/99517342?v=4)](https://github.com/x-xuhxun)|[![방기현](https://avatars.githubusercontent.com/u/102677317?v=4)](https://github.com/kihyeoon)|[![우상현](https://avatars.githubusercontent.com/u/98410418?v=4)](https://github.com/Withlaw)|
+|[<img src ="https://avatars.githubusercontent.com/u/106420520?v=4" width=100px>](https://github.com/kongchip)|[<img src ="https://avatars.githubusercontent.com/u/99517342?v=4" width=100px>](https://github.com/x-xuhxun)|[<img src ="https://avatars.githubusercontent.com/u/102677317?v=4" width=100px>](https://github.com/kihyeoon)|[<img src ="https://avatars.githubusercontent.com/u/98410418?v=4" width=100px>](https://github.com/Withlaw)|
 |FE|FE|FE|FE|
 | 김영희 | 신승현 | 제민혜 |
-|[![김영희](https://avatars.githubusercontent.com/u/106645091?v=4)](https://github.com/kyh0113)|[![신승현](https://avatars.githubusercontent.com/u/59863297?v=4)](https://github.com/Shin-seung-hyun)|[![제민혜](https://avatars.githubusercontent.com/u/106645091?v=4)](https://github.com/domadoes)|
+|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
 |BE|BE|BE|
 
 ## Project Description
