@@ -3,21 +3,16 @@ package com.seb40.server.Answer.Controller;
 
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Answer.Entity.Answer;
-//import com.seb40.server.ask.answer.mapper.AnswerMapper;
 import com.seb40.server.Answer.Mapper.AnswerMapper;
-import com.seb40.server.Answer.Repository.AnswerRepository;
-import com.seb40.server.Comment.AnswerComment.Mapper.AnswerCommentMapper;
-import com.seb40.server.Quesiton.Entity.Question;
-import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import com.seb40.server.Quesiton.Service.QuestionService;
 import com.seb40.server.Response.MultiResponseDto;
 import com.seb40.server.Answer.Service.AnswerService;
 import com.seb40.server.Response.SingleResponseDto;
+import com.seb40.server.User.entity.User;
+import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.Optional;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController //bean 등록
@@ -33,24 +28,25 @@ import java.util.Optional;
 @AllArgsConstructor
 // 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
-
-    // AnswerService, Mapper2 사용하기 위해 DI 주입
     private final AnswerService answerService;
-    private final QuestionService questionService;
-    private final AnswerMapper mapper;
-    private final AnswerCommentMapper answerCommentMapper;
 
+    private final QuestionService questionService;
+    private final UserService userService;
+    private final AnswerMapper mapper;
 
     @PostMapping("/{question_id}/post")
     public ResponseEntity postAnswer(@PathVariable("question_id") long questionId,
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
         // answerPostDto 에 URI로 받은 questionId 설정
         answerPostDto.setQuestionId(questionId);
+        User user = userService.findVerifiedUser(answerPostDto.getUserId());
+        answerPostDto.setName(user.getName());
+
         Answer answer = answerService.createAnswer(
                 mapper.answerPostDtoToAnswer(answerPostDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer, answerCommentMapper)),
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
                 HttpStatus.CREATED);
     }
 
@@ -66,7 +62,7 @@ public class AnswerController {
                 mapper.answerPatchDtoToAnswer(answerPatchDto));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response,answerCommentMapper))
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(response))
                 , HttpStatus.OK);
     }
 
@@ -76,11 +72,11 @@ public class AnswerController {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer,answerCommentMapper))
+
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer))
                 , HttpStatus.OK);
     }
 
-    // Get answer List
     @GetMapping("/{question_id}")
     public ResponseEntity getAnswers(@PathVariable("question_id")@Positive long questionId,
                                      @Positive @RequestParam int page,
@@ -90,19 +86,11 @@ public class AnswerController {
         Page<Answer> pageAnswers = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswers.getContent();
 
-//        List<AnswerResponseDto> response = answerService.getAllContents();
-//
-//        List<AnswerResponseDto> answerResponseDto = mapper.answersToAnswerResponseDtos(answers);
-//        List<AnswerResponseDto> answer1 = mapper.answerResponseDtoToAnswerResponseDtos(answerResponseDto);
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(
-                        mapper.answersToAnswerResponseDtos(answers),pageAnswers),
+                        mapper.answersToAnswerResponseDtos(answers), pageAnswers),
                 HttpStatus.OK);
-//        @Query(value = "" +
-//                "select question_id, count(*) as answerNum\n" +
-//                "from answer\n" +
-//                "group by question_id\n", nativeQuery = true)
 
     }
 

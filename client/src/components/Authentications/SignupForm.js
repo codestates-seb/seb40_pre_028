@@ -2,6 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { FaQuestionCircle } from 'react-icons/fa';
 import * as LoginForm from './LoginForm.js';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { authSlice } from '../../redux/slice/authSlice.js';
+import { fetchCreateSignup } from '../../utils/apis.js';
 
 const Form = styled(LoginForm.Form)`
   display: flex;
@@ -12,7 +16,7 @@ const Fieldset = styled(LoginForm.Fieldset)`
   /* width: 280px; */
   width: 340px;
   height: 820px;
-  padding: 30px 30px;
+  padding: 30px 30px 0 30px;
   border-radius: 10px;
   border: none;
   margin: 20px;
@@ -77,19 +81,7 @@ const QuestionCircle = styled(FaQuestionCircle)`
     cursor: pointer;
   }
 `;
-const Button = styled.button`
-  width: 100%;
-  height: 2.4rem;
-  color: white;
-  background-color: #0996ff;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 50px;
-  &:hover {
-    cursor: pointer;
-    background-color: #077cd2;
-  }
-`;
+
 const FieldsetFooter = styled.div`
   span {
     font-size: 14px;
@@ -123,16 +115,23 @@ const TextContainer = styled.div`
     }
   }
 `;
-export function SignupForm({ setUserData, setIsLoading }) {
+export function SignupForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [nameValue, setNameValue] = useState('');
+
   const [emailValid, setEmailValid] = useState(false);
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-  const [nameValue, setNameValue] = useState('');
 
   // const [userData, setUserData] = useState({});
   const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
+
+  //  redux state
+  const dispatch = useDispatch();
+
+  // router
+  const navigate = useNavigate();
 
   const formSubmitHandler = e => {
     e.preventDefault();
@@ -149,55 +148,25 @@ export function SignupForm({ setUserData, setIsLoading }) {
 
     if (emailValue === '' || passwordValue === '' || !LoginForm.emailValidation(emailValue)) return;
 
-    console.log('login varified: ');
-    console.log({
-      name: nameValue,
-      email: emailValue,
-      password: passwordValue,
-    });
     const payload = JSON.stringify({
       name: nameValue,
       email: emailValue,
       password: passwordValue,
     });
 
-    // fetch('https://9d19-110-13-106-62.jp.ngrok.io/user/join', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: payload,
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     setIsLoading(false);
-    //     setTest(data);
-    //     setUserData(data);
-    //   })
-    //   .catch(err => console.error('LOGIN FETCH ERROR: ', err));
+    fetchCreateSignup('/user/join', payload).then(data => {
+      //  db에 동일한 이메일이 있으면 알림창
+      if (data.status >= 500) {
+        alert('이미 존재하는 이메일 입니다😞');
+        setVerifiSuccess(true);
+        return;
+      }
 
-    // login post rq
-    fetch('https://4c94-61-255-255-90.jp.ngrok.io/user/join', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: payload,
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setIsLoading(false);
-        // setTest(data);
-        setUserData(data);
-      })
-      .catch(err => console.error('LOGIN FETCH ERROR: ', err));
-
-    //
-    fetch(`https://4c94-61-255-255-90.jp.ngrok.io/user/question?page=1&size=10`)
-      .then(res => res.json())
-      .then(data => console.log('question data: ', data));
+      dispatch(authSlice.actions.login());
+      window.localStorage.setItem('user', JSON.stringify(data));
+      window.localStorage.setItem('auth', true);
+      navigate('/');
+    });
   };
 
   const emailValueHandler = e => {
@@ -238,7 +207,7 @@ export function SignupForm({ setUserData, setIsLoading }) {
 
           <Field>
             <LoginForm.Label htmlFor="password">Password</LoginForm.Label>
-            <LoginForm.Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+            <LoginForm.Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
             {passwordValid ? (
               <LoginForm.ErrorMSG>
                 Password cannot be empty.
@@ -265,7 +234,7 @@ export function SignupForm({ setUserData, setIsLoading }) {
               <QuestionCircle />
             </div>
           </Checkbox>
-          <Button>Sign up</Button>
+          <LoginForm.Button>Sign up</LoginForm.Button>
 
           <FieldsetFooter>
             <span>

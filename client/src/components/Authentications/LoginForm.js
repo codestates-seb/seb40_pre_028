@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { fetchCreateLogin } from '../../utils/apis';
 
 const Form = styled.form`
   display: flex;
@@ -8,8 +10,8 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
   background-color: white;
   width: 340px;
-  height: 280px;
-  padding: 30px 30px;
+  /* height: 280px; */
+  padding: 30px 30px 0 30px;
   border-radius: 10px;
   border: none;
   margin: 20px;
@@ -74,13 +76,22 @@ const Button = styled.button`
   width: 100%;
   height: 2.4rem;
   color: white;
-  background-color: #0996ff;
-  border: none;
+  /* border: none; */
   border-radius: 4px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  border: 1px solid var(--blue-500);
+  color: var(--blue-050);
+  background-color: var(--blue-500);
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
   &:hover {
+    background-color: var(--blue-600);
+    transition: 0.4s all;
     cursor: pointer;
-    background-color: #077cd2;
+  }
+  &:active {
+    box-shadow: none;
+    border-color: var(--blue-500);
+    background-color: var(--blue-700);
   }
 `;
 const TextContainer = styled.div`
@@ -111,12 +122,16 @@ const emailValidation = str => {
 export function LoginForm() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+
   const [emailValid, setEmailValid] = useState(false);
   const [emailValid2, setEmailValid2] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
 
-  const [verifiSuccess, setVerifiSuccess] = useState(false); // 로그인 시도 후 아이디,비밀번호 정보의 일치 유무
+  const [isVerifiSuccess, setIsVerifiSuccess] = useState(false); // 로그인 시도 후 아이디 정보 일치
 
+  const navigate = useNavigate();
+
+  // const input
   const formSubmitHandler = e => {
     e.preventDefault();
 
@@ -129,22 +144,42 @@ export function LoginForm() {
     // 형식 체크
     if (!emailValidation(emailValue)) setEmailValid2(true);
     else setEmailValid2(false);
-  };
 
+    if (emailValue === '' || passwordValue === '' || !emailValidation(emailValue)) return;
+    const payload = JSON.stringify({
+      email: emailValue,
+      password: passwordValue,
+    });
+
+    //fetch
+    fetchCreateLogin('/user/login', payload).then(data => {
+      // 로그인정보가 다르면 알림창
+      if (data.status >= 500) {
+        alert('로그인 정보가 다릅니다😞');
+        setIsVerifiSuccess(true);
+        return;
+      }
+
+      window.localStorage.setItem('user', JSON.stringify(data));
+      window.localStorage.setItem('auth', true);
+      navigate('/');
+    });
+  };
   const emailValueHandler = e => {
     setEmailValue(e.target.value);
   };
   const passwordValueHandler = e => {
     setPasswordValue(e.target.value);
   };
+
   return (
     <>
       <Form onSubmit={formSubmitHandler}>
-        {verifiSuccess ? (
+        {isVerifiSuccess ? (
           <Fieldset>
             <Field>
               <Label htmlFor="email">Email</Label>
-              <Input type="text" id="email" onChange={emailValueHandler} error={emailValid || emailValid2 || verifiSuccess} />
+              <Input type="text" id="email" onChange={emailValueHandler} error={emailValid || emailValid2 || isVerifiSuccess} />
               {emailValid ? (
                 <ErrorMSG>
                   Email cannot be empty.
@@ -169,7 +204,7 @@ export function LoginForm() {
                   <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
                 </span>
               </div>
-              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              <Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
               {passwordValid ? (
                 <ErrorMSG>
                   Password cannot be empty.
@@ -207,7 +242,7 @@ export function LoginForm() {
                   <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
                 </span>
               </div>
-              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              <Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
               {passwordValid ? (
                 <ErrorMSG>
                   Password cannot be empty.

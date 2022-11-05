@@ -21,14 +21,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
-    // (1)
+
     private final QuestionRepository questionRepository ;
-
-
-//    public QuestionService(QuestionRepository questionRepository) {
-//        this.questionRepository = questionRepository;
-//    }
-
+    private final QuestionTagService questionTagService;
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -48,12 +43,12 @@ public class QuestionService {
         // 수정 날짜 및 시간 수정
         Optional.ofNullable(question.getQuestionModified()) //업데이트 날짜 수정
                 .ifPresent(questionModified->findQuestion.setQuestionModified(questionModified));
+        Question updatedQuestion = questionRepository.save(findQuestion);
         return questionRepository.save(findQuestion);
     }
 
     // 선택 질문 요청
     public Question findQuestion(long questionId){
-
         return findVerifiedQuestion(questionId);
     }
 
@@ -79,9 +74,11 @@ public class QuestionService {
         return findQuestion;
     }
 
-//    public List<QuestionResponseDto> getAllContents() {
-//        return questionRepository.findAll().stream()
-//                .map(QuestionResponseDto::fromEntity).collect(Collectors.toList());
-//
-//    }
+    public Question addViews(Question question){
+        long views = question.getViews();
+        views++;
+        question.setViews(views);
+
+        return questionRepository.save(question);
+    }
 }

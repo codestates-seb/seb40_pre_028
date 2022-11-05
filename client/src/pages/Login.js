@@ -4,7 +4,7 @@ import StackIcon from '../assets/img/stackicon.png';
 import { OauthBtn } from '../components/Authentications/OauthButton';
 const Bg = styled.div`
   background-color: #f1f2f3;
-  padding: 20px 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

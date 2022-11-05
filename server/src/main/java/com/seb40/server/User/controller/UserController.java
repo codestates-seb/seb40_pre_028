@@ -1,13 +1,12 @@
 package com.seb40.server.User.controller;
 
-import com.seb40.server.Response.SingleResponseDto;
+
 import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.entity.User;
 import com.seb40.server.User.mapper.UserMapper;
 import com.seb40.server.User.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/user")
@@ -45,7 +46,7 @@ public class UserController {
         User user = userMapper.userLoginDtoUser(userLoginDto);
         User response = userService.longinUser(user);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(userMapper.userToUserResponseDto(response), HttpStatus.OK);
     }
 
     @PostMapping("/logout")
@@ -53,7 +54,5 @@ public class UserController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-
-    //사용자 탈퇴 구현
 
 }
