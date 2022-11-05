@@ -31,7 +31,6 @@ public class AnswerVoteSevice {
                 System.out.print("값이 다를때 삭제 완료");
             }
 
-            //answerVoteRepository.save(findAnswerVote);
         }
         // 투표한 적이 없을 때
         else{

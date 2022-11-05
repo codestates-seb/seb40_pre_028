@@ -32,5 +32,4 @@ public class QuestionVoteService {
             questionVoteRepository.save(questionVote);
         }
     }
-
 }

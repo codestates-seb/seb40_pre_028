@@ -55,5 +55,4 @@ public class QuestionVoteController {
         return new ResponseEntity(questionVoteResponseDto, HttpStatus.CREATED);
 
     }
-
 }
