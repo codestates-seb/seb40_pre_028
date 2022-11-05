@@ -22,5 +22,7 @@ public class AnswerResponseDto {
     private LocalDateTime answerCreatedAt;
     private LocalDateTime answerModified;
     private int answerNum;
+    private long answerVoteSum;
+
 
 }
