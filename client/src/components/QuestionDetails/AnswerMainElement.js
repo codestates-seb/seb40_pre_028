@@ -112,8 +112,8 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '123' }) =
 
   const voteHandler = action => {
     let answerVoteCnt = 0;
-    if (action === 'up') answerVoteCnt = '+1';
-    if (action === 'down') answerVoteCnt = '-1';
+    if (action === 'up') answerVoteCnt = 1;
+    if (action === 'down') answerVoteCnt = -1;
 
     const payload = {
       userId: user.userId,

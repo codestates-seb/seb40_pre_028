@@ -140,8 +140,8 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
 
   const voteHandler = action => {
     let questionVoteCnt = 0;
-    if (action === 'up') questionVoteCnt = '+1';
-    if (action === 'down') questionVoteCnt = '-1';
+    if (action === 'up') questionVoteCnt = 1;
+    if (action === 'down') questionVoteCnt = -1;
 
     const payload = {
       userId: user.userId,

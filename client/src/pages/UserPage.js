@@ -10,7 +10,6 @@ function UserPage() {
     fetch(`https://api.stackexchange.com/2.3/users?order=desc&sort=${click}&site=stackoverflow`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setUsers(data.items);
       })
       .catch(error => console.error(error));
