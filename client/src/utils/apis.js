@@ -1,5 +1,5 @@
-export const BASE_URL = process.env.REACT_APP_HOST;
-// export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com';
+// export const BASE_URL = process.env.REACT_APP_HOST;
+export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {

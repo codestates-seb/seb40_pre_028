@@ -105,7 +105,22 @@ const SEF = styled.div`
   }
 `;
 
-export const AnswerMainElement = ({ id, body, createdAt, name, vote = '123' }) => {
+const VoteBtnUp = styled(VscTriangleUp)`
+  &:hover {
+    cursor: pointer;
+    color: var(--blue-500);
+    transition: 0.4s all;
+  }
+`;
+const VoteBtnDown = styled(VscTriangleDown)`
+  &:hover {
+    cursor: pointer;
+    color: var(--blue-500);
+    transition: 0.4s all;
+  }
+`;
+
+export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => {
   let [count, SetCount] = useState(vote);
   const { user } = useSelector(state => state.user);
   const { id: answerId } = useParams();
@@ -137,7 +152,7 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '123' }) =
                 voteHandler('up');
               }}
             >
-              <VscTriangleUp className="icon triangle" />
+              <VoteBtnUp className="icon triangle" />
             </button>
             <span>{count}</span>
             <button
@@ -145,7 +160,7 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '123' }) =
                 voteHandler('down');
               }}
             >
-              <VscTriangleDown className="icon triangle" />
+              <VoteBtnDown className="icon triangle" />
             </button>
           </div>
           <BsBookmark className="icon booktime" />

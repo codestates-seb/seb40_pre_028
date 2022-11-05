@@ -96,10 +96,30 @@ const Select = styled.div`
     align-items: center;
     button {
       all: unset;
+
+      /* &:hover {
+        cursor: pointer;
+        background-color: var(--blue-500);
+        transition: 0.4s all;
+      } */
     }
   }
 `;
 
+const VoteBtnUp = styled(VscTriangleUp)`
+  &:hover {
+    cursor: pointer;
+    color: var(--blue-500);
+    transition: 0.4s all;
+  }
+`;
+const VoteBtnDown = styled(VscTriangleDown)`
+  &:hover {
+    cursor: pointer;
+    color: var(--blue-500);
+    transition: 0.4s all;
+  }
+`;
 const Question = styled.div`
   p {
     margin: 20px 0;
@@ -165,7 +185,7 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
                 voteHandler('up');
               }}
             >
-              <VscTriangleUp className="icon triangle" />
+              <VoteBtnUp className="icon triangle" />
             </button>
             <span>{count}</span>
             <button
@@ -173,7 +193,7 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
                 voteHandler('down');
               }}
             >
-              <VscTriangleDown className="icon triangle" />
+              <VoteBtnDown className="icon triangle" />
             </button>
           </div>
 
