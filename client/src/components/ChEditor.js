@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { VscEditorLayout } from 'react-icons/vsc';
 
 const ChContainer = styled.div`
   margin-bottom: 0.4rem;
@@ -14,6 +15,9 @@ const ChContainer = styled.div`
 
 export default function ChEditor({ onfocus, setInputEl2, onchange }) {
   const edit = useRef(null);
+  // useEffect(() => {
+  //   edit.current.focus();
+  // }, []);
   return (
     <ChContainer className="App">
       <CKEditor
@@ -23,6 +27,7 @@ export default function ChEditor({ onfocus, setInputEl2, onchange }) {
           toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'imageUpload', '|', 'horizontalLine'],
         }}
         onReady={editor => {
+          console.log('editor: ', editor);
           setInputEl2?.(editor);
           // editorInit?.(edit);
         }}

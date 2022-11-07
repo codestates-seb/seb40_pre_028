@@ -1,5 +1,8 @@
 package com.seb40.server.Vote.AnswerVote.service;
 
+import com.seb40.server.Exception.BusinessLogicException;
+import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.User.entity.User;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVotePatchDto;
 import com.seb40.server.Vote.AnswerVote.Entity.AnswerVote;
 import com.seb40.server.Vote.AnswerVote.Mapper.AnswerVoteMapper;
@@ -18,11 +21,16 @@ public class AnswerVoteSevice {
         Optional<AnswerVote>  optionalAnswerVote =  answerVoteRepository.findAnswerVotesByUser_UserIdAndAnswer_AnswerId(answerVotePatchDto.getUserId(),
                                                                                                                         answerVotePatchDto.getAnswerId());
         // 기존에 투표한 사람으로 투표값 update
-        if(optionalAnswerVote.isPresent()){
 
+
+        if(optionalAnswerVote.isPresent()){
             AnswerVote findAnswerVote = optionalAnswerVote.orElseThrow();
-            findAnswerVote.setAnswerVoteCnt(answerVotePatchDto.getAnswerVoteCnt());
-            answerVoteRepository.save(findAnswerVote);
+
+            if(answerVotePatchDto.getAnswerVoteCnt() != findAnswerVote.getAnswerVoteCnt() ){
+                answerVoteRepository.deleteById(findAnswerVote.getAnswerVoteId());
+
+            }
+
         }
         // 투표한 적이 없을 때
         else{

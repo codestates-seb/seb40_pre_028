@@ -4,9 +4,12 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 import { useState } from 'react';
 import { getDateToString } from '../../utils/dateFormat';
-import { fetchDelete, fetchUpdateVote } from '../../utils/apis';
+import { fetchDelete, fetchEdit, fetchUpdateVote } from '../../utils/apis';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import ChEditor from '../ChEditor';
+import { BlueButton } from '../DefaultButton';
+import { useEffect } from 'react';
 // import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
@@ -140,6 +143,7 @@ const SEF = styled.div`
     border: 0;
     outline: 0;
     background-color: white;
+    cursor: pointer;
   }
 `;
 
@@ -153,7 +157,7 @@ const Tag = ({ tag }) => {
   );
 };
 
-export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) => {
+export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }) => {
   let [count, SetCount] = useState(vote);
   const { user } = useSelector(state => state.user);
   const { id: questionId } = useParams();
@@ -173,6 +177,26 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
       SetCount(data.questionVoteSum);
     });
   };
+
+  const [onEdit, setOnEdit] = useState(false);
+  const [editBody, setEditBody] = useState('');
+  const qEditHandler = () => {
+    const payload = {
+      userId: user.userId,
+      questionBody: editBody,
+    };
+    fetchEdit(`/user/questions/${questionId}`, JSON.stringify(payload)).then(data => {
+      console.log('edit: ', data);
+      // window.location.reload();
+    });
+  };
+
+  // 글 수정 에디터 오토 포커싱
+  const [inputEl, setInputEl2] = useState(null);
+  useEffect(() => {
+    console.log('edit: ');
+    inputEl?.focus();
+  }, [inputEl]);
 
   return (
     <Main>
@@ -210,11 +234,16 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
           <User>
             <SEF>
               <a href="question">Share</a>
-              <button>Edit</button>
+              <button onClick={() => setOnEdit(!onEdit)}>Edit</button>
               <button>Follow</button>
               <button
                 onClick={() => {
-                  if (confirm('정말로 삭제하시겠습니까?')) fetchDelete(`/user/questions/${questionId}`).then(window.location.reload);
+                  if (confirm('정말로 지우시겠습니까?')) {
+                    fetchDelete(`/user/question/${questionId}`).then(data => {
+                      console.log('deletedata: ', data);
+                      // window.location.href = 'http://localhost:3000';
+                    });
+                  }
                 }}
               >
                 Delete
@@ -228,6 +257,12 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
               </div>
             </UserInfo>
           </User>
+          {onEdit && (
+            <>
+              <ChEditor onchange={setEditBody} setInputEl2={setInputEl2} />
+              <BlueButton onClick={qEditHandler}>Edit</BlueButton>
+            </>
+          )}
         </Question>
       </Section>
     </Main>

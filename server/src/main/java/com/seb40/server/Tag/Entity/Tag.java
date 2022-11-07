@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @NoArgsConstructor
@@ -23,7 +22,7 @@ public class Tag {
     private String tagName;
 
     @ManyToOne(targetEntity = Question.class)
-    @JoinColumn(name="question_id")  //questionId ->question_id
-    private Question question; //추가
+    @JoinColumn(name="question_id")
+    private Question question;
 
 }

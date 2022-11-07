@@ -12,8 +12,17 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-04T11:38:23+0900",
+<<<<<<< HEAD
+    date = "2022-11-07T10:53:13+0900",
+=======
+<<<<<<< HEAD
+    date = "2022-11-05T22:41:46+0900",
+>>>>>>> dev
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
+=======
+    date = "2022-11-04T11:58:21+0900",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.17 (Azul Systems, Inc.)"
+>>>>>>> 1081e9adb982812f7d91689189b80dd89cd265a8
 )
 @Component
 public class QuestionCommentMapperImpl implements QuestionCommentMapper {
