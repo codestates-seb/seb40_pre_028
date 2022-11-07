@@ -1,6 +1,6 @@
-export const BASE_URL = process.env.REACT_APP_HOST;
+// const BASE_URL = process.env.REACT_APP_HOST;
 //민혜님
-// export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com:8080';
+export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com:8080';
 //승현님
 // export const BASE_URL = 'http://ec2-54-180-104-243.ap-northeast-2.compute.amazonaws.com:8080';
 
