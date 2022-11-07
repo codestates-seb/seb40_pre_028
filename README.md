@@ -4,11 +4,11 @@
 
 
 ## 팀원
-| 김명환(팀장 & FE) | 권수현(팀원 & FE) | 방기현(서기 & FE) | 우상헌(Git & FE) |
+| 김명환(팀장 & FE Developer) | 권수현(UI/UX & FE Developer) | 방기현(서기 & FE Developer) | 우상헌(Git & FE Developer) |
 |:----------:|:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/106420520?v=4" width=100px>](https://github.com/kongchip)|[<img src ="https://avatars.githubusercontent.com/u/99517342?v=4" width=100px>](https://github.com/x-xuhxun)|[<img src ="https://avatars.githubusercontent.com/u/102677317?v=4" width=100px>](https://github.com/kihyeoon)|[<img src ="https://avatars.githubusercontent.com/u/98410418?v=4" width=100px>](https://github.com/Withlaw)|
 
-| 김영희(팀원 & BE) | 신승현(팀원 & BE) | 제민혜(팀원 & BE) |
+| 김영희(QA & BE Developer) | 신승현(BE 팀장 & BE Developer) | 제민혜(B/R & BE Developer) |
 |:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
 
@@ -29,3 +29,9 @@ BE<br/>
   <img src="https://img.shields.io/badge/Spring JPA-6DB33F?style=flat&logo=Spring&logoColor=white"/>
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>
   <img src="https://img.shields.io/badge/Java-0B4EA2?style=flat&logo=Jabber&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Gradle-000b47?style=flat&logo=Jabber&logoColor=white"/>
+
+협업 도구<br/>
+    <img src="https://img.shields.io/badge/Gather-420747?style=flat&logo=Gather&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Discord-4207EF?style=flat&logo=Discord&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Zoom-42FFEF?style=flat&logo=Zoom&logoColor=white"/>
