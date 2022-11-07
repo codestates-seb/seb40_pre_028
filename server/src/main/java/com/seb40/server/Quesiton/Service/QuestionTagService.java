@@ -11,11 +11,9 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class QuestionTagService { // 태그 삭제 안할거면 일단 status필요 없음 (일단 삽입을 구현)
+public class QuestionTagService {
 
     QuestionTagRepository questionTagRepository;
-
-    // 태그를 만들어서 repository에 저장해
     public List<QuestionTag> createQuestionTags(List<QuestionTag> questionTags){
         return questionTags.stream().map(questionTag -> questionTagRepository.save(questionTag)).collect(Collectors.toList());
     }

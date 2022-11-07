@@ -1,10 +1,8 @@
 package com.seb40.server.Quesiton.Service;
 
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
 import com.seb40.server.Quesiton.Dto.QuestionPostDto;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,11 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -24,7 +19,6 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     private final QuestionRepository questionRepository ;
-    private final QuestionTagService questionTagService;
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -68,7 +62,7 @@ public class QuestionService {
     // questionId 확인
     public Question findVerifiedQuestion(long questionId){
         Optional<Question> optionalQuestion=
-                questionRepository.findByQuestionId(questionId); // 수정
+                questionRepository.findByQuestionId(questionId);
         Question findQuestion=
                 optionalQuestion.orElseThrow(()->
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));
@@ -91,9 +85,4 @@ public class QuestionService {
 
         }
     }
-    // string  을 받아서 쪼개기
-    // 쪼개진 string tag 를 중복 검사하기
-    // 저장소에 있다면 저장소의 동일 tag Id를 가져오기
-    // 저장소에 없다면 저장소에 저장해서 새로운 tag Id 를 받아서 List tags에 add 넣기
-    // 넣은 List 를 question 의 tags 에 set 하기
 }

@@ -23,8 +23,10 @@ public class QuestionVoteService {
         if(optionalQuestionVote.isPresent()){
 
             QuestionVote findQuestionVote = optionalQuestionVote.orElseThrow();
-            findQuestionVote.setQuestionVoteCnt(questionVotePatchDto.getQuestionVoteCnt());
-            questionVoteRepository.save(findQuestionVote);
+
+            if(questionVotePatchDto.getQuestionVoteCnt() != findQuestionVote.getQuestionVoteCnt()){
+                questionVoteRepository.deleteById(findQuestionVote.getQuestionVoteId());
+            }
         }
         // 투표한 적이 없을 때
         else{
@@ -32,5 +34,4 @@ public class QuestionVoteService {
             questionVoteRepository.save(questionVote);
         }
     }
-
 }

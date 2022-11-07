@@ -10,16 +10,16 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity // DB 테이블 뜻 함
+@Entity
 public class Answer {
 
-    @Id // PK
+    @Id
     @Column(name="answer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Key 생성전략 MySQL의 auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
     @ManyToOne(targetEntity = Question.class)
-    @JoinColumn(name="question_id")  //questionId ->question_id
+    @JoinColumn(name="question_id")
     private Question question;
 
     @ManyToOne(targetEntity = User.class)
@@ -38,8 +38,5 @@ public class Answer {
 
     @Column(nullable = false)
     private String answerBody;
-
-//    @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
-//    private List<AnswerComment> answerComments = new ArrayList<>();
 
 }
