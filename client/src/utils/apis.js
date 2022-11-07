@@ -85,3 +85,15 @@ export const fetchUpdateVote = (url, payload) => {
 export const fetchQuestionList = url => {
   return fetch(BASE_URL + url).then(res => res.json());
 };
+
+export const fetchEdit = (url, payload) => {
+  return fetch(BASE_URL + url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'Application/json' },
+    body: payload,
+  })
+    .then(res => res.json())
+    .catch(error => {
+      console.error('Error', error);
+    });
+};
