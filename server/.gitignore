@@ -37,5 +37,4 @@ out/
 .vscode/
 
 ### password ###
-*.yml
-.application.properties
+.yml

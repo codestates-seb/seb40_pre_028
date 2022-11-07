@@ -2,6 +2,7 @@ package com.seb40.server.Quesiton.Service;
 
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
+import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -74,5 +75,14 @@ public class QuestionService {
         question.setViews(views);
 
         return questionRepository.save(question);
+    }
+
+    // 태그 검증
+    public void addTags(QuestionPostDto questionPostDto){
+        String tags = questionPostDto.getTags();
+
+        for(int i = 0; i < tags.split(",").length; i++){
+
+        }
     }
 }

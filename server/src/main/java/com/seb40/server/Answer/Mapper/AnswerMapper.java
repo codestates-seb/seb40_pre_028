@@ -9,7 +9,6 @@ import com.seb40.server.User.entity.User;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 import java.util.stream.Collectors;
