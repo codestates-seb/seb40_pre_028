@@ -20,7 +20,7 @@ public class AnswerPostDto {
 
     private String name;
 
-    @NotBlank // null 이 아닌 값, 공백이 아니어야함
+    @NotBlank
     private String answerBody;
 
 

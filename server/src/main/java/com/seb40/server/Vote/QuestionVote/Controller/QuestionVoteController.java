@@ -28,10 +28,8 @@ public class QuestionVoteController {
         QuestionVoteResponseDto questionVoteResponseDto = new QuestionVoteResponseDto();
         questionVoteService.vote(questionVotePatchDto);
 
-        //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = questionVoteRepository.findByQuestionVoteCnt();
 
-        //질문에 대한 투표값확인
         Iterator iter = list.iterator();
 
         while (iter.hasNext()) {

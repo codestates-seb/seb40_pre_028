@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class AnswerResponseDto {
-    // post 후 response 내용 answerId , userName, voteNum, answerBody, answerCommnetId
-
 
     private long answerId;
     private String answerBody;

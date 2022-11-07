@@ -15,7 +15,7 @@ public class QuestionPatchDto {
     private String questionBody;
 
     @Valid
-    private List<Tag> tags; // tagId, tagName;
+    private List<Tag> tags;
 
     public void setQuestionId(Long questionId){
         this.questionId = questionId;
