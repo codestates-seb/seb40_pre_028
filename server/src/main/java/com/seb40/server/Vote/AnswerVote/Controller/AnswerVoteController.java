@@ -1,7 +1,6 @@
 
 package com.seb40.server.Vote.AnswerVote.Controller;
 
-
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVotePatchDto;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVoteResponseDto;
 import com.seb40.server.Vote.AnswerVote.service.AnswerVoteSevice;

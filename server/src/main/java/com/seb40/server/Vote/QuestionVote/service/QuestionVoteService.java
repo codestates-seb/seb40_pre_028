@@ -22,8 +22,10 @@ public class QuestionVoteService {
         // 기존에 투표한 사람으로 투표값 update
         if(optionalQuestionVote.isPresent()){
 
-            if(questionVotePatchDto.getQuestionVoteCnt() != optionalQuestionVote.get().questionVoteCnt){
-                questionVoteRepository.deleteById(optionalQuestionVote.get().questionVoteId);
+            QuestionVote findQuestionVote = optionalQuestionVote.orElseThrow();
+
+            if(questionVotePatchDto.getQuestionVoteCnt() != findQuestionVote.getQuestionVoteCnt()){
+                questionVoteRepository.deleteById(findQuestionVote.getQuestionVoteId());
             }
         }
         // 투표한 적이 없을 때
