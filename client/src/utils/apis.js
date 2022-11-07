@@ -79,7 +79,9 @@ export const fetchUpdateVote = (url, payload) => {
     headers: { 'Content-Type': 'Application/json' },
     body: payload,
   })
-    .then(res => res.json())
+    .then(res => {
+      return res.json();
+    })
     .catch(error => {
       console.error('Error', error);
     });
