@@ -169,10 +169,11 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
 
     const payload = {
       userId: user.userId,
-      questionId,
+      questionId: +questionId,
       questionVoteCnt,
     };
     fetchUpdateVote('/user/questionvote', JSON.stringify(payload)).then(data => {
+      console.log('payload: ', JSON.stringify(payload));
       console.log('vote: ', data);
       SetCount(data.questionVoteSum);
     });
@@ -186,17 +187,9 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
       questionBody: editBody,
     };
     fetchEdit(`/user/questions/${questionId}`, JSON.stringify(payload)).then(data => {
-      console.log('edit: ', data);
-      // window.location.reload();
+      window.location.reload();
     });
   };
-
-  // 글 수정 에디터 오토 포커싱
-  const [inputEl, setInputEl2] = useState(null);
-  useEffect(() => {
-    console.log('edit: ');
-    inputEl?.focus();
-  }, [inputEl]);
 
   return (
     <Main>
@@ -259,7 +252,7 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
           </User>
           {onEdit && (
             <>
-              <ChEditor onchange={setEditBody} setInputEl2={setInputEl2} />
+              <ChEditor onchange={setEditBody} />
               <BlueButton onClick={qEditHandler}>Edit</BlueButton>
             </>
           )}
