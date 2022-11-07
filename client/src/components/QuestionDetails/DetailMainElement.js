@@ -4,7 +4,7 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 import { useState } from 'react';
 import { getDateToString } from '../../utils/dateFormat';
-import { fetchUpdateVote } from '../../utils/apis';
+import { fetchDelete, fetchUpdateVote } from '../../utils/apis';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { MarkdownRenderer } from './MarkdownRenderer';
@@ -168,7 +168,6 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
       questionId,
       questionVoteCnt,
     };
-
     fetchUpdateVote('/user/questionvote', JSON.stringify(payload)).then(data => {
       console.log('vote: ', data);
       SetCount(data.questionVoteSum);
@@ -213,7 +212,13 @@ export const DetailMainElement = ({ body, createdAt, name, tag, vote = '0' }) =>
               <a href="question">Share</a>
               <button>Edit</button>
               <button>Follow</button>
-              <button>Delete</button>
+              <button
+                onClick={() => {
+                  if (confirm('정말로 삭제하시겠습니까?')) fetchDelete(`/user/questions/${questionId}`).then(window.location.reload);
+                }}
+              >
+                Delete
+              </button>
             </SEF>
             <UserInfo>
               <div>asked {getDateToString(createdAt)}</div>
