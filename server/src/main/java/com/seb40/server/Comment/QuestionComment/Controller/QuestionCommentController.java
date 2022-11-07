@@ -1,6 +1,5 @@
 package com.seb40.server.Comment.QuestionComment.Controller;
 
-
 import com.seb40.server.Comment.QuestionComment.Dto.QuestionCommentPatchDto;
 import com.seb40.server.Comment.QuestionComment.Dto.QuestionCommentPostDto;
 import com.seb40.server.Comment.QuestionComment.Entity.QuestionComment;
