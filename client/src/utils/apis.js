@@ -1,5 +1,8 @@
 // export const BASE_URL = process.env.REACT_APP_HOST;
-export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com:8080';
+//민혜님
+// export const BASE_URL = 'http://ec2-3-38-97-170.ap-northeast-2.compute.amazonaws.com:8080';
+//승현님
+export const BASE_URL = 'http://ec2-15-164-169-109.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const fetchCreateLogin = (url, payload) => {
   return fetch(BASE_URL + url, {
@@ -76,7 +79,9 @@ export const fetchUpdateVote = (url, payload) => {
     headers: { 'Content-Type': 'Application/json' },
     body: payload,
   })
-    .then(res => res.json())
+    .then(res => {
+      return res.json();
+    })
     .catch(error => {
       console.error('Error', error);
     });

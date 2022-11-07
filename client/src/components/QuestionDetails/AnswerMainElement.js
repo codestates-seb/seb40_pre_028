@@ -104,6 +104,7 @@ const SEF = styled.div`
     border: 0;
     outline: 0;
     background-color: white;
+    cursor: pointer;
   }
 `;
 
@@ -186,7 +187,13 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => 
               <a href="question">Share</a>
               <button onClick={() => setOnEdit(!onEdit)}>Edit</button>
               <button>Follow</button>
-              <button onClick={() => fetchDelete(`/user/answer/${id}`).then(window.location.reload)}>Delete</button>
+              <button
+                onClick={() => {
+                  if (confirm('정말로 지우시겠습니까?')) fetchDelete(`/user/answer/${id}`).then(window.location.reload);
+                }}
+              >
+                Delete
+              </button>
             </SEF>
             <UserInfo>
               <div>asked {getDateToString(createdAt)}</div>
