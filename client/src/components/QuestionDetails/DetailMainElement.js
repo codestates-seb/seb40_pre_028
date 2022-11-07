@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ChEditor from '../ChEditor';
 import { BlueButton } from '../DefaultButton';
+import { useEffect } from 'react';
 // import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
@@ -187,9 +188,16 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
     };
     fetchEdit(`/user/questions/${questionId}`, JSON.stringify(payload)).then(data => {
       console.log('edit: ', data);
-      window.location.reload();
+      // window.location.reload();
     });
   };
+
+  // 글 수정 에디터 오토 포커싱
+  const [inputEl, setInputEl2] = useState(null);
+  useEffect(() => {
+    console.log('edit: ');
+    inputEl?.focus();
+  }, [inputEl]);
 
   return (
     <Main>
@@ -231,7 +239,12 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
               <button>Follow</button>
               <button
                 onClick={() => {
-                  if (confirm('정말로 지우시겠습니까?')) fetchDelete(`/user/questions/${id}`).then(window.location.reload());
+                  if (confirm('정말로 지우시겠습니까?')) {
+                    fetchDelete(`/user/question/${questionId}`).then(data => {
+                      console.log('deletedata: ', data);
+                      // window.location.href = 'http://localhost:3000';
+                    });
+                  }
                 }}
               >
                 Delete
@@ -247,7 +260,7 @@ export const DetailMainElement = ({ id, body, createdAt, name, tag, vote = '0' }
           </User>
           {onEdit && (
             <>
-              <ChEditor onchange={setEditBody} />
+              <ChEditor onchange={setEditBody} setInputEl2={setInputEl2} />
               <BlueButton onClick={qEditHandler}>Edit</BlueButton>
             </>
           )}
