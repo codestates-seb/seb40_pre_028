@@ -272,7 +272,6 @@ export default function CreateQuestionPage() {
       userId: user.userId,
       questionTags: tagName.join(','),
     });
-    // console.log(payload);
     fetchCreateQuestion('/user/question/post', payload).then(res => {
       const { data } = res;
       // window.location.href = `http://localhost:3000/user/question/${data.questionId}`;
