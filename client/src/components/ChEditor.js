@@ -27,7 +27,6 @@ export default function ChEditor({ onfocus, setInputEl2, onchange }) {
           toolbar: ['heading', '|', 'bold', 'italic', 'code', '|', 'link', 'blockQuote', 'codeBlock', 'imageUpload', '|', 'horizontalLine'],
         }}
         onReady={editor => {
-          console.log('editor: ', editor);
           setInputEl2?.(editor);
           // editorInit?.(edit);
         }}
