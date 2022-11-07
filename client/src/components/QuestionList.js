@@ -73,7 +73,11 @@ export function QuestionList() {
 
   useEffect(() => {
     dispatch(getQuestionList());
-  }, [dispatch]);
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [dispatch, page, size]);
 
   const setPage = page => {
     dispatch(changeQPage(page));
