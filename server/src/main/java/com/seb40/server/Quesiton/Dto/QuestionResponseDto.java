@@ -1,6 +1,7 @@
 package com.seb40.server.Quesiton.Dto;
 
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDtos;
 import com.seb40.server.Quesiton.Entity.QuestionTag;
 import com.seb40.server.Tag.Entity.Tag;
 import lombok.*;

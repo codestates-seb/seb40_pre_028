@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class AnswerResponseDto {
-    // post 후 response 내용 answerId , userName, voteNum, answerBody, answerCommnetId
-
+public class AnswerResponseDtos {
 
     private long answerId;
     private String answerBody;

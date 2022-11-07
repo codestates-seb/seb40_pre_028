@@ -3,6 +3,7 @@ package com.seb40.server.Answer.Mapper;
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
+import com.seb40.server.Answer.Dto.AnswerResponseDtos;
 import com.seb40.server.Answer.Entity.Answer;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.User.entity.User;
@@ -63,6 +64,7 @@ public interface AnswerMapper {
                         .answerBody(answer.getAnswerBody())
                         .answerCreatedAt(answer.getAnswerCreatedAt())
                         .answerModified(answer.getAnswerModified())
+//                        .answerNum(answers.size())
                         .build())
                 .collect(Collectors.toList());
 
