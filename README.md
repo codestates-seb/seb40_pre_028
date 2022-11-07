@@ -12,11 +12,25 @@
 |:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)| [<img src ="https://avatars.githubusercontent.com/u/71127157?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
 
+<br>
+
 ## Project Description
 FE분들과 BE분들의 첫 협업 프로젝트로 메인프로젝트 시작전 배운것들을 실전처럼 연습하여 다듬어보기 Stack Overflow를 클론코딩 하는 프로젝트입니다.
 
+<br>
+
 ## Project Period
 - 2022.10.20 ~ 2022.11.07 / 13Days
+
+
+<br>
+
+## ERD(Entity Relationship Diagram)
+
+<img src="https://user-images.githubusercontent.com/59863297/200244068-243cdff3-49eb-43ea-af85-ed7f64534480.png">
+
+
+<br>
 
 ## 기술 스택
 FE <br/>
@@ -30,8 +44,13 @@ BE<br/>
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>
   <img src="https://img.shields.io/badge/Java-0B4EA2?style=flat&logo=Jabber&logoColor=white"/>
   <img src="https://img.shields.io/badge/Gradle-000b47?style=flat&logo=Jabber&logoColor=white"/>
-
-협업 도구<br/>
+  
+Infrastructures<br/>
+    <img src="https://img.shields.io/badge/AWS EC2-6DB33F?style=flat&logo=EC2&logoColor=white"/>
+    <img src="https://img.shields.io/badge/AWS RDS-6DB33F?style=flat&logo=RDS&logoColor=white"/>
+    <img src="https://img.shields.io/badge/vercel-6DB33F?style=flat&logo=Spring Boot&logoColor=white"/>
+    
+Communication Tools<br/>
     <img src="https://img.shields.io/badge/Gather-420747?style=flat&logo=Gather&logoColor=white"/>
     <img src="https://img.shields.io/badge/Discord-4207EF?style=flat&logo=Discord&logoColor=white"/>
     <img src="https://img.shields.io/badge/Zoom-42FFEF?style=flat&logo=Zoom&logoColor=white"/>
