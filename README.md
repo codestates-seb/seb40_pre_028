@@ -10,7 +10,7 @@
 
 | 신승현(BE PL & BE Developer) | 김영희(QA & BE Developer) | 제민혜(B/R & BE Developer)
 |:----------:|:----------:|:----------:|
-|[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)| [<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
+|[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)| [<img src ="https://avatars.githubusercontent.com/u/71127157?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
 
 ## Project Description
 FE분들과 BE분들의 첫 협업 프로젝트로 메인프로젝트 시작전 배운것들을 실전처럼 연습하여 다듬어보기 Stack Overflow를 클론코딩 하는 프로젝트입니다.
