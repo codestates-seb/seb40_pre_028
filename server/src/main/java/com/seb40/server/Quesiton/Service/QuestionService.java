@@ -1,9 +1,8 @@
 package com.seb40.server.Quesiton.Service;
 
-import com.seb40.server.Answer.Dto.AnswerResponseDto;
 import com.seb40.server.Exception.BusinessLogicException;
 import com.seb40.server.Exception.ExceptionCode;
-import com.seb40.server.Quesiton.Dto.QuestionResponseDto;
+import com.seb40.server.Quesiton.Dto.QuestionPostDto;
 import com.seb40.server.Quesiton.Entity.Question;
 import com.seb40.server.Quesiton.Repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 
 @Service
@@ -23,7 +19,6 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     private final QuestionRepository questionRepository ;
-    private final QuestionTagService questionTagService;
 
     // 질문 등록
     public Question createQuestion(Question question) {
@@ -67,7 +62,7 @@ public class QuestionService {
     // questionId 확인
     public Question findVerifiedQuestion(long questionId){
         Optional<Question> optionalQuestion=
-                questionRepository.findByQuestionId(questionId); // 수정
+                questionRepository.findByQuestionId(questionId);
         Question findQuestion=
                 optionalQuestion.orElseThrow(()->
                         new BusinessLogicException(ExceptionCode.Question_NOT_FOUND));
@@ -80,5 +75,14 @@ public class QuestionService {
         question.setViews(views);
 
         return questionRepository.save(question);
+    }
+
+    // 태그 검증
+    public void addTags(QuestionPostDto questionPostDto){
+        String tags = questionPostDto.getTags();
+
+        for(int i = 0; i < tags.split(",").length; i++){
+
+        }
     }
 }

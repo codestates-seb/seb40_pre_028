@@ -31,10 +31,12 @@ public class QuestionPostDto {
     private String questionBody;
 
 
-    @Valid
-    private List<Tag> tags;
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
+//    @Valid
+//    private List<Tag> tags;
+//    public void setTags(List<Tag> tags) {
+//        this.tags = tags;
+//    }
+
+    private String tags;
 
 }
