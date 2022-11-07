@@ -1,9 +1,9 @@
 # Stack Overflow Clone
 
-### 일곱ㅎ쟁이 소개
+### :rainbow: 일곱ㅎ쟁이 소개
 
 
-## 팀원
+## :sunglasses: 팀원
 | 김명환(PM & FE Developer) | 방기현(FE PL & FE Developer) | 권수현(UI/UX & FE Developer)  | 우상헌(Git & FE Developer) |
 |:----------:|:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/106420520?v=4" width=100px>](https://github.com/kongchip)|[<img src ="https://avatars.githubusercontent.com/u/102677317?v=4" width=100px>](https://github.com/kihyeoon)|[<img src ="https://avatars.githubusercontent.com/u/99517342?v=4" width=100px>](https://github.com/x-xuhxun)|[<img src ="https://avatars.githubusercontent.com/u/98410418?v=4" width=100px>](https://github.com/Withlaw)|
@@ -14,25 +14,25 @@
 
 <br>
 
-## Project Description
+## :paperclip: Project Description
 FE분들과 BE분들의 첫 협업 프로젝트로 메인프로젝트 시작전 배운것들을 실전처럼 연습하여 다듬어보기 Stack Overflow를 클론코딩 하는 프로젝트입니다.
 
 <br>
 
-## Project Period
+## :mega: Project Period
 - 2022.10.20 ~ 2022.11.07 / 13Days
 
 
 <br>
 
-## ERD(Entity Relationship Diagram)
+## :pushpin: ERD(Entity Relationship Diagram)
 
 <img src="https://user-images.githubusercontent.com/59863297/200244068-243cdff3-49eb-43ea-af85-ed7f64534480.png">
 
 
 <br>
 
-## 기술 스택
+## :computer: 기술 스택
 FE <br/>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
   <img src="https://img.shields.io/badge/Redux toolkit-764ABC?style=flat&logo=Redux&logoColor=white"/>
