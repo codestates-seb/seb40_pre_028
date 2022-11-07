@@ -4,9 +4,11 @@ import { BsBookmark, BsPersonSquare } from 'react-icons/bs';
 import { GiBackwardTime } from 'react-icons/gi';
 import { useState } from 'react';
 import { getDateToString } from '../../utils/dateFormat';
-import { fetchUpdateVote, fetchDelete } from '../../utils/apis';
+import { fetchUpdateVote, fetchDelete, fetchEdit } from '../../utils/apis';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import ChEditor from '../ChEditor';
+import { BlueButton } from '../DefaultButton';
 // import { MarkdownRenderer } from './MarkdownRenderer';
 
 const Main = styled.div`
@@ -123,7 +125,6 @@ const VoteBtnDown = styled(VscTriangleDown)`
 export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => {
   let [count, SetCount] = useState(vote);
   const { user } = useSelector(state => state.user);
-  const { id: answerId } = useParams();
 
   const voteHandler = action => {
     let answerVoteCnt = 0;
@@ -132,13 +133,25 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => 
 
     const payload = {
       userId: user.userId,
-      answerId,
+      answerId: id,
       answerVoteCnt,
     };
 
     fetchUpdateVote('/user/answervote', JSON.stringify(payload)).then(data => {
       console.log('vote: ', data);
       SetCount(data.answerVoteSum);
+    });
+  };
+
+  const [onEdit, setOnEdit] = useState(false);
+  const [editAnswer, setEditAnswer] = useState('');
+  const aEditHandler = () => {
+    const payload = {
+      answerBody: editAnswer,
+    };
+    fetchEdit(`/user/answer/${id}`, JSON.stringify(payload)).then(data => {
+      console.log('edit: ', data);
+      window.location.reload();
     });
   };
 
@@ -171,7 +184,7 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => 
           <User>
             <SEF>
               <a href="question">Share</a>
-              <button>Edit</button>
+              <button onClick={() => setOnEdit(!onEdit)}>Edit</button>
               <button>Follow</button>
               <button onClick={() => fetchDelete(`/user/answer/${id}`).then(window.location.reload)}>Delete</button>
             </SEF>
@@ -183,6 +196,12 @@ export const AnswerMainElement = ({ id, body, createdAt, name, vote = '0' }) => 
               </div>
             </UserInfo>
           </User>
+          {onEdit && (
+            <>
+              <ChEditor onchange={setEditAnswer} />
+              <BlueButton onClick={aEditHandler}>Edit</BlueButton>
+            </>
+          )}
         </Question>
       </Section>
     </Main>
