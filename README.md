@@ -46,9 +46,9 @@ BE<br/>
   <img src="https://img.shields.io/badge/Gradle-000b47?style=flat&logo=Jabber&logoColor=white"/>
   
 Infrastructures<br/>
-    <img src="https://img.shields.io/badge/AWS EC2-6DB33F?style=flat&logo=EC2&logoColor=white"/>
-    <img src="https://img.shields.io/badge/AWS RDS-6DB33F?style=flat&logo=RDS&logoColor=white"/>
-    <img src="https://img.shields.io/badge/vercel-6DB33F?style=flat&logo=Spring Boot&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat&logo=Amazon EC2&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=flat&logo=AmazonRDS&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=Vercel&logoColor=white"/>
     
 Communication Tools<br/>
     <img src="https://img.shields.io/badge/Gather-420747?style=flat&logo=Gather&logoColor=white"/>
