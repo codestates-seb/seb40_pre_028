@@ -1,6 +1,5 @@
 package com.seb40.server.User.controller;
 
-
 import com.seb40.server.User.dto.UserLoginDto;
 import com.seb40.server.User.dto.UserPostDto;
 import com.seb40.server.User.entity.User;
@@ -13,9 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController

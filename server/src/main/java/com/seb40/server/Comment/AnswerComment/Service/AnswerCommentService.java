@@ -21,10 +21,6 @@ public class AnswerCommentService {
 
     private final AnswerCommentRepository commentRepository;
 
-//    public AnswerCommentService(AnswerCommentRepository commentRepository) {
-//        this.commentRepository = commentRepository;
-//    }
-
     public AnswerComment createComment(AnswerComment answerComment) {
         return commentRepository.save(answerComment);
 

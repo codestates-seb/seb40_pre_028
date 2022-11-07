@@ -27,28 +27,21 @@ public class Question{
     private User user;
     public void setUser(User user){this.user = user;}
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)//추가
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> answers = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "question")
-//    private ArrayList<Tag> tags = new ArrayList<>();
-
 
     private int answerNum;
 
     private long views;
 
-
     private String questionTitle;
+
     private String questionBody;
+
     @CreatedDate
     private LocalDateTime questionCreatedAt = LocalDateTime.now();
+
     @LastModifiedDate
     private LocalDateTime questionModified  = LocalDateTime.now();
-
-//    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
-//    private List<QuestionTag> questionTags = new ArrayList<>();
-
-
 
 }
