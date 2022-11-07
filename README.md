@@ -1,14 +1,20 @@
 # Stack Overflow Clone
+### :rainbow: 일곱ㅎ쟁이 팀
+### 배포링크: http://seb40-pre028.s3-website.ap-northeast-2.amazonaws.com/
 
-### :rainbow: 일곱ㅎ쟁이 소개
+---
+<br>
 
 
-## :sunglasses: 팀원
-| 김명환(PM & FE Developer) | 방기현(FE PL & FE Developer) | 권수현(UI/UX & FE Developer)  | 우상헌(Git & FE Developer) |
+### :sunglasses: 팀원
+
+### FE
+| 김명환 (팀장) | 방기현 (서기) | 권수현 (UI/UX)  | 우상헌 (Git 관리) |
 |:----------:|:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/106420520?v=4" width=100px>](https://github.com/kongchip)|[<img src ="https://avatars.githubusercontent.com/u/102677317?v=4" width=100px>](https://github.com/kihyeoon)|[<img src ="https://avatars.githubusercontent.com/u/99517342?v=4" width=100px>](https://github.com/x-xuhxun)|[<img src ="https://avatars.githubusercontent.com/u/98410418?v=4" width=100px>](https://github.com/Withlaw)|
 
-| 신승현(BE PL & BE Developer) | 김영희(QA & BE Developer) | 제민혜(B/R & BE Developer)
+### BE
+| 신승현 (BE PL) | 김영희 (QA) | 제민혜 (B/R)
 |:----------:|:----------:|:----------:|
 |[<img src ="https://avatars.githubusercontent.com/u/59863297?v=4" width=100px>](https://github.com/Shin-seung-hyun)| [<img src ="https://avatars.githubusercontent.com/u/71127157?v=4" width=100px>](https://github.com/kyh0113)|[<img src ="https://avatars.githubusercontent.com/u/106645091?v=4" width=100px>](https://github.com/domadoes)|
 
