@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { fetchCreateLogin } from '../../utils/apis';
-import { useRef } from 'react';
 
 const Form = styled.form`
   display: flex;
@@ -205,7 +204,7 @@ export function LoginForm() {
                   <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
                 </span>
               </div>
-              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              <Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
               {passwordValid ? (
                 <ErrorMSG>
                   Password cannot be empty.
@@ -243,7 +242,7 @@ export function LoginForm() {
                   <a href='https://stackoverflow.com/users/account-recovery target="_blank" rel="noreferrer'>Forgot password?</a>
                 </span>
               </div>
-              <Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+              <Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
               {passwordValid ? (
                 <ErrorMSG>
                   Password cannot be empty.

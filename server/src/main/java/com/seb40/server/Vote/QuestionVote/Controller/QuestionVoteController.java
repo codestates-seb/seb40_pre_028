@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Iterator;
 import java.util.List;
@@ -29,10 +28,8 @@ public class QuestionVoteController {
         QuestionVoteResponseDto questionVoteResponseDto = new QuestionVoteResponseDto();
         questionVoteService.vote(questionVotePatchDto);
 
-        //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = questionVoteRepository.findByQuestionVoteCnt();
 
-        //질문에 대한 투표값확인
         Iterator iter = list.iterator();
 
         while (iter.hasNext()) {
@@ -40,15 +37,19 @@ public class QuestionVoteController {
             Long questionId = Long.valueOf(obj[0].toString());
             int questionVoteSum = Integer.parseInt(obj[1].toString());
 
-            questionVoteResponseDto.setQuestionId(questionId);
-            questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+            if(questionId == questionVotePatchDto.getQuestionId()) {
 
-            if(questionId == questionVotePatchDto.getQuestionId()) break;
+                questionVoteResponseDto.setQuestionId(questionId);
+                questionVoteResponseDto.setQuestionVoteSum(questionVoteSum);
+                break;
+            }
+            else {
+                questionVoteResponseDto.setQuestionVoteSum(0);
+            }
+
         }
 
         return new ResponseEntity(questionVoteResponseDto, HttpStatus.CREATED);
 
     }
-
-
 }

@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 function UserPage() {
   let [users, setUsers] = useState([]);
   let [click, setClick] = useState('reputation');
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch(`https://api.stackexchange.com/2.3/users?order=desc&sort=${click}&site=stackoverflow`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setUsers(data.items);
+        setIsLoading(false);
       })
       .catch(error => console.error(error));
   }, [click]);
@@ -41,21 +42,35 @@ function UserPage() {
           </FilterBtn>
         </FilterBar>
         <UserList>
-          {users.map(user => (
-            <UserItem key={user.user_id}>
-              <Profile src={user.profile_image} alt="profile_image" />
-              <div className="userItem">
-                <UserName onClick={() => window.open(user.link)}>{user.display_name}</UserName>
-                <UserLocation onChange={() => console.log(users)}>{user.location}</UserLocation>
-                <UserReputation onChange={() => console.log(users)}>{user.reputation}</UserReputation>
-              </div>
-            </UserItem>
-          ))}
+          {isLoading ? (
+            <LoadingSpinnerContainer>
+              <LoadingSpinner />
+            </LoadingSpinnerContainer>
+          ) : (
+            users.map(user => (
+              <UserItem key={user.user_id}>
+                <Profile src={user.profile_image} alt="profile_image" />
+                <div className="userItem">
+                  <UserName onClick={() => window.open(user.link)}>{user.display_name}</UserName>
+                  <UserLocation onChange={() => console.log(users)}>{user.location}</UserLocation>
+                  <UserReputation onChange={() => console.log(users)}>{user.reputation}</UserReputation>
+                </div>
+              </UserItem>
+            ))
+          )}
         </UserList>
       </UserFrom>
     </UserLayout>
   );
 }
+
+const LoadingSpinnerContainer = styled.div`
+  width: 110vh;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const UserLayout = styled.div`
   width: 100%;

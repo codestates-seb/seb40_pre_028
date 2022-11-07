@@ -24,10 +24,13 @@ public class AnswerVoteSevice {
 
 
         if(optionalAnswerVote.isPresent()){
-
             AnswerVote findAnswerVote = optionalAnswerVote.orElseThrow();
-            findAnswerVote.setAnswerVoteCnt(answerVotePatchDto.getAnswerVoteCnt());
-            answerVoteRepository.save(findAnswerVote);
+
+            if(answerVotePatchDto.getAnswerVoteCnt() != findAnswerVote.getAnswerVoteCnt() ){
+                answerVoteRepository.deleteById(findAnswerVote.getAnswerVoteId());
+
+            }
+
         }
         // 투표한 적이 없을 때
         else{

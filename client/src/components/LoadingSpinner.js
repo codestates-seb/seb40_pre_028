@@ -39,7 +39,7 @@ export const Container = styled.div`
   }
 `;
 
-const LoadingSpinner = ({ className }) => (
+export const LoadingSpinner = ({ className }) => (
   <Container className={`lds-ring ${className}`}>
     <div />
     <div />
@@ -47,5 +47,3 @@ const LoadingSpinner = ({ className }) => (
     <div />
   </Container>
 );
-
-export default LoadingSpinner;

@@ -66,6 +66,7 @@ export default function QuestionDetail() {
     fetchQuestion(`/user/question/${id}`).then(data => {
       setQuestion(data.data);
       setIsLoading(false);
+      console.log(data.data);
     });
   };
 

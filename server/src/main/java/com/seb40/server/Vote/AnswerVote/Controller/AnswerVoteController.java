@@ -1,7 +1,6 @@
 
 package com.seb40.server.Vote.AnswerVote.Controller;
 
-
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVotePatchDto;
 import com.seb40.server.Vote.AnswerVote.Dto.AnswerVoteResponseDto;
 import com.seb40.server.Vote.AnswerVote.service.AnswerVoteSevice;
@@ -29,10 +28,8 @@ public class AnswerVoteController {
         AnswerVoteResponseDto answerVoteResponseDto = new AnswerVoteResponseDto();
         answerVoteSevice.vote(answerVotePatchDto);
 
-        //DB 내용을 확인 후 answerVoteSum 반환
         List<Object[]> list = answerVoteRepository.findByAnswerVoteCnt();
 
-        //답변에 대한 투표값확인
         Iterator iter = list.iterator();
 
         while (iter.hasNext()) {
@@ -40,16 +37,18 @@ public class AnswerVoteController {
             Long answerId = Long.valueOf(obj[0].toString());
             int answerVoteSum = Integer.parseInt(obj[1].toString());
 
-
-            answerVoteResponseDto.setAnswerId(answerId);
-            answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
-
-            if(answerId == answerVotePatchDto.getAnswerId()) break;
+            if(answerId == answerVotePatchDto.getAnswerId()){
+                answerVoteResponseDto.setAnswerId(answerId);
+                answerVoteResponseDto.setAnswerVoteSum(answerVoteSum);
+                break;
+            }
+            else{
+                answerVoteResponseDto.setAnswerVoteSum(0);
+            }
         }
 
         return new ResponseEntity(answerVoteResponseDto, HttpStatus.CREATED);
 
     }
-
 }
 

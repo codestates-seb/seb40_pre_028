@@ -158,6 +158,7 @@ export function SignupForm() {
       //  db에 동일한 이메일이 있으면 알림창
       if (data.status >= 500) {
         alert('이미 존재하는 이메일 입니다😞');
+        setVerifiSuccess(true);
         return;
       }
 
@@ -206,7 +207,7 @@ export function SignupForm() {
 
           <Field>
             <LoginForm.Label htmlFor="password">Password</LoginForm.Label>
-            <LoginForm.Input type="text" id="password" onChange={passwordValueHandler} error={passwordValid} />
+            <LoginForm.Input type="password" id="password" onChange={passwordValueHandler} error={passwordValid} />
             {passwordValid ? (
               <LoginForm.ErrorMSG>
                 Password cannot be empty.

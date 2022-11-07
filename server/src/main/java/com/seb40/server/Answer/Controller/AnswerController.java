@@ -1,6 +1,5 @@
 package com.seb40.server.Answer.Controller;
 
-
 import com.seb40.server.Answer.Dto.AnswerPatchDto;
 import com.seb40.server.Answer.Dto.AnswerPostDto;
 import com.seb40.server.Answer.Entity.Answer;
@@ -26,7 +25,6 @@ import java.util.List;
 @RestController //bean 등록
 @RequestMapping("/user/answer")
 @AllArgsConstructor
-// 핸들러메서드 매핑, AnswerController클래스 전체에 사용되는 공통 Base URL 설정
 public class AnswerController {
     private final AnswerService answerService;
 
@@ -97,10 +95,8 @@ public class AnswerController {
     @DeleteMapping("/{answer_id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer_id")
                                            @Positive long answerId){
-        // answerId 로 deleteAnswer 서비스 메소드로 삭제
-        answerService.deleteAnswer(answerId);
 
-        // 삭제요청, ok 반환
+        answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

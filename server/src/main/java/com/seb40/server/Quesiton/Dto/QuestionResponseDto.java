@@ -1,7 +1,6 @@
 package com.seb40.server.Quesiton.Dto;
 
 import com.seb40.server.Answer.Dto.AnswerResponseDto;
-import com.seb40.server.Answer.Dto.AnswerResponseDtos;
 import com.seb40.server.Quesiton.Entity.QuestionTag;
 import com.seb40.server.Tag.Entity.Tag;
 import lombok.*;
@@ -14,18 +13,18 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionResponseDto { // userId라고 하면 DB에서 자동으로 user_id로 바꾸는듯
+public class QuestionResponseDto {
     private Long questionId;
     private String questionTitle;
     private String questionBody;
     private LocalDateTime questionCreatedAt;
     private LocalDateTime questionModified;
     private List<AnswerResponseDto> answers;
-    private String tags; // 수정
+    private List<Tag> tags;
     private String name;
     private int answerNum;
     private long views;
-
+    private long questionVoteSum;
     private List<QuestionTag> questionTags;
 
 }
