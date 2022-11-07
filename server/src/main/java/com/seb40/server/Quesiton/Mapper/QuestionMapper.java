@@ -84,6 +84,7 @@ public interface QuestionMapper {
         questionResponseDto.setAnswerNum(question.getAnswerNum());
         questionResponseDto.setAnswers(answerMapper.answersToAnswerResponseDtos(question.getAnswers()));
         questionResponseDto.setName(question.getUser().getName());
+        questionResponseDto.setViews(question.getViews());
 
         return questionResponseDto;
     }
